@@ -9,7 +9,7 @@ interface BlueprintButtonProps {
   children: ReactNode;
   className?: string;
   variant?: "default" | "outline" | "ghost";
-  size?: "sm" | "lg" | "default";
+  size?: "icon" | "sm" | "md" | "lg";
   asChild?: boolean;
 }
 
@@ -17,7 +17,7 @@ export function BlueprintButton({
   children,
   className,
   variant = "default",
-  size = "default",
+  size,
   asChild = true
 }: BlueprintButtonProps) {
   const { isAuthenticated, loading } = useAuth();
