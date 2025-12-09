@@ -234,6 +234,7 @@ export function BlueprintForm() {
           },
         ],
         colorPreference: [],
+        imageryVibe: [],
         assetsNote: "",
         assetUploads: [],
       },
@@ -244,6 +245,7 @@ export function BlueprintForm() {
       },
       technical: {
         domainStatus: "have",
+        integrations: [],
         currentSite: "",
       },
       confirmations: {
@@ -538,7 +540,7 @@ export function BlueprintForm() {
                           />
                           <Button
                             size="sm"
-                            variant={isSelected ? "default" : "secondary"}
+                            variant={isSelected ? "default" : "outline"}
                             className="absolute right-3 top-3 h-8 w-8 rounded-full p-0"
                             onClick={(e) => {
                               e.stopPropagation();
