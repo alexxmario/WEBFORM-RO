@@ -110,50 +110,20 @@ export default function HomePage() {
           />
           <div
             className="relative w-screen max-w-none overflow-hidden"
-            style={{ width: "100vw" }}
+            style={{ width: "100vw", minHeight: "400px" }}
           >
             <spline-viewer
               id="hero-spline"
               loading-anim-type="spinner-small-dark"
+              url="https://prod.spline.design/w-aLrHUI4pNxOgrP/scene.splinecode"
               style={{
                 display: "block",
                 width: "100vw",
                 maxWidth: "100vw",
-                minHeight: "720px",
+                height: "720px",
               }}
-              data-url="https://prod.spline.design/w-aLrHUI4pNxOgrP/scene.splinecode"
             />
           </div>
-          <Script
-            id="spline-lazy-loader"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-                (function() {
-                  const viewer = document.getElementById("hero-spline");
-                  if (!viewer) return;
-                  const url = viewer.dataset.url;
-                  if (!url) return;
-
-                  const load = () => {
-                    if (viewer.getAttribute("url")) return;
-                    viewer.setAttribute("url", url);
-                  };
-
-                  const io = new IntersectionObserver((entries) => {
-                    entries.forEach((entry) => {
-                      if (entry.isIntersecting) {
-                        load();
-                        io.disconnect();
-                      }
-                    });
-                  }, { threshold: 0.25 });
-
-                  io.observe(viewer);
-                })();
-              `,
-            }}
-          />
         </section>
 
         {/* Features */}
