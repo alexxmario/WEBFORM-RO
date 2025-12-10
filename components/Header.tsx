@@ -15,7 +15,6 @@ import { useAuth } from "@/lib/hooks/useAuth";
 const navLinks = [
   { href: "/#how", label: "How it works" },
   { href: "/#plans", label: "Plans" },
-  { href: "/pricing", label: "Pricing" },
   { href: "/status", label: "Status" },
 ];
 
