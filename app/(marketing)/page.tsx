@@ -96,7 +96,6 @@ export default function HomePage() {
         />
 
         <section
-          id="how"
           className="hidden w-screen max-w-none px-0 md:block"
           style={{
             marginLeft: "calc(50% - 50vw)",

@@ -13,10 +13,8 @@ import { BlueprintButton } from "./BlueprintButton";
 import { useAuth } from "@/lib/hooks/useAuth";
 
 const navLinks = [
-  { href: "/#how", label: "How it works" },
   { href: "/templates", label: "Templates" },
   { href: "/#plans", label: "Plans" },
-  { href: "/status", label: "Status" },
 ];
 
 export function Header() {
