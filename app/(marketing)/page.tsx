@@ -191,7 +191,7 @@ export default function HomePage() {
         </section>
 
         {/* How it works */}
-        <section className="bg-[#0A0A0A] text-white py-20">
+        <section id="how-it-works" className="bg-[#0A0A0A] text-white py-20">
           <div className="container max-w-6xl space-y-12">
             <div className="text-center space-y-3">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/70">
