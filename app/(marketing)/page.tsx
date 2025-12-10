@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import Script from "next/script";
 import { useState } from "react";
 
@@ -8,7 +7,6 @@ import { Header } from "@/components/Header";
 import { HeroInteractive } from "@/components/HeroInteractive";
 import { Button } from "@/components/ui/button";
 import { Footer } from "@/components/Footer";
-import { BlueprintButton } from "@/components/BlueprintButton";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
