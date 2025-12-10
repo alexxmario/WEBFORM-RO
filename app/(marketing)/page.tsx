@@ -506,24 +506,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Waitlist */}
-        <section className="container rounded-3xl border border-white/10 bg-[#0A0A0A] text-white p-8 backdrop-blur">
-          <div className="flex flex-col gap-3">
-            <h4 className="text-2xl font-semibold">
-              Keep your spot — we cap membership at 1,000 for quality.
-            </h4>
-            <p className="text-sm text-white/70">
-              If the roster is full, join the waitlist and we’ll invite you the moment a slot opens.
-            </p>
-          </div>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Button asChild variant="outline">
-              <Link href="/waitlist">Join the waitlist</Link>
-            </Button>
-            <BlueprintButton>Start the Blueprint</BlueprintButton>
-          </div>
-        </section>
-
       </main>
       <Footer />
 
