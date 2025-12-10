@@ -115,7 +115,7 @@ export default function HomePage() {
             strategy="afterInteractive"
           />
           <div
-            className="relative hidden w-screen max-w-none overflow-hidden md:block"
+            className="relative w-screen max-w-none overflow-hidden"
             style={{ width: "100vw" }}
           >
             <spline-viewer
