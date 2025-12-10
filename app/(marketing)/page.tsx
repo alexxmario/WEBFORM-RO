@@ -48,9 +48,13 @@ export default function HomePage() {
           dangerouslySetInnerHTML={{
             __html: `
               .mission-section {
+                opacity: 1;
+                transform: translateY(0);
+                transition: opacity 700ms ease, transform 700ms ease;
+              }
+              .mission-section.animate-in {
                 opacity: 0;
                 transform: translateY(16px);
-                transition: opacity 700ms ease, transform 700ms ease;
               }
               .mission-section.visible {
                 opacity: 1;
@@ -80,9 +84,11 @@ export default function HomePage() {
               (function() {
                 const el = document.getElementById("mission-section");
                 if (!el) return;
+                el.classList.add("animate-in");
                 const io = new IntersectionObserver((entries) => {
                   entries.forEach((entry) => {
                     if (entry.isIntersecting) {
+                      el.classList.remove("animate-in");
                       el.classList.add("visible");
                       io.disconnect();
                     }
@@ -96,7 +102,7 @@ export default function HomePage() {
 
         <section
           id="how"
-          className="w-screen max-w-none px-0"
+          className="hidden w-screen max-w-none px-0 md:block"
           style={{
             marginLeft: "calc(50% - 50vw)",
             marginRight: "calc(50% - 50vw)",
