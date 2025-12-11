@@ -45,6 +45,7 @@ import {
 import { templateOptions } from "@/lib/templates";
 
 export function BlueprintForm() {
+  console.log("🔵 BlueprintForm v2.0 - localStorage removed");
   const router = useRouter();
   const defaultValues = useMemo<BlueprintFormValues>(
     () => ({
