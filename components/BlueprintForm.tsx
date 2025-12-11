@@ -107,6 +107,9 @@ export function BlueprintForm() {
     watch,
     formState: { errors, isSubmitting },
   } = form;
+
+  // Log errors whenever they change
+  console.log("🔴 Form errors:", errors);
   const assetUploads = watch("look.assetUploads");
   const references = watch("look.references");
   const selectedTemplates = templateOptions.filter((template) =>
@@ -215,7 +218,10 @@ export function BlueprintForm() {
 
       <form
         className="space-y-8"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmit, (errors) => {
+          console.error("❌ Form validation failed:", errors);
+          toast.error("Please check all required fields and confirmations");
+        })}
         aria-label="Website Blueprint form"
       >
         {step === 0 && (
