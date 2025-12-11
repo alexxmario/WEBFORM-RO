@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Check, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import {
@@ -60,12 +60,7 @@ export function BlueprintForm() {
         dreamClient: "",
       },
       look: {
-        references: [
-          {
-            url: "",
-            notes: "",
-          },
-        ],
+        references: [],
         colorPreference: [],
         imageryVibe: [],
         assetsNote: "",
@@ -325,13 +320,10 @@ export function BlueprintForm() {
                       return (
                         <div
                           key={template.id}
-                          className="group relative flex flex-col gap-3 rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm transition hover:border-primary/50 hover:shadow-glow cursor-pointer"
-                          onClick={() =>
-                            window.open(template.preview, "_blank", "noopener,noreferrer")
-                          }
+                          className="group relative flex flex-col rounded-2xl border border-border/60 bg-background/80 overflow-hidden shadow-sm transition hover:border-primary/50 hover:shadow-glow"
                         >
                           <div
-                            className="w-full aspect-square rounded-xl shadow-inner bg-cover bg-center brightness-125 saturate-125"
+                            className="w-full aspect-square rounded-t-xl bg-cover bg-center brightness-125 saturate-125"
                             style={{
                               backgroundImage: thumb
                                 ? `url(${thumb})`
@@ -339,20 +331,32 @@ export function BlueprintForm() {
                               filter: "brightness(1.45) saturate(1.25)",
                             }}
                           />
-                          <Button
-                            size="sm"
-                            variant={isSelected ? "default" : "outline"}
-                            className="absolute right-3 top-3 h-8 w-8 rounded-full p-0"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              applyTemplateReference(template);
-                            }}
-                            aria-pressed={isSelected}
-                            aria-label={`Select ${template.name}`}
-                          >
-                            <Check className="h-4 w-4" />
-                          </Button>
-                          <span className="sr-only">{template.name}</span>
+                          <div className="flex gap-2 p-3">
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant={isSelected ? "default" : "outline"}
+                              className="flex-1"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                applyTemplateReference(template);
+                              }}
+                              aria-pressed={isSelected}
+                            >
+                              {isSelected ? "Selected" : "Select"}
+                            </Button>
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant="outline"
+                              className="flex-1"
+                              onClick={() =>
+                                window.open(template.preview, "_blank", "noopener,noreferrer")
+                              }
+                            >
+                              View
+                            </Button>
+                          </div>
                         </div>
                       );
                     })}
