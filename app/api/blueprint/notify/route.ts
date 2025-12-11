@@ -82,7 +82,7 @@ export async function POST(request: Request) {
                 ${data.look.references?.length > 0 ? `
                 <div class="field">
                   <span class="field-label">Reference sites:</span>
-                  ${data.look.references.map((ref: any) => `
+                  ${data.look.references.map((ref: { url: string; notes?: string }) => `
                     <div class="list-item">
                       <a href="${ref.url}" style="color: #667eea;">${ref.url}</a>
                       ${ref.notes ? `<br><span style="color: #666; font-size: 14px;">${ref.notes}</span>` : ''}
