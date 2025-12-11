@@ -153,16 +153,23 @@ export function BlueprintForm() {
   const goPrev = () => setStep((prev) => Math.max(prev - 1, 0));
 
   const onSubmit = async (values: BlueprintFormValues) => {
-    const response = await fetch("/api/blueprint", {
-      method: "POST",
-      body: JSON.stringify(values),
-    });
-    if (!response.ok) {
-      toast.error("Something went wrong. Please review the form.");
-      return;
+    console.log("🟢 Form submitted with values:", values);
+    try {
+      const response = await fetch("/api/blueprint", {
+        method: "POST",
+        body: JSON.stringify(values),
+      });
+      if (!response.ok) {
+        console.error("❌ API error:", response.status, await response.text());
+        toast.error("Something went wrong. Please review the form.");
+        return;
+      }
+      toast.success("Blueprint received. We'll follow up within 24 hours.");
+      router.push("/thank-you");
+    } catch (error) {
+      console.error("❌ Submit error:", error);
+      toast.error("Failed to submit. Please try again.");
     }
-    toast.success("Blueprint received. We'll follow up within 24 hours.");
-    router.push("/thank-you");
   };
 
   const applyTemplateReference = (template: (typeof templateOptions)[number]) => {
