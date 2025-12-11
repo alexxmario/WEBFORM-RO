@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     const supabase = supabaseServerAdmin();
 
     // Upload to Supabase Storage
-    const { data, error } = await supabase.storage
+    const { error } = await supabase.storage
       .from("blueprint-assets")
       .upload(filename, buffer, {
         contentType: file.type,
