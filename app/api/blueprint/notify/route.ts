@@ -61,7 +61,11 @@ export async function POST(request: Request) {
                 <div class="section-title">🎯 Vision</div>
                 <div class="field">
                   <span class="field-label">Main goal:</span>
-                  <span class="field-value">${data.vision.mainGoal || 'N/A'}</span>
+                  <span class="field-value">${
+                    data.vision.mainGoal === 'Other' && data.vision.customMainGoal
+                      ? data.vision.customMainGoal
+                      : data.vision.mainGoal || 'N/A'
+                  }</span>
                 </div>
               </div>
 

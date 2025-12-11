@@ -54,6 +54,7 @@ export function BlueprintForm() {
       },
       vision: {
         mainGoal: "Leads",
+        customMainGoal: "",
       },
       look: {
         references: [],
@@ -115,6 +116,7 @@ export function BlueprintForm() {
     ],
     1: [
       "vision.mainGoal",
+      "vision.customMainGoal",
     ],
     2: [
       "look.references",
@@ -267,7 +269,7 @@ export function BlueprintForm() {
                       <SelectValue placeholder="Choose a goal" />
                     </SelectTrigger>
                     <SelectContent>
-                      {["Leads", "Bookings", "Trust", "Portfolio", "Sell"].map((goal) => (
+                      {["Leads", "Bookings", "Trust", "Portfolio", "Sell", "Other"].map((goal) => (
                         <SelectItem key={goal} value={goal}>
                           {goal}
                         </SelectItem>
@@ -277,6 +279,14 @@ export function BlueprintForm() {
                 )}
               />
             </Field>
+            {watch("vision.mainGoal") === "Other" && (
+              <Field label="Describe your main goal" error={errors.vision?.customMainGoal?.message}>
+                <Input
+                  placeholder="e.g., Build brand awareness, Drive app downloads"
+                  {...register("vision.customMainGoal")}
+                />
+              </Field>
+            )}
           </section>
         )}
 

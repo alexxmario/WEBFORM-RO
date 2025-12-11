@@ -19,8 +19,20 @@ export const blueprintSchema = z.object({
       .nonempty("Pick at least one personality"),
   }),
   vision: z.object({
-    mainGoal: z.enum(["Leads", "Bookings", "Trust", "Portfolio", "Sell"]),
-  }),
+    mainGoal: z.enum(["Leads", "Bookings", "Trust", "Portfolio", "Sell", "Other"]),
+    customMainGoal: z.string().optional(),
+  }).refine(
+    (data) => {
+      if (data.mainGoal === "Other") {
+        return data.customMainGoal && data.customMainGoal.trim().length >= 3;
+      }
+      return true;
+    },
+    {
+      message: "Please describe your main goal (min 3 characters)",
+      path: ["customMainGoal"],
+    }
+  ),
   look: z.object({
     references: z
       .array(referenceSiteSchema)

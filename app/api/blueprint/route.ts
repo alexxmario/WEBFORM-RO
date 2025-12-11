@@ -26,7 +26,9 @@ export async function POST(request: Request) {
         one_liner: data.identity.oneLiner,
         what_you_sell: data.identity.whatYouSell,
         brand_personality: data.identity.brandPersonality,
-        main_goal: data.vision.mainGoal,
+        main_goal: data.vision.mainGoal === "Other" && data.vision.customMainGoal
+          ? data.vision.customMainGoal
+          : data.vision.mainGoal,
         "references": data.look.references,
         color_preference: data.look.colorPreference,
         imagery_vibe: data.look.imageryVibe,

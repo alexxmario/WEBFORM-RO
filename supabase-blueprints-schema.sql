@@ -55,6 +55,7 @@ CREATE POLICY "Service role can manage blueprints" ON blueprints
   FOR ALL
   USING (auth.role() = 'service_role');
 
+
 -- Policy: Admins can view all blueprints
 CREATE POLICY "Admins can view blueprints" ON blueprints
   FOR SELECT
