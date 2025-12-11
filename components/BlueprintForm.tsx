@@ -430,21 +430,31 @@ export function BlueprintForm() {
               <Controller
                 control={control}
                 name="content.pages"
-                render={({ field }) => (
-                  <>
-                    <ChipGroup
-                      value={field.value}
-                      onChange={field.onChange}
-                      options={[
-                        { label: "Home", value: "Home" },
-                        { label: "About", value: "About" },
-                        { label: "Services", value: "Services" },
-                        { label: "Pricing", value: "Pricing" },
-                        { label: "Portfolio", value: "Portfolio" },
-                        { label: "Contact", value: "Contact" },
-                        { label: "Book", value: "Book" },
-                      ]}
-                    />
+                render={({ field }) => {
+                  const predefinedPages = [
+                    { label: "Home", value: "Home" },
+                    { label: "About", value: "About" },
+                    { label: "Services", value: "Services" },
+                    { label: "Pricing", value: "Pricing" },
+                    { label: "Portfolio", value: "Portfolio" },
+                    { label: "Contact", value: "Contact" },
+                    { label: "Book", value: "Book" },
+                  ];
+
+                  // Add custom pages to options
+                  const customPages = (field.value || [])
+                    .filter((page: string) => !predefinedPages.some(p => p.value === page))
+                    .map((page: string) => ({ label: page, value: page }));
+
+                  const allPageOptions = [...predefinedPages, ...customPages];
+
+                  return (
+                    <>
+                      <ChipGroup
+                        value={field.value}
+                        onChange={field.onChange}
+                        options={allPageOptions}
+                      />
                     <div className="flex gap-2 mt-3">
                       <Input
                         placeholder="Add custom page (e.g., Blog, Resources)"
@@ -466,8 +476,9 @@ export function BlueprintForm() {
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
-                  </>
-                )}
+                    </>
+                  );
+                }}
               />
             </Field>
             <Field
