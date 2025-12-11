@@ -138,11 +138,14 @@ export function BlueprintForm() {
       "vision.dreamClient",
     ],
     2: [
+      "look.references",
       "look.colorPreference",
+      "look.imageryVibe",
       "look.assetsNote",
+      "look.assetUploads",
     ],
     3: ["content.pages", "content.ctaDestination", "content.homeCopy"],
-    4: ["technical.domainStatus", "technical.currentSite"],
+    4: ["technical.domainStatus", "technical.currentSite", "technical.integrations"],
     5: ["confirmations.timeline", "confirmations.cancellation", "confirmations.sla"],
   };
 
