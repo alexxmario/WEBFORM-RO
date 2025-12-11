@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, Loader2, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Controller,
   FieldPath,
@@ -42,14 +42,11 @@ import {
   blueprintSchema,
   blueprintSteps,
 } from "@/lib/zodSchemas";
-import { loadFromStorage, saveToStorage } from "@/lib/utils";
 import { templateOptions } from "@/lib/templates";
-
-const storageKey = "webform-blueprint";
 
 export function BlueprintForm() {
   const router = useRouter();
-  const initialValues = useMemo<BlueprintFormValues>(
+  const defaultValues = useMemo<BlueprintFormValues>(
     () => ({
       identity: {
         businessName: "",
@@ -94,30 +91,6 @@ export function BlueprintForm() {
     [],
   );
 
-  const defaultValues = useMemo<BlueprintFormValues>(() => {
-    const saved = loadFromStorage<BlueprintFormValues>(
-      storageKey,
-      initialValues,
-    );
-    return {
-      ...initialValues,
-      ...(saved ?? {}),
-      identity: { ...initialValues.identity, ...(saved?.identity ?? {}) },
-      vision: { ...initialValues.vision, ...(saved?.vision ?? {}) },
-      look: {
-        ...initialValues.look,
-        ...(saved?.look ?? {}),
-        assetUploads: saved?.look?.assetUploads ?? [],
-      },
-      content: { ...initialValues.content, ...(saved?.content ?? {}) },
-      technical: { ...initialValues.technical, ...(saved?.technical ?? {}) },
-      confirmations: {
-        ...initialValues.confirmations,
-        ...(saved?.confirmations ?? {}),
-      },
-    };
-  }, [initialValues]);
-
   const form = useForm<BlueprintFormValues>({
     resolver: zodResolver(blueprintSchema),
     defaultValues,
@@ -146,15 +119,6 @@ export function BlueprintForm() {
 
   const [step, setStep] = useState(0);
   const [templateDialogOpen, setTemplateDialogOpen] = useState(false);
-
-  useEffect(() => {
-    const sub = watch((values) => {
-      saveToStorage(storageKey, values);
-    });
-    return () => {
-      sub.unsubscribe();
-    };
-  }, [watch]);
 
   const stepFields: Record<number, FieldPath<BlueprintFormValues>[]> = {
     0: [
@@ -196,8 +160,7 @@ export function BlueprintForm() {
       toast.error("Something went wrong. Please review the form.");
       return;
     }
-    toast.success("Blueprint received. We’ll follow up within 24 hours.");
-    saveToStorage(storageKey, values);
+    toast.success("Blueprint received. We'll follow up within 24 hours.");
     router.push("/thank-you");
   };
 
