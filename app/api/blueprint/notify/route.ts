@@ -63,22 +63,6 @@ export async function POST(request: Request) {
                   <span class="field-label">Main goal:</span>
                   <span class="field-value">${data.vision.mainGoal || 'N/A'}</span>
                 </div>
-                <div class="field">
-                  <span class="field-label">Primary action:</span>
-                  <span class="field-value">${data.vision.primaryAction || 'N/A'}</span>
-                </div>
-                <div class="field">
-                  <span class="field-label">Visitor should feel:</span>
-                  <span class="field-value">${data.vision.visitorFeel || 'N/A'}</span>
-                </div>
-                ${data.vision.dreamClient ? `
-                <div class="field">
-                  <span class="field-label">Dream client:</span>
-                  <div style="margin-left: 10px; margin-top: 5px; padding: 10px; background: white; border-radius: 4px;">
-                    ${data.vision.dreamClient}
-                  </div>
-                </div>
-                ` : ''}
               </div>
 
               <div class="section">
@@ -130,14 +114,6 @@ export async function POST(request: Request) {
                 <div class="field">
                   <span class="field-label">CTA destination:</span>
                   <span class="field-value">${data.content.ctaDestination}</span>
-                </div>
-                ` : ''}
-                ${data.content.homeCopy ? `
-                <div class="field">
-                  <span class="field-label">Home copy:</span>
-                  <div style="margin-left: 10px; margin-top: 5px; padding: 10px; background: white; border-radius: 4px;">
-                    ${data.content.homeCopy}
-                  </div>
                 </div>
                 ` : ''}
               </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
+import { Loader2, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import {
@@ -55,9 +55,6 @@ export function BlueprintForm() {
       },
       vision: {
         mainGoal: "Leads",
-        primaryAction: "Book a call",
-        visitorFeel: "Confident, taken care of, impressed",
-        dreamClient: "",
       },
       look: {
         references: [],
@@ -69,7 +66,6 @@ export function BlueprintForm() {
       content: {
         pages: ["Home", "About", "Services", "Pricing", "Contact"],
         ctaDestination: "",
-        homeCopy: "",
       },
       technical: {
         domainStatus: "have",
@@ -77,9 +73,7 @@ export function BlueprintForm() {
         currentSite: "",
       },
       confirmations: {
-        timeline: false,
-        cancellation: false,
-        sla: false,
+        termsAccepted: false,
       },
     }),
     [],
@@ -111,6 +105,7 @@ export function BlueprintForm() {
 
   const [step, setStep] = useState(0);
   const [templateDialogOpen, setTemplateDialogOpen] = useState(false);
+  const [customPageInput, setCustomPageInput] = useState("");
 
   const stepFields: Record<number, FieldPath<BlueprintFormValues>[]> = {
     0: [
@@ -121,9 +116,6 @@ export function BlueprintForm() {
     ],
     1: [
       "vision.mainGoal",
-      "vision.primaryAction",
-      "vision.visitorFeel",
-      "vision.dreamClient",
     ],
     2: [
       "look.references",
@@ -132,9 +124,9 @@ export function BlueprintForm() {
       "look.assetsNote",
       "look.assetUploads",
     ],
-    3: ["content.pages", "content.ctaDestination", "content.homeCopy"],
+    3: ["content.pages", "content.ctaDestination"],
     4: ["technical.domainStatus", "technical.currentSite", "technical.integrations"],
-    5: ["confirmations.timeline", "confirmations.cancellation", "confirmations.sla"],
+    5: ["confirmations.termsAccepted"],
   };
 
   const goNext = async () => {
@@ -189,6 +181,21 @@ export function BlueprintForm() {
     const nextRefs = [...currentRefs, templateRef];
     setValue("look.references", nextRefs, { shouldValidate: true });
     toast.success(`Added ${template.name} to your references`);
+  };
+
+  const handleAddCustomPage = (field: { value: string[]; onChange: (value: string[]) => void }) => {
+    const trimmedInput = customPageInput.trim();
+    if (!trimmedInput) return;
+
+    const currentPages = field.value || [];
+    if (currentPages.includes(trimmedInput)) {
+      toast.error("Page already added");
+      return;
+    }
+
+    field.onChange([...currentPages, trimmedInput]);
+    setCustomPageInput("");
+    toast.success(`Added ${trimmedInput}`);
   };
 
   return (
@@ -270,19 +277,6 @@ export function BlueprintForm() {
                   </Select>
                 )}
               />
-            </Field>
-            <Field label="#1 action you want visitors to take" error={errors.vision?.primaryAction?.message}>
-              <Input placeholder="Book a consult, start trial, reserve spot" {...register("vision.primaryAction")} />
-            </Field>
-            <Field label="What should visitors feel?" hint="Use 3–5 keywords." error={errors.vision?.visitorFeel?.message}>
-              <Input placeholder="Confident, excited, taken care of" {...register("vision.visitorFeel")} />
-            </Field>
-            <Field
-              label="Describe your dream client"
-              hint="2–3 sentences."
-              error={errors.vision?.dreamClient?.message}
-            >
-              <Textarea placeholder="Describe who you serve, why they pick you, and what success looks like for them." {...register("vision.dreamClient")} />
             </Field>
           </section>
         )}
@@ -438,19 +432,42 @@ export function BlueprintForm() {
                 control={control}
                 name="content.pages"
                 render={({ field }) => (
-                  <ChipGroup
-                    value={field.value}
-                    onChange={field.onChange}
-                    options={[
-                      { label: "Home", value: "Home" },
-                      { label: "About", value: "About" },
-                      { label: "Services", value: "Services" },
-                      { label: "Pricing", value: "Pricing" },
-                      { label: "Portfolio", value: "Portfolio" },
-                      { label: "Contact", value: "Contact" },
-                      { label: "Book", value: "Book" },
-                    ]}
-                  />
+                  <>
+                    <ChipGroup
+                      value={field.value}
+                      onChange={field.onChange}
+                      options={[
+                        { label: "Home", value: "Home" },
+                        { label: "About", value: "About" },
+                        { label: "Services", value: "Services" },
+                        { label: "Pricing", value: "Pricing" },
+                        { label: "Portfolio", value: "Portfolio" },
+                        { label: "Contact", value: "Contact" },
+                        { label: "Book", value: "Book" },
+                      ]}
+                    />
+                    <div className="flex gap-2 mt-3">
+                      <Input
+                        placeholder="Add custom page (e.g., Blog, Resources)"
+                        value={customPageInput}
+                        onChange={(e) => setCustomPageInput(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            handleAddCustomPage(field);
+                          }
+                        }}
+                      />
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleAddCustomPage(field)}
+                      >
+                        <Plus className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </>
                 )}
               />
             </Field>
@@ -460,13 +477,6 @@ export function BlueprintForm() {
               error={errors.content?.ctaDestination?.message}
             >
               <Input placeholder="hello@yourcompany.com" {...register("content.ctaDestination")} />
-            </Field>
-            <Field
-              label="Seed copy for Home hero"
-              hint="Feel free to paste per-page notes."
-              error={errors.content?.homeCopy?.message}
-            >
-              <Textarea placeholder="We help busy teams launch premium websites without the DIY." {...register("content.homeCopy")} />
             </Field>
           </section>
         )}
@@ -502,23 +512,30 @@ export function BlueprintForm() {
 
         {step === 5 && (
           <section className="section space-y-4">
-            <CheckboxField
-              label="I acknowledge the 7-day build and 3-day updates."
-              checked={form.getValues("confirmations.timeline")}
-              onCheckedChange={(v) => setValue("confirmations.timeline", Boolean(v))}
-              error={errors.confirmations?.timeline?.message}
-            />
-            <CheckboxField
-              label="I understand hosting/domain is included; canceling stops hosting."
-              checked={form.getValues("confirmations.cancellation")}
-              onCheckedChange={(v) => setValue("confirmations.cancellation", Boolean(v))}
-              error={errors.confirmations?.cancellation?.message}
-            />
-            <CheckboxField
-              label="I agree to respond within 24h during build checkpoints."
-              checked={form.getValues("confirmations.sla")}
-              onCheckedChange={(v) => setValue("confirmations.sla", Boolean(v))}
-              error={errors.confirmations?.sla?.message}
+            <Controller
+              control={control}
+              name="confirmations.termsAccepted"
+              render={({ field }) => (
+                <CheckboxField
+                  label={
+                    <>
+                      I agree with the{" "}
+                      <a
+                        href="/terms"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary underline hover:text-primary/80"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        terms and conditions
+                      </a>
+                    </>
+                  }
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  error={errors.confirmations?.termsAccepted?.message}
+                />
+              )}
             />
           </section>
         )}
@@ -569,7 +586,7 @@ function Field({ label, hint, error, children }: FieldProps) {
 }
 
 type CheckboxFieldProps = {
-  label: string;
+  label: string | React.ReactNode;
   checked: boolean;
   onCheckedChange: (value: boolean) => void;
   error?: string;
@@ -589,7 +606,7 @@ function CheckboxField({
         className="mt-1"
       />
       <div>
-        <p className="text-sm font-semibold text-foreground">{label}</p>
+        <div className="text-sm font-semibold text-foreground">{label}</div>
         {error && <p className="text-sm text-red-400">{error}</p>}
       </div>
     </div>

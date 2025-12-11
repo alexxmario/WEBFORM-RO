@@ -20,11 +20,6 @@ export const blueprintSchema = z.object({
   }),
   vision: z.object({
     mainGoal: z.enum(["Leads", "Bookings", "Trust", "Portfolio", "Sell"]),
-    primaryAction: z.string().min(3, "What's the #1 action?"),
-    visitorFeel: z.string().min(3, "Share 3-5 keywords"),
-    dreamClient: z
-      .string()
-      .min(15, "Describe your dream client in a couple sentences"),
   }),
   look: z.object({
     references: z
@@ -39,11 +34,8 @@ export const blueprintSchema = z.object({
   content: z.object({
     pages: z
       .array(z.string())
-      .nonempty("Select the pages you want live at launch"),
+      .nonempty("Select or add at least one page"),
     ctaDestination: z.string().min(5, "Where should your CTAs point?"),
-    homeCopy: z
-      .string()
-      .min(12, "Give us a starter hero message for Home"),
   }),
   technical: z.object({
     domainStatus: z.enum(["have", "need"]),
@@ -55,20 +47,10 @@ export const blueprintSchema = z.object({
     integrations: z.array(z.string()).optional().default([]),
   }),
   confirmations: z.object({
-    timeline: z
+    termsAccepted: z
       .boolean()
       .refine((val) => val, {
-        message: "Please acknowledge the 7-day build and 3-day updates",
-      }),
-    cancellation: z
-      .boolean()
-      .refine((val) => val, {
-        message: "Please confirm hosting stops if you cancel",
-      }),
-    sla: z
-      .boolean()
-      .refine((val) => val, {
-        message: "Please agree to the 24h response window",
+        message: "Please accept the terms and conditions to continue",
       }),
   }),
 });
