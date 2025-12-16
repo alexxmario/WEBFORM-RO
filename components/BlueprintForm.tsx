@@ -157,14 +157,14 @@ export function BlueprintForm() {
       });
       if (!response.ok) {
         console.error("❌ API error:", response.status, await response.text());
-        toast.error("Something went wrong. Please review the form.");
+        toast.error("Ceva nu a mers bine. Te rugăm să verifici formularul.");
         return;
       }
-      toast.success("Blueprint received. We'll follow up within 24 hours.");
+      toast.success("Blueprint primit. Te vom contacta în 24 de ore.");
       router.push("/thank-you");
     } catch (error) {
       console.error("❌ Submit error:", error);
-      toast.error("Failed to submit. Please try again.");
+      toast.error("Trimiterea a eșuat. Te rugăm să încerci din nou.");
     }
   };
 
@@ -179,18 +179,18 @@ export function BlueprintForm() {
     if (exists) {
       const nextRefs = currentRefs.filter((ref) => ref.url !== template.url);
       setValue("look.references", nextRefs, { shouldValidate: true });
-      toast.success(`Removed ${template.name} from your references`);
+      toast.success(`${template.name} eliminat din referințele tale`);
       return;
     }
 
     if (currentRefs.length >= 3) {
-      toast.error("You can pick up to 3 templates. Remove one to add another.");
+      toast.error("Poți alege până la 3 șabloane. Elimină unul pentru a adăuga altul.");
       return;
     }
 
     const nextRefs = [...currentRefs, templateRef];
     setValue("look.references", nextRefs, { shouldValidate: true });
-    toast.success(`Added ${template.name} to your references`);
+    toast.success(`${template.name} adăugat la referințele tale`);
   };
 
   const handleAddCustomPage = (field: { value: string[]; onChange: (value: string[]) => void }) => {
@@ -199,13 +199,13 @@ export function BlueprintForm() {
 
     const currentPages = field.value || [];
     if (currentPages.includes(trimmedInput)) {
-      toast.error("Page already added");
+      toast.error("Pagina a fost deja adăugată");
       return;
     }
 
     field.onChange([...currentPages, trimmedInput]);
     setCustomPageInput("");
-    toast.success(`Added ${trimmedInput}`);
+    toast.success(`${trimmedInput} adăugat`);
   };
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -213,7 +213,7 @@ export function BlueprintForm() {
     if (files.length === 0) return;
 
     if (!sessionId) {
-      toast.error("Session not initialized. Please refresh the page.");
+      toast.error("Sesiunea nu este inițializată. Te rugăm să reîncarci pagina.");
       return;
     }
 
@@ -241,10 +241,10 @@ export function BlueprintForm() {
 
       const uploadedUrls = await Promise.all(uploadPromises);
       setValue("look.assetUploads", [...currentUploads, ...uploadedUrls]);
-      toast.success(`Uploaded ${files.length} file${files.length > 1 ? 's' : ''}`);
+      toast.success(`${files.length} fișier${files.length > 1 ? 'e' : ''} încărcat${files.length > 1 ? 'e' : ''}`);
     } catch (error) {
       console.error("Upload error:", error);
-      toast.error("Failed to upload some files");
+      toast.error("Încărcarea unor fișiere a eșuat");
     } finally {
       setUploadingFiles(false);
       // Reset file input
@@ -272,22 +272,22 @@ export function BlueprintForm() {
         className="space-y-8"
         onSubmit={handleSubmit(onSubmit, (errors) => {
           console.error("❌ Form validation failed:", errors);
-          toast.error("Please check all required fields and confirmations");
+          toast.error("Te rugăm să verifici toate câmpurile obligatorii și confirmările");
         })}
         aria-label="Website Blueprint form"
       >
         {step === 0 && (
           <section className="section space-y-4">
-            <Field label="Business name" error={errors.identity?.businessName?.message}>
+            <Field label="Numele afacerii" error={errors.identity?.businessName?.message}>
               <Input placeholder="Acme Studio" {...register("identity.businessName")} />
             </Field>
-            <Field label="One-liner (optional)" hint='e.g., "We help busy founders launch premium nutrition apps."' error={errors.identity?.oneLiner?.message}>
-              <Input placeholder="We build fast, memorable websites." {...register("identity.oneLiner")} />
+            <Field label="Slogan (opțional)" hint='de ex., "Ajutăm antreprenorii ocupați să lanseze aplicații premium de nutriție."' error={errors.identity?.oneLiner?.message}>
+              <Input placeholder="Construim site-uri rapide și memorabile." {...register("identity.oneLiner")} />
             </Field>
-            <Field label="What do you sell?" error={errors.identity?.whatYouSell?.message}>
-              <Input placeholder="Service, product, or offer" {...register("identity.whatYouSell")} />
+            <Field label="Ce vinzi?" error={errors.identity?.whatYouSell?.message}>
+              <Input placeholder="Serviciu, produs sau ofertă" {...register("identity.whatYouSell")} />
             </Field>
-            <Field label="Brand personality" error={errors.identity?.brandPersonality?.message}>
+            <Field label="Personalitatea brandului" error={errors.identity?.brandPersonality?.message}>
               <Controller
                 control={control}
                 name="identity.brandPersonality"
@@ -296,12 +296,12 @@ export function BlueprintForm() {
                     value={field.value}
                     onChange={field.onChange}
                     options={[
-                      { label: "Friendly", value: "Friendly" },
-                      { label: "Luxury", value: "Luxury" },
-                      { label: "Bold", value: "Bold" },
+                      { label: "Prietenos", value: "Friendly" },
+                      { label: "Lux", value: "Luxury" },
+                      { label: "Îndrăzneț", value: "Bold" },
                       { label: "Calm", value: "Calm" },
-                      { label: "Technical", value: "Technical" },
-                      { label: "Creative", value: "Creative" },
+                      { label: "Tehnic", value: "Technical" },
+                      { label: "Creativ", value: "Creative" },
                     ]}
                   />
                 )}
@@ -312,19 +312,26 @@ export function BlueprintForm() {
 
         {step === 1 && (
           <section className="section space-y-4">
-            <Field label="Main website goal" error={errors.vision?.mainGoal?.message}>
+            <Field label="Obiectivul principal al website-ului" error={errors.vision?.mainGoal?.message}>
               <Controller
                 control={control}
                 name="vision.mainGoal"
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger aria-label="Main goal">
-                      <SelectValue placeholder="Choose a goal" />
+                      <SelectValue placeholder="Alege un obiectiv" />
                     </SelectTrigger>
                     <SelectContent>
-                      {["Leads", "Bookings", "Trust", "Portfolio", "Sell", "Other"].map((goal) => (
-                        <SelectItem key={goal} value={goal}>
-                          {goal}
+                      {[
+                        { value: "Leads", label: "Clienți potențiali" },
+                        { value: "Bookings", label: "Rezervări" },
+                        { value: "Trust", label: "Încredere" },
+                        { value: "Portfolio", label: "Portofoliu" },
+                        { value: "Sell", label: "Vânzare" },
+                        { value: "Other", label: "Altele" }
+                      ].map((goal) => (
+                        <SelectItem key={goal.value} value={goal.value}>
+                          {goal.label}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -333,9 +340,9 @@ export function BlueprintForm() {
               />
             </Field>
             {watch("vision.mainGoal") === "Other" && (
-              <Field label="Describe your main goal" error={errors.vision?.customMainGoal?.message}>
+              <Field label="Descrie obiectivul principal" error={errors.vision?.customMainGoal?.message}>
                 <Input
-                  placeholder="e.g., Build brand awareness, Drive app downloads"
+                  placeholder="de ex., Creșterea gradului de cunoaștere a brandului, Descărcări aplicație"
                   {...register("vision.customMainGoal")}
                 />
               </Field>
@@ -349,24 +356,24 @@ export function BlueprintForm() {
               <Dialog open={templateDialogOpen} onOpenChange={setTemplateDialogOpen}>
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div className="space-y-1">
-                    <p className="text-sm font-semibold text-foreground">Template library</p>
+                    <p className="text-sm font-semibold text-foreground">Bibliotecă de șabloane</p>
                     <p className="text-xs text-muted-foreground">
                       {selectedTemplates.length
-                        ? `${selectedTemplates.length} template${selectedTemplates.length > 1 ? 's' : ''} selected`
-                        : "Pick up to 3 templates to inspire your design"}
+                        ? `${selectedTemplates.length} șablon${selectedTemplates.length > 1 ? 'e' : ''} selectat${selectedTemplates.length > 1 ? 'e' : ''}`
+                        : "Alege până la 3 șabloane pentru a-ți inspira designul"}
                     </p>
                   </div>
                   <DialogTrigger asChild>
                     <Button variant="outline" size="sm">
-                      Open template library
+                      Deschide biblioteca de șabloane
                     </Button>
                   </DialogTrigger>
                 </div>
                 <DialogContent className="max-w-screen-lg max-h-[90vh] overflow-y-auto">
                   <DialogHeader className="space-y-2">
-                    <DialogTitle>Browse templates</DialogTitle>
+                    <DialogTitle>Răsfoiește șabloanele</DialogTitle>
                     <DialogDescription>
-                      Select any template to add it to your references. You can mix and match up to three.
+                      Selectează orice șablon pentru a-l adăuga la referințele tale. Poți combina până la trei.
                     </DialogDescription>
                   </DialogHeader>
                   <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -399,7 +406,7 @@ export function BlueprintForm() {
                               }}
                               aria-pressed={isSelected}
                             >
-                              {isSelected ? "Selected" : "Select"}
+                              {isSelected ? "Selectat" : "Selectează"}
                             </Button>
                             <Button
                               type="button"
@@ -410,7 +417,7 @@ export function BlueprintForm() {
                                 window.open(template.preview, "_blank", "noopener,noreferrer")
                               }
                             >
-                              View
+                              Vizualizează
                             </Button>
                           </div>
                         </div>
@@ -422,7 +429,7 @@ export function BlueprintForm() {
             </div>
             {selectedTemplates.length > 0 && (
               <div className="space-y-3">
-                <Label>Selected templates</Label>
+                <Label>Șabloane selectate</Label>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {selectedTemplates.map((template) => (
                     <div
@@ -456,7 +463,7 @@ export function BlueprintForm() {
                 </div>
               </div>
             )}
-            <Field label="Color preference" error={errors.look?.colorPreference?.message}>
+            <Field label="Preferință culoare" error={errors.look?.colorPreference?.message}>
               <Controller
                 control={control}
                 name="look.colorPreference"
@@ -465,7 +472,7 @@ export function BlueprintForm() {
                 )}
               />
             </Field>
-            <Field label="Upload photos" hint="Add logos, brand images, or inspiration photos.">
+            <Field label="Încarcă fotografii" hint="Adaugă logo-uri, imagini de brand sau fotografii inspiraționale.">
               <input
                 type="file"
                 multiple
@@ -478,12 +485,12 @@ export function BlueprintForm() {
                 {uploadingFiles ? (
                   <span className="flex items-center gap-2">
                     <Loader2 className="h-3 w-3 animate-spin" />
-                    Uploading files...
+                    Se încarcă fișierele...
                   </span>
                 ) : assetUploads?.length ? (
-                  `${assetUploads.length} file${assetUploads.length > 1 ? 's' : ''} uploaded`
+                  `${assetUploads.length} fișier${assetUploads.length > 1 ? 'e' : ''} încărcat${assetUploads.length > 1 ? 'e' : ''}`
                 ) : (
-                  "JPG, PNG, SVG files supported"
+                  "Fișiere JPG, PNG, SVG suportate"
                 )}
               </p>
             </Field>
@@ -492,19 +499,19 @@ export function BlueprintForm() {
 
         {step === 3 && (
           <section className="section space-y-4">
-            <Field label="Pages you want" error={errors.content?.pages?.message}>
+            <Field label="Paginile dorite" error={errors.content?.pages?.message}>
               <Controller
                 control={control}
                 name="content.pages"
                 render={({ field }) => {
                   const predefinedPages = [
-                    { label: "Home", value: "Home" },
-                    { label: "About", value: "About" },
-                    { label: "Services", value: "Services" },
-                    { label: "Pricing", value: "Pricing" },
-                    { label: "Portfolio", value: "Portfolio" },
+                    { label: "Acasă", value: "Home" },
+                    { label: "Despre", value: "About" },
+                    { label: "Servicii", value: "Services" },
+                    { label: "Prețuri", value: "Pricing" },
+                    { label: "Portofoliu", value: "Portfolio" },
                     { label: "Contact", value: "Contact" },
-                    { label: "Book", value: "Book" },
+                    { label: "Rezervare", value: "Book" },
                   ];
 
                   // Add custom pages to options
@@ -523,7 +530,7 @@ export function BlueprintForm() {
                       />
                     <div className="flex gap-2 mt-3">
                       <Input
-                        placeholder="Add custom page (e.g., Blog, Resources)"
+                        placeholder="Adaugă pagină personalizată (de ex., Blog, Resurse)"
                         value={customPageInput}
                         onChange={(e) => setCustomPageInput(e.target.value)}
                         onKeyDown={(e) => {
@@ -548,18 +555,18 @@ export function BlueprintForm() {
               />
             </Field>
             <Field
-              label="CTA destination"
-              hint="Email, phone, or booking link."
+              label="Destinația CTA"
+              hint="Email, telefon sau link de rezervare."
               error={errors.content?.ctaDestination?.message}
             >
-              <Input placeholder="hello@yourcompany.com" {...register("content.ctaDestination")} />
+              <Input placeholder="salut@compania-ta.com" {...register("content.ctaDestination")} />
             </Field>
           </section>
         )}
 
         {step === 4 && (
           <section className="section space-y-4">
-            <Field label="Domain" error={errors.technical?.domainStatus?.message}>
+            <Field label="Domeniu" error={errors.technical?.domainStatus?.message}>
               <Controller
                 control={control}
                 name="technical.domainStatus"
@@ -569,18 +576,18 @@ export function BlueprintForm() {
                     multiple={false}
                     onChange={(val) => field.onChange(val[0] ?? field.value)}
                     options={[
-                      { label: "I have a domain", value: "have" },
-                      { label: "I need a domain", value: "need" },
+                      { label: "Am un domeniu", value: "have" },
+                      { label: "Am nevoie de un domeniu", value: "need" },
                     ]}
                   />
                 )}
               />
             </Field>
             <Field
-              label="Current site URL (optional)"
+              label="URL site actual (opțional)"
               error={errors.technical?.currentSite?.message}
             >
-              <Input placeholder="https://current-site.com" {...register("technical.currentSite")} />
+              <Input placeholder="https://site-actual.com" {...register("technical.currentSite")} />
             </Field>
           </section>
         )}
@@ -595,7 +602,7 @@ export function BlueprintForm() {
                 <CheckboxField
                   label={
                     <>
-                      I agree with the{" "}
+                      Sunt de acord cu{" "}
                       <a
                         href="/terms"
                         target="_blank"
@@ -603,7 +610,7 @@ export function BlueprintForm() {
                         className="text-primary underline hover:text-primary/80"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        terms and conditions
+                        termenii și condițiile
                       </a>
                     </>
                   }
@@ -623,16 +630,16 @@ export function BlueprintForm() {
             onClick={goPrev}
             disabled={step === 0}
           >
-            Previous
+            Înapoi
           </Button>
           {step < blueprintSteps.length - 1 ? (
             <Button type="button" onClick={goNext}>
-              Next
+              Următorul
             </Button>
           ) : (
             <Button type="submit" disabled={isSubmitting}>
               {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Submit Blueprint
+              Trimite Blueprint-ul
             </Button>
           )}
         </div>

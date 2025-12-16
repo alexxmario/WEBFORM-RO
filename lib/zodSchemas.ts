@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const heroPromptSchema = z.object({
-  whatYouDo: z.string().min(2, "Tell us what you do"),
+  whatYouDo: z.string().min(2, "Spune-ne ce faci"),
 });
 
 const referenceSiteSchema = z.object({
@@ -11,12 +11,12 @@ const referenceSiteSchema = z.object({
 
 export const blueprintSchema = z.object({
   identity: z.object({
-    businessName: z.string().min(2, "Business name is required"),
+    businessName: z.string().min(2, "Numele afacerii este necesar"),
     oneLiner: z.string().optional(),
-    whatYouSell: z.string().min(3, "What you sell is required"),
+    whatYouSell: z.string().min(3, "Trebuie să specifici ce vinzi"),
     brandPersonality: z
       .array(z.string())
-      .nonempty("Pick at least one personality"),
+      .nonempty("Alege cel puțin o personalitate"),
   }),
   vision: z.object({
     mainGoal: z.enum(["Leads", "Bookings", "Trust", "Portfolio", "Sell", "Other"]),
@@ -29,7 +29,7 @@ export const blueprintSchema = z.object({
       return true;
     },
     {
-      message: "Please describe your main goal (min 3 characters)",
+      message: "Te rugăm să descrii obiectivul principal (min 3 caractere)",
       path: ["customMainGoal"],
     }
   ),
@@ -38,7 +38,7 @@ export const blueprintSchema = z.object({
       .array(referenceSiteSchema)
       .optional()
       .default([]),
-    colorPreference: z.array(z.string()).max(5, "You can add up to 5 colors"),
+    colorPreference: z.array(z.string()).max(5, "Poți adăuga până la 5 culori"),
     imageryVibe: z.array(z.string()).optional().default([]),
     assetsNote: z.string().optional().default(""),
     assetUploads: z.array(z.string()).optional().default([]),
@@ -46,14 +46,14 @@ export const blueprintSchema = z.object({
   content: z.object({
     pages: z
       .array(z.string())
-      .nonempty("Select or add at least one page"),
-    ctaDestination: z.string().min(5, "Where should your CTAs point?"),
+      .nonempty("Selectează sau adaugă cel puțin o pagină"),
+    ctaDestination: z.string().min(5, "Unde ar trebui să direcționeze CTA-urile tale?"),
   }),
   technical: z.object({
     domainStatus: z.enum(["have", "need"]),
     currentSite: z
       .string()
-      .url("Share a valid URL")
+      .url("Introdu un URL valid")
       .optional()
       .or(z.literal("")),
     integrations: z.array(z.string()).optional().default([]),
@@ -62,7 +62,7 @@ export const blueprintSchema = z.object({
     termsAccepted: z
       .boolean()
       .refine((val) => val, {
-        message: "Please accept the terms and conditions to continue",
+        message: "Te rugăm să accepți termenii și condițiile pentru a continua",
       }),
   }),
 });
@@ -70,10 +70,10 @@ export const blueprintSchema = z.object({
 export type BlueprintFormValues = z.infer<typeof blueprintSchema>;
 
 export const blueprintSteps = [
-  "Identity",
-  "Vision",
-  "Look & Feel",
-  "Content & Structure",
-  "Technical",
-  "Confirmations",
+  "Identitate",
+  "Viziune",
+  "Aspect & Stil",
+  "Conținut & Structură",
+  "Tehnic",
+  "Confirmări",
 ] as const;

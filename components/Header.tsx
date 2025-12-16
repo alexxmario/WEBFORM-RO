@@ -13,9 +13,9 @@ import { BlueprintButton } from "./BlueprintButton";
 import { useAuth } from "@/lib/hooks/useAuth";
 
 const navLinks = [
-  { href: "/#how-it-works", label: "How it works" },
-  { href: "/templates", label: "Templates" },
-  { href: "/#plans", label: "Plans" },
+  { href: "/#how-it-works", label: "Cum funcționează" },
+  { href: "/templates", label: "Șabloane" },
+  { href: "/#plans", label: "Planuri" },
 ];
 
 export function Header() {
@@ -66,7 +66,7 @@ export function Header() {
                 pathname === "/chat" && "text-foreground",
               )}
             >
-              Chat
+              Suport
             </Link>
           )}
         </nav>
@@ -79,16 +79,16 @@ export function Header() {
               </div>
               <Button size="sm" variant="outline" onClick={handleSignOut}>
                 <LogOut className="h-4 w-4 sm:mr-2" />
-                <span className="hidden sm:inline">Sign out</span>
+                <span className="hidden sm:inline">Deconectare</span>
               </Button>
             </>
           ) : (
             <>
               <Button asChild size="sm" variant="outline">
-                <Link href="/login">Log in</Link>
+                <Link href="/login">Autentificare</Link>
               </Button>
               <BlueprintButton size="sm" className="hidden sm:inline-flex">
-                Start the Website Blueprint
+                Începe Blueprint-ul
               </BlueprintButton>
             </>
           )}

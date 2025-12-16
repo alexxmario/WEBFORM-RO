@@ -27,11 +27,11 @@ export default function HomePage() {
       // Here you would send the email to your backend
       // For now, we'll just show a success message
       await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
-      toast.success("You'll be notified when e-commerce is available!");
+      toast.success("Vei fi notificat când e-commerce va fi disponibil!");
       setEmail("");
       setNotifyDialogOpen(false);
     } catch {
-      toast.error("Something went wrong. Please try again.");
+      toast.error("Ceva nu a mers bine. Te rugăm să încerci din nou.");
     } finally {
       setIsSubmitting(false);
     }
@@ -63,12 +63,12 @@ export default function HomePage() {
         />
         <section className="mission-section container max-w-5xl space-y-6 text-center" id="mission-section">
           <h2 className="text-3xl md:text-4xl font-semibold leading-tight text-foreground">
-            We’re designers and engineers who build, host, and update your site without meetings. We ship in days,
-            manage the stack end-to-end, and surface only the decisions you need —
-            <span className="italic text-muted-foreground"> so you can stay focused on your business.</span>
+            Suntem designeri și ingineri care construiesc, găzduiesc și actualizează site-ul tău fără întâlniri. Livrăm în zile,
+            gestionăm întreaga infrastructură și te implicăm doar în deciziile importante —
+            <span className="italic text-muted-foreground"> astfel încât tu să te concentrezi pe afacerea ta.</span>
           </h2>
           <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            Launch fast. Iterate async. Always on.
+            Lansare rapidă. Iterare asincronă. Mereu disponibili.
           </p>
         </section>
         <Script
@@ -131,22 +131,22 @@ export default function HomePage() {
           <div className="container max-w-6xl space-y-10">
             <div className="text-center space-y-4">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/70">
-                Powerful Features
+                Funcționalități Puternice
               </div>
-              <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Everything you need to launch</h2>
+              <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Tot ce ai nevoie pentru lansare</h2>
               <p className="mx-auto max-w-3xl text-lg text-white/70">
-                Library-driven builds, async checkpoints, and production hosting—without the meetings.
+                Dezvoltare bazată pe șabloane, verificări asincrone și găzduire de producție—fără întâlniri.
               </p>
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {[
-                { title: "Template library", desc: "20+ premium layouts. Swap anytime without downtime." },
-                { title: "Async checkpoints", desc: "Wireframe → design → final preview with no calls required." },
-                { title: "Hosting & domain", desc: "SSL, domains, and analytics bundled. We run the stack for you." },
-                { title: "3-day updates", desc: "Queue-based changes with clear previews and approvals." },
-                { title: "Integrations", desc: "Calendly, forms, CRM tags, and custom scripts done for you." },
-                { title: "Export ready", desc: "Full export available as a paid service if you need to move." },
+                { title: "Bibliotecă de șabloane", desc: "20+ layout-uri premium. Schimbă oricând fără timp de nefuncționare." },
+                { title: "Verificări asincrone", desc: "Wireframe → design → previzualizare finală fără apeluri necesare." },
+                { title: "Găzduire & domeniu", desc: "SSL, domenii și analiză incluse. Gestionăm infrastructura pentru tine." },
+                { title: "Actualizări în 3 zile", desc: "Modificări bazate pe coadă cu previzualizări clare și aprobări." },
+                { title: "Integrări", desc: "Calendly, formulare, taguri CRM și scripturi personalizate făcute pentru tine." },
+                { title: "Export disponibil", desc: "Export complet disponibil ca serviciu plătit dacă ai nevoie să muți." },
               ].map((item) => (
                 <div
                   key={item.title}
@@ -165,11 +165,11 @@ export default function HomePage() {
           <div className="container max-w-6xl space-y-12">
             <div className="text-center space-y-3">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/70">
-                Simple Setup
+                Configurare Simplă
               </div>
-              <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">How WebForm Works</h2>
+              <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Cum Funcționează WebForm</h2>
               <p className="text-lg text-white/70 max-w-3xl mx-auto">
-                A subscription website platform. You submit a Blueprint, pick a look, we ship in 7 days—then manage and update it forever.
+                O platformă de website prin abonament. Trimiți un Blueprint, alegi un aspect, livrăm în 7 zile—apoi gestionăm și actualizăm pentru totdeauna.
               </p>
             </div>
 
@@ -179,22 +179,22 @@ export default function HomePage() {
                 <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#9EF0A0]/20 text-sm font-semibold text-[#9EF0A0]">
                   1
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-semibold">Submit your Blueprint & pick a template</h3>
+                <h3 className="text-2xl sm:text-3xl font-semibold">Trimite Blueprint-ul & alege un șablon</h3>
                 <p className="text-white/70">
-                  Fill out the Website Blueprint (goals, pages, integrations, tone) and choose from our Template Gallery (100+ pro styles shown as thumbnails).
+                  Completează Blueprint-ul Website-ului (obiective, pagini, integrări, tonalitate) și alege din Galeria de Șabloane (100+ stiluri profesionale afișate ca miniaturi).
                 </p>
                 <ul className="space-y-2 text-sm text-white/70">
                   <li className="flex gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>
-                    Website Blueprint captures copy needs, pages, and integrations.
+                    Blueprint-ul Website-ului captează nevoile de conținut, pagini și integrări.
                   </li>
                   <li className="flex gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>
-                    Template Gallery: 100+ premium looks (thumbnails only).
+                    Galeria de Șabloane: 100+ aspecte premium (doar miniaturi).
                   </li>
                   <li className="flex gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>
-                    No meetings, no builders—just submit and approve.
+                    Fără întâlniri, fără constructori—doar trimite și aprobă.
                   </li>
                 </ul>
               </div>
@@ -203,14 +203,14 @@ export default function HomePage() {
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-sm font-semibold">WB</div>
                     <div>
-                      <p className="text-sm font-semibold">Website Blueprint</p>
-                      <p className="text-xs text-white/60">Goals • Pages • Integrations</p>
+                      <p className="text-sm font-semibold">Blueprint Website</p>
+                      <p className="text-xs text-white/60">Obiective • Pagini • Integrări</p>
                     </div>
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-black/30 p-4 space-y-3">
                     <div className="flex items-center justify-between text-sm text-white/80">
-                      <span>Template Gallery</span>
-                      <span className="text-xs rounded-full bg-white/10 px-2 py-0.5 text-white/60">100+ styles</span>
+                      <span>Galerie de Șabloane</span>
+                      <span className="text-xs rounded-full bg-white/10 px-2 py-0.5 text-white/60">100+ stiluri</span>
                     </div>
                     <div className="grid grid-cols-3 gap-2">
                       {[
@@ -236,7 +236,7 @@ export default function HomePage() {
                     </div>
                     <div className="flex items-center gap-2 rounded-xl border border-white/5 bg-white/5 px-3 py-2">
                       <div className="h-2 w-2 rounded-full bg-[#9EF0A0]"></div>
-                      <span className="text-sm text-white/80">Blueprint submitted • Template selected</span>
+                      <span className="text-sm text-white/80">Blueprint trimis • Șablon selectat</span>
                     </div>
                   </div>
                 </div>
@@ -247,21 +247,21 @@ export default function HomePage() {
             <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_25px_80px_-30px_rgba(0,0,0,0.6)] backdrop-blur">
                 <div className="flex items-center justify-between text-sm text-white/70">
-                  <span>Build Status</span>
-                  <span className="rounded-full bg-[#9EF0A0]/20 px-2 py-0.5 text-xs text-[#9EF0A0]">In Progress</span>
+                  <span>Status Construcție</span>
+                  <span className="rounded-full bg-[#9EF0A0]/20 px-2 py-0.5 text-xs text-[#9EF0A0]">În Progres</span>
                 </div>
                 <div className="mt-4 space-y-3 text-sm text-white/80">
                   <div className="rounded-xl border border-white/10 bg-black/30 px-3 py-3">
-                    <p className="font-semibold">Website build in progress — 7 days</p>
-                    <p className="text-white/60">Wireframe → design → live preview</p>
+                    <p className="font-semibold">Construcția website-ului în progres — 7 zile</p>
+                    <p className="text-white/60">Wireframe → design → previzualizare live</p>
                   </div>
                   <div className="rounded-xl border border-white/10 bg-black/30 px-3 py-3">
-                    <p className="font-semibold">Async checkpoints</p>
-                    <p className="text-white/60">Approve key moments without meetings</p>
+                    <p className="font-semibold">Verificări asincrone</p>
+                    <p className="text-white/60">Aprobă momentele cheie fără întâlniri</p>
                   </div>
                   <div className="rounded-xl border border-white/10 bg-black/30 px-3 py-3">
-                    <p className="font-semibold">Integrations configured</p>
-                    <p className="text-white/60">Forms, analytics, booking, payments</p>
+                    <p className="font-semibold">Integrări configurate</p>
+                    <p className="text-white/60">Formulare, analiză, rezervări, plăți</p>
                   </div>
                 </div>
               </div>
@@ -269,22 +269,22 @@ export default function HomePage() {
                 <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#B2A5FE]/20 text-sm font-semibold text-[#B2A5FE]">
                   2
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-semibold">We build everything in 7 days</h3>
+                <h3 className="text-2xl sm:text-3xl font-semibold">Construim totul în 7 zile</h3>
                 <p className="text-white/70">
-                  Your entire site is built for you. We align asynchronously with clear previews—and you can message us anytime in the built-in chat.
+                  Întregul tău site este construit pentru tine. Ne aliniem asincron cu previzualizări clare—și poți să ne trimiti mesaje oricând în chat-ul integrat.
                 </p>
                 <ul className="space-y-2 text-sm text-white/70">
                   <li className="flex gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>
-                    Full build in 7 days with async approvals.
+                    Construcție completă în 7 zile cu aprobări asincrone.
                   </li>
                   <li className="flex gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>
-                    Copy, layout, and integrations handled; questions answered via in-app chat.
+                    Conținut, layout și integrări gestionate; întrebări răspunse prin chat-ul din aplicație.
                   </li>
                   <li className="flex gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>
-                    Status card: “Website build in progress — 7 days.”
+                    Card status: "Construcția website-ului în progres — 7 zile."
                   </li>
                 </ul>
               </div>
@@ -296,46 +296,46 @@ export default function HomePage() {
                 <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#FBBF24]/20 text-sm font-semibold text-[#FBBF24]">
                   3
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-semibold">Managed forever with unlimited updates</h3>
+                <h3 className="text-2xl sm:text-3xl font-semibold">Gestionat pentru totdeauna cu actualizări nelimitate</h3>
                 <p className="text-white/70">
-                  WebForm runs your site end-to-end. Submit changes anytime; we ship in 3 days (7 on Start).
+                  WebForm gestionează site-ul tău de la un capăt la altul. Trimite modificări oricând; livrăm în 3 zile (7 pe Start).
                 </p>
                 <ul className="space-y-2 text-sm text-white/70">
                   <li className="flex gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>
-                    Unlimited updates with clear queue and turnaround.
+                    Actualizări nelimitate cu coadă clară și timp de execuție.
                   </li>
                   <li className="flex gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>
-                    3-day turnaround on Business/Commerce; 7-day on Start.
+                    Timp de execuție de 3 zile pe Business/Commerce; 7 zile pe Start.
                   </li>
                   <li className="flex gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>
-                    Dashboard shows activity, approvals, and live status.
+                    Dashboard-ul arată activitatea, aprobările și status-ul live.
                   </li>
                 </ul>
               </div>
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_25px_80px_-30px_rgba(0,0,0,0.6)] backdrop-blur">
                 <div className="flex items-center justify-between text-sm text-white/70">
-                  <span>Managed Forever</span>
-                  <span className="text-xs text-white/50">Queue live</span>
+                  <span>Gestionat Pentru Totdeauna</span>
+                  <span className="text-xs text-white/50">Coadă live</span>
                 </div>
                 <div className="mt-4 space-y-3 text-sm text-white/80">
                   <div className="flex gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>
-                    Update scheduled: new hero copy (3-day SLA)
+                    Actualizare programată: conținut nou hero (SLA 3 zile)
                   </div>
                   <div className="flex gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#60A5FA]"></span>
-                    Template swap preview ready
+                    Previzualizare schimbare șablon gata
                   </div>
                   <div className="flex gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#C084FC]"></span>
-                    Integration added: Calendly + Stripe
+                    Integrare adăugată: Calendly + Stripe
                   </div>
                   <div className="flex gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#FACC15]"></span>
-                    SSL, analytics, and uptime monitored
+                    SSL, analiză și uptime monitorizate
                   </div>
                 </div>
               </div>
@@ -348,74 +348,74 @@ export default function HomePage() {
           <div className="container max-w-6xl space-y-8">
             <div className="text-center space-y-3">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.16em] text-white/70">
-                Pricing
+                Prețuri
               </div>
-              <h3 className="text-4xl font-semibold tracking-tight sm:text-5xl">Choose your plan</h3>
+              <h3 className="text-4xl font-semibold tracking-tight sm:text-5xl">Alege-ți planul</h3>
               <p className="text-lg text-white/70">
-                Start free with a Blueprint. Upgrade when you’re ready to launch.
+                Începe gratuit cu un Blueprint. Upgrade când ești gata să lansezi.
               </p>
             </div>
             <div className="grid gap-6 lg:grid-cols-3">
               {[
                 {
                   name: "WEBFORM START",
-                  price: "$100/mo",
-                  desc: "For small business owners who need a simple, clean website fast.",
+                  price: "$100/lună",
+                  desc: "Pentru proprietarii de afaceri mici care au nevoie de un website simplu și curat rapid.",
                   items: [
-                    "Up to 3 pages (Home, About, Contact or Services)",
-                    "Choose from 100+ templates",
-                    "Built in 7 days",
-                    "Managed forever (hosting + domain included)",
-                    "Updates in 7 days",
-                    "1 active request at a time",
-                    "Basic SEO",
-                    "Mobile optimization",
-                    "Contact form / booking link",
-                    "SSL security",
+                    "Până la 3 pagini (Acasă, Despre, Contact sau Servicii)",
+                    "Alege din 100+ șabloane",
+                    "Construit în 7 zile",
+                    "Gestionat pentru totdeauna (găzduire + domeniu incluse)",
+                    "Actualizări în 7 zile",
+                    "1 cerere activă la un moment dat",
+                    "SEO de bază",
+                    "Optimizare mobilă",
+                    "Formular de contact / link de rezervare",
+                    "Securitate SSL",
                   ],
                   primary: false,
-                  cta: "Choose Start",
+                  cta: "Alege Start",
                 },
                 {
                   name: "WEBFORM BUSINESS",
-                  price: "$250/mo",
-                  desc: "Our most popular — covers 70%+ of customers.",
+                  price: "$250/lună",
+                  desc: "Cel mai popular — acoperă 70%+ din clienți.",
                   items: [
-                    "Up to 7 pages",
-                    "100+ templates with customization",
-                    "Built in 7 days",
-                    "Updates in 3 days (priority)",
-                    "2 active requests",
-                    "Advanced SEO setup",
-                    "Optional blog system",
-                    "Analytics dashboard",
-                    "Integrations (Calendly, Stripe, Mailchimp, CRM, etc.)",
-                    "Custom forms",
-                    "Light copywriting (AI-assisted 1–2 sections)",
-                    "Hosting + domain + full management",
+                    "Până la 7 pagini",
+                    "100+ șabloane cu personalizare",
+                    "Construit în 7 zile",
+                    "Actualizări în 3 zile (prioritate)",
+                    "2 cereri active",
+                    "Configurare SEO avansată",
+                    "Sistem de blog opțional",
+                    "Dashboard de analiză",
+                    "Integrări (Calendly, Stripe, Mailchimp, CRM, etc.)",
+                    "Formulare personalizate",
+                    "Copywriting ușor (asistat AI 1-2 secțiuni)",
+                    "Găzduire + domeniu + gestionare completă",
                   ],
                   primary: true,
-                  cta: "Start Business",
+                  cta: "Începe Business",
                 },
                 {
                   name: "WEBFORM COMMERCE",
-                  price: "Custom",
-                  desc: "For businesses selling products or bookings.",
+                  price: "Personalizat",
+                  desc: "Pentru afaceri care vând produse sau rezervări.",
                   items: [
-                    "Everything in Business",
-                    "Full e-commerce setup (Stripe, Sellfy, Snipcart, Shopify Lite, etc.)",
-                    "Unlimited products or up to 50 — your choice",
-                    "48h update turnaround",
-                    "Unlimited request queue",
-                    "Automations (abandoned cart, customer emails, CRM flows)",
-                    "Performance optimization",
-                    "Advanced SEO",
-                    "Custom sections / UI elements",
-                    "API integrations",
-                    "Priority support (fastest responses)",
+                    "Tot ce e în Business",
+                    "Configurare e-commerce completă (Stripe, Sellfy, Snipcart, Shopify Lite, etc.)",
+                    "Produse nelimitate sau până la 50 — alegerea ta",
+                    "Timp de execuție actualizări 48h",
+                    "Coadă de cereri nelimitată",
+                    "Automatizări (coș abandonat, email-uri clienți, fluxuri CRM)",
+                    "Optimizare performanță",
+                    "SEO avansat",
+                    "Secțiuni personalizate / elemente UI",
+                    "Integrări API",
+                    "Suport prioritar (cele mai rapide răspunsuri)",
                   ],
                   primary: false,
-                  cta: "Talk to us",
+                  cta: "Contactează-ne",
                 },
               ].map((plan) => {
                 const isCommerce = plan.name === "WEBFORM COMMERCE";
@@ -433,7 +433,7 @@ export default function HomePage() {
                     {isCommerce && (
                       <div className="absolute -top-3 -right-3 z-10 pointer-events-auto">
                         <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 text-xs font-semibold shadow-lg rotate-12">
-                          E-commerce Coming Soon
+                          E-commerce Vine Curând
                         </Badge>
                       </div>
                     )}
@@ -455,7 +455,7 @@ export default function HomePage() {
                           variant="outline"
                           onClick={() => setNotifyDialogOpen(true)}
                         >
-                          Notify Me
+                          Notifică-mă
                         </Button>
                       ) : (
                         <Button
@@ -479,18 +479,18 @@ export default function HomePage() {
       <Dialog open={notifyDialogOpen} onOpenChange={setNotifyDialogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-semibold">Get Notified</DialogTitle>
+            <DialogTitle className="text-2xl font-semibold">Primește Notificări</DialogTitle>
             <DialogDescription>
-              Enter your email and we&apos;ll notify you as soon as<br />e-commerce functionality is available.
+              Introdu email-ul tău și te vom notifica imediat ce<br />funcționalitatea e-commerce va fi disponibilă.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleNotifySubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email address</Label>
+              <Label htmlFor="email">Adresă email</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder="tu@exemplu.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -504,10 +504,10 @@ export default function HomePage() {
                 onClick={() => setNotifyDialogOpen(false)}
                 disabled={isSubmitting}
               >
-                Cancel
+                Anulează
               </Button>
               <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Submitting..." : "Notify Me"}
+                {isSubmitting ? "Se trimite..." : "Notifică-mă"}
               </Button>
             </div>
           </form>

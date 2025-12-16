@@ -64,7 +64,7 @@ export function HeroInteractive() {
           transition={{ duration: 0.4 }}
           className="max-w-3xl font-display text-4xl leading-tight text-foreground sm:text-5xl"
         >
-          One simple form to launch your site.
+          Un formular simplu pentru a-ți lansa site-ul.
         </motion.h1>
 
         <motion.div
@@ -77,7 +77,7 @@ export function HeroInteractive() {
             className="rounded-full px-8 py-6 text-lg"
             onClick={handleStart}
           >
-            Start the Blueprint
+            Începe Blueprint-ul
           </Button>
         </motion.div>
       </div>

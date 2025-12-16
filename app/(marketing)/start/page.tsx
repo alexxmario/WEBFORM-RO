@@ -18,7 +18,7 @@ export default function StartPage() {
             Website Blueprint
           </Badge>
           <h1 className="font-display text-4xl font-semibold sm:text-5xl">
-            One form to launch and manage your site.
+            Un formular pentru a lansa și gestiona site-ul tău.
           </h1>
         </div>
 

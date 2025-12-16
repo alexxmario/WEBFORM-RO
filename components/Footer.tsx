@@ -1,17 +1,17 @@
 import Link from "next/link";
 
 const footerNavLeft = [
-  { label: "Pricing", href: "/pricing" },
-  { label: "Waitlist", href: "/waitlist" },
+  { label: "Prețuri", href: "/pricing" },
+  { label: "Listă de așteptare", href: "/waitlist" },
   { label: "Blueprint", href: "/start" },
 ];
 
 const footerNavRight = [
-  { label: "About", href: "/about" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Support", href: "/support" },
-  { label: "Privacy", href: "/legal/privacy" },
-  { label: "Terms", href: "/legal/terms" },
+  { label: "Despre", href: "/about" },
+  { label: "Întrebări frecvente", href: "/faq" },
+  { label: "Suport", href: "/support" },
+  { label: "Confidențialitate", href: "/legal/privacy" },
+  { label: "Termeni", href: "/legal/terms" },
 ];
 
 export function Footer() {

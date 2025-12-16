@@ -89,7 +89,7 @@ export default function LoginPage() {
         setPasswordConfirm("");
         setAgree(false);
         // Show success message
-        toast.success("Account created successfully! Please log in with your credentials.");
+        toast.success("Cont creat cu succes! Te rugăm să te autentifici cu credențialele tale.");
         return;
       }
 
@@ -119,7 +119,7 @@ export default function LoginPage() {
     <main className="container flex min-h-screen flex-col items-center justify-center gap-6 px-4 py-12">
       <div className="w-full max-w-md space-y-4 rounded-3xl border border-border/60 bg-card/80 p-6 shadow-lg shadow-black/20">
         <h1 className="text-2xl font-semibold text-foreground">
-          {authMode === "signup" ? "Create an account" : "Log in to chat"}
+          {authMode === "signup" ? "Creează un cont" : "Autentifică-te pentru chat"}
         </h1>
         {error && (
           <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-400">
@@ -128,21 +128,21 @@ export default function LoginPage() {
         )}
         {authMode === "signup" && (
           <>
-            <Input placeholder="Full name" value={name} onChange={(e) => setName(e.target.value)} />
-            <Input placeholder="Business name" value={business} onChange={(e) => setBusiness(e.target.value)} />
+            <Input placeholder="Nume complet" value={name} onChange={(e) => setName(e.target.value)} />
+            <Input placeholder="Numele afacerii" value={business} onChange={(e) => setBusiness(e.target.value)} />
           </>
         )}
-        <Input type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Input type="email" placeholder="tu@exemplu.com" value={email} onChange={(e) => setEmail(e.target.value)} />
         <Input
           type="password"
-          placeholder="Password"
+          placeholder="Parolă"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         {authMode === "signup" && (
           <Input
             type="password"
-            placeholder="Confirm password"
+            placeholder="Confirmă parola"
             value={passwordConfirm}
             onChange={(e) => setPasswordConfirm(e.target.value)}
           />
@@ -151,22 +151,22 @@ export default function LoginPage() {
           <label className="flex items-center gap-2 text-sm text-muted-foreground">
             <Checkbox checked={agree} onCheckedChange={(v) => setAgree(Boolean(v))} />
             <span>
-              I agree to the{" "}
+              Sunt de acord cu{" "}
               <a className="text-primary underline" href="/legal/terms" target="_blank">
-                Terms of Service
+                Termenii și Condițiile
               </a>
             </span>
           </label>
         )}
         <Button className="w-full" onClick={handleAuth} disabled={loading}>
           {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          {authMode === "signup" ? "Create account" : "Log in"}
+          {authMode === "signup" ? "Creează cont" : "Autentifică-te"}
         </Button>
         <button
           className="text-sm text-muted-foreground underline"
           onClick={() => setAuthMode(authMode === "signup" ? "signin" : "signup")}
         >
-          {authMode === "signup" ? "Have an account? Log in" : "Need an account? Sign up"}
+          {authMode === "signup" ? "Ai deja un cont? Autentifică-te" : "Ai nevoie de un cont? Înregistrează-te"}
         </button>
       </div>
     </main>
