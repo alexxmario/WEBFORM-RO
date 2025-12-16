@@ -284,7 +284,7 @@ export default function HomePage() {
                   </li>
                   <li className="flex gap-2">
                     <span className="mt-1 h-2 w-2 rounded-full bg-[#9EF0A0]"></span>
-                    Card status: "Construcția website-ului în progres — 7 zile."
+                    {'Card status: "Construcția website-ului în progres — 7 zile."'}
                   </li>
                 </ul>
               </div>
