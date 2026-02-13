@@ -15,14 +15,17 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-11 w-full items-center justify-between rounded-xl border border-border/70 bg-background/60 px-4 py-2 text-sm text-foreground shadow-sm transition focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30",
+      "flex h-11 w-full items-center justify-between rounded-lg border border-border bg-background px-4 text-sm",
+      "transition-colors duration-150",
+      "hover:border-border/80",
+      "focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20",
       className,
     )}
     {...props}
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <ChevronDown className="h-4 w-4 opacity-70" />
+      <ChevronDown className="h-4 w-4 opacity-50" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ));
@@ -36,7 +39,7 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        "z-50 min-w-[8rem] overflow-hidden rounded-xl border border-border/70 bg-card/90 shadow-xl backdrop-blur",
+        "z-50 min-w-[8rem] overflow-hidden rounded-lg border border-border bg-card shadow-lg",
         position === "popper" &&
           "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
         className,
@@ -44,13 +47,13 @@ const SelectContent = React.forwardRef<
       position={position}
       {...props}
     >
-      <SelectPrimitive.ScrollUpButton className="flex h-8 cursor-default items-center justify-center bg-background text-muted-foreground">
+      <SelectPrimitive.ScrollUpButton className="flex h-6 cursor-default items-center justify-center bg-card text-muted-foreground">
         <ChevronUp className="h-4 w-4" />
       </SelectPrimitive.ScrollUpButton>
       <SelectPrimitive.Viewport className="p-1">
         {children}
       </SelectPrimitive.Viewport>
-      <SelectPrimitive.ScrollDownButton className="flex h-8 cursor-default items-center justify-center bg-background text-muted-foreground">
+      <SelectPrimitive.ScrollDownButton className="flex h-6 cursor-default items-center justify-center bg-card text-muted-foreground">
         <ChevronDown className="h-4 w-4" />
       </SelectPrimitive.ScrollDownButton>
     </SelectPrimitive.Content>

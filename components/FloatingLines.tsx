@@ -13,6 +13,7 @@ import {
 } from "three";
 import React, { useEffect, useRef } from "react";
 
+import { throttle } from "@/lib/throttle";
 import "./FloatingLines.css";
 
 const vertexShader = `
@@ -420,7 +421,7 @@ export function FloatingLines({
       ro.observe(containerRef.current);
     }
 
-    const handlePointerMove = (event: PointerEvent) => {
+    const handlePointerMove = throttle((event: PointerEvent) => {
       const rect = renderer.domElement.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
@@ -439,7 +440,7 @@ export function FloatingLines({
           offsetY * parallaxStrength,
         );
       }
-    };
+    }, 16); // Throttle to ~60fps
 
     const handlePointerLeave = () => {
       targetInfluenceRef.current = 0.0;
@@ -515,6 +516,7 @@ export function FloatingLines({
       className="floating-lines-container"
       style={{
         mixBlendMode,
+        willChange: "transform",
       }}
     />
   );

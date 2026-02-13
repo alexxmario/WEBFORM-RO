@@ -22,6 +22,18 @@ const config: Config = {
         display: ["var(--font-display)", "var(--font-inter)", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular"],
       },
+      fontSize: {
+        "display-xl": ["4.5rem", { lineHeight: "1.08", letterSpacing: "-0.03em", fontWeight: "600" }],
+        "display-lg": ["3.5rem", { lineHeight: "1.1", letterSpacing: "-0.025em", fontWeight: "600" }],
+        "display-md": ["2.5rem", { lineHeight: "1.15", letterSpacing: "-0.02em", fontWeight: "600" }],
+        "display-sm": ["2rem", { lineHeight: "1.2", letterSpacing: "-0.015em", fontWeight: "600" }],
+        "heading-lg": ["1.5rem", { lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600" }],
+        "heading-md": ["1.25rem", { lineHeight: "1.35", letterSpacing: "-0.01em", fontWeight: "600" }],
+        "heading-sm": ["1.125rem", { lineHeight: "1.4", fontWeight: "600" }],
+        "body-lg": ["1.125rem", { lineHeight: "1.65" }],
+        "body-md": ["1rem", { lineHeight: "1.6" }],
+        "body-sm": ["0.875rem", { lineHeight: "1.55" }],
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -39,24 +51,24 @@ const config: Config = {
         "accent-foreground": "hsl(var(--accent-foreground))",
         ring: "hsl(var(--ring))",
       },
-      boxShadow: {
-        glow: "0 10px 50px rgba(80, 177, 255, 0.28)",
-        "float-lg":
-          "0 25px 70px rgba(0,0,0,0.35), 0 10px 30px rgba(58,130,255,0.22)",
-      },
-      backgroundImage: {
-        "grid-sheen":
-          "radial-gradient(circle at 20% 20%, rgba(78, 166, 255, 0.18), transparent 25%), radial-gradient(circle at 80% 0%, rgba(255, 189, 89, 0.12), transparent 25%)",
-        "noise-overlay":
-          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E\")",
-      },
       borderRadius: {
-        xl: "1.25rem",
+        lg: "0.625rem",
+        xl: "0.75rem",
+        "2xl": "1rem",
+        "3xl": "1.25rem",
       },
       keyframes: {
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
         "fade-up": {
-          "0%": { opacity: "0", transform: "translateY(16px)" },
+          "0%": { opacity: "0", transform: "translateY(8px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "scale-in": {
+          "0%": { opacity: "0", transform: "scale(0.96)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
         },
         "accordion-down": {
           from: { height: "0" },
@@ -66,16 +78,13 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "float-slow": {
-          "0%, 100%": { transform: "translate3d(0, 0, 0)" },
-          "50%": { transform: "translate3d(0, -6px, 0)" },
-        },
       },
       animation: {
-        "fade-up": "fade-up 0.8s ease forwards",
-        "float-slow": "float-slow 6s ease-in-out infinite",
-        "accordion-down": "accordion-down 0.25s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in": "fade-in 0.3s ease-out",
+        "fade-up": "fade-up 0.4s ease-out",
+        "scale-in": "scale-in 0.25s ease-out",
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.15s ease-out",
       },
     },
   },

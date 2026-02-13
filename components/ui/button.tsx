@@ -5,24 +5,28 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-glow hover:shadow-float-lg",
+          "bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98]",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/90 active:scale-[0.98]",
         ghost:
-          "bg-transparent text-foreground/80 hover:text-foreground hover:bg-foreground/5 border border-border/60",
+          "text-foreground/70 hover:text-foreground hover:bg-foreground/5",
         outline:
-          "border border-border bg-background/40 text-foreground hover:border-primary/60 hover:text-foreground shadow-sm",
+          "border border-border bg-transparent text-foreground hover:bg-foreground/5 hover:border-foreground/20",
         subtle:
-          "bg-muted/50 text-foreground hover:bg-muted border border-border/40",
+          "bg-muted text-foreground hover:bg-muted/80",
+        link:
+          "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        sm: "h-9 px-4 py-2 text-xs",
-        md: "h-11 px-6 py-2.5",
-        lg: "h-12 px-8 text-base",
-        icon: "h-10 w-10",
+        sm: "h-9 px-4 text-xs rounded-lg",
+        md: "h-10 px-5 rounded-lg",
+        lg: "h-12 px-6 text-base rounded-xl",
+        icon: "h-10 w-10 rounded-lg",
       },
     },
     defaultVariants: {

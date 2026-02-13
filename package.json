@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
+    "@next/swc-darwin-arm64": "^16.1.6",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-dialog": "^1.1.1",
@@ -24,7 +25,6 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.6",
-    "gsap": "^3.13.0",
     "lucide-react": "^0.469.0",
     "next": "14.2.15",
     "next-seo": "^6.5.0",

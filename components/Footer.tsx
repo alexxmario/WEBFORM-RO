@@ -16,7 +16,7 @@ const footerNavRight = [
 
 export function Footer() {
   return (
-    <footer className="overflow-hidden text-white bg-[#050505] border-neutral-800 border-t pt-24">
+    <footer className="relative z-10 overflow-hidden text-white bg-[#050505] border-neutral-800 border-t pt-24">
       <div
         className="text-center w-full mb-20 pr-4 pl-4"
         style={{

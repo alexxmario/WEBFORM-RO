@@ -2,41 +2,40 @@
   --font-inter: "Inter", "Segoe UI", system-ui, sans-serif;
   --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, monospace;
-  --background: 222 18% 8%;
-  --foreground: 220 15% 96%;
-  --card: 220 18% 10%;
-  --card-foreground: 220 14% 95%;
-  --muted: 222 24% 16%;
-  --muted-foreground: 220 11% 72%;
-  --border: 223 18% 18%;
-  --input: 223 18% 18%;
-  --primary: 203 95% 64%;
-  --primary-foreground: 210 100% 98%;
-  --secondary: 38 98% 60%;
-  --secondary-foreground: 220 18% 10%;
-  --accent: 268 86% 64%;
-  --accent-foreground: 220 15% 98%;
-  --ring: 203 95% 64%;
-  --radius: 1.25rem;
-  --noise-overlay: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+  --background: 220 14% 6%;
+  --foreground: 220 10% 94%;
+  --card: 220 14% 8%;
+  --card-foreground: 220 10% 92%;
+  --muted: 220 12% 14%;
+  --muted-foreground: 220 8% 55%;
+  --border: 220 10% 16%;
+  --input: 220 10% 14%;
+  --primary: 210 60% 58%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 40 45% 55%;
+  --secondary-foreground: 220 14% 8%;
+  --accent: 260 40% 56%;
+  --accent-foreground: 0 0% 100%;
+  --ring: 210 50% 50%;
+  --radius: 0.75rem;
 }
 
 .light {
-  --background: 210 40% 98%;
-  --foreground: 222 14% 12%;
+  --background: 0 0% 99%;
+  --foreground: 220 12% 10%;
   --card: 0 0% 100%;
-  --card-foreground: 222 14% 12%;
-  --muted: 210 30% 94%;
-  --muted-foreground: 222 12% 32%;
-  --border: 220 13% 90%;
-  --input: 220 13% 90%;
-  --primary: 203 94% 56%;
-  --primary-foreground: 210 100% 98%;
-  --secondary: 39 96% 58%;
-  --secondary-foreground: 222 14% 12%;
-  --accent: 267 85% 60%;
-  --accent-foreground: 210 100% 98%;
-  --ring: 203 94% 56%;
+  --card-foreground: 220 12% 10%;
+  --muted: 220 14% 96%;
+  --muted-foreground: 220 8% 40%;
+  --border: 220 10% 90%;
+  --input: 220 10% 90%;
+  --primary: 210 55% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 40 40% 50%;
+  --secondary-foreground: 220 12% 10%;
+  --accent: 260 35% 50%;
+  --accent-foreground: 0 0% 100%;
+  --ring: 210 45% 45%;
 }
 
 .dark {

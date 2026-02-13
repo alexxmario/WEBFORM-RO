@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { memo, useCallback } from "react";
 
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
@@ -18,24 +19,25 @@ const navLinks = [
   { href: "/#plans", label: "Planuri" },
 ];
 
-export function Header() {
+export const Header = memo(function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const { user } = useAuth();
   const supabase = supabaseBrowser();
 
-  const handleSignOut = async () => {
+  const handleSignOut = useCallback(async () => {
     await supabase.auth.signOut();
     router.push("/");
-  };
+  }, [supabase, router]);
 
   return (
     <motion.header
-      initial={{ opacity: 0, y: -12 }}
+      initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
-      className="fixed inset-x-0 top-0 z-40 flex justify-center pt-4"
+      transition={{ duration: 0.3 }}
+      className="fixed inset-x-0 top-0 z-40 px-4 pt-2"
     >
-      <div className="glass flex w-[95%] items-center justify-between gap-4 rounded-full border border-white/10 px-5 py-3 shadow-lg shadow-black/20 md:w-[88%] lg:w-[82%]">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 rounded-xl border border-border bg-background/95 px-4 py-3 backdrop-blur-sm">
         <Link href="/" className="flex items-center px-2 py-1">
           <Image
             src="/logo.png"
@@ -51,7 +53,7 @@ export function Header() {
               key={link.href}
               href={link.href}
               className={cn(
-                "rounded-full px-3 py-2 text-sm font-medium text-foreground/80 transition hover:text-foreground",
+                "rounded-lg px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground",
                 pathname === link.href && "text-foreground",
               )}
             >
@@ -62,7 +64,7 @@ export function Header() {
             <Link
               href="/chat"
               className={cn(
-                "rounded-full px-3 py-2 text-sm font-medium text-foreground/80 transition hover:text-foreground",
+                "rounded-lg px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground",
                 pathname === "/chat" && "text-foreground",
               )}
             >
@@ -96,4 +98,4 @@ export function Header() {
       </div>
     </motion.header>
   );
-}
+});

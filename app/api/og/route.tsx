@@ -26,12 +26,13 @@ export async function GET(request: Request) {
       >
         <div
           style={{
-            display: "inline-flex",
+            display: "flex",
             padding: "8px 14px",
             borderRadius: "999px",
             background: "rgba(255,255,255,0.12)",
             fontSize: "18px",
             marginBottom: "20px",
+            alignSelf: "flex-start",
           }}
         >
           WebForm • 7-day launch • 3-day updates
