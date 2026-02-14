@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { DefaultSeoProps } from "next-seo";
 
 export const siteConfig = {
   name: "WebForm",
@@ -205,3 +206,40 @@ export function generatePageMetadata({
       : { index: true, follow: true },
   };
 }
+
+// For next-seo library compatibility
+export const defaultSeo: DefaultSeoProps = {
+  title: siteConfig.title,
+  description: siteConfig.description,
+  canonical: siteConfig.url,
+  openGraph: {
+    url: siteConfig.url,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
+    images: [
+      {
+        url: `${siteConfig.url}/api/og`,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.title,
+      },
+    ],
+  },
+  twitter: {
+    handle: siteConfig.twitterHandle,
+    site: siteConfig.twitterHandle,
+    cardType: "summary_large_image",
+  },
+  additionalMetaTags: [
+    {
+      name: "keywords",
+      content: siteConfig.keywords.join(", "),
+    },
+    {
+      name: "author",
+      content: siteConfig.creator,
+    },
+  ],
+};
