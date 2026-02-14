@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { organizationJsonLd, productJsonLd } from "@/lib/schema";
+import { homePageJsonLd } from "@/lib/schema";
 import { toast } from "sonner";
 
 export default function HomePage() {
@@ -494,16 +494,14 @@ export default function HomePage() {
         </DialogContent>
       </Dialog>
 
-      <Script
-        type="application/ld+json"
-        id="organization-jsonld"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-      />
-      <Script
-        type="application/ld+json"
-        id="product-jsonld"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
-      />
+      {homePageJsonLd.map((schema, index) => (
+        <Script
+          key={index}
+          type="application/ld+json"
+          id={`jsonld-${index}`}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
     </>
   );
 }

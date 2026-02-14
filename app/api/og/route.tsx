@@ -6,7 +6,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const title =
     searchParams.get("title") ||
-    "Your website, built for you — forever managed.";
+    "Site-ul tau, construit pentru tine — gestionat pentru totdeauna.";
   const accent = searchParams.get("accent") || "#0EA5E9";
 
   return new ImageResponse(
@@ -35,14 +35,14 @@ export async function GET(request: Request) {
             alignSelf: "flex-start",
           }}
         >
-          WebForm • 7-day launch • 3-day updates
+          WebForm • Lansare in 7 zile • Actualizari in 3 zile
         </div>
         <h1 style={{ fontSize: "64px", lineHeight: 1.1, maxWidth: "900px" }}>
           {title}
         </h1>
         <p style={{ marginTop: "20px", fontSize: "26px", opacity: 0.9 }}>
-          A done-for-you website platform. Hosting, domain, and unlimited queued
-          updates included.
+          Platforma completa de creare site-uri web. Gazduire, domeniu si
+          actualizari nelimitate incluse.
         </p>
       </div>
     ),

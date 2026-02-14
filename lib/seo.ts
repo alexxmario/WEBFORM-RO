@@ -1,25 +1,79 @@
 import type { Metadata } from "next";
-import type { DefaultSeoProps } from "next-seo";
 
 export const siteConfig = {
   name: "WebForm",
-  title: "WebForm — Your website, built for you — forever managed.",
+  title: "WebForm — Site-ul tău, construit pentru tine — gestionat pentru totdeauna",
+  titleTemplate: "%s | WebForm România",
   description:
-    "Launch in 7 days. Update in 3. WebForm builds, hosts, and manages your site under one subscription so you never touch a builder again.",
+    "Lansare în 7 zile. Actualizări în 3 zile. WebForm construiește, găzduiește și gestionează site-ul tău sub un singur abonament. Fără constructori de site-uri, fără bătăi de cap tehnice.",
   url: "https://webform.site",
-  creator: "WebForm",
+  domain: "webform.site",
+  creator: "WebForm România",
+  locale: "ro_RO",
+  language: "ro",
+  keywords: [
+    "creare site web",
+    "web design România",
+    "site web profesional",
+    "website pentru afaceri",
+    "creare site web preț",
+    "site web abonament",
+    "web design Brașov",
+    "web design București",
+    "site web firma",
+    "realizare site web",
+    "mentenanță site web",
+    "găzduire site web",
+    "site web rapid",
+    "landing page",
+    "site web optimizat SEO",
+    "site web responsive",
+    "WebForm",
+    "creare website",
+    "design web modern",
+    "site web pentru IMM",
+  ],
+  themeColor: "#0F0F11",
+  twitterHandle: "@webform_ro",
+  linkedinUrl: "https://www.linkedin.com/company/webform-ro",
+  email: "contact@webform.site",
+  phone: "+40 722 000 000",
+  address: {
+    street: "România",
+    city: "Brașov",
+    country: "România",
+    countryCode: "RO",
+  },
 };
 
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: siteConfig.title,
+  title: {
+    default: siteConfig.title,
+    template: siteConfig.titleTemplate,
+  },
   description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.creator, url: siteConfig.url }],
+  creator: siteConfig.creator,
+  publisher: siteConfig.creator,
+  applicationName: siteConfig.name,
+  generator: "Next.js",
+  referrer: "origin-when-cross-origin",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   alternates: {
     canonical: "/",
+    languages: {
+      "ro-RO": "/",
+    },
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: siteConfig.locale,
     url: siteConfig.url,
     siteName: siteConfig.name,
     title: siteConfig.title,
@@ -29,47 +83,117 @@ export const defaultMetadata: Metadata = {
         url: "/api/og",
         width: 1200,
         height: 630,
-        alt: siteConfig.title,
+        alt: `${siteConfig.name} - Creare site-uri web profesionale`,
+        type: "image/png",
+      },
+      {
+        url: "/og-square.png",
+        width: 600,
+        height: 600,
+        alt: `${siteConfig.name} Logo`,
+        type: "image/png",
       },
     ],
+    countryName: "România",
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    creator: "@webform",
-    images: ["/api/og"],
+    creator: siteConfig.twitterHandle,
+    site: siteConfig.twitterHandle,
+    images: {
+      url: "/api/og",
+      alt: `${siteConfig.name} - Site-uri web profesionale`,
+    },
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   icons: {
-    icon: "/favicon.ico",
-  },
-};
-
-export const defaultSeo: DefaultSeoProps = {
-  title: siteConfig.title,
-  description: siteConfig.description,
-  canonical: siteConfig.url,
-  openGraph: {
-    url: siteConfig.url,
-    title: siteConfig.title,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
-    images: [
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
       {
-        url: `${siteConfig.url}/api/og`,
-        width: 1200,
-        height: 630,
-        alt: siteConfig.title,
+        rel: "mask-icon",
+        url: "/safari-pinned-tab.svg",
+        color: "#0F0F11",
       },
     ],
   },
-  twitter: {
-    handle: "@webform",
-    site: "@webform",
-    cardType: "summary_large_image",
+  manifest: "/site.webmanifest",
+  category: "technology",
+  classification: "Web Development Services",
+  verification: {
+    google: "your-google-verification-code",
+    // yandex: "your-yandex-verification-code",
+    // yahoo: "your-yahoo-verification-code",
+  },
+  other: {
+    "msapplication-TileColor": "#0F0F11",
+    "theme-color": siteConfig.themeColor,
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+    "apple-mobile-web-app-title": siteConfig.name,
+    "mobile-web-app-capable": "yes",
+    "geo.region": "RO",
+    "geo.placename": "România",
+    "content-language": "ro",
   },
 };
+
+// Page-specific metadata helpers
+export function generatePageMetadata({
+  title,
+  description,
+  path = "",
+  image,
+  noIndex = false,
+}: {
+  title: string;
+  description: string;
+  path?: string;
+  image?: string;
+  noIndex?: boolean;
+}): Metadata {
+  const url = `${siteConfig.url}${path}`;
+  const ogImage = image || "/api/og";
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: path || "/",
+    },
+    openGraph: {
+      title: `${title} | ${siteConfig.name}`,
+      description,
+      url,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      title: `${title} | ${siteConfig.name}`,
+      description,
+      images: [ogImage],
+    },
+    robots: noIndex
+      ? { index: false, follow: false }
+      : { index: true, follow: true },
+  };
+}

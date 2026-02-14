@@ -14,10 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ro" suppressHydrationWarning>
       <body className="min-h-screen bg-background text-foreground antialiased font-sans">
         <a href="#main" className="sr-skip">
-          Skip to content
+          Salt la continut
         </a>
         <ThemeProvider>
           <div className="relative min-h-screen overflow-hidden">
