@@ -339,7 +339,7 @@ export default function HomePage() {
               {[
                 {
                   name: "WEBFORM START",
-                  price: "$100/lună",
+                  price: "150 RON/lună",
                   desc: "Pentru proprietarii de afaceri mici care au nevoie de un website simplu și curat rapid.",
                   items: [
                     "Până la 3 pagini (Acasă, Despre, Contact sau Servicii)",
@@ -358,7 +358,7 @@ export default function HomePage() {
                 },
                 {
                   name: "WEBFORM BUSINESS",
-                  price: "$250/lună",
+                  price: "350 RON/lună",
                   desc: "Cel mai popular — acoperă 70%+ din clienți.",
                   items: [
                     "Până la 7 pagini",
@@ -435,7 +435,7 @@ export default function HomePage() {
                           variant="outline"
                           onClick={() => setNotifyDialogOpen(true)}
                         >
-                          Notifică-mă
+                          Anunță-mă
                         </Button>
                       ) : (
                         <Button
