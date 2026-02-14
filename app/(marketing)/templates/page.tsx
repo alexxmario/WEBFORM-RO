@@ -14,15 +14,15 @@ export default function TemplatesPage() {
       <main className="container space-y-10 pb-16 pt-28">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <Badge>Templates</Badge>
+            <Badge>Librărie</Badge>
             <h1 className="mt-3 font-display text-4xl font-semibold">
-              Browse our template library
+              Explorează librăria noastră de șabloane
             </h1>
             <p className="max-w-2xl text-muted-foreground">
-              Choose from {templateOptions.length}+ professionally designed templates. Each one is fully customizable to match your brand.
+              Alege din {templateOptions.length}+ șabloane proiectate profesional. Fiecare poate fi personalizat complet pentru a se potrivi brandului tău.
             </p>
           </div>
-          <BlueprintButton size="lg">Start the Website Blueprint</BlueprintButton>
+          <BlueprintButton size="lg">Completează Blueprint-ul</BlueprintButton>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -67,9 +67,9 @@ export default function TemplatesPage() {
         <div className="sticky bottom-4 z-20">
           <div className="glass flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border/70 px-4 py-3 shadow-lg">
             <p className="text-sm text-muted-foreground">
-              Ready to start? Fill the Website Blueprint and we&apos;ll customize any template for you.
+              Gata să începi? Completează Blueprint-ul Website-ului și vom personaliza orice șablon pentru tine.
             </p>
-            <BlueprintButton>Start the Website Blueprint</BlueprintButton>
+            <BlueprintButton>Completează Blueprint-ul</BlueprintButton>
           </div>
         </div>
       </main>

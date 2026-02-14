@@ -15,7 +15,7 @@ import { useAuth } from "@/lib/hooks/useAuth";
 
 const navLinks = [
   { href: "/#how-it-works", label: "Cum funcționează" },
-  { href: "/templates", label: "Șabloane" },
+  { href: "/templates", label: "Librărie" },
   { href: "/#plans", label: "Planuri" },
 ];
 
