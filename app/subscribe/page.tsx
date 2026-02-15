@@ -44,6 +44,7 @@ export default function SubscribePage() {
       const response = await fetch("/api/payments/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           planId: plan.id,
           browserData: browserInfo,
