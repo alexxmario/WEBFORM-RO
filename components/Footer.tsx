@@ -7,7 +7,6 @@ const footerNavLeft = [
 ];
 
 const footerNavRight = [
-  { label: "Despre", href: "/about" },
   { label: "Întrebări frecvente", href: "/faq" },
   { label: "Suport", href: "/support" },
   { label: "Confidențialitate", href: "/legal/privacy" },
