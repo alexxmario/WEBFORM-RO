@@ -1,8 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 
 import { supabaseBrowser } from "@/lib/supabase/browser";
 import { Button } from "@/components/ui/button";
@@ -10,9 +10,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
-export default function LoginPage() {
+function LoginForm() {
   const supabase = useMemo(supabaseBrowser, []);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/subscribe";
   const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
   const [name, setName] = useState("");
   const [business, setBusiness] = useState("");
@@ -78,18 +80,26 @@ export default function LoginPage() {
           return;
         }
 
-        // Success! Switch to sign in mode
-        setLoading(false);
-        setAuthMode("signin");
-        setError("");
-        // Clear the form fields
-        setName("");
-        setBusiness("");
-        setPassword("");
-        setPasswordConfirm("");
-        setAgree(false);
-        // Show success message
-        toast.success("Cont creat cu succes! Te rugăm să te autentifici cu credențialele tale.");
+        // Auto sign-in after signup
+        const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (signInError) {
+          // If auto sign-in fails, show success and ask to sign in manually
+          setLoading(false);
+          setAuthMode("signin");
+          toast.success("Cont creat cu succes! Te rugăm să te autentifici.");
+          return;
+        }
+
+        if (signInData.session?.user) {
+          const user = signInData.session.user;
+          await initRoom(user.id, user.email || "", name, business);
+          // Redirect to subscribe page after signup
+          router.replace("/subscribe");
+        }
         return;
       }
 
@@ -105,7 +115,22 @@ export default function LoginPage() {
       if (signInData.session?.user) {
         const user = signInData.session.user;
         await initRoom(user.id, user.email || "");
-        router.replace("/");
+
+        // Check subscription status
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("subscription_status")
+          .eq("id", user.id)
+          .single();
+
+        // Redirect based on subscription status
+        if (profile?.subscription_status === "active") {
+          // If there's a redirect param and user has subscription, use it
+          router.replace(redirectTo === "/subscribe" ? "/templates" : redirectTo);
+        } else {
+          // No active subscription - go to subscribe page
+          router.replace("/subscribe");
+        }
       } else {
         setError("No session created");
       }
@@ -170,5 +195,19 @@ export default function LoginPage() {
         </button>
       </div>
     </main>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="container flex min-h-screen flex-col items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </main>
+      }
+    >
+      <LoginForm />
+    </Suspense>
   );
 }

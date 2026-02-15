@@ -1,32 +1,50 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { supabaseBrowser } from "@/lib/supabase/browser";
 
+interface UserProfile {
+  id: string;
+  email: string;
+  name?: string;
+  subscriptionStatus?: string | null;
+  subscriptionPlan?: string | null;
+}
+
 export function useAuth() {
-  const [user, setUser] = useState<{ id: string; email: string } | null>(null);
+  const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const supabase = supabaseBrowser();
+
+  const fetchProfile = useCallback(async (userId: string, email: string) => {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("name, subscription_status, subscription_plan")
+      .eq("id", userId)
+      .single();
+
+    setUser({
+      id: userId,
+      email,
+      name: profile?.name || undefined,
+      subscriptionStatus: profile?.subscription_status || null,
+      subscriptionPlan: profile?.subscription_plan || null,
+    });
+  }, [supabase]);
 
   useEffect(() => {
     const getUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user) {
-        setUser({
-          id: session.user.id,
-          email: session.user.email || ""
-        });
+        await fetchProfile(session.user.id, session.user.email || "");
       }
       setLoading(false);
     };
     getUser();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (session?.user) {
-        setUser({
-          id: session.user.id,
-          email: session.user.email || ""
-        });
+        await fetchProfile(session.user.id, session.user.email || "");
       } else {
         setUser(null);
       }
@@ -34,7 +52,12 @@ export function useAuth() {
     });
 
     return () => subscription.unsubscribe();
-  }, [supabase]);
+  }, [supabase, fetchProfile]);
 
-  return { user, loading, isAuthenticated: !!user };
+  return {
+    user,
+    loading,
+    isAuthenticated: !!user,
+    hasActiveSubscription: user?.subscriptionStatus === "active",
+  };
 }
