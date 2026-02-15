@@ -2,7 +2,7 @@ export const templateOptions = [
   {
     id: "orbit",
     name: "Orbit — Engineering velocity",
-    description: "Dark, neon lines with a fast engineering SaaS vibe.",
+    description: "Design întunecat cu linii neon și energie de startup tech.",
     url: "https://templates.webform.site/orbit",
     preview: "/templates/orbit.html",
     thumbnail: "/templates/orbit.png",
@@ -10,7 +10,7 @@ export const templateOptions = [
   {
     id: "yuna",
     name: "YUNA — Proactive Intelligence Platform",
-    description: "High-contrast predictive platform with orange and blue energy.",
+    description: "Platformă predictivă cu contrast puternic și accente vibrante de portocaliu și albastru.",
     url: "https://templates.webform.site/yuna",
     preview: "/templates/yuna.html",
     thumbnail: "/templates/yuna.png",
@@ -18,7 +18,7 @@ export const templateOptions = [
   {
     id: "aether",
     name: "AETHER — Advanced Skincare",
-    description: "Luxury skincare hero with glassmorphism, scrolly storytelling, and editorial layout.",
+    description: "Design de lux pentru skincare, cu efecte de sticlă, animații la scroll și aspect editorial.",
     url: "https://templates.webform.site/aether",
     preview: "/templates/aether.html",
     thumbnail: "/templates/aether.png",
@@ -26,7 +26,7 @@ export const templateOptions = [
   {
     id: "forward",
     name: "Forward — Next Gen Finance",
-    description: "Futuristic finance OS with kinetic hero, glass nav, and developer-focused sections.",
+    description: "Aspect futurist pentru fintech, cu animații dinamice și secțiuni pentru developeri.",
     url: "https://templates.webform.site/forward",
     preview: "/templates/forward.html",
     thumbnail: "/templates/forward.png",
@@ -34,7 +34,7 @@ export const templateOptions = [
   {
     id: "suki",
     name: "Sarah — Model Portfolio",
-    description: "Cinematic portfolio with spotlight interactions, editorial hero, and project grid.",
+    description: "Portofoliu cinematic cu interacțiuni spectaculoase și galerie de proiecte.",
     url: "https://templates.webform.site/suki",
     preview: "/templates/suki.html",
     thumbnail: "/templates/suki.png",
@@ -42,7 +42,7 @@ export const templateOptions = [
   {
     id: "cognitive",
     name: "Cognitive Future AI",
-    description: "Enterprise AI consulting with neural-themed hero, product stories, and rich visuals.",
+    description: "Consultanță AI enterprise cu tematică neurală și vizualuri impresionante.",
     url: "https://templates.webform.site/cognitive",
     preview: "/templates/cognitive.html",
     thumbnail: "/templates/cognitive.png",
@@ -50,7 +50,7 @@ export const templateOptions = [
   {
     id: "aura",
     name: "Aura",
-    description: "Ethereal landing layout with layered gradients and crisp hero framing.",
+    description: "Layout etereal cu gradienți stratificați și încadrare elegantă.",
     url: "https://templates.webform.site/aura",
     preview: "/templates/aura.html",
     thumbnail: "/templates/aura.png",
@@ -58,7 +58,7 @@ export const templateOptions = [
   {
     id: "archito",
     name: "Archito",
-    description: "Architectural portfolio aesthetic with structured grids and bold type.",
+    description: "Estetică de portofoliu arhitectural cu grid-uri structurate și tipografie îndrăzneață.",
     url: "https://templates.webform.site/archito",
     preview: "/templates/archito.html",
     thumbnail: "/templates/archito.png",
@@ -66,7 +66,7 @@ export const templateOptions = [
   {
     id: "roar",
     name: "Roar",
-    description: "High-impact brand page with aggressive gradients and loud callouts.",
+    description: "Pagină de brand cu impact puternic, gradienți intensi și mesaje care ies în evidență.",
     url: "https://templates.webform.site/roar",
     preview: "/templates/roar.html",
     thumbnail: "/templates/roar.png",
@@ -74,7 +74,7 @@ export const templateOptions = [
   {
     id: "engineer-portfolio",
     name: "Engineer Portfolio",
-    description: "Personal engineering portfolio with clean sections and project highlights.",
+    description: "Portofoliu personal de inginer cu secțiuni clare și proiecte în prim-plan.",
     url: "https://templates.webform.site/engineer-portfolio",
     preview: "/templates/engineer-portfolio.html",
     thumbnail: "/templates/engineer-portfolio.png",
@@ -82,7 +82,7 @@ export const templateOptions = [
   {
     id: "flux",
     name: "Flux",
-    description: "High-energy SaaS landing with motion-forward hero and bold CTAs.",
+    description: "Landing SaaS plin de energie, cu animații în hero și butoane de acțiune vizibile.",
     url: "https://templates.webform.site/flux",
     preview: "/templates/flux.html",
     thumbnail: "/templates/flux.png",
@@ -90,7 +90,7 @@ export const templateOptions = [
   {
     id: "lexora",
     name: "Lexora",
-    description: "Premium brand storytelling with editorial typography and luxe gradients.",
+    description: "Storytelling premium de brand cu tipografie editorială și gradienți rafinați.",
     url: "https://templates.webform.site/lexora",
     preview: "/templates/lexora.html",
     thumbnail: "/templates/lexora.png",
@@ -98,7 +98,7 @@ export const templateOptions = [
   {
     id: "gemini-motion",
     name: "Gemini Motion",
-    description: "Cinematic motion-inspired layout with layered panels and kinetic cards.",
+    description: "Layout cinematic cu panouri stratificate și carduri animate.",
     url: "https://templates.webform.site/gemini-motion",
     preview: "/templates/gemini-motion.html",
     thumbnail: "/templates/gemini-motion.png",
@@ -106,7 +106,7 @@ export const templateOptions = [
   {
     id: "faster",
     name: "Faster",
-    description: "Performance-focused product page with crisp metrics and speed visuals.",
+    description: "Pagină de produs axată pe performanță, cu metrici clare și vizualuri de viteză.",
     url: "https://templates.webform.site/faster",
     preview: "/templates/faster.html",
     thumbnail: "/templates/faster.png",
@@ -114,7 +114,7 @@ export const templateOptions = [
   {
     id: "form-design",
     name: "Form Design",
-    description: "Form-first experience showcasing UI patterns and clean inputs.",
+    description: "Experiență centrată pe formulare, cu pattern-uri UI moderne și câmpuri elegante.",
     url: "https://templates.webform.site/form-design",
     preview: "/templates/form-design.html",
     thumbnail: "/templates/form-design.png",
@@ -122,7 +122,7 @@ export const templateOptions = [
   {
     id: "genlabs",
     name: "GenLabs",
-    description: "AI lab aesthetic with gradient lab panels and data-forward sections.",
+    description: "Estetică de laborator AI cu panouri gradient și secțiuni axate pe date.",
     url: "https://templates.webform.site/genlabs",
     preview: "/templates/genlabs.html",
     thumbnail: "/templates/genlabs.png",
@@ -130,7 +130,7 @@ export const templateOptions = [
   {
     id: "archdigest",
     name: "Archdigest",
-    description: "Architectural digest vibe with large imagery and grid-based storytelling.",
+    description: "Atmosferă de revistă de arhitectură cu imagini mari și povestire prin grid.",
     url: "https://templates.webform.site/archdigest",
     preview: "/templates/archdigest.html",
     thumbnail: "/templates/archdigest.png",
@@ -138,7 +138,7 @@ export const templateOptions = [
   {
     id: "clarity-yield",
     name: "Clarity Yield",
-    description: "Fintech yield dashboard look with clean cards and trust signals.",
+    description: "Aspect de dashboard fintech cu carduri curate și elemente de încredere.",
     url: "https://templates.webform.site/clarity-yield",
     preview: "/templates/clarity-yield.html",
     thumbnail: "/templates/clarity-yield.png",
@@ -146,7 +146,7 @@ export const templateOptions = [
   {
     id: "kreona",
     name: "Kreona",
-    description: "Creative studio layout with playful color blocking and portfolio grid.",
+    description: "Layout de studio creativ cu blocuri de culoare jucăușe și grid de portofoliu.",
     url: "https://templates.webform.site/kreona",
     preview: "/templates/kreona.html",
     thumbnail: "/templates/kreona.png",
@@ -154,7 +154,7 @@ export const templateOptions = [
   {
     id: "devforge",
     name: "DevForge",
-    description: "Developer tooling landing with dark code aesthetic and feature highlights.",
+    description: "Landing pentru unelte de developer cu estetică dark și funcționalități în prim-plan.",
     url: "https://templates.webform.site/devforge",
     preview: "/templates/devforge.html",
     thumbnail: "/templates/devforge.png",
