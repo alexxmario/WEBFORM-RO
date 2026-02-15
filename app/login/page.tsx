@@ -140,9 +140,14 @@ function LoginForm() {
     }
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleAuth();
+  };
+
   return (
     <main className="container flex min-h-screen flex-col items-center justify-center gap-6 px-4 py-12">
-      <div className="w-full max-w-md space-y-4 rounded-3xl border border-border/60 bg-card/80 p-6 shadow-lg shadow-black/20">
+      <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4 rounded-3xl border border-border/60 bg-card/80 p-6 shadow-lg shadow-black/20">
         <h1 className="text-2xl font-semibold text-foreground">
           {authMode === "signup" ? "Creează un cont" : "Autentifică-te pentru chat"}
         </h1>
@@ -183,17 +188,18 @@ function LoginForm() {
             </span>
           </label>
         )}
-        <Button className="w-full" onClick={handleAuth} disabled={loading}>
+        <Button type="submit" className="w-full" disabled={loading}>
           {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {authMode === "signup" ? "Creează cont" : "Autentifică-te"}
         </Button>
         <button
+          type="button"
           className="text-sm text-muted-foreground underline"
           onClick={() => setAuthMode(authMode === "signup" ? "signin" : "signup")}
         >
           {authMode === "signup" ? "Ai deja un cont? Autentifică-te" : "Ai nevoie de un cont? Înregistrează-te"}
         </button>
-      </div>
+      </form>
     </main>
   );
 }
