@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Check, Loader2 } from "lucide-react";
 import { collectBrowserInfo } from "netopia-card";
@@ -10,12 +10,14 @@ import { Footer } from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/hooks/useAuth";
+import { supabaseBrowser } from "@/lib/supabase/browser";
 import { getPlansByTier, getMonthlyEquivalent, type Plan } from "@/lib/pricing";
 
 type BillingInterval = "month" | "year";
 
 export default function SubscribePage() {
   const router = useRouter();
+  const supabase = useMemo(supabaseBrowser, []);
   const { user, loading: authLoading, isAuthenticated } = useAuth();
   const [billingInterval, setBillingInterval] = useState<BillingInterval>("year");
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
@@ -38,13 +40,22 @@ export default function SubscribePage() {
     setLoadingPlan(plan.id);
 
     try {
+      // Get the current session for the access token
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session?.access_token) {
+        router.push("/login?redirect=/subscribe");
+        return;
+      }
+
       // Collect browser info for Netopia
       const browserInfo = collectBrowserInfo(navigator, window);
 
       const response = await fetch("/api/payments/start", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${session.access_token}`,
+        },
         body: JSON.stringify({
           planId: plan.id,
           browserData: browserInfo,

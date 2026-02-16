@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createClient } from "@supabase/supabase-js";
 
 import { createPaymentRequest, isNetopiaConfigured } from "@/lib/netopia";
 import { getPlan } from "@/lib/pricing";
@@ -29,34 +28,37 @@ export async function POST(request: Request) {
       );
     }
 
-    // Get the current user
-    const cookieStore = await cookies();
-    const supabase = createServerClient(
+    // Get the access token from Authorization header
+    const authHeader = request.headers.get("Authorization");
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return NextResponse.json(
+        { error: "Trebuie sa fii autentificat" },
+        { status: 401 }
+      );
+    }
+
+    const accessToken = authHeader.replace("Bearer ", "");
+
+    // Create Supabase client with the access token
+    const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
       {
-        cookies: {
-          getAll() {
-            return cookieStore.getAll();
-          },
-          setAll(cookiesToSet) {
-            try {
-              cookiesToSet.forEach(({ name, value, options }) =>
-                cookieStore.set(name, value, options)
-              );
-            } catch {
-              // Ignore - cookies can only be set in Server Actions
-            }
+        global: {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
           },
         },
       }
     );
 
+    // Get user from the token
     const {
       data: { user },
-    } = await supabase.auth.getUser();
+      error: userError,
+    } = await supabase.auth.getUser(accessToken);
 
-    if (!user) {
+    if (userError || !user) {
       return NextResponse.json(
         { error: "Trebuie sa fii autentificat" },
         { status: 401 }
@@ -88,8 +90,13 @@ export async function POST(request: Request) {
       clientIp,
     });
 
-    // Store order in database for tracking
-    const { error: orderError } = await supabase.from("orders").insert({
+    // Store order in database for tracking (use service role for insert)
+    const supabaseAdmin = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+
+    const { error: orderError } = await supabaseAdmin.from("orders").insert({
       id: paymentResult.orderId,
       user_id: user.id,
       plan_id: planId,
