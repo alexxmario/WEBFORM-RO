@@ -244,7 +244,7 @@ export const defaultFaqItems: FAQItem[] = [
   {
     question: "Cat dureaza sa fie gata site-ul meu?",
     answer:
-      "Site-ul tau va fi construit si lansat in 7 zile de la aprobarea Blueprint-ului.",
+      "Site-ul tau va fi construit si lansat in 7 zile de la aprobarea Formularului.",
   },
   {
     question: "Ce este inclus in abonament?",
@@ -284,7 +284,7 @@ export const howToJsonLd = {
   step: [
     {
       "@type": "HowToStep",
-      name: "Trimite Blueprint-ul",
+      name: "Trimite Formularul",
       text: "Completeaza formularul Blueprint cu detaliile despre afacerea ta si obiectivele site-ului.",
       url: `${siteConfig.url}/start`,
     },

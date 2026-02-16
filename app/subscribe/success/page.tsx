@@ -48,7 +48,7 @@ export default function PaymentSuccessPage() {
           <div className="mt-8 flex flex-col items-center gap-4">
             <Button asChild size="lg" className="w-full max-w-xs">
               <Link href="/start">
-                Incepe Blueprint-ul
+                Incepe Formularul
               </Link>
             </Button>
 

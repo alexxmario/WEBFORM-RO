@@ -159,14 +159,14 @@ export default function HomePage() {
                 <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-sm font-semibold text-primary">
                   1
                 </div>
-                <h3 className="text-display-sm text-foreground">Trimite Blueprint-ul & alege un șablon</h3>
+                <h3 className="text-display-sm text-foreground">Trimite Formularul & alege un șablon</h3>
                 <p className="text-muted-foreground">
-                  Completează Blueprint-ul Website-ului (obiective, pagini, integrări, tonalitate) și alege din Galeria de Șabloane (100+ stiluri profesionale afișate ca miniaturi).
+                  Completează Formularul Website-ului (obiective, pagini, integrări, tonalitate) și alege din Galeria de Șabloane (100+ stiluri profesionale afișate ca miniaturi).
                 </p>
                 <ul className="space-y-2 text-body-sm text-muted-foreground">
                   <li className="flex gap-2">
                     <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                    Blueprint-ul Website-ului captează nevoile de conținut, pagini și integrări.
+                    Formularul Website-ului captează nevoile de conținut, pagini și integrări.
                   </li>
                   <li className="flex gap-2">
                     <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>

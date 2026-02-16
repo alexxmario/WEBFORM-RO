@@ -21,7 +21,7 @@ export default function TemplatesPage() {
               Alege din {templateOptions.length}+ șabloane proiectate profesional. Fiecare poate fi personalizat complet pentru a se potrivi brandului tău.
             </p>
           </div>
-          <BlueprintButton size="lg">Completează Blueprint-ul</BlueprintButton>
+          <BlueprintButton size="lg">Completează Formularul</BlueprintButton>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -66,9 +66,9 @@ export default function TemplatesPage() {
         <div className="sticky bottom-4 z-20">
           <div className="glass flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border/70 px-4 py-3 shadow-lg">
             <p className="text-sm text-muted-foreground">
-              Gata să începi? Completează Blueprint-ul Website-ului și vom personaliza orice șablon pentru tine.
+              Gata să începi? Completează Formularul Website-ului și vom personaliza orice șablon pentru tine.
             </p>
-            <BlueprintButton>Completează Blueprint-ul</BlueprintButton>
+            <BlueprintButton>Completează Formularul</BlueprintButton>
           </div>
         </div>
       </main>

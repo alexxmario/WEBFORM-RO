@@ -64,7 +64,7 @@ export const HeroInteractive = memo(function HeroInteractive() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="max-w-xl text-body-lg text-muted-foreground"
         >
-          Completezi Blueprint-ul, alegi un șablon, și primești site-ul tău în 7
+          Completezi Formularul, alegi un șablon, și primești site-ul tău în 7
           zile. Fără întâlniri, fără complicații.
         </motion.p>
 
@@ -76,7 +76,7 @@ export const HeroInteractive = memo(function HeroInteractive() {
           className="flex flex-col gap-4 sm:flex-row"
         >
           <Button size="lg" onClick={handleStart}>
-            Începe Blueprint-ul
+            Începe Formularul
           </Button>
           <Button size="lg" variant="outline" asChild>
             <Link href="#how-it-works">Cum funcționează</Link>

@@ -93,7 +93,7 @@ export const Header = memo(function Header() {
                 <Link href="/login">Autentificare</Link>
               </Button>
               <BlueprintButton size="sm" className="hidden sm:inline-flex">
-                Începe Blueprint-ul
+                Începe Formularul
               </BlueprintButton>
             </>
           )}
