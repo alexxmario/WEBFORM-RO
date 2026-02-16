@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -27,7 +26,7 @@ export default function TemplatesPage() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {templateOptions.map((template) => (
-            <Link
+            <a
               key={template.id}
               href={template.preview}
               target="_blank"
@@ -60,7 +59,7 @@ export default function TemplatesPage() {
                   {template.description}
                 </p>
               </div>
-            </Link>
+            </a>
           ))}
         </div>
 
