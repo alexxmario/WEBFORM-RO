@@ -34,25 +34,26 @@ function LoginForm() {
   };
 
   const handleAuth = async () => {
+    console.log("handleAuth called", { authMode, email, password: password ? "[hidden]" : "" });
     setError("");
 
     if (authMode === "signup") {
       if (!name.trim() || !business.trim()) {
-        setError("Please fill in all required fields");
+        setError("Te rugăm să completezi toate câmpurile");
         return;
       }
       if (password !== passwordConfirm) {
-        setError("Passwords don't match");
+        setError("Parolele nu se potrivesc");
         return;
       }
       if (!agree) {
-        setError("Please agree to the terms of service");
+        setError("Te rugăm să accepți termenii și condițiile");
         return;
       }
     }
 
     if (!email.trim() || !password.trim()) {
-      setError("Please enter email and password");
+      setError("Te rugăm să introduci email și parola");
       return;
     }
 
@@ -188,10 +189,14 @@ function LoginForm() {
             </span>
           </label>
         )}
-        <Button type="submit" className="w-full" disabled={loading}>
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full h-10 px-5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 inline-flex items-center justify-center gap-2 text-sm font-medium"
+        >
           {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {authMode === "signup" ? "Creează cont" : "Autentifică-te"}
-        </Button>
+        </button>
         <button
           type="button"
           className="text-sm text-muted-foreground underline"
