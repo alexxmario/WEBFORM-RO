@@ -1,4 +1,8 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
+import NTPLogo from "ntp-logo-react";
 
 const footerNavLeft = [
   { label: "Prețuri", href: "/#plans" },
@@ -76,7 +80,51 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <div className="max-w-6xl mx-auto mt-8 border-t border-neutral-900 pt-4 px-8 text-sm text-neutral-500 text-center pb-8">
+      {/* Payment & Consumer Protection Logos */}
+      <div className="border-t border-neutral-900 py-8 px-8">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+          {/* Netopia Logo */}
+          <div className="flex flex-col items-center gap-2">
+            <NTPLogo color="#3890bc" version="vertical" secret="160895" />
+          </div>
+
+          {/* ANPC - SOL */}
+          <Link
+            href="https://anpc.ro/ce-spune-legea/solutionarea-alternativa-a-litigiilor-sal/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center gap-2 text-neutral-500 hover:text-white transition-colors"
+          >
+            <Image
+              src="https://anpc.ro/galerie/sol.png"
+              alt="ANPC SOL"
+              width={150}
+              height={50}
+              className="opacity-70 hover:opacity-100 transition-opacity"
+            />
+            <span className="text-[10px] uppercase tracking-widest">SOL - Litigii Online</span>
+          </Link>
+
+          {/* EU ODR Platform */}
+          <Link
+            href="https://ec.europa.eu/consumers/odr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center gap-2 text-neutral-500 hover:text-white transition-colors"
+          >
+            <Image
+              src="https://ec.europa.eu/consumers/odr/resources/logo-sprite.svg"
+              alt="EU ODR"
+              width={120}
+              height={40}
+              className="opacity-70 hover:opacity-100 transition-opacity invert"
+            />
+            <span className="text-[10px] uppercase tracking-widest">Soluționare Online Litigii</span>
+          </Link>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto border-t border-neutral-900 pt-4 px-8 text-sm text-neutral-500 text-center pb-8">
         © {new Date().getFullYear()} IONESCU ALEXANDRU-MARIO PFA. Toate drepturile rezervate.
       </div>
     </footer>
