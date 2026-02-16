@@ -90,7 +90,7 @@ export default function HomePage() {
         />
         <section ref={missionSectionRef} className="mission-section section-blur section-fade container max-w-5xl space-y-6 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold leading-tight text-foreground">
-            Suntem designeri și ingineri care construiesc, găzduiesc și actualizează site-ul tău fără întâlniri. Livrăm în zile,
+            Suntem designeri care construiesc, găzduiesc și actualizează site-ul tău fără întâlniri. Livrăm în zile,
             gestionăm întreaga infrastructură și te implicăm doar în deciziile importante —
             <span className="italic text-muted-foreground"> astfel încât tu să te concentrezi pe afacerea ta.</span>
           </h2>
