@@ -40,20 +40,30 @@ export async function middleware(request: NextRequest) {
   if (pathname === "/start") {
     // Not logged in - redirect to login
     if (!user) {
+      console.log("[Middleware] /start - No user session found, redirecting to login");
       const redirectUrl = new URL("/login", request.url);
       redirectUrl.searchParams.set("redirect", pathname);
       return NextResponse.redirect(redirectUrl);
     }
 
     // Check subscription status
-    const { data: profile } = await supabase
+    const { data: profile, error: profileError } = await supabase
       .from("profiles")
-      .select("subscription_status")
+      .select("subscription_status, subscription_expires_at")
       .eq("id", user.id)
       .single();
 
-    // If no active subscription, redirect to subscribe page
-    if (profile?.subscription_status !== "active") {
+    console.log("[Middleware] /start - User:", user.id, "Status:", profile?.subscription_status, "Error:", profileError?.message);
+
+    // Allow access if subscription is active OR cancelled but not expired
+    const hasAccess =
+      profile?.subscription_status === "active" ||
+      (profile?.subscription_status === "cancelled" &&
+        profile?.subscription_expires_at &&
+        new Date(profile.subscription_expires_at) > new Date());
+
+    if (!hasAccess) {
+      console.log("[Middleware] /start - No access, redirecting to subscribe");
       return NextResponse.redirect(new URL("/subscribe", request.url));
     }
   }
