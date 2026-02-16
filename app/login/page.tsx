@@ -108,7 +108,14 @@ function LoginForm() {
 
       if (error) {
         console.error("Supabase sign in error:", error);
-        setError(`Sign in failed: ${error.message}`);
+        // Translate common Supabase errors to Romanian
+        if (error.message.includes("Invalid login credentials")) {
+          setError("Email sau parolă incorectă");
+        } else if (error.message.includes("Email not confirmed")) {
+          setError("Te rugăm să îți confirmi adresa de email");
+        } else {
+          setError(`Autentificare eșuată: ${error.message}`);
+        }
         return;
       }
 
@@ -132,11 +139,11 @@ function LoginForm() {
           router.replace("/subscribe");
         }
       } else {
-        setError("No session created");
+        setError("Nu s-a putut crea sesiunea");
       }
     } catch (err) {
       setLoading(false);
-      setError(`Unexpected error: ${err instanceof Error ? err.message : 'Unknown error'}`);
+      setError(`Eroare neașteptată: ${err instanceof Error ? err.message : 'Eroare necunoscută'}`);
     }
   };
 
