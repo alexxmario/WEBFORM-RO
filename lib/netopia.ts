@@ -120,7 +120,7 @@ export async function createPaymentRequest(params: CreatePaymentParams) {
       email: userEmail,
       firstName: firstName || "Client",
       lastName: lastName || "WebForm",
-      phone: "",
+      phone: "0700000000",
       city: "Bucuresti",
       country: 642, // Romania ISO code
       countryName: "Romania",
