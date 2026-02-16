@@ -3,7 +3,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Check, Loader2 } from "lucide-react";
-import { collectBrowserInfo } from "netopia-card";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -51,7 +50,8 @@ export default function SubscribePage() {
         return;
       }
 
-      // Collect browser info for Netopia
+      // Dynamically import and collect browser info for Netopia
+      const { collectBrowserInfo } = await import("netopia-card");
       const browserInfo = collectBrowserInfo(navigator, window);
 
       const response = await fetch("/api/payments/start", {
