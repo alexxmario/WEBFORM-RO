@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ReactNode } from "react";
 import { Button } from "./ui/button";
-import { useAuth } from "@/lib/hooks/useAuth";
 
 interface BlueprintButtonProps {
   children: ReactNode;
@@ -20,22 +19,18 @@ export function BlueprintButton({
   size,
   asChild = true
 }: BlueprintButtonProps) {
-  const { isAuthenticated, loading } = useAuth();
-
-  // Show login link while loading or not authenticated
-  const href = loading || !isAuthenticated ? "/login" : "/start";
-
+  // Always link to /start - middleware handles auth/subscription redirects
   if (asChild) {
     return (
       <Button asChild variant={variant} size={size} className={className}>
-        <Link href={href}>{children}</Link>
+        <Link href="/start">{children}</Link>
       </Button>
     );
   }
 
   return (
     <Button variant={variant} size={size} className={className}>
-      <Link href={href}>{children}</Link>
+      <Link href="/start">{children}</Link>
     </Button>
   );
 }

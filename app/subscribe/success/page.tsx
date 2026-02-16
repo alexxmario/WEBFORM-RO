@@ -18,7 +18,7 @@ export default function PaymentSuccessPage() {
       setCountdown((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
-          router.push("/templates");
+          router.push("/start");
           return 0;
         }
         return prev - 1;
@@ -42,13 +42,13 @@ export default function PaymentSuccessPage() {
           </h1>
 
           <p className="mt-3 text-muted-foreground">
-            Multumim pentru abonament! Acum ai acces complet la toate template-urile noastre profesionale.
+            Multumim pentru abonament! Acum poti incepe sa iti creezi website-ul.
           </p>
 
           <div className="mt-8 flex flex-col items-center gap-4">
             <Button asChild size="lg" className="w-full max-w-xs">
-              <Link href="/templates">
-                Exploreaza template-urile
+              <Link href="/start">
+                Incepe Blueprint-ul
               </Link>
             </Button>
 
