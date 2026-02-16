@@ -75,10 +75,13 @@ export const Header = memo(function Header() {
         <div className="flex items-center gap-2">
           {user ? (
             <>
-              <div className="hidden items-center gap-2 text-sm text-foreground/80 sm:flex">
+              <Link
+                href="/account"
+                className="hidden items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground/80 transition-colors hover:text-foreground sm:flex"
+              >
                 <User className="h-4 w-4" />
-                <span className="max-w-[120px] truncate">{user.email}</span>
-              </div>
+                <span className="max-w-[120px] truncate">Contul meu</span>
+              </Link>
               <Button size="sm" variant="outline" onClick={handleSignOut}>
                 <LogOut className="h-4 w-4 sm:mr-2" />
                 <span className="hidden sm:inline">Deconectare</span>

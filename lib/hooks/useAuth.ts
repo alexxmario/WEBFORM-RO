@@ -9,6 +9,7 @@ interface UserProfile {
   name?: string;
   subscriptionStatus?: string | null;
   subscriptionPlan?: string | null;
+  subscriptionExpiresAt?: string | null;
 }
 
 export function useAuth() {
@@ -19,7 +20,7 @@ export function useAuth() {
   const fetchProfile = useCallback(async (userId: string, email: string) => {
     const { data: profile } = await supabase
       .from("profiles")
-      .select("name, subscription_status, subscription_plan")
+      .select("name, subscription_status, subscription_plan, subscription_expires_at")
       .eq("id", userId)
       .single();
 
@@ -29,6 +30,7 @@ export function useAuth() {
       name: profile?.name || undefined,
       subscriptionStatus: profile?.subscription_status || null,
       subscriptionPlan: profile?.subscription_plan || null,
+      subscriptionExpiresAt: profile?.subscription_expires_at || null,
     });
   }, [supabase]);
 

@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/hooks/useAuth";
 import { supabaseBrowser } from "@/lib/supabase/browser";
-import { getPlansByTier, getMonthlyEquivalent, type Plan } from "@/lib/pricing";
+import { getPlansByTier, getMonthlyEquivalent, getPlan, type Plan } from "@/lib/pricing";
 
 type BillingInterval = "month" | "year";
 
@@ -23,6 +23,10 @@ export default function SubscribePage() {
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
   const plans = getPlansByTier();
+
+  // Get user's current plan tier (if any)
+  const currentPlan = user?.subscriptionPlan ? getPlan(user.subscriptionPlan) : null;
+  const currentTier = currentPlan?.tier || null;
 
   // Redirect to login if not authenticated
   useEffect(() => {
@@ -138,6 +142,7 @@ export default function SubscribePage() {
             billingInterval={billingInterval}
             onSubscribe={handleSubscribe}
             loading={loadingPlan === (billingInterval === "month" ? plans.standard.monthly.id : plans.standard.yearly.id)}
+            isCurrentPlan={currentTier === "standard"}
           />
 
           {/* Business Plan */}
@@ -147,6 +152,7 @@ export default function SubscribePage() {
             onSubscribe={handleSubscribe}
             loading={loadingPlan === (billingInterval === "month" ? plans.business.monthly.id : plans.business.yearly.id)}
             popular
+            isCurrentPlan={currentTier === "business"}
           />
         </div>
 
@@ -169,20 +175,28 @@ interface PricingCardProps {
   onSubscribe: (plan: Plan) => void;
   loading?: boolean;
   popular?: boolean;
+  isCurrentPlan?: boolean;
 }
 
-function PricingCard({ plan, billingInterval, onSubscribe, loading, popular }: PricingCardProps) {
+function PricingCard({ plan, billingInterval, onSubscribe, loading, popular, isCurrentPlan }: PricingCardProps) {
   const monthlyEquivalent = getMonthlyEquivalent(plan);
 
   return (
     <div
       className={`relative flex flex-col rounded-2xl border p-6 shadow-lg transition ${
-        popular
+        isCurrentPlan
+          ? "border-green-500/50 bg-card ring-2 ring-green-500/20"
+          : popular
           ? "border-primary/50 bg-card shadow-glow"
           : "border-border/60 bg-card/70"
       }`}
     >
-      {popular && (
+      {isCurrentPlan && (
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+          <Badge className="bg-green-500 text-white">Planul tău actual</Badge>
+        </div>
+      )}
+      {!isCurrentPlan && popular && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2">
           <Badge className="bg-primary text-primary-foreground">Recomandat</Badge>
         </div>
@@ -219,14 +233,25 @@ function PricingCard({ plan, billingInterval, onSubscribe, loading, popular }: P
 
       <Button
         onClick={() => onSubscribe(plan)}
-        disabled={loading}
-        className={`w-full ${popular ? "" : "bg-muted text-foreground hover:bg-muted/80"}`}
+        disabled={loading || isCurrentPlan}
+        className={`w-full ${
+          isCurrentPlan
+            ? "bg-green-500/20 text-green-400 hover:bg-green-500/20 cursor-default"
+            : popular
+            ? ""
+            : "bg-muted text-foreground hover:bg-muted/80"
+        }`}
         size="lg"
       >
         {loading ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             Se procesează...
+          </>
+        ) : isCurrentPlan ? (
+          <>
+            <Check className="mr-2 h-4 w-4" />
+            Planul tău actual
           </>
         ) : (
           "Abonează-te acum"
