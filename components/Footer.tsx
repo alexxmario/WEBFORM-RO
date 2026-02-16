@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import NTPLogo from "ntp-logo-react";
+import dynamic from "next/dynamic";
+
+// Dynamic import to avoid SSR issues
+const NTPLogo = dynamic(() => import("ntp-logo-react"), {
+  ssr: false,
+  loading: () => <div className="h-12 w-24 bg-neutral-800 rounded animate-pulse" />
+});
 
 const footerNavLeft = [
   { label: "Prețuri", href: "/#plans" },

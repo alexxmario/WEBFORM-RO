@@ -36,21 +36,31 @@ export function useAuth() {
 
   useEffect(() => {
     const getUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        await fetchProfile(session.user.id, session.user.email || "");
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user) {
+          await fetchProfile(session.user.id, session.user.email || "");
+        }
+      } catch (error) {
+        console.error("Error getting session:", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     getUser();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (session?.user) {
-        await fetchProfile(session.user.id, session.user.email || "");
-      } else {
-        setUser(null);
+      try {
+        if (session?.user) {
+          await fetchProfile(session.user.id, session.user.email || "");
+        } else {
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Error on auth state change:", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => subscription.unsubscribe();
