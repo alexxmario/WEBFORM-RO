@@ -5,7 +5,6 @@ import { Loader2 } from "lucide-react";
 import { Suspense, useMemo, useState } from "react";
 
 import { supabaseBrowser } from "@/lib/supabase/browser";
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
