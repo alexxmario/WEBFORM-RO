@@ -10,35 +10,35 @@ import { BlueprintButton } from "./BlueprintButton";
 
 const plans = [
   {
-    name: "Starter",
-    setup: "$149",
-    monthly: "$99/mo",
-    summary: "Launch-ready brochure site for lean teams.",
-    perks: ["Up to 3 pages", "3-day updates", "1 active request", "Hosting + domain"],
+    name: "Start",
+    setup: "699 RON",
+    monthly: "449 RON/lună",
+    summary: "Site de prezentare gata de lansare pentru echipe mici.",
+    perks: ["Până la 3 pagini", "Actualizări în 3 zile", "1 cerere activă", "Găzduire + domeniu"],
   },
   {
     name: "Business",
-    setup: "$399",
-    monthly: "$199/mo",
-    summary: "Built for growing companies that need speed.",
+    setup: "1.799 RON",
+    monthly: "899 RON/lună",
+    summary: "Pentru companii în creștere care au nevoie de viteză.",
     perks: [
-      "Up to 7 pages",
-      "2 active requests",
-      "2-day priority",
-      "Analytics + SEO setup",
+      "Până la 7 pagini",
+      "2 cereri active",
+      "Prioritate 2 zile",
+      "Analytics + SEO",
     ],
     highlighted: true,
   },
   {
     name: "Premium",
-    setup: "$899",
-    monthly: "$399/mo",
-    summary: "Complex builds, booking, or e-commerce flows.",
+    setup: "3.999 RON",
+    monthly: "1.799 RON/lună",
+    summary: "Site-uri complexe, rezervări sau e-commerce.",
     perks: [
-      "10+ pages or e-com",
-      "3 active requests",
-      "24h priority",
-      "Integrations included",
+      "10+ pagini sau e-com",
+      "3 cereri active",
+      "Prioritate 24h",
+      "Integrări incluse",
     ],
   },
 ];
@@ -74,10 +74,10 @@ export function Plans({ compact = false }: PlansProps) {
                   </h3>
                   <p className="text-sm text-muted-foreground">{plan.summary}</p>
                 </div>
-                {plan.highlighted && <Badge>Most popular</Badge>}
+                {plan.highlighted && <Badge>Cel mai popular</Badge>}
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Setup</p>
+                <p className="text-sm text-muted-foreground">Inițial</p>
                 <p className="text-2xl font-semibold">{plan.setup}</p>
                 <p className="mt-1 text-sm text-muted-foreground">{plan.monthly}</p>
               </div>
@@ -90,12 +90,12 @@ export function Plans({ compact = false }: PlansProps) {
                 ))}
               </ul>
               <BlueprintButton variant={plan.highlighted ? "default" : "outline"} className="mt-auto">
-                Start the Website Blueprint
+                Începe Formularul
                 <ArrowRight className="ml-2 h-4 w-4" />
               </BlueprintButton>
               {!compact && (
                 <p className="text-xs text-muted-foreground">
-                  7-day launch • 3-day updates • Hosting & domain included.
+                  Lansare în 7 zile • Actualizări în 3 zile • Găzduire și domeniu incluse.
                 </p>
               )}
             </CardContent>
