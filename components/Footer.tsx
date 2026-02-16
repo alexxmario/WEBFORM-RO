@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import NTPLogo from "ntp-logo-react";
 
@@ -88,38 +87,38 @@ export function Footer() {
             <NTPLogo color="#3890bc" version="vertical" secret="160895" />
           </div>
 
-          {/* ANPC - SOL */}
+          {/* ANPC - SAL */}
           <Link
-            href="https://anpc.ro/ce-spune-legea/solutionarea-alternativa-a-litigiilor-sal/"
+            href="https://anpc.ro/ce-spune-legea/sal/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col items-center gap-2 text-neutral-500 hover:text-white transition-colors"
           >
-            <Image
-              src="https://anpc.ro/galerie/sol.png"
-              alt="ANPC SOL"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sal.png"
+              alt="ANPC SAL"
               width={150}
               height={50}
-              className="opacity-70 hover:opacity-100 transition-opacity"
+              className="opacity-80 hover:opacity-100 transition-opacity"
             />
-            <span className="text-[10px] uppercase tracking-widest">SOL - Litigii Online</span>
           </Link>
 
-          {/* EU ODR Platform */}
+          {/* ANPC - SOL */}
           <Link
             href="https://ec.europa.eu/consumers/odr"
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col items-center gap-2 text-neutral-500 hover:text-white transition-colors"
           >
-            <Image
-              src="https://ec.europa.eu/consumers/odr/resources/logo-sprite.svg"
-              alt="EU ODR"
-              width={120}
-              height={40}
-              className="opacity-70 hover:opacity-100 transition-opacity invert"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://wpfitness.eu/wp-content/uploads/2022/10/anpc-sol.png"
+              alt="ANPC SOL - EU ODR"
+              width={150}
+              height={50}
+              className="opacity-80 hover:opacity-100 transition-opacity"
             />
-            <span className="text-[10px] uppercase tracking-widest">Soluționare Online Litigii</span>
           </Link>
         </div>
       </div>
