@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { createServerClient } from "@supabase/ssr";
 
 import { blueprintSchema } from "@/lib/zodSchemas";
 import { supabaseServerAdmin } from "@/lib/supabase/server";
@@ -19,10 +21,26 @@ export async function POST(request: Request) {
     const data = parse.data;
     const supabase = supabaseServerAdmin();
 
+    // Get user from session
+    const cookieStore = await cookies();
+    const supabaseAuth = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return cookieStore.getAll();
+          },
+        },
+      }
+    );
+    const { data: { user } } = await supabaseAuth.auth.getUser();
+
     // Save to Supabase
     const { data: blueprint, error } = await supabase
       .from("blueprints")
       .insert({
+        user_id: user?.id || null,
         business_name: data.identity.businessName,
         one_liner: data.identity.oneLiner,
         what_you_sell: data.identity.whatYouSell,
@@ -123,9 +141,38 @@ export async function POST(request: Request) {
 
 export async function GET() {
   const supabase = supabaseServerAdmin();
+
+  // Get user from session
+  const cookieStore = await cookies();
+  const supabaseAuth = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll();
+        },
+      },
+    }
+  );
+  const { data: { user } } = await supabaseAuth.auth.getUser();
+
+  // Check if user has submitted a blueprint
+  let hasBlueprint = false;
+  if (user) {
+    const { data: userBlueprint } = await supabase
+      .from("blueprints")
+      .select("id")
+      .eq("user_id", user.id)
+      .limit(1)
+      .single();
+
+    hasBlueprint = !!userBlueprint;
+  }
+
   const { count } = await supabase
     .from("blueprints")
     .select("*", { count: "exact", head: true });
 
-  return NextResponse.json({ ok: true, total: count || 0 });
+  return NextResponse.json({ ok: true, total: count || 0, hasBlueprint });
 }
