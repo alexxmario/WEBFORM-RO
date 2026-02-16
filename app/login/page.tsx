@@ -196,8 +196,9 @@ function LoginForm() {
           </label>
         )}
         <button
-          type="submit"
+          type="button"
           disabled={loading}
+          onClick={handleAuth}
           className="w-full h-10 px-5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 inline-flex items-center justify-center gap-2 text-sm font-medium"
         >
           {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
