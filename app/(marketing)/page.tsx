@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useEffect, useRef, useCallback } from "react";
 
 import { Header } from "@/components/Header";
@@ -441,8 +442,9 @@ export default function HomePage() {
                         <Button
                           className="w-full"
                           variant={plan.primary ? "default" : "outline"}
+                          asChild
                         >
-                          {plan.cta}
+                          <Link href="/start">{plan.cta}</Link>
                         </Button>
                       )}
                     </div>
