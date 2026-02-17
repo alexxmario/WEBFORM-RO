@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { supabaseBrowser } from "@/lib/supabase/browser";
 
 interface UserProfile {
@@ -16,25 +16,40 @@ export function useAuth() {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const supabase = useMemo(supabaseBrowser, []);
+  const initialized = useRef(false);
 
   const fetchProfile = useCallback(async (userId: string, email: string) => {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("name, subscription_status, subscription_plan, subscription_expires_at")
-      .eq("id", userId)
-      .single();
+    try {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("name, subscription_status, subscription_plan, subscription_expires_at")
+        .eq("id", userId)
+        .single();
 
-    setUser({
-      id: userId,
-      email,
-      name: profile?.name || undefined,
-      subscriptionStatus: profile?.subscription_status || null,
-      subscriptionPlan: profile?.subscription_plan || null,
-      subscriptionExpiresAt: profile?.subscription_expires_at || null,
-    });
+      setUser({
+        id: userId,
+        email,
+        name: profile?.name || undefined,
+        subscriptionStatus: profile?.subscription_status || null,
+        subscriptionPlan: profile?.subscription_plan || null,
+        subscriptionExpiresAt: profile?.subscription_expires_at || null,
+      });
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+      // Still set basic user info even if profile fetch fails
+      setUser({ id: userId, email });
+    }
   }, [supabase]);
 
   useEffect(() => {
+    if (initialized.current) return;
+    initialized.current = true;
+
+    // Safety timeout - never hang forever
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+
     const getUser = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
@@ -44,6 +59,7 @@ export function useAuth() {
       } catch (error) {
         console.error("Error getting session:", error);
       } finally {
+        clearTimeout(timeout);
         setLoading(false);
       }
     };
@@ -58,12 +74,13 @@ export function useAuth() {
         }
       } catch (error) {
         console.error("Error on auth state change:", error);
-      } finally {
-        setLoading(false);
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      clearTimeout(timeout);
+      subscription.unsubscribe();
+    };
   }, [supabase, fetchProfile]);
 
   return {
