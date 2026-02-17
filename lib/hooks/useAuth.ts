@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { supabaseBrowser } from "@/lib/supabase/browser";
 
 interface UserProfile {
@@ -15,7 +15,7 @@ interface UserProfile {
 export function useAuth() {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
-  const supabase = supabaseBrowser();
+  const supabase = useMemo(supabaseBrowser, []);
 
   const fetchProfile = useCallback(async (userId: string, email: string) => {
     const { data: profile } = await supabase
