@@ -36,6 +36,15 @@ export async function middleware(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
 
+  // Protected route: /subscribe requires auth
+  if (pathname === "/subscribe") {
+    if (!user) {
+      const redirectUrl = new URL("/login", request.url);
+      redirectUrl.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(redirectUrl);
+    }
+  }
+
   // Protected route: /start (Blueprint form) requires auth + subscription
   if (pathname === "/start") {
     // Not logged in - redirect to login
