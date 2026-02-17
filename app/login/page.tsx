@@ -104,9 +104,9 @@ function LoginForm() {
       }
 
       const { data: signInData, error } = await supabase.auth.signInWithPassword({ email, password });
-      setLoading(false);
 
       if (error) {
+        setLoading(false);
         console.error("Supabase sign in error:", error);
         // Translate common Supabase errors to Romanian
         if (error.message.includes("Invalid login credentials")) {
@@ -139,6 +139,7 @@ function LoginForm() {
           router.replace("/subscribe");
         }
       } else {
+        setLoading(false);
         setError("Nu s-a putut crea sesiunea");
       }
     } catch (err) {
