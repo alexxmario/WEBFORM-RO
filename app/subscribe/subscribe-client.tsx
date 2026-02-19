@@ -29,7 +29,7 @@ interface SubscribeClientProps {
 export function SubscribeClient({ initialUser }: SubscribeClientProps) {
   const router = useRouter();
   const supabase = useMemo(supabaseBrowser, []);
-  const [billingInterval, setBillingInterval] = useState<BillingInterval>("year");
+  const [billingInterval, setBillingInterval] = useState<BillingInterval>("month");
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
   const plans = getPlansByTier();
