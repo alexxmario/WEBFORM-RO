@@ -6,6 +6,7 @@ type SignupRequest = {
   password: string;
   name?: string;
   businessName?: string;
+  phone?: string;
 };
 
 export async function POST(request: Request) {
@@ -56,6 +57,7 @@ export async function POST(request: Request) {
         email: body.email,
         name: body.name,
         business_name: body.businessName,
+        phone_number: body.phone,
         role: isAdmin ? "admin" : "client",
       });
 

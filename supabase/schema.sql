@@ -7,6 +7,7 @@ create table if not exists public.profiles (
   email text unique,
   name text,
   business_name text,
+  phone_number text,
   role text not null default 'client' check (role in ('admin', 'client')),
   created_at timestamptz default now()
 );

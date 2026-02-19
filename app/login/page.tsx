@@ -17,6 +17,7 @@ function LoginForm() {
   const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
   const [name, setName] = useState("");
   const [business, setBusiness] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -37,7 +38,7 @@ function LoginForm() {
     setError("");
 
     if (authMode === "signup") {
-      if (!name.trim() || !business.trim()) {
+      if (!name.trim() || !business.trim() || !phone.trim()) {
         setError("Te rugăm să completezi toate câmpurile");
         return;
       }
@@ -69,6 +70,7 @@ function LoginForm() {
             password,
             name,
             businessName: business,
+            phone,
           }),
         });
 
@@ -168,6 +170,7 @@ function LoginForm() {
           <>
             <Input placeholder="Nume complet" value={name} onChange={(e) => setName(e.target.value)} />
             <Input placeholder="Numele afacerii" value={business} onChange={(e) => setBusiness(e.target.value)} />
+            <Input type="tel" placeholder="Număr de telefon" value={phone} onChange={(e) => setPhone(e.target.value)} />
           </>
         )}
         <Input type="email" placeholder="tu@exemplu.com" value={email} onChange={(e) => setEmail(e.target.value)} />
