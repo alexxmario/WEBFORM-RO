@@ -7,8 +7,8 @@ export const siteConfig = {
   titleTemplate: "%s | WebForm România",
   description:
     "Lansare în 7 zile. Actualizări în 3 zile. WebForm construiește, găzduiește și gestionează site-ul tău sub un singur abonament. Fără constructori de site-uri, fără bătăi de cap tehnice.",
-  url: "https://webform.site",
-  domain: "webform.site",
+  url: "https://ro.joinwebform.com",
+  domain: "ro.joinwebform.com",
   creator: "WebForm România",
   locale: "ro_RO",
   language: "ro",
