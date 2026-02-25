@@ -340,7 +340,7 @@ export default function HomePage() {
               {[
                 {
                   name: "WEBFORM START",
-                  price: "150 RON/lună",
+                  price: "180 RON/lună",
                   desc: "Pentru proprietarii de afaceri mici care au nevoie de un website simplu și curat rapid.",
                   items: [
                     "Până la 3 pagini (Acasă, Despre, Contact sau Servicii)",

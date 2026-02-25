@@ -107,7 +107,7 @@ export const productJsonLd = {
       name: "WebForm Start",
       description:
         "Pentru proprietarii de afaceri mici care au nevoie de un website simplu si curat.",
-      price: "150",
+      price: "180",
       priceCurrency: "RON",
       priceValidUntil: "2026-12-31",
       url: `${siteConfig.url}/#plans`,
@@ -279,7 +279,7 @@ export const howToJsonLd = {
   estimatedCost: {
     "@type": "MonetaryAmount",
     currency: "RON",
-    value: "150",
+    value: "180",
   },
   step: [
     {
