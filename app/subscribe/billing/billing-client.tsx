@@ -289,14 +289,14 @@ export function BillingClient({ plan, initialName, initialPhone }: BillingClient
                       <label className="mb-1.5 block text-sm font-medium">Cod unic de Inregistrare</label>
                       <div className="flex gap-2">
                         <Select
-                          value={company.cuiPrefix}
-                          onValueChange={(value) => setCompany({ ...company, cuiPrefix: value as "" | "RO" })}
+                          value={company.cuiPrefix || undefined}
+                          onValueChange={(value) => setCompany({ ...company, cuiPrefix: (value === "_none" ? "" : value) as "" | "RO" })}
                         >
                           <SelectTrigger className="w-20">
                             <SelectValue placeholder="-" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="">-</SelectItem>
+                            <SelectItem value="_none">-</SelectItem>
                             <SelectItem value="RO">RO</SelectItem>
                           </SelectContent>
                         </Select>
@@ -314,14 +314,14 @@ export function BillingClient({ plan, initialName, initialPhone }: BillingClient
                     <label className="mb-1.5 block text-sm font-medium">Numar de inregistrare in Registrul Comertului</label>
                     <div className="flex gap-2">
                       <Select
-                        value={company.regComCounty}
-                        onValueChange={(value) => setCompany({ ...company, regComCounty: value })}
+                        value={company.regComCounty || undefined}
+                        onValueChange={(value) => setCompany({ ...company, regComCounty: value === "_none" ? "" : value })}
                       >
                         <SelectTrigger className="w-20">
                           <SelectValue placeholder="-" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="">-</SelectItem>
+                          <SelectItem value="_none">-</SelectItem>
                           {REG_COM_JUDETE.map((j) => (
                             <SelectItem key={j.code} value={j.code}>
                               J{j.code}
@@ -330,14 +330,14 @@ export function BillingClient({ plan, initialName, initialPhone }: BillingClient
                         </SelectContent>
                       </Select>
                       <Select
-                        value={company.regComType}
-                        onValueChange={(value) => setCompany({ ...company, regComType: value })}
+                        value={company.regComType || undefined}
+                        onValueChange={(value) => setCompany({ ...company, regComType: value === "_none" ? "" : value })}
                       >
                         <SelectTrigger className="w-20">
                           <SelectValue placeholder="--" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="">--</SelectItem>
+                          <SelectItem value="_none">--</SelectItem>
                           {Array.from({ length: 99 }, (_, i) => i + 1).map((n) => (
                             <SelectItem key={n} value={String(n)}>
                               {n}
@@ -352,14 +352,14 @@ export function BillingClient({ plan, initialName, initialPhone }: BillingClient
                         placeholder=""
                       />
                       <Select
-                        value={company.regComYear}
-                        onValueChange={(value) => setCompany({ ...company, regComYear: value })}
+                        value={company.regComYear || undefined}
+                        onValueChange={(value) => setCompany({ ...company, regComYear: value === "_none" ? "" : value })}
                       >
                         <SelectTrigger className="w-24">
                           <SelectValue placeholder="----" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="">----</SelectItem>
+                          <SelectItem value="_none">----</SelectItem>
                           {Array.from({ length: 35 }, (_, i) => 2026 - i).map((year) => (
                             <SelectItem key={year} value={String(year)}>
                               {year}
