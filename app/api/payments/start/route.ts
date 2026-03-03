@@ -3,10 +3,11 @@ import { createClient } from "@supabase/supabase-js";
 
 import { createPaymentRequest, isNetopiaConfigured } from "@/lib/netopia";
 import { getPlan } from "@/lib/pricing";
+import { billingSchema, type BillingInfo } from "@/lib/schemas/billing";
 
 export async function POST(request: Request) {
   try {
-    const { planId, browserData } = await request.json();
+    const { planId, browserData, billingInfo } = await request.json();
 
     // Validate plan
     const plan = getPlan(planId);
@@ -16,6 +17,24 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    // Validate billing info
+    if (!billingInfo) {
+      return NextResponse.json(
+        { error: "Informatiile de facturare sunt obligatorii" },
+        { status: 400 }
+      );
+    }
+
+    const billingResult = billingSchema.safeParse(billingInfo);
+    if (!billingResult.success) {
+      return NextResponse.json(
+        { error: "Informatii de facturare invalide" },
+        { status: 400 }
+      );
+    }
+
+    const validatedBilling: BillingInfo = billingResult.data;
 
     // Check if Netopia is configured
     if (!isNetopiaConfigured()) {
@@ -104,6 +123,7 @@ export async function POST(request: Request) {
       currency: "RON",
       status: "pending",
       ntp_id: paymentResult.ntpId,
+      billing_info: validatedBilling,
     });
 
     if (orderError) {

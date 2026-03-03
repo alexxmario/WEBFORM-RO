@@ -1,14 +1,13 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, Loader2 } from "lucide-react";
+import { Check } from "lucide-react";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { supabaseBrowser } from "@/lib/supabase/browser";
 import { getPlansByTier, getMonthlyEquivalent, getPlan, type Plan } from "@/lib/pricing";
 
 type BillingInterval = "month" | "year";
@@ -28,9 +27,7 @@ interface SubscribeClientProps {
 
 export function SubscribeClient({ initialUser }: SubscribeClientProps) {
   const router = useRouter();
-  const supabase = useMemo(supabaseBrowser, []);
   const [billingInterval, setBillingInterval] = useState<BillingInterval>("month");
-  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
   const plans = getPlansByTier();
 
@@ -39,49 +36,8 @@ export function SubscribeClient({ initialUser }: SubscribeClientProps) {
   const currentTier = currentPlan?.tier || null;
 
   const handleSubscribe = async (plan: Plan) => {
-    setLoadingPlan(plan.id);
-
-    try {
-      // Get the current session for the access token
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session?.access_token) {
-        router.push("/login?redirect=/subscribe");
-        return;
-      }
-
-      // Dynamically import and collect browser info for Netopia
-      const { collectBrowserInfo } = await import("netopia-card");
-      const browserInfo = collectBrowserInfo(navigator, window);
-
-      const response = await fetch("/api/payments/start", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${session.access_token}`,
-        },
-        body: JSON.stringify({
-          planId: plan.id,
-          browserData: browserInfo,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Eroare la initierea platii");
-      }
-
-      // Redirect to Netopia payment page
-      if (data.paymentUrl) {
-        window.location.href = data.paymentUrl;
-      } else {
-        throw new Error("Nu s-a primit URL-ul de plata");
-      }
-    } catch (error) {
-      console.error("Payment error:", error);
-      alert(error instanceof Error ? error.message : "Eroare la procesarea platii");
-      setLoadingPlan(null);
-    }
+    // Redirect to billing page with plan ID
+    router.push(`/subscribe/billing?planId=${plan.id}`);
   };
 
   return (
@@ -132,7 +88,6 @@ export function SubscribeClient({ initialUser }: SubscribeClientProps) {
             plan={billingInterval === "month" ? plans.standard.monthly : plans.standard.yearly}
             billingInterval={billingInterval}
             onSubscribe={handleSubscribe}
-            loading={loadingPlan === (billingInterval === "month" ? plans.standard.monthly.id : plans.standard.yearly.id)}
             isCurrentPlan={currentTier === "standard"}
           />
 
@@ -141,7 +96,6 @@ export function SubscribeClient({ initialUser }: SubscribeClientProps) {
             plan={billingInterval === "month" ? plans.business.monthly : plans.business.yearly}
             billingInterval={billingInterval}
             onSubscribe={handleSubscribe}
-            loading={loadingPlan === (billingInterval === "month" ? plans.business.monthly.id : plans.business.yearly.id)}
             popular
             isCurrentPlan={currentTier === "business"}
           />
@@ -164,12 +118,11 @@ interface PricingCardProps {
   plan: Plan;
   billingInterval: BillingInterval;
   onSubscribe: (plan: Plan) => void;
-  loading?: boolean;
   popular?: boolean;
   isCurrentPlan?: boolean;
 }
 
-function PricingCard({ plan, billingInterval, onSubscribe, loading, popular, isCurrentPlan }: PricingCardProps) {
+function PricingCard({ plan, billingInterval, onSubscribe, popular, isCurrentPlan }: PricingCardProps) {
   const monthlyEquivalent = getMonthlyEquivalent(plan);
 
   return (
@@ -224,7 +177,7 @@ function PricingCard({ plan, billingInterval, onSubscribe, loading, popular, isC
 
       <Button
         onClick={() => onSubscribe(plan)}
-        disabled={loading || isCurrentPlan}
+        disabled={isCurrentPlan}
         className={`w-full ${
           isCurrentPlan
             ? "bg-green-500/20 text-green-400 hover:bg-green-500/20 cursor-default"
@@ -234,12 +187,7 @@ function PricingCard({ plan, billingInterval, onSubscribe, loading, popular, isC
         }`}
         size="lg"
       >
-        {loading ? (
-          <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Se procesează...
-          </>
-        ) : isCurrentPlan ? (
+        {isCurrentPlan ? (
           <>
             <Check className="mr-2 h-4 w-4" />
             Planul tău actual
