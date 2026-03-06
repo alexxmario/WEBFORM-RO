@@ -116,6 +116,9 @@ function LoginForm() {
           .eq("id", user.id)
           .single();
 
+        // Small delay to ensure session cookies are fully persisted before redirect
+        await new Promise(resolve => setTimeout(resolve, 100));
+
         // Redirect based on subscription status (use full page reload to ensure auth state is synced)
         if (profile?.subscription_status === "active") {
           // If there's a redirect param and user has subscription, use it
