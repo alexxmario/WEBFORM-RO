@@ -444,7 +444,7 @@ export default function HomePage() {
                           variant={plan.primary ? "default" : "outline"}
                           asChild
                         >
-                          <Link href="/start">{plan.cta}</Link>
+                          <Link href="/login">{plan.cta}</Link>
                         </Button>
                       )}
                     </div>
