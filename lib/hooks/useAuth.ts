@@ -50,20 +50,21 @@ export function useAuth() {
       setLoading(false);
     }, 5000);
 
-    const getUser = async () => {
+    const checkUser = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (session?.user) {
-          await fetchProfile(session.user.id, session.user.email || "");
+        // Use getUser() instead of getSession() to validate with server
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          await fetchProfile(user.id, user.email || "");
         }
       } catch (error) {
-        console.error("Error getting session:", error);
+        console.error("Error getting user:", error);
       } finally {
         clearTimeout(timeout);
         setLoading(false);
       }
     };
-    getUser();
+    checkUser();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       try {
