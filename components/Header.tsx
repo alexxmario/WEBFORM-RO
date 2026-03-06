@@ -19,10 +19,16 @@ const navLinks = [
   { href: "/#plans", label: "Planuri" },
 ];
 
-export const Header = memo(function Header() {
+interface HeaderProps {
+  initialUser?: { id: string; email: string } | null;
+}
+
+export const Header = memo(function Header({ initialUser }: HeaderProps = {}) {
   const pathname = usePathname();
   const router = useRouter();
-  const { user } = useAuth();
+  const { user: authUser } = useAuth();
+  // Use initialUser if provided (from server), otherwise fall back to useAuth
+  const user = initialUser || authUser;
   const supabase = useMemo(supabaseBrowser, []);
 
   const handleSignOut = useCallback(async () => {

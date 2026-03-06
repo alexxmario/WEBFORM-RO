@@ -42,7 +42,7 @@ export function SubscribeClient({ initialUser }: SubscribeClientProps) {
 
   return (
     <>
-      <Header />
+      <Header initialUser={initialUser} />
       <main className="container space-y-10 pb-16 pt-28">
         <div className="mx-auto max-w-3xl text-center">
           <Badge>Abonament</Badge>

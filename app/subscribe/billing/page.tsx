@@ -55,6 +55,7 @@ export default async function BillingPage({ searchParams }: BillingPageProps) {
       plan={plan}
       initialName={profile?.name || ""}
       initialPhone={profile?.phone || ""}
+      initialUser={{ id: user.id, email: user.email || "" }}
     />
   );
 }
