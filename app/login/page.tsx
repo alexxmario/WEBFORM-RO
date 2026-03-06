@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { Suspense, useMemo, useState } from "react";
 
@@ -11,7 +11,6 @@ import { toast } from "sonner";
 
 function LoginForm() {
   const supabase = useMemo(supabaseBrowser, []);
-  const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/subscribe";
   const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
