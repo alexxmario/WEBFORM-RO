@@ -82,26 +82,11 @@ function LoginForm() {
           return;
         }
 
-        // Auto sign-in after signup
-        const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-
-        if (signInError) {
-          // If auto sign-in fails, show success and ask to sign in manually
-          setLoading(false);
-          setAuthMode("signin");
-          toast.success("Cont creat cu succes! Te rugăm să te autentifici.");
-          return;
-        }
-
-        if (signInData.session?.user) {
-          const user = signInData.session.user;
-          await initRoom(user.id, user.email || "", name, business);
-          // Redirect to subscribe page after signup
-          router.replace("/subscribe");
-        }
+        // Show success and switch to sign in mode
+        setLoading(false);
+        setAuthMode("signin");
+        setPassword("");
+        toast.success("Cont creat cu succes! Te rugăm să te autentifici.");
         return;
       }
 
