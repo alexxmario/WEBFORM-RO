@@ -117,13 +117,13 @@ function LoginForm() {
           .eq("id", user.id)
           .single();
 
-        // Redirect based on subscription status
+        // Redirect based on subscription status (use full page reload to ensure auth state is synced)
         if (profile?.subscription_status === "active") {
           // If there's a redirect param and user has subscription, use it
-          router.replace(redirectTo === "/subscribe" ? "/templates" : redirectTo);
+          window.location.href = redirectTo === "/subscribe" ? "/templates" : redirectTo;
         } else {
           // No active subscription - go to subscribe page
-          router.replace("/subscribe");
+          window.location.href = "/subscribe";
         }
       } else {
         setLoading(false);
