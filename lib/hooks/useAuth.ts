@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useMemo, useRef } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { supabaseBrowser } from "@/lib/supabase/browser";
 
 interface UserProfile {
@@ -16,7 +16,6 @@ export function useAuth() {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const supabase = useMemo(supabaseBrowser, []);
-  const initialized = useRef(false);
 
   const fetchProfile = useCallback(async (userId: string, email: string) => {
     try {
@@ -42,31 +41,12 @@ export function useAuth() {
   }, [supabase]);
 
   useEffect(() => {
-    if (initialized.current) return;
-    initialized.current = true;
+    let isMounted = true;
 
-    // Safety timeout - never hang forever
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 5000);
-
-    const checkUser = async () => {
-      try {
-        // Use getUser() instead of getSession() to validate with server
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
-          await fetchProfile(user.id, user.email || "");
-        }
-      } catch (error) {
-        console.error("Error getting user:", error);
-      } finally {
-        clearTimeout(timeout);
-        setLoading(false);
-      }
-    };
-    checkUser();
-
+    // Listen for auth state changes - this is the primary source of truth
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (!isMounted) return;
+
       try {
         if (session?.user) {
           await fetchProfile(session.user.id, session.user.email || "");
@@ -75,10 +55,22 @@ export function useAuth() {
         }
       } catch (error) {
         console.error("Error on auth state change:", error);
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     });
 
+    // Safety timeout - never hang forever
+    const timeout = setTimeout(() => {
+      if (isMounted) {
+        setLoading(false);
+      }
+    }, 5000);
+
     return () => {
+      isMounted = false;
       clearTimeout(timeout);
       subscription.unsubscribe();
     };
