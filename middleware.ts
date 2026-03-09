@@ -37,7 +37,7 @@ export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Protected routes that require auth
-  if (pathname === "/subscribe" || pathname === "/account") {
+  if (pathname === "/subscribe" || pathname === "/account" || pathname === "/chat") {
     if (!user) {
       const redirectUrl = new URL("/login", request.url);
       redirectUrl.searchParams.set("redirect", pathname);
