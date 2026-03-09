@@ -31,10 +31,10 @@ export const PLANS: Record<string, Plan> = {
   standard_anual: {
     id: "standard_anual",
     name: "Standard Anual",
-    price: 1944, // 180 * 12 * 0.9 = 10% off
+    price: 1620, // 180 * 12 * 0.75 = 25% off
     interval: "year",
     tier: "standard",
-    savings: "10%",
+    savings: "25%",
     features: [
       "Acces la toate template-urile",
       "Suport via chat",
@@ -62,10 +62,10 @@ export const PLANS: Record<string, Plan> = {
   business_anual: {
     id: "business_anual",
     name: "Business Anual",
-    price: 3780, // 350 * 12 * 0.9 = 10% off
+    price: 3150, // 350 * 12 * 0.75 = 25% off
     interval: "year",
     tier: "business",
-    savings: "10%",
+    savings: "25%",
     features: [
       "Tot ce include Standard",
       "Suport prioritar 24/7",
