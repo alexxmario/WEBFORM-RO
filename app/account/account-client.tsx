@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { useRouter } from "next/navigation";
 import { Loader2, User, CreditCard, LogOut, AlertTriangle } from "lucide-react";
 import Link from "next/link";
 
@@ -26,7 +25,6 @@ interface AccountClientProps {
 }
 
 export function AccountClient({ initialUser }: AccountClientProps) {
-  const router = useRouter();
   const supabase = useMemo(supabaseBrowser, []);
   const [cancellingSubscription, setCancellingSubscription] = useState(false);
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
