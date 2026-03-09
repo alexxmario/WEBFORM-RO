@@ -5,19 +5,19 @@ import { useRouter } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import { FormEvent, memo, useCallback } from "react";
 
-import { useAuth } from "@/lib/hooks/useAuth";
+import { useAuthContext } from "@/lib/context/AuthContext";
 import { Button } from "./ui/button";
 
 export const HeroInteractive = memo(function HeroInteractive() {
   const router = useRouter();
-  const { isAuthenticated, loading } = useAuth();
+  const { user, loading } = useAuthContext();
   const prefersReducedMotion = useReducedMotion();
 
   const handleStart = useCallback((event?: FormEvent) => {
     event?.preventDefault();
-    const destination = loading || !isAuthenticated ? "/login" : "/start";
+    const destination = loading || !user ? "/login" : "/start";
     router.push(destination);
-  }, [loading, isAuthenticated, router]);
+  }, [loading, user, router]);
 
   return (
     <section
