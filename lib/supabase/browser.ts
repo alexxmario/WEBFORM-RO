@@ -1,12 +1,9 @@
 "use client";
 
 import { createBrowserClient } from "@supabase/ssr";
-import { type SupabaseClient } from "@supabase/supabase-js";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-let browserSupabase: SupabaseClient | null = null;
 
 export const supabaseBrowser = () => {
   if (!supabaseUrl || !supabaseAnonKey) {
@@ -15,11 +12,6 @@ export const supabaseBrowser = () => {
     throw new Error("Supabase environment variables are missing. Check Vercel environment variables.");
   }
 
-  if (browserSupabase) return browserSupabase;
-
-  // Use createBrowserClient from @supabase/ssr to ensure cookies are synced
-  // This allows the middleware to read the session from cookies
-  browserSupabase = createBrowserClient(supabaseUrl, supabaseAnonKey);
-
-  return browserSupabase;
+  // Create a fresh client each time to ensure cookies are read properly
+  return createBrowserClient(supabaseUrl, supabaseAnonKey);
 };

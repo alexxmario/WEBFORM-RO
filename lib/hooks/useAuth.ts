@@ -35,7 +35,6 @@ export function useAuth() {
       });
     } catch (error) {
       console.error("Error fetching profile:", error);
-      // Still set basic user info even if profile fetch fails
       setUser({ id: userId, email });
     }
   }, [supabase]);
@@ -43,35 +42,38 @@ export function useAuth() {
   useEffect(() => {
     let isMounted = true;
 
-    // Listen for auth state changes - this is the primary source of truth
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (!isMounted) return;
-
+    // Immediately check for existing session
+    const checkSession = async () => {
       try {
-        if (session?.user) {
-          await fetchProfile(session.user.id, session.user.email || "");
-        } else {
-          setUser(null);
+        const { data: { user: authUser } } = await supabase.auth.getUser();
+        if (isMounted && authUser) {
+          await fetchProfile(authUser.id, authUser.email || "");
         }
       } catch (error) {
-        console.error("Error on auth state change:", error);
+        console.error("Error checking session:", error);
       } finally {
         if (isMounted) {
           setLoading(false);
         }
       }
-    });
+    };
 
-    // Safety timeout - never hang forever
-    const timeout = setTimeout(() => {
-      if (isMounted) {
-        setLoading(false);
+    checkSession();
+
+    // Also listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (!isMounted) return;
+
+      if (session?.user) {
+        await fetchProfile(session.user.id, session.user.email || "");
+      } else if (event === "SIGNED_OUT") {
+        setUser(null);
       }
-    }, 5000);
+      setLoading(false);
+    });
 
     return () => {
       isMounted = false;
-      clearTimeout(timeout);
       subscription.unsubscribe();
     };
   }, [supabase, fetchProfile]);
