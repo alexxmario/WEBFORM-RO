@@ -188,7 +188,7 @@ export function ChatClient({ initialUser }: ChatClientProps) {
 
   return (
     <>
-      <Header initialUser={initialUser} />
+      <Header />
       <main className="flex min-h-screen pt-20">
         {isAdmin && (
           <ChatSidebar

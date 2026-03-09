@@ -83,7 +83,7 @@ export function AccountClient({ initialUser }: AccountClientProps) {
 
   return (
     <>
-      <Header initialUser={initialUser} />
+      <Header />
       <main className="container pb-16 pt-28">
         <div className="mx-auto max-w-2xl space-y-8">
           <div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import { AuthProvider } from "@/lib/context/AuthContext";
 import { Toast } from "@/components/Toast";
 import { AnalyticsScripts } from "@/components/analytics";
 import { defaultMetadata } from "@/lib/seo";
@@ -20,15 +21,17 @@ export default function RootLayout({
           Salt la continut
         </a>
         <ThemeProvider>
-          <div className="relative min-h-screen overflow-hidden">
-            <div
-              className="noise pointer-events-none fixed inset-0 opacity-40 mix-blend-soft-light"
-              aria-hidden
-            />
-            {children}
-          </div>
-          <Toast />
-          <AnalyticsScripts />
+          <AuthProvider>
+            <div className="relative min-h-screen overflow-hidden">
+              <div
+                className="noise pointer-events-none fixed inset-0 opacity-40 mix-blend-soft-light"
+                aria-hidden
+              />
+              {children}
+            </div>
+            <Toast />
+            <AnalyticsScripts />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

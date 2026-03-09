@@ -3,7 +3,7 @@
 import { User, LogOut } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { memo, useCallback, useMemo } from "react";
 
@@ -11,7 +11,7 @@ import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { supabaseBrowser } from "@/lib/supabase/browser";
 import { BlueprintButton } from "./BlueprintButton";
-import { useAuth } from "@/lib/hooks/useAuth";
+import { useAuthContext } from "@/lib/context/AuthContext";
 
 const navLinks = [
   { href: "/#how-it-works", label: "Cum funcționează" },
@@ -19,22 +19,15 @@ const navLinks = [
   { href: "/#plans", label: "Planuri" },
 ];
 
-interface HeaderProps {
-  initialUser?: { id: string; email: string } | null;
-}
-
-export const Header = memo(function Header({ initialUser }: HeaderProps = {}) {
+export const Header = memo(function Header() {
   const pathname = usePathname();
-  const router = useRouter();
-  const { user: authUser } = useAuth();
-  // Use initialUser if provided (from server), otherwise fall back to useAuth
-  const user = initialUser || authUser;
+  const { user } = useAuthContext();
   const supabase = useMemo(supabaseBrowser, []);
 
   const handleSignOut = useCallback(async () => {
     await supabase.auth.signOut();
-    router.push("/");
-  }, [supabase, router]);
+    window.location.href = "/";
+  }, [supabase]);
 
   return (
     <motion.header

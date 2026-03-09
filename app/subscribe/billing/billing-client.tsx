@@ -31,12 +31,11 @@ interface BillingClientProps {
   plan: Plan;
   initialName: string;
   initialPhone: string;
-  initialUser: { id: string; email: string };
 }
 
 type BillingType = "individual" | "company";
 
-export function BillingClient({ plan, initialName, initialPhone, initialUser }: BillingClientProps) {
+export function BillingClient({ plan, initialName, initialPhone }: BillingClientProps) {
   const router = useRouter();
   const supabase = useMemo(supabaseBrowser, []);
   const [loading, setLoading] = useState(false);
@@ -127,7 +126,7 @@ export function BillingClient({ plan, initialName, initialPhone, initialUser }: 
 
   return (
     <>
-      <Header initialUser={initialUser} />
+      <Header />
       <main className="container pb-16 pt-28">
         <div className="mx-auto max-w-2xl">
           {/* Back button */}
