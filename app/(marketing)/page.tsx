@@ -18,10 +18,13 @@ import { Label } from "@/components/ui/label";
 import { homePageJsonLd } from "@/lib/schema";
 import { toast } from "sonner";
 
+type BillingInterval = "month" | "year";
+
 export default function HomePage() {
   const [notifyDialogOpen, setNotifyDialogOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [billingInterval, setBillingInterval] = useState<BillingInterval>("month");
   const missionSectionRef = useRef<HTMLElement>(null);
 
   const handleNotifySubmit = useCallback(async (e: React.FormEvent) => {
@@ -335,12 +338,40 @@ export default function HomePage() {
               <p className="text-body-lg text-muted-foreground">
                 Începe gratuit cu un Blueprint. Upgrade când ești gata să lansezi.
               </p>
+
+              {/* Billing toggle */}
+              <div className="mt-8 flex items-center justify-center gap-3">
+                <button
+                  onClick={() => setBillingInterval("month")}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                    billingInterval === "month"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Lunar
+                </button>
+                <button
+                  onClick={() => setBillingInterval("year")}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                    billingInterval === "year"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Anual
+                  <span className="ml-1.5 rounded-full bg-green-500/20 px-2 py-0.5 text-xs text-green-400">
+                    -25%
+                  </span>
+                </button>
+              </div>
             </div>
             <div className="grid gap-6 lg:grid-cols-3">
               {[
                 {
                   name: "WEBFORM START",
-                  price: "180 RON/lună",
+                  monthlyPrice: 180,
+                  yearlyPrice: 1620, // 180 * 12 * 0.75
                   desc: "Pentru proprietarii de afaceri mici care au nevoie de un website simplu și curat rapid.",
                   items: [
                     "Până la 3 pagini (Acasă, Despre, Contact sau Servicii)",
@@ -359,7 +390,8 @@ export default function HomePage() {
                 },
                 {
                   name: "WEBFORM BUSINESS",
-                  price: "350 RON/lună",
+                  monthlyPrice: 350,
+                  yearlyPrice: 3150, // 350 * 12 * 0.75
                   desc: "Cel mai popular — acoperă 70%+ din clienți.",
                   items: [
                     "Până la 7 pagini",
@@ -380,7 +412,8 @@ export default function HomePage() {
                 },
                 {
                   name: "WEBFORM COMMERCE",
-                  price: "Personalizat",
+                  monthlyPrice: null,
+                  yearlyPrice: null,
                   desc: "Pentru afaceri care vând produse sau rezervări.",
                   items: [
                     "Tot ce e în Business",
@@ -419,7 +452,23 @@ export default function HomePage() {
                       </div>
                     )}
                     <div className="text-sm font-medium text-muted-foreground">{plan.name}</div>
-                    <div className="mt-2 text-3xl font-semibold text-foreground">{plan.price}</div>
+                    <div className="mt-2 text-3xl font-semibold text-foreground">
+                      {plan.monthlyPrice === null
+                        ? "Personalizat"
+                        : billingInterval === "year"
+                        ? `${Math.round(plan.yearlyPrice! / 12)} RON/lună`
+                        : `${plan.monthlyPrice} RON/lună`}
+                    </div>
+                    {plan.monthlyPrice !== null && billingInterval === "year" && (
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        Facturat anual ({plan.yearlyPrice} RON/an)
+                      </p>
+                    )}
+                    {plan.monthlyPrice !== null && billingInterval === "year" && (
+                      <p className="mt-1 text-sm text-green-400">
+                        Economisești 25%
+                      </p>
+                    )}
                     <p className="mt-2 text-body-sm text-muted-foreground">{plan.desc}</p>
                     <ul className="mt-4 space-y-2 text-body-sm text-muted-foreground">
                       {plan.items.map((it) => (

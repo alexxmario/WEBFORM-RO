@@ -75,7 +75,7 @@ export function SubscribeClient({ initialUser }: SubscribeClientProps) {
             >
               Anual
               <span className="ml-1.5 rounded-full bg-green-500/20 px-2 py-0.5 text-xs text-green-400">
-                -10%
+                -25%
               </span>
             </button>
           </div>
