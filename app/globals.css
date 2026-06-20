@@ -21,8 +21,8 @@ body {
 }
 
 ::selection {
-  background: rgba(75, 145, 255, 0.35);
-  color: #e8f1ff;
+  background: hsl(var(--primary) / 0.35);
+  color: hsl(var(--primary-foreground));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -52,15 +52,6 @@ a {
   @apply absolute left-4 top-4 -translate-y-20 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
 }
 
-/* Performance optimizations */
-.hero-orb {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(99, 179, 237, 0.65), rgba(59, 130, 246, 0.25));
-  filter: blur(50px);
-  will-change: transform, opacity;
-}
-
 .mission-section {
   will-change: opacity, transform;
 }
@@ -74,11 +65,8 @@ a {
   content: '';
   position: absolute;
   inset: 0;
-  background: hsl(220, 14%, 2% / 0.98);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
+  background: hsl(var(--background));
   z-index: 1;
-  border-radius: 0;
   pointer-events: none;
 }
 
@@ -88,8 +76,7 @@ a {
 }
 
 .section-fade {
-  mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+  /* intentionally empty */
 }
 
 /* Optimize transforms for GPU acceleration */

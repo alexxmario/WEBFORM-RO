@@ -390,7 +390,7 @@ export function BlueprintForm() {
                             style={{
                               backgroundImage: thumb
                                 ? `url(${thumb})`
-                                : "radial-gradient(circle at 20% 30%,rgba(156,77,255,0.35),transparent 40%),radial-gradient(circle at 80% 30%,rgba(79,195,255,0.35),transparent 40%),linear-gradient(120deg,rgba(40,50,70,0.6),rgba(20,26,38,0.7))",
+                                : "radial-gradient(circle at 20% 30%,hsl(var(--accent) / 0.35),transparent 40%),radial-gradient(circle at 80% 30%,hsl(var(--primary) / 0.35),transparent 40%),linear-gradient(120deg,hsl(var(--muted) / 0.6),hsl(var(--background) / 0.7))",
                               filter: "brightness(1.45) saturate(1.25)",
                             }}
                           />
@@ -441,7 +441,7 @@ export function BlueprintForm() {
                         style={{
                           backgroundImage: template.thumbnail
                             ? `url(${template.thumbnail})`
-                            : "radial-gradient(circle at 20% 30%,rgba(156,77,255,0.35),transparent 40%),radial-gradient(circle at 80% 30%,rgba(79,195,255,0.35),transparent 40%),linear-gradient(120deg,rgba(40,50,70,0.6),rgba(20,26,38,0.7))",
+                            : "radial-gradient(circle at 20% 30%,hsl(var(--accent) / 0.35),transparent 40%),radial-gradient(circle at 80% 30%,hsl(var(--primary) / 0.35),transparent 40%),linear-gradient(120deg,hsl(var(--muted) / 0.6),hsl(var(--background) / 0.7))",
                         }}
                       />
                       <div className="p-3">

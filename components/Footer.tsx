@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 // Dynamic import to avoid SSR issues
 const NTPLogo = dynamic(() => import("ntp-logo-react"), {
   ssr: false,
-  loading: () => <div className="h-12 w-24 bg-neutral-800 rounded animate-pulse" />
+  loading: () => <div className="h-12 w-24 bg-muted rounded animate-pulse" />
 });
 
 const footerNavLeft = [
@@ -25,7 +25,7 @@ const footerNavRight = [
 
 export function Footer() {
   return (
-    <footer className="relative z-10 overflow-hidden text-white bg-[#050505] border-neutral-800 border-t pt-24">
+    <footer className="relative z-10 overflow-hidden text-foreground bg-background border-border border-t pt-24">
       <div
         className="text-center w-full mb-20 pr-4 pl-4"
         style={{
@@ -33,18 +33,18 @@ export function Footer() {
           WebkitMaskImage: "linear-gradient(180deg, transparent, black 0%, black 55%, transparent)",
         }}
       >
-        <h1 className="text-[16vw] leading-[0.7] select-none font-bold text-[#141414] tracking-tighter mix-blend-screen scale-y-110">
+        <h1 className="text-[16vw] leading-[0.7] select-none font-bold text-foreground/[0.03] tracking-tighter scale-y-110">
           WEBFORM
         </h1>
       </div>
-      <div className="border-t border-neutral-900 grid grid-cols-1 lg:grid-cols-2">
-        <div className="p-8 md:p-16 grid grid-cols-2 gap-12 border-r border-neutral-900">
+      <div className="border-t border-border grid grid-cols-1 lg:grid-cols-2">
+        <div className="p-8 md:p-16 grid grid-cols-2 gap-12 border-r border-border">
           <div className="flex flex-col gap-6">
             {footerNavLeft.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-xs font-medium text-neutral-500 uppercase tracking-widest hover:text-white transition-colors"
+                className="text-xs font-medium text-muted-foreground uppercase tracking-widest hover:text-foreground transition-colors"
               >
                 {item.label}
               </Link>
@@ -55,16 +55,16 @@ export function Footer() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-xs font-medium text-neutral-500 uppercase tracking-widest hover:text-white transition-colors"
+                className="text-xs font-medium text-muted-foreground uppercase tracking-widest hover:text-foreground transition-colors"
               >
                 {item.label}
               </Link>
             ))}
           </div>
         </div>
-        <div className="lg:h-auto lg:border-t-0 flex overflow-hidden w-full border-neutral-900 border-t relative p-8 md:p-16">
-          <div className="flex flex-col gap-4 text-xs text-neutral-500">
-            <p className="font-medium text-neutral-400 uppercase tracking-widest">Date de Contact</p>
+        <div className="lg:h-auto lg:border-t-0 flex overflow-hidden w-full border-border border-t relative p-8 md:p-16">
+          <div className="flex flex-col gap-4 text-xs text-muted-foreground">
+            <p className="font-medium text-foreground/60 uppercase tracking-widest">Date de Contact</p>
             <div className="space-y-2">
               <p>IONESCU ALEXANDRU-MARIO PFA</p>
               <p>CUI: 52801591</p>
@@ -72,12 +72,12 @@ export function Footer() {
               <p>Bulevardul Bucureștii Noi, Nr. 136, Parter, Ap. 5</p>
               <p>Sector 1, București, România</p>
               <p>
-                <Link href="tel:+40764902801" className="hover:text-white transition-colors">
+                <Link href="tel:+40764902801" className="hover:text-foreground transition-colors">
                   +40 764 902 801
                 </Link>
               </p>
               <p>
-                <Link href="mailto:alexionescu870@gmail.com" className="hover:text-white transition-colors">
+                <Link href="mailto:alexionescu870@gmail.com" className="hover:text-foreground transition-colors">
                   alexionescu870@gmail.com
                 </Link>
               </p>
@@ -86,7 +86,7 @@ export function Footer() {
         </div>
       </div>
       {/* Payment & Consumer Protection Logos */}
-      <div className="border-t border-neutral-900 py-8 px-8">
+      <div className="border-t border-border py-8 px-8">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
           {/* Netopia Logo */}
           <div className="flex flex-col items-center gap-2">
@@ -98,7 +98,7 @@ export function Footer() {
             href="https://anpc.ro/ce-spune-legea/sal/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center gap-2 text-neutral-500 hover:text-white transition-colors"
+            className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -115,7 +115,7 @@ export function Footer() {
             href="https://ec.europa.eu/consumers/odr"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center gap-2 text-neutral-500 hover:text-white transition-colors"
+            className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -129,7 +129,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto border-t border-neutral-900 pt-4 px-8 text-sm text-neutral-500 text-center pb-8">
+      <div className="max-w-6xl mx-auto border-t border-border pt-4 px-8 text-sm text-muted-foreground text-center pb-8">
         © {new Date().getFullYear()} IONESCU ALEXANDRU-MARIO PFA. Toate drepturile rezervate.
       </div>
     </footer>

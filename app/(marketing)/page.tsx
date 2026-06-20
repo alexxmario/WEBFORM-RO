@@ -7,7 +7,6 @@ import { useState, useEffect, useRef, useCallback } from "react";
 
 import { Header } from "@/components/Header";
 import { HeroInteractive } from "@/components/HeroInteractive";
-import { HeroBackground } from "@/components/HeroBackground";
 import { LazySpline } from "@/components/LazySpline";
 import { Button } from "@/components/ui/button";
 import { Footer } from "@/components/Footer";
@@ -70,7 +69,6 @@ export default function HomePage() {
   return (
     <>
       <Header />
-      <HeroBackground />
       <main id="main" className="relative z-10 space-y-32 pb-32 pt-16">
         <HeroInteractive />
         <style
@@ -92,15 +90,10 @@ export default function HomePage() {
             `,
           }}
         />
-        <section ref={missionSectionRef} className="mission-section section-blur section-fade container max-w-5xl space-y-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold leading-tight text-foreground">
-            Suntem designeri care construiesc, găzduiesc și actualizează site-ul tău fără întâlniri. Livrăm în zile,
-            gestionăm întreaga infrastructură și te implicăm doar în deciziile importante —
-            <span className="italic text-muted-foreground"> astfel încât tu să te concentrezi pe afacerea ta.</span>
+        <section ref={missionSectionRef} className="mission-section section-blur section-fade container max-w-4xl text-center">
+          <h2 className="text-display-sm md:text-display-md text-foreground" style={{ textWrap: "balance" }}>
+            Construim, găzduim și actualizăm site-ul tău. Tu te concentrezi pe afacere.
           </h2>
-          <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            Lansare rapidă. Iterare asincronă. Mereu disponibili.
-          </p>
         </section>
 
         <section
@@ -116,16 +109,15 @@ export default function HomePage() {
 
         {/* Features */}
         <section className="section-blur section-fade py-20">
-          <div className="container max-w-5xl space-y-12">
+          <div className="container max-w-5xl space-y-16">
             <div className="mx-auto max-w-2xl text-center space-y-4">
-              <p className="text-sm font-medium text-muted-foreground">Funcționalități</p>
-              <h2 className="text-display-md text-foreground">Tot ce ai nevoie pentru lansare</h2>
+              <h2 className="text-display-md text-foreground" style={{ textWrap: "balance" }}>Tot ce ai nevoie pentru lansare</h2>
               <p className="text-body-lg text-muted-foreground">
                 Dezvoltare bazată pe șabloane, verificări asincrone și găzduire de producție—fără întâlniri.
               </p>
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="space-y-px rounded-xl border border-border overflow-hidden">
               {[
                 { title: "Bibliotecă de șabloane", desc: "20+ layout-uri premium. Schimbă oricând fără timp de nefuncționare." },
                 { title: "Verificări asincrone", desc: "Wireframe → design → previzualizare finală fără apeluri necesare." },
@@ -136,10 +128,10 @@ export default function HomePage() {
               ].map((item) => (
                 <div
                   key={item.title}
-                  className="rounded-xl border border-border bg-card p-6 transition-colors hover:border-primary/30"
+                  className="flex flex-col gap-1 border-b border-border last:border-b-0 bg-card px-6 py-5 sm:flex-row sm:items-baseline sm:gap-8"
                 >
-                  <h3 className="text-heading-sm text-foreground">{item.title}</h3>
-                  <p className="mt-2 text-body-sm text-muted-foreground">{item.desc}</p>
+                  <h3 className="text-heading-sm text-foreground sm:w-56 sm:shrink-0">{item.title}</h3>
+                  <p className="text-body-sm text-muted-foreground">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -148,82 +140,55 @@ export default function HomePage() {
 
         {/* How it works */}
         <section id="how-it-works" className="section-blur section-fade py-20">
-          <div className="container max-w-5xl space-y-16">
+          <div className="container max-w-5xl space-y-20">
             <div className="mx-auto max-w-2xl text-center space-y-4">
-              <p className="text-sm font-medium text-muted-foreground">Configurare Simplă</p>
-              <h2 className="text-display-md text-foreground">Cum Funcționează WebForm</h2>
+              <h2 className="text-display-md text-foreground" style={{ textWrap: "balance" }}>Cum Funcționează WebForm</h2>
               <p className="text-body-lg text-muted-foreground">
-                O platformă de website prin abonament. Trimiți un Blueprint, alegi un aspect, livrăm în 7 zile—apoi gestionăm și actualizăm pentru totdeauna.
+                Trimiți un Blueprint, alegi un aspect, livrăm în 7 zile — apoi gestionăm și actualizăm pentru totdeauna.
               </p>
             </div>
 
             {/* Step 1 */}
             <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
               <div className="space-y-4">
-                <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-sm font-semibold text-primary">
-                  1
-                </div>
+                <p className="text-body-sm font-medium text-primary">Pasul 1</p>
                 <h3 className="text-display-sm text-foreground">Trimite Formularul & alege un șablon</h3>
-                <p className="text-muted-foreground">
-                  Completează Formularul Website-ului (obiective, pagini, integrări, tonalitate) și alege din Galeria de Șabloane (100+ stiluri profesionale afișate ca miniaturi).
+                <p className="text-body-md text-muted-foreground">
+                  Completează Formularul Website-ului cu obiectivele, paginile și integrările tale. Alege din 100+ șabloane profesionale. Fără întâlniri — doar trimite și aprobă.
                 </p>
-                <ul className="space-y-2 text-body-sm text-muted-foreground">
-                  <li className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                    Formularul Website-ului captează nevoile de conținut, pagini și integrări.
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                    Galeria de Șabloane: 100+ aspecte premium (doar miniaturi).
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                    Fără întâlniri, fără constructori—doar trimite și aprobă.
-                  </li>
-                </ul>
               </div>
-              <div className="rounded-xl border border-border bg-card p-6">
+              <div className="rounded-xl border border-border bg-card p-5">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted text-sm font-semibold text-foreground">WB</div>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted text-body-sm font-semibold text-foreground">WB</div>
                     <div>
-                      <p className="text-sm font-semibold text-foreground">Blueprint Website</p>
-                      <p className="text-xs text-muted-foreground">Obiective • Pagini • Integrări</p>
+                      <p className="text-body-sm font-semibold text-foreground">Blueprint Website</p>
+                      <p className="text-body-sm text-muted-foreground">Obiective · Pagini · Integrări</p>
                     </div>
                   </div>
-                  <div className="rounded-lg border border-border bg-muted/50 p-4 space-y-3">
-                    <div className="flex items-center justify-between text-sm text-foreground/80">
-                      <span>Galerie de Șabloane</span>
-                      <span className="text-xs rounded-lg bg-muted px-2 py-0.5 text-muted-foreground">100+ stiluri</span>
-                    </div>
-                    <div className="grid grid-cols-3 gap-2">
-                      {[
-                        { name: "Orbit", img: "/templates/orbit.png" },
-                        { name: "Aether", img: "/templates/aether.png" },
-                        { name: "Forward", img: "/templates/forward.png" },
-                        { name: "Cognitive", img: "/templates/cognitive.png" },
-                        { name: "Flux", img: "/templates/flux.png" },
-                        { name: "Lexora", img: "/templates/lexora.png" },
-                      ].map((template) => (
-                        <div
-                          key={template.name}
-                          className="aspect-video rounded-lg border border-border bg-muted overflow-hidden"
-                        >
-                          <Image
-                            src={template.img}
-                            alt={template.name}
-                            width={200}
-                            height={113}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                    <div className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2">
-                      <div className="h-2 w-2 rounded-full bg-primary"></div>
-                      <span className="text-sm text-foreground/80">Blueprint trimis • Șablon selectat</span>
-                    </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    {[
+                      { name: "Orbit", img: "/templates/orbit.png" },
+                      { name: "Aether", img: "/templates/aether.png" },
+                      { name: "Forward", img: "/templates/forward.png" },
+                      { name: "Cognitive", img: "/templates/cognitive.png" },
+                      { name: "Flux", img: "/templates/flux.png" },
+                      { name: "Lexora", img: "/templates/lexora.png" },
+                    ].map((template) => (
+                      <div
+                        key={template.name}
+                        className="aspect-video rounded-lg border border-border overflow-hidden"
+                      >
+                        <Image
+                          src={template.img}
+                          alt={template.name}
+                          width={200}
+                          height={113}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -231,98 +196,56 @@ export default function HomePage() {
 
             {/* Step 2 */}
             <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
-              <div className="rounded-xl border border-border bg-card p-6">
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
+              <div className="rounded-xl border border-border bg-card p-5 order-2 lg:order-1">
+                <div className="flex items-center justify-between text-body-sm text-muted-foreground mb-4">
                   <span>Status Construcție</span>
-                  <span className="rounded-lg bg-primary/10 px-2 py-0.5 text-xs text-primary">În Progres</span>
+                  <span className="rounded-lg bg-primary/10 px-2 py-0.5 text-body-sm text-primary">În Progres</span>
                 </div>
-                <div className="mt-4 space-y-3 text-sm">
-                  <div className="rounded-lg border border-border bg-muted/50 px-3 py-3">
-                    <p className="font-semibold text-foreground">Construcția website-ului în progres — 7 zile</p>
-                    <p className="text-muted-foreground">Wireframe → design → previzualizare live</p>
-                  </div>
-                  <div className="rounded-lg border border-border bg-muted/50 px-3 py-3">
-                    <p className="font-semibold text-foreground">Verificări asincrone</p>
-                    <p className="text-muted-foreground">Aprobă momentele cheie fără întâlniri</p>
-                  </div>
-                  <div className="rounded-lg border border-border bg-muted/50 px-3 py-3">
-                    <p className="font-semibold text-foreground">Integrări configurate</p>
-                    <p className="text-muted-foreground">Formulare, analiză, rezervări, plăți</p>
-                  </div>
+                <div className="space-y-2">
+                  {[
+                    { label: "Wireframe aprobat", done: true },
+                    { label: "Design în lucru", done: false },
+                    { label: "Previzualizare live", done: false },
+                    { label: "Integrări configurate", done: false },
+                  ].map((step) => (
+                    <div key={step.label} className="flex items-center gap-3 rounded-lg border border-border px-3 py-2.5">
+                      <div className={`h-2 w-2 rounded-full ${step.done ? "bg-primary" : "bg-muted-foreground/30"}`} />
+                      <span className={`text-body-sm ${step.done ? "text-foreground" : "text-muted-foreground"}`}>{step.label}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
-              <div className="space-y-4">
-                <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-accent/10 text-sm font-semibold text-accent">
-                  2
-                </div>
+              <div className="space-y-4 order-1 lg:order-2">
+                <p className="text-body-sm font-medium text-primary">Pasul 2</p>
                 <h3 className="text-display-sm text-foreground">Construim totul în 7 zile</h3>
-                <p className="text-muted-foreground">
-                  Întregul tău site este construit pentru tine. Ne aliniem asincron cu previzualizări clare—și poți să ne trimiti mesaje oricând în chat-ul integrat.
+                <p className="text-body-md text-muted-foreground">
+                  Întregul site este construit pentru tine. Ne aliniem asincron cu previzualizări clare — poți trimite mesaje oricând în chat-ul integrat.
                 </p>
-                <ul className="space-y-2 text-body-sm text-muted-foreground">
-                  <li className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                    Construcție completă în 7 zile cu aprobări asincrone.
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                    Conținut, layout și integrări gestionate; întrebări răspunse prin chat-ul din aplicație.
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                    {'Card status: "Construcția website-ului în progres — 7 zile."'}
-                  </li>
-                </ul>
               </div>
             </div>
 
             {/* Step 3 */}
-            <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-start">
+            <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
               <div className="space-y-4">
-                <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-secondary/10 text-sm font-semibold text-secondary">
-                  3
-                </div>
-                <h3 className="text-display-sm text-foreground">Gestionat pentru totdeauna cu actualizări nelimitate</h3>
-                <p className="text-muted-foreground">
-                  WebForm gestionează site-ul tău de la un capăt la altul. Trimite modificări oricând; livrăm în 3 zile (7 pe Start).
+                <p className="text-body-sm font-medium text-primary">Pasul 3</p>
+                <h3 className="text-display-sm text-foreground">Gestionat pentru totdeauna</h3>
+                <p className="text-body-md text-muted-foreground">
+                  Trimite modificări oricând. Livrăm în 3 zile pe Business, 7 pe Start. Actualizări nelimitate, găzduire, SSL și monitorizare — totul inclus.
                 </p>
-                <ul className="space-y-2 text-body-sm text-muted-foreground">
-                  <li className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                    Actualizări nelimitate cu coadă clară și timp de execuție.
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                    Timp de execuție de 3 zile pe Business/Commerce; 7 zile pe Start.
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                    Dashboard-ul arată activitatea, aprobările și status-ul live.
-                  </li>
-                </ul>
               </div>
-              <div className="rounded-xl border border-border bg-card p-6">
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
-                  <span>Gestionat Pentru Totdeauna</span>
-                  <span className="text-xs">Coadă live</span>
-                </div>
-                <div className="mt-4 space-y-3 text-sm text-foreground/80">
-                  <div className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                    Actualizare programată: conținut nou hero (SLA 3 zile)
-                  </div>
-                  <div className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                    Previzualizare schimbare șablon gata
-                  </div>
-                  <div className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent"></span>
-                    Integrare adăugată: Calendly + Stripe
-                  </div>
-                  <div className="flex gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-secondary"></span>
-                    SSL, analiză și uptime monitorizate
-                  </div>
+              <div className="rounded-xl border border-border bg-card p-5">
+                <div className="space-y-2">
+                  {[
+                    "Conținut nou hero — livrat",
+                    "Schimbare șablon — previzualizare gata",
+                    "Integrare Calendly + Stripe — configurată",
+                    "SSL, analiză, uptime — monitorizat",
+                  ].map((item) => (
+                    <div key={item} className="flex items-center gap-3 rounded-lg border border-border px-3 py-2.5">
+                      <div className="h-2 w-2 rounded-full bg-primary" />
+                      <span className="text-body-sm text-foreground/80">{item}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -333,8 +256,7 @@ export default function HomePage() {
         <section id="plans" className="section-blur section-fade py-20">
           <div className="container max-w-5xl space-y-12">
             <div className="mx-auto max-w-2xl text-center space-y-4">
-              <p className="text-sm font-medium text-muted-foreground">Prețuri</p>
-              <h3 className="text-display-md text-foreground">Alege-ți planul</h3>
+              <h2 className="text-display-md text-foreground" style={{ textWrap: "balance" }}>Alege-ți planul</h2>
               <p className="text-body-lg text-muted-foreground">
                 Începe gratuit cu un Blueprint. Upgrade când ești gata să lansezi.
               </p>
@@ -360,7 +282,7 @@ export default function HomePage() {
                   }`}
                 >
                   Anual
-                  <span className="ml-1.5 rounded-full bg-green-500/20 px-2 py-0.5 text-xs text-green-400">
+                  <span className="ml-1.5 rounded-full bg-secondary/15 px-2 py-0.5 text-xs text-secondary">
                     -25%
                   </span>
                 </button>
@@ -451,8 +373,8 @@ export default function HomePage() {
                         </Badge>
                       </div>
                     )}
-                    <div className="text-sm font-medium text-muted-foreground">{plan.name}</div>
-                    <div className="mt-2 text-3xl font-semibold text-foreground">
+                    <div className="text-body-sm font-medium text-muted-foreground">{plan.name}</div>
+                    <div className="mt-2 text-display-sm text-foreground">
                       {plan.monthlyPrice === null
                         ? "Personalizat"
                         : billingInterval === "year"
@@ -465,7 +387,7 @@ export default function HomePage() {
                       </p>
                     )}
                     {plan.monthlyPrice !== null && billingInterval === "year" && (
-                      <p className="mt-1 text-sm text-green-400">
+                      <p className="mt-1 text-sm text-secondary">
                         Economisești 25%
                       </p>
                     )}

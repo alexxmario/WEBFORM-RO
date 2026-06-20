@@ -144,12 +144,12 @@ function LoginForm() {
 
   return (
     <main className="container flex min-h-screen flex-col items-center justify-center gap-6 px-4 py-12">
-      <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4 rounded-3xl border border-border/60 bg-card/80 p-6 shadow-lg shadow-black/20">
-        <h1 className="text-2xl font-semibold text-foreground">
+      <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4 rounded-xl border border-border bg-card p-6">
+        <h1 className="text-heading-lg text-foreground">
           {authMode === "signup" ? "Creează un cont" : "Autentifică-te pentru chat"}
         </h1>
         {error && (
-          <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-400">
+          <div className="rounded-lg border border-red-500/20 bg-red-500/10 p-3 text-body-sm text-red-400">
             {error}
           </div>
         )}
@@ -176,7 +176,7 @@ function LoginForm() {
           />
         )}
         {authMode === "signup" && (
-          <label className="flex items-center gap-2 text-sm text-muted-foreground">
+          <label className="flex items-center gap-2 text-body-sm text-muted-foreground">
             <Checkbox checked={agree} onCheckedChange={(v) => setAgree(Boolean(v))} />
             <span>
               Sunt de acord cu{" "}
@@ -189,14 +189,14 @@ function LoginForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full h-10 px-5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 inline-flex items-center justify-center gap-2 text-sm font-medium"
+          className="w-full h-10 px-5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 inline-flex items-center justify-center gap-2 text-body-sm font-medium transition-colors"
         >
           {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {authMode === "signup" ? "Creează cont" : "Autentifică-te"}
         </button>
         <button
           type="button"
-          className="text-sm text-muted-foreground underline"
+          className="text-body-sm text-muted-foreground underline"
           onClick={() => setAuthMode(authMode === "signup" ? "signin" : "signup")}
         >
           {authMode === "signup" ? "Ai deja un cont? Autentifică-te" : "Ai nevoie de un cont? Înregistrează-te"}

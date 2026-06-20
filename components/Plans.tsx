@@ -62,26 +62,26 @@ export function Plans({ compact = false }: PlansProps) {
         >
           <Card
             className={cn(
-              "h-full border-border/60 bg-card/60 backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:border-primary/50 hover:shadow-lg",
-              plan.highlighted && "border-primary/60 shadow-lg shadow-primary/20",
+              "h-full transition-colors duration-200 hover:border-primary/30",
+              plan.highlighted && "border-primary/40",
             )}
           >
             <CardContent className="flex h-full flex-col gap-5">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-xl font-semibold text-foreground">
+                  <h3 className="text-heading-md text-foreground">
                     {plan.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground">{plan.summary}</p>
+                  <p className="text-body-sm text-muted-foreground">{plan.summary}</p>
                 </div>
                 {plan.highlighted && <Badge>Cel mai popular</Badge>}
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Inițial</p>
-                <p className="text-2xl font-semibold">{plan.setup}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{plan.monthly}</p>
+                <p className="text-body-sm text-muted-foreground">Inițial</p>
+                <p className="text-display-sm">{plan.setup}</p>
+                <p className="mt-1 text-body-sm text-muted-foreground">{plan.monthly}</p>
               </div>
-              <ul className="space-y-2 text-sm text-foreground/90">
+              <ul className="space-y-2 text-body-sm text-foreground/90">
                 {plan.perks.map((perk) => (
                   <li key={perk} className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-primary" />
@@ -94,7 +94,7 @@ export function Plans({ compact = false }: PlansProps) {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </BlueprintButton>
               {!compact && (
-                <p className="text-xs text-muted-foreground">
+                <p className="text-body-sm text-muted-foreground">
                   Lansare în 7 zile • Actualizări în 3 zile • Găzduire și domeniu incluse.
                 </p>
               )}

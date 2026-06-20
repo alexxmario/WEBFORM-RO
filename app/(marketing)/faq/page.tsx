@@ -33,27 +33,24 @@ export default function FaqPage() {
     <>
       <Header />
       <main className="min-h-screen pt-32 pb-16">
-        <section className="bg-[#0A0A0A] text-white py-16">
+        <section className="section-blur section-fade py-16">
           <div className="container max-w-4xl space-y-8">
             <div className="space-y-3 text-center">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.16em] text-white/70">
-                FAQ
-              </div>
-              <h1 className="text-4xl font-semibold sm:text-5xl">Frequently Asked Questions</h1>
-              <p className="text-lg text-white/70">
-                No surprises: cancellation, exports, domains, and SLA are baked into the platform.
+              <h1 className="text-display-md text-foreground" style={{ textWrap: "balance" }}>Întrebări Frecvente</h1>
+              <p className="text-body-lg text-muted-foreground">
+                Fără surprize: anulare, exporturi, domenii și SLA sunt integrate în platformă.
               </p>
             </div>
             <div className="grid gap-4">
               {faqItems.map((item) => (
                 <details
                   key={item.question}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:bg-white/10 transition-colors"
+                  className="rounded-xl border border-border bg-card p-6 hover:border-primary/30 transition-colors"
                 >
-                  <summary className="cursor-pointer text-lg font-semibold text-white">
+                  <summary className="cursor-pointer text-heading-sm text-foreground">
                     {item.question}
                   </summary>
-                  <p className="mt-3 text-base text-white/70 leading-relaxed">{item.answer}</p>
+                  <p className="mt-3 text-body-md text-muted-foreground leading-relaxed">{item.answer}</p>
                 </details>
               ))}
             </div>

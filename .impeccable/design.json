@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-20T00:00:00Z",
+  "title": "Design System: WebForm",
+  "extensions": {
+    "colorMeta": {
+      "deep-navy": {
+        "role": "neutral",
+        "displayName": "Deep Navy",
+        "canonical": "hsl(220, 14%, 6%)",
+        "tonalRamp": ["#050608", "#0d0f13", "#121519", "#1f2228", "#25282e", "#3a3e47", "#858a93", "#eef0f3"]
+      },
+      "ink-white": {
+        "role": "neutral",
+        "displayName": "Ink White",
+        "canonical": "hsl(220, 10%, 94%)",
+        "tonalRamp": ["#858a93", "#a0a4ab", "#b8bbc0", "#d0d2d6", "#e0e2e5", "#eef0f3", "#f5f6f7", "#fafbfc"]
+      },
+      "steel-blue": {
+        "role": "primary",
+        "displayName": "Steel Blue",
+        "canonical": "hsl(210, 60%, 58%)",
+        "tonalRamp": ["#1a3a5c", "#245080", "#2e66a4", "#3d7dc0", "#5599d4", "#72aede", "#99c5e8", "#c0ddf2"]
+      },
+      "warm-gold": {
+        "role": "secondary",
+        "displayName": "Warm Gold",
+        "canonical": "hsl(40, 45%, 55%)",
+        "tonalRamp": ["#4d3d1f", "#6b5629", "#8a6f34", "#a8893f", "#c3a25e", "#d1b578", "#dfc99a", "#eddcbc"]
+      },
+      "quiet-violet": {
+        "role": "tertiary",
+        "displayName": "Quiet Violet",
+        "canonical": "hsl(260, 40%, 56%)",
+        "tonalRamp": ["#2d1f5c", "#3f2c80", "#5139a4", "#6349ba", "#7e5fba", "#9a7ecc", "#b6a0dd", "#d2c3ee"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headlines only. One per page maximum." },
+      "headline": { "displayName": "Headline", "purpose": "Card titles, feature headings. Font-display." },
+      "body": { "displayName": "Body", "purpose": "Running text. Cap line length at 65ch." },
+      "label": { "displayName": "Label", "purpose": "Captions, metadata, navigation." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-standard", "value": "ease-out", "purpose": "Default easing for all transitions. 200ms duration." },
+      { "name": "fade-in", "value": "opacity 0→1 over 300ms ease-out", "purpose": "General element entrance." },
+      { "name": "fade-up", "value": "opacity 0→1 + translateY(8px→0) over 400ms ease-out", "purpose": "Content section reveals." },
+      { "name": "scale-in", "value": "opacity 0→1 + scale(0.96→1) over 250ms ease-out", "purpose": "Modal and overlay entrances." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "2xl", "value": "1200px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Default action button. Steel Blue background, white text.",
+      "html": "<button class=\"ds-btn-primary\">Începe Acum</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; height: 2.5rem; padding: 0 1.25rem; font-size: 0.875rem; font-weight: 500; font-family: Inter, system-ui, sans-serif; color: #ffffff; background: #5599d4; border: none; border-radius: 0.625rem; cursor: pointer; transition: all 200ms ease-out; } .ds-btn-primary:hover { background: #4889c0; } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 2px #0d0f13, 0 0 0 4px rgba(85, 153, 212, 0.5); } .ds-btn-primary:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary action button. Transparent with border.",
+      "html": "<button class=\"ds-btn-outline\">Autentificare</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; height: 2.5rem; padding: 0 1.25rem; font-size: 0.875rem; font-weight: 500; font-family: Inter, system-ui, sans-serif; color: #eef0f3; background: transparent; border: 1px solid #25282e; border-radius: 0.625rem; cursor: pointer; transition: all 200ms ease-out; } .ds-btn-outline:hover { background: rgba(238, 240, 243, 0.05); border-color: rgba(238, 240, 243, 0.2); } .ds-btn-outline:focus-visible { outline: none; box-shadow: 0 0 0 2px #0d0f13, 0 0 0 4px rgba(85, 153, 212, 0.5); } .ds-btn-outline:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Minimal button for tertiary actions. No background, muted text.",
+      "html": "<button class=\"ds-btn-ghost\">Află mai multe</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; height: 2.5rem; padding: 0 0.75rem; font-size: 0.875rem; font-weight: 500; font-family: Inter, system-ui, sans-serif; color: rgba(238, 240, 243, 0.7); background: transparent; border: none; border-radius: 0.625rem; cursor: pointer; transition: all 200ms ease-out; } .ds-btn-ghost:hover { color: #eef0f3; background: rgba(238, 240, 243, 0.05); }"
+    },
+    {
+      "name": "Default Card",
+      "kind": "card",
+      "refersTo": "card-default",
+      "description": "Standard container card. One tonal step above body background.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Titlu Card</h3><p class=\"ds-card-desc\">Descriere scurtă a conținutului cardului.</p></div>",
+      "css": ".ds-card { background: #121519; border: 1px solid #25282e; border-radius: 0.75rem; padding: 1.5rem; transition: border-color 200ms ease-out; } .ds-card:hover { border-color: rgba(37, 40, 46, 0.8); } .ds-card-title { font-family: 'Space Grotesk', Inter, sans-serif; font-size: 1.125rem; font-weight: 600; line-height: 1.4; color: #eef0f3; margin: 0 0 0.375rem 0; } .ds-card-desc { font-family: Inter, system-ui, sans-serif; font-size: 0.875rem; line-height: 1.55; color: #858a93; margin: 0; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Standard text input. Understated at rest, steel blue focus ring.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Email\" />",
+      "css": ".ds-input { width: 100%; height: 2.75rem; padding: 0 1rem; font-size: 0.875rem; font-family: Inter, system-ui, sans-serif; color: #eef0f3; background: #0d0f13; border: 1px solid #25282e; border-radius: 0.625rem; outline: none; transition: border-color 150ms ease-out, box-shadow 150ms ease-out; } .ds-input::placeholder { color: rgba(133, 138, 147, 0.6); } .ds-input:hover { border-color: rgba(37, 40, 46, 0.8); } .ds-input:focus { border-color: rgba(85, 153, 212, 0.6); box-shadow: 0 0 0 1px rgba(85, 153, 212, 0.2); }"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Floating glass header bar pinned to top of viewport.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\">Cum funcționează</a><a class=\"ds-nav-link ds-nav-link--active\" href=\"#\">Librărie</a><a class=\"ds-nav-link\" href=\"#\">Planuri</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: rgba(13, 15, 19, 0.95); backdrop-filter: blur(4px); border: 1px solid #25282e; border-radius: 0.75rem; } .ds-nav-link { font-family: Inter, system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; color: rgba(238, 240, 243, 0.7); text-decoration: none; padding: 0.5rem 0.75rem; border-radius: 0.5rem; transition: color 200ms ease-out; } .ds-nav-link:hover { color: #eef0f3; } .ds-nav-link--active { color: #eef0f3; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Authority",
+    "overview": "WebForm's design system speaks with the confidence of someone who knows exactly what they're doing and doesn't need to prove it. Like a well-tailored suit, the premium quality comes from restraint and precision — the cut of the typography, the rhythm of the spacing, the deliberate absence of decoration. Every element earns its place; nothing is ornamental.\n\nThe system explicitly rejects three patterns: the generic SaaS aesthetic (radial gradients, glass cards, purple-to-blue color stories), the cheap website builder look (template-preview dashboards, drag-and-drop metaphors), and over-designed agency sites (parallax everything, navigation buried under effects).",
+    "keyCharacteristics": [
+      "Dark-first, with depth conveyed through tonal layering rather than shadows",
+      "Typography-driven hierarchy using Space Grotesk for authority and Inter for readability",
+      "Generous whitespace as a signal of confidence, not emptiness",
+      "Steel blue as the sole accent color — used sparingly, never decoratively",
+      "Motion that reveals content naturally, never gates it"
+    ],
+    "rules": [
+      { "name": "The One Action Rule", "body": "Steel Blue is reserved for interactive elements. If an element isn't clickable, it isn't blue.", "section": "colors" },
+      { "name": "The Flat Surface Rule", "body": "No box-shadows on cards, containers, or buttons. Depth comes from tonal layering.", "section": "elevation" },
+      { "name": "The Display Ceiling Rule", "body": "Display text never exceeds clamp(2rem, 5vw, 4.5rem).", "section": "typography" },
+      { "name": "The Font-Display Boundary Rule", "body": "Space Grotesk is used exclusively at heading-sm and above. Body text always uses Inter.", "section": "typography" }
+    ],
+    "dos": [
+      "Do use Steel Blue exclusively for interactive elements",
+      "Do maintain the tonal layering sequence: body → card → muted",
+      "Do cap body text line length at 65ch",
+      "Do use Space Grotesk for all headings heading-sm and above",
+      "Do use text-wrap: balance on h1-h3 elements",
+      "Do respect prefers-reduced-motion on every animation",
+      "Do use the CSS variable system for all colors"
+    ],
+    "donts": [
+      "Don't use radial gradients, glass cards, or glowing orb effects for decoration",
+      "Don't make it look like a website builder",
+      "Don't bury navigation under effects or animations",
+      "Don't use box-shadows on cards or buttons",
+      "Don't add eyebrow kickers above every section heading",
+      "Don't use numbered section markers as default decoration",
+      "Don't hardcode colors outside the CSS variable system",
+      "Don't pair two similar sans-serifs"
+    ]
+  }
+}
