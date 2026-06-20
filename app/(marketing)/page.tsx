@@ -92,7 +92,7 @@ export default function HomePage() {
         />
         <section ref={missionSectionRef} className="mission-section section-blur section-fade container max-w-5xl text-center">
           <h2 className="text-display-sm md:text-display-md text-foreground" style={{ textWrap: "balance" }}>
-            Construim, găzduim și actualizăm site-ul tău. Tu te concentrezi pe afacere.
+            Construim, găzduim și actualizăm site&#8209;ul tău. Tu te concentrezi pe afacere.
           </h2>
         </section>
 
