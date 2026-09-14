@@ -218,6 +218,70 @@ export default function HomePage() {
             </p>
           </div>
         </section>
+        <section className="client-proof-section" id="proiecte-reale">
+          <div className="shell home-section client-proof-grid">
+            <div>
+              <p className="eyebrow">PROIECTE REALE, AFACERI REALE</p>
+              <h2>Prezențe online<br />transformate.</h2>
+              <p className="section-description">
+                De la produse auto la experiențe culinare, construim site-uri care fac oferta mai clară și drumul clientului mai simplu.
+              </p>
+              <div className="client-logo-list">
+                {[
+                  {
+                    name: "eNavigații",
+                    detail: "E-commerce auto",
+                    domain: "piloton.enavigatii.ro",
+                    href: "https://piloton.enavigatii.ro",
+                    logo: "/client-logos/enavigatii.webp",
+                    width: 235,
+                    height: 80,
+                    dark: true,
+                  },
+                  {
+                    name: "PilotOn Navi",
+                    detail: "Catalog și vânzare online",
+                    domain: "navi.piloton.ro",
+                    href: "https://navi.piloton.ro",
+                    logo: "/client-logos/piloton.png",
+                    width: 202,
+                    height: 62,
+                    dark: false,
+                  },
+                  {
+                    name: "Zaitoone",
+                    detail: "Restaurant și experiență locală",
+                    domain: "zaitoone.ro",
+                    href: "https://zaitoone.ro",
+                    logo: "/client-logos/zaitoone.png",
+                    width: 104,
+                    height: 100,
+                    dark: true,
+                  },
+                ].map((project) => (
+                  <a className="client-logo-row" href={project.href} key={project.name} target="_blank" rel="noopener noreferrer">
+                    <span className={`client-logo-frame ${project.dark ? "client-logo-dark" : ""}`}>
+                      <Image src={project.logo} alt={`${project.name} logo`} width={project.width} height={project.height} />
+                    </span>
+                    <span className="client-project-meta">
+                      <strong>{project.name}</strong>
+                      <small>{project.detail} · {project.domain}</small>
+                    </span>
+                    <ArrowUpRight size={18} />
+                  </a>
+                ))}
+              </div>
+            </div>
+            <aside className="client-proof-stat">
+              <span className="client-proof-number">3</span>
+              <h3>proiecte digitale live</h3>
+              <p>Concepute pentru afaceri care trebuie să fie găsite, înțelese și alese mai ușor.</p>
+              <div className="client-proof-industries">
+                <span>Automotive</span><span>E-commerce</span><span>HoReCa</span>
+              </div>
+            </aside>
+          </div>
+        </section>
         <section
           className="shell home-section process-section"
           id="how-it-works"
