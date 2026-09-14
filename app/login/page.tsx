@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { safeAuthRedirect } from "@/lib/auth-redirect";
 import { useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
@@ -145,7 +146,9 @@ function LoginForm() {
 
   return (
     <main id="main" className="container flex min-h-screen flex-col items-center justify-center gap-6 px-4 py-12">
-      <Link href="/" className="wordmark"><span className="brand-symbol">w.</span>webform</Link>
+      <Link href="/" className="wordmark" aria-label="WebForm, pagina principală">
+        <span className="brand-logo-shell"><Image className="brand-logo" src="/logo.png" alt="" width={1137} height={314} priority /></span>
+      </Link>
       <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4 rounded-xl border border-border bg-card p-6">
         <h1 className="text-heading-lg text-foreground">
           {authMode === "signup" ? "Creează un cont" : "Bine ai revenit"}

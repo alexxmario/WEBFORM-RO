@@ -195,12 +195,12 @@ export function ChatClient({ initialUser }: ChatClientProps) {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-semibold text-foreground">
-                    {isAdmin ? "Admin Support Chat" : "Conversația ta cu WebForm"}
+                    {isAdmin ? "Conversații clienți" : "Chat-ul proiectului tău"}
                   </p>
                   <p className="text-xs text-muted-foreground">
                     {isAdmin
-                      ? `Viewing conversation • ${initialUser.email}`
-                      : `Signed in as ${initialUser.email}. Messages update in real time.`}
+                      ? `Cont administrator · ${initialUser.email}`
+                      : "Aici primești întrebările, versiunile site-ului și trimiți modificările."}
                   </p>
                 </div>
               </div>
@@ -214,7 +214,7 @@ export function ChatClient({ initialUser }: ChatClientProps) {
                       }`}
                     >
                       <div className="text-xs text-muted-foreground">
-                        {message.sender_id === initialUser.id ? "Tu" : message.sender_email || "Suport"}
+                        {message.sender_id === initialUser.id ? "Tu" : isAdmin ? message.sender_email || "Client" : "Echipa WebForm"}
                       </div>
                       <div className="mt-1 max-w-[80%] rounded-2xl border border-border/50 bg-card/80 px-3 py-2 text-sm text-foreground">
                         {message.content}
@@ -223,7 +223,7 @@ export function ChatClient({ initialUser }: ChatClientProps) {
                   ))}
                   {!messages.length && (
                     <div className="text-center text-sm text-muted-foreground">
-                      {isAdmin ? "No messages in this conversation yet." : "Ai o întrebare sau o modificare pentru site? Scrie-ne aici."}
+                      {isAdmin ? "Conversația nu are încă mesaje." : "După formular, mesajul de bun venit și pașii proiectului apar aici."}
                     </div>
                   )}
                 </div>

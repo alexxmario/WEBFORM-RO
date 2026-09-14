@@ -74,6 +74,28 @@ export function Plans({ compact = false }: { compact?: boolean }) {
             </article>
           );
         })}
+        <article className="plan-card plan-commerce">
+          <div className="plan-heading">
+            <h3>Magazin online</h3>
+            <span className="plan-tag">OFERTĂ PERSONALIZATĂ</span>
+          </div>
+          <p>Pentru catalog, plăți, livrare și integrările afacerii tale.</p>
+          <div className="plan-price plan-price-custom">
+            La cerere
+          </div>
+          <p className="billing-detail">
+            Discutăm cerințele și primești un preț clar înainte să începem.
+          </p>
+          <Link className="action action-outline" href="/oferta-magazin-online">
+            Cere ofertă <ArrowUpRight size={18} />
+          </Link>
+          <div className="plan-divider" />
+          <ul>
+            {["Pagini de produs și categorii", "Plată online și livrare", "Integrări pentru stocuri și facturare", "Lansare și suport gestionate de noi"].map((feature) => (
+              <li key={feature}><Check size={17} />{feature}</li>
+            ))}
+          </ul>
+        </article>
       </div>
     </div>
   );

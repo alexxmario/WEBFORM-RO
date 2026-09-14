@@ -2,7 +2,7 @@
 import { hasSubscriptionAccess } from "@/lib/subscription";
 
 import { useState, useMemo } from "react";
-import { Loader2, User, CreditCard, LogOut, AlertTriangle } from "lucide-react";
+import { Loader2, User, CreditCard, LogOut, AlertTriangle, MessageCircle } from "lucide-react";
 import Link from "next/link";
 
 import { Header } from "@/components/Header";
@@ -91,11 +91,16 @@ export function AccountClient({ initialUser }: AccountClientProps) {
           <div>
             <h1 className="font-display text-3xl font-semibold">Contul meu</h1>
             <p className="mt-1 text-muted-foreground">
-              Gestioneaza contul si abonamentul tau
+              Gestionează proiectul și abonamentul tău
             </p>
           </div>
 
           {initialUser.isAdmin && <Link href="/admin" className="action action-dark">Deschide panoul de administrare ↗</Link>}
+
+          <Link href="/chat" className="flex items-center gap-4 rounded-2xl border border-primary/20 bg-primary/5 p-6 transition hover:border-primary/50">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10"><MessageCircle className="h-5 w-5 text-primary" /></div>
+            <div><h2 className="font-semibold">Chat-ul proiectului</h2><p className="mt-1 text-sm text-muted-foreground">Întrebări, versiuni ale site-ului, modificări și aprobarea finală.</p></div>
+          </Link>
 
           {/* Profile Section */}
           <div className="rounded-2xl border border-border/60 bg-card/80 p-6">
@@ -131,7 +136,7 @@ export function AccountClient({ initialUser }: AccountClientProps) {
             {hasActiveSubscription && currentPlan ? (
               <div className="space-y-4">
                 <Link href="/start" className="text-primary underline">Deschide proiectul</Link>
-                <Link href="/chat" className="ml-4 text-primary underline">Suport</Link>
+                <Link href="/chat" className="ml-4 text-primary underline">Chat proiect</Link>
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-muted-foreground">Plan curent</p>
@@ -207,7 +212,7 @@ export function AccountClient({ initialUser }: AccountClientProps) {
             ) : (
               <div className="space-y-4">
                 <Link href="/start" className="text-primary underline">Deschide proiectul</Link>
-                <Link href="/chat" className="ml-4 text-primary underline">Suport</Link>
+                <Link href="/chat" className="ml-4 text-primary underline">Chat proiect</Link>
                 <p className="text-muted-foreground">
                   Nu ai un abonament activ. Aboneaza-te pentru a accesa toate template-urile.
                 </p>

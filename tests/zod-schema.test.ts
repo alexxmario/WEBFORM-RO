@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { blueprintSchema } from "@/lib/zodSchemas";
+import { commerceQuoteSchema } from "@/lib/commerce-quote";
 
 const validBlueprint = {
   identity: {
@@ -64,5 +65,27 @@ describe("blueprintSchema", () => {
       look: { ...validBlueprint.look, references: [] },
     });
     expect(parsed.success).toBe(true);
+  });
+});
+
+describe("commerceQuoteSchema", () => {
+  const quote = {
+    name: "Ana Popescu",
+    businessName: "Magazinul Anei",
+    email: "ana@example.com",
+    phone: "+40 700 000 000",
+    productCount: "21-100",
+    needs: ["Plată online", "Livrare prin curier"],
+    currentSite: "",
+    notes: "Avem deja fotografiile produselor.",
+    consent: true,
+  };
+
+  it("accepts a complete online-store quote request", () => {
+    expect(commerceQuoteSchema.safeParse(quote).success).toBe(true);
+  });
+
+  it("requires explicit consent for the phone call", () => {
+    expect(commerceQuoteSchema.safeParse({ ...quote, consent: false }).success).toBe(false);
   });
 });

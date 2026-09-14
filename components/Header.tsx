@@ -10,6 +10,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const links = [
     { href: "/#how-it-works", label: "Cum funcționează" },
+    { href: "/#chat-workflow", label: "Comunicare" },
     { href: "/templates", label: "Modele de site" },
     { href: "/#plans", label: "Prețuri" },
   ];
@@ -38,6 +39,7 @@ export function Header() {
               {l.label}
             </Link>
           ))}
+          {user && <Link href="/chat">Chat proiect</Link>}
         </nav>
         <div className="header-actions">
           <Link className="account-link" href={user ? "/account" : "/login"}>
@@ -73,7 +75,7 @@ export function Header() {
               href: user ? "/account" : "/login",
               label: user ? "Contul meu" : "Intră în cont",
             },
-            ...(user ? [{ href: "/chat", label: "Suport" }] : []),
+            ...(user ? [{ href: "/chat", label: "Chat proiect" }] : []),
           ].map((l) => (
             <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>
               {l.label}

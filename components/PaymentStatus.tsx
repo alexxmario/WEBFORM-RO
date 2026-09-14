@@ -63,7 +63,7 @@ export function PaymentStatus({
       </h1>
       <p className="mt-4 text-muted-foreground">
         {paid
-          ? "Abonamentul este activ. Acum ne poți spune despre afacerea ta."
+          ? "Abonamentul este activ. Completează formularul scurt, apoi primești pașii proiectului în chat."
           : pending
             ? delayed
               ? "Confirmarea durează mai mult. Nu plăti din nou; contactează-ne cu numărul comenzii."
@@ -78,9 +78,9 @@ export function PaymentStatus({
         href={paid ? "/start" : pending ? "/chat" : "/subscribe"}
       >
         {paid
-          ? "Completează formularul"
+          ? "Completează formularul proiectului"
           : pending
-            ? "Contactează suportul"
+            ? "Deschide chat-ul"
             : "Înapoi la planuri"}
       </Link>
     </div>

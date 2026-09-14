@@ -113,7 +113,7 @@ export default function HomePage() {
               <ShieldCheck size={18} /> Securitate & mentenanță
             </span>
             <span>
-              <MessageCircle size={18} /> Suport în română
+              <MessageCircle size={18} /> Proiect și modificări în chat
             </span>
           </div>
         </div>
@@ -254,18 +254,23 @@ export default function HomePage() {
             {[
               [
                 "01",
-                "Alegi planul și ne spui despre tine.",
-                "Îți creezi contul, activezi abonamentul și completezi formularul despre afacere. Alegi modelul care îți place.",
+                "Alegi serviciul potrivit.",
+                "Activezi un abonament pentru site sau ceri o ofertă dacă ai nevoie de un magazin online.",
               ],
               [
                 "02",
-                "Noi construim. Tu aprobi.",
-                "Adaptăm designul și conținutul. Primești site-ul pentru verificare, înainte să îl publicăm.",
+                "Completezi formularul scurt.",
+                "În aproximativ 4 minute aflăm ce vinzi, ce obiectiv ai și ce stil îți place.",
               ],
               [
                 "03",
-                "Ești online. Noi rămânem aproape.",
-                "Lansăm site-ul și ne ocupăm de găzduire și mentenanță. Ceri modificări direct din contul tău.",
+                "Continuăm împreună în chat.",
+                "Primești acolo întrebările, prima versiune a site-ului și trimiți toate modificările.",
+              ],
+              [
+                "04",
+                "Aprobi, publicăm și rămânem aproape.",
+                "După lansare, folosești același chat când ai nevoie de o actualizare.",
               ],
             ].map(([n, title, desc]) => (
               <article key={n}>
@@ -276,6 +281,25 @@ export default function HomePage() {
                 </div>
               </article>
             ))}
+          </div>
+        </section>
+        <section className="chat-workflow-section" id="chat-workflow">
+          <div className="shell home-section chat-workflow-grid">
+            <div>
+              <p className="eyebrow">UN SINGUR LOC PENTRU TOT PROIECTUL</p>
+              <h2>Fără telefoane pierdute.<br />Fără conversații împrăștiate.</h2>
+              <p className="section-description">
+                După formular, primești un mesaj în chat-ul proiectului. Acolo discutăm detaliile, îți trimitem site-ul și notăm fiecare modificare.
+              </p>
+              <Link className="action action-dark" href="#plans">Începe proiectul <ArrowUpRight size={18} /></Link>
+            </div>
+            <div className="chat-workflow-card" aria-label="Exemplu de conversație în chat-ul proiectului">
+              <div className="chat-workflow-head"><span className="status-dot" /> Chat proiect · Echipa WebForm</div>
+              <div className="chat-bubble chat-bubble-team">Bine ai venit! Am primit formularul. Îl analizăm și revenim aici în cel mult o zi lucrătoare.</div>
+              <div className="chat-bubble chat-bubble-client">Perfect. Pot să vă trimit aici și logo-ul nou?</div>
+              <div className="chat-bubble chat-bubble-team">Da. Tot aici primești și prima versiune a site-ului pentru verificare.</div>
+              <div className="chat-workflow-input">Scrie un mesaj… <MessageCircle size={17} /></div>
+            </div>
           </div>
         </section>
         <section className="pricing-section" id="plans">
@@ -291,7 +315,7 @@ export default function HomePage() {
               </div>
               <p>
                 Alege în funcție de ce are nevoie afacerea ta. Designul,
-                găzduirea și administrarea sunt incluse în ambele planuri.
+                găzduirea și administrarea sunt incluse în abonamente. Pentru magazin online pregătim o ofertă după nevoile tale.
               </p>
             </div>
             <Plans />
@@ -300,15 +324,6 @@ export default function HomePage() {
               a materialelor. Serviciile de găzduire și administrare sunt
               disponibile pe durata abonamentului.
             </p>
-            <div className="commerce-note">
-              <span>
-                <strong>Vrei un magazin online?</strong> Serviciul e-commerce
-                este în pregătire.
-              </span>
-              <a href="mailto:alexionescu870@gmail.com?subject=Interes%20e-commerce">
-                Hai să vorbim <ArrowUpRight size={16} />
-              </a>
-            </div>
           </div>
         </section>
         <section className="shell home-section faq-section">

@@ -12,6 +12,7 @@ import {
 } from "@/lib/api";
 import { assetIdFromUrl } from "@/lib/assets";
 import { notifyBlueprint } from "@/lib/blueprint-notification";
+import { ensureProjectChatWelcome } from "@/lib/chat-welcome";
 export async function POST(request: Request) {
   try {
     const user = await requireSubscription(request);
@@ -103,7 +104,14 @@ export async function POST(request: Request) {
     } catch {
       console.error("Blueprint saved; notification requires retry", id);
     }
-    return NextResponse.json({ ok: true, id, notification });
+    let chatReady = false;
+    try {
+      await ensureProjectChatWelcome(user.id, user.email || "");
+      chatReady = true;
+    } catch (error) {
+      console.error("Blueprint saved; welcome message requires retry", error);
+    }
+    return NextResponse.json({ ok: true, id, notification, chatReady });
   } catch (error) {
     return apiError(error);
   }

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Loader2, MessageCircle } from "lucide-react";
 
-import { BlueprintForm } from "@/components/BlueprintForm";
+import { ProjectBriefForm } from "@/components/ProjectBriefForm";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 
@@ -57,13 +57,13 @@ export default function StartPage() {
             </h1>
             <p className="text-body-lg text-muted-foreground">
               Formularul tău este la echipa noastră și lucrăm la site-ul tău.
-              Pentru orice modificare sau întrebare, te rugăm să ne contactezi prin suport.
+              Pentru întrebări, materiale sau modificări, folosește chat-ul proiectului.
             </p>
           </div>
           <Button asChild size="lg" className="gap-2">
             <Link href="/chat">
               <MessageCircle className="h-5 w-5" />
-              Mergi la Suport
+              Deschide chat-ul proiectului
             </Link>
           </Button>
         </main>
@@ -80,13 +80,16 @@ export default function StartPage() {
       >
         <div className="mx-auto max-w-2xl space-y-4 text-center">
           <h1 className="font-display text-display-md sm:text-display-lg" style={{ textWrap: "balance" }}>
-            Un formular pentru a lansa și gestiona site-ul tău.
+            Spune-ne pe scurt de ce are nevoie afacerea ta.
           </h1>
+          <p className="text-muted-foreground">
+            Durează aproximativ 4 minute. După trimitere, primești un mesaj în chat-ul proiectului și continuăm totul acolo.
+          </p>
         </div>
 
         <div className="mx-auto w-full max-w-5xl overflow-hidden rounded-2xl border border-border bg-card">
           <div className="px-5 py-6 sm:px-10 sm:py-10">
-            <BlueprintForm />
+            <ProjectBriefForm />
           </div>
         </div>
       </main>

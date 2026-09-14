@@ -31,7 +31,7 @@ export function MultiColorPicker({ value, onChange }: Props) {
   return (
     <div className="space-y-3">
       {colors.length === 0 && (
-        <p className="text-sm text-muted-foreground">No colors added yet. Add your brand colors below.</p>
+        <p className="text-sm text-muted-foreground">Nu ai adăugat culori. Poți lăsa alegerea în grija noastră.</p>
       )}
 
       {colors.map((color, index) => (
@@ -47,14 +47,14 @@ export function MultiColorPicker({ value, onChange }: Props) {
             onChange={(e) => updateColor(index, e.target.value)}
             className="flex-1"
             placeholder="#000000"
-            aria-label={`Color ${index + 1} hex value`}
+            aria-label={`Codul culorii ${index + 1}`}
           />
           <Button
             type="button"
             variant="ghost"
             size="sm"
             onClick={() => removeColor(index)}
-            aria-label={`Remove color ${index + 1}`}
+            aria-label={`Elimină culoarea ${index + 1}`}
           >
             <X className="h-4 w-4" />
           </Button>
@@ -70,7 +70,7 @@ export function MultiColorPicker({ value, onChange }: Props) {
           className="w-full"
         >
           <Plus className="mr-2 h-4 w-4" />
-          Add color ({colors.length}/5)
+          Adaugă o culoare ({colors.length}/5)
         </Button>
       )}
     </div>
