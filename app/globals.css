@@ -592,6 +592,11 @@ h2 {
   letter-spacing: -10px;
   color: #e5ae82;
 }
+.client-proof-number-traffic {
+  font-size: clamp(72px, 9vw, 118px);
+  letter-spacing: -7px;
+  white-space: nowrap;
+}
 .client-proof-stat h3 {
   margin-top: 32px;
   font-size: 27px;

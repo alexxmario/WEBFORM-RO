@@ -273,9 +273,9 @@ export default function HomePage() {
               </div>
             </div>
             <aside className="client-proof-stat">
-              <span className="client-proof-number">3</span>
-              <h3>proiecte digitale live</h3>
-              <p>Concepute pentru afaceri care trebuie să fie găsite, înțelese și alese mai ușor.</p>
+              <span className="client-proof-number client-proof-number-traffic">50K+</span>
+              <h3>vizite / lună</h3>
+              <p>Trafic cumulat pentru proiectele prezentate, construite ca afacerile să fie găsite, înțelese și alese mai ușor.</p>
               <div className="client-proof-industries">
                 <span>Automotive</span><span>E-commerce</span><span>HoReCa</span>
               </div>
