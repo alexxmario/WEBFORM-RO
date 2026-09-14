@@ -1,480 +1,350 @@
-"use client";
-
-import Script from "next/script";
-import Image from "next/image";
+import { DesignStudio } from "@/components/DesignStudio";
+import { HomeMotion } from "@/components/HomeMotion";
 import Link from "next/link";
-import { useState, useEffect, useRef, useCallback } from "react";
-
+import Image from "next/image";
+import {
+  ArrowUpRight,
+  ArrowRight,
+  Check,
+  Globe2,
+  MousePointer2,
+  ShieldCheck,
+  MessageCircle,
+  Sparkles,
+} from "lucide-react";
 import { Header } from "@/components/Header";
-import { HeroInteractive } from "@/components/HeroInteractive";
-import { LazySpline } from "@/components/LazySpline";
-import { Button } from "@/components/ui/button";
 import { Footer } from "@/components/Footer";
-import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { homePageJsonLd } from "@/lib/schema";
-import { toast } from "sonner";
-
-type BillingInterval = "month" | "year";
+import { Plans } from "@/components/Plans";
+import { FAQ } from "@/components/FAQ";
+import { templateOptions } from "@/lib/templates";
 
 export default function HomePage() {
-  const [notifyDialogOpen, setNotifyDialogOpen] = useState(false);
-  const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [billingInterval, setBillingInterval] = useState<BillingInterval>("month");
-  const missionSectionRef = useRef<HTMLElement>(null);
-
-  const handleNotifySubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      // Here you would send the email to your backend
-      // For now, we'll just show a success message
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
-      toast.success("Vei fi notificat când e-commerce va fi disponibil!");
-      setEmail("");
-      setNotifyDialogOpen(false);
-    } catch {
-      toast.error("Ceva nu a mers bine. Te rugăm să încerci din nou.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    const el = missionSectionRef.current;
-    if (!el) return;
-
-    el.classList.add("animate-in");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            el.classList.remove("animate-in");
-            el.classList.add("visible");
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.35 }
-    );
-    observer.observe(el);
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <>
       <Header />
-      <main id="main" className="relative z-10 space-y-32 pb-32 pt-16">
-        <HeroInteractive />
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              .mission-section {
-                opacity: 1;
-                transform: translateY(0);
-                transition: opacity 700ms ease, transform 700ms ease;
-              }
-              .mission-section.animate-in {
-                opacity: 0;
-                transform: translateY(16px);
-              }
-              .mission-section.visible {
-                opacity: 1;
-                transform: translateY(0);
-              }
-            `,
-          }}
-        />
-        <section ref={missionSectionRef} className="mission-section section-blur section-fade container max-w-5xl text-center">
-          <h2 className="text-display-sm md:text-display-md text-foreground" style={{ textWrap: "balance" }}>
-            Construim, găzduim și actualizăm site&#8209;ul tău. Tu te concentrezi pe afacere.
-          </h2>
-        </section>
-
-        <section
-          className="relative z-10 w-screen max-w-none px-0 -mb-16"
-          style={{
-            marginLeft: "calc(50% - 50vw)",
-            marginRight: "calc(50% - 50vw)",
-            width: "100vw",
-          }}
-        >
-          <LazySpline />
-        </section>
-
-        {/* Features */}
-        <section className="section-blur section-fade py-20">
-          <div className="container max-w-5xl space-y-16">
-            <div className="mx-auto max-w-2xl text-center space-y-4">
-              <h2 className="text-display-md text-foreground" style={{ textWrap: "balance" }}>Tot ce ai nevoie pentru lansare</h2>
-              <p className="text-body-lg text-muted-foreground">
-                Dezvoltare bazată pe șabloane, verificări asincrone și găzduire de producție—fără întâlniri.
-              </p>
+      <HomeMotion />
+      <main id="main" className="home-page">
+        <section className="hero-wrap shell">
+          <div className="hero-copy">
+            <p className="eyebrow">
+              <span className="status-dot" /> SITE-UL TĂU. GRIJA NOASTRĂ.
+            </p>
+            <h1>
+              O afacere bună
+              <br />
+              merită un site
+              <br />
+              <em>pe măsură.</em>
+            </h1>
+            <p className="hero-description">
+              Îl construim. Îl găzduim. Îl ținem la zi.
+              <br className="hidden sm:block" /> Un site profesionist, fără
+              bătăi de cap.
+              <br className="hidden sm:block" /> De la{" "}
+              <strong>180 lei / lună.</strong>
+            </p>
+            <div className="hero-actions">
+              <Link className="action action-dark" href="#plans">
+                Alege site-ul tău <ArrowUpRight size={18} />
+              </Link>
+              <Link className="text-link" href="#design-studio">
+                Explorează designul <ArrowRight size={17} />
+              </Link>
             </div>
-
-            <div className="space-y-px rounded-xl border border-border overflow-hidden">
+            <div className="hero-notes">
+              <span>
+                <Check size={14} /> Gata în 7 zile*
+              </span>
+              <span>
+                <Check size={14} /> Găzduire inclusă
+              </span>
+            </div>
+          </div>
+          <div className="hero-art hero-art-generated hero-editorial">
+            <div className="art-caption">
+              <span>O PRIMĂ IMPRESIE CARE RĂMÂNE</span>
+              <span>WEBFORM STUDIO ↗</span>
+            </div>
+            <div className="hero-scene">
+              <Image
+                src="/images/architecture-editorial.png"
+                alt="Concept vizual pentru arhitectură: vilă din piatră naturală, lumină și spațiu"
+                width={1536}
+                height={1024}
+                priority
+                sizes="(max-width: 760px) 100vw, 50vw"
+              />
+              <div className="hero-editorial-label"><small>FORMA / CONCEPT WEBFORM</small>Loc pentru<br />extraordinar.</div>
+            </div>
+            <div className="floating-note">
+              <span className="note-icon">
+                <Check size={20} />
+              </span>
+              <div>
+                <strong>Din lumea ta. În lumea online.</strong>
+                <span>Un site care arată cine ești.</span>
+              </div>
+            </div>
+            <div className="art-bottom">
+              <span>
+                Tu conduci afacerea.
+                <br />
+                <strong>Noi ne ocupăm de site.</strong>
+              </span>
+              <span className="asterisk" aria-hidden="true">
+                ✳
+              </span>
+            </div>
+          </div>
+        </section>
+        <div className="benefit-strip">
+          <div className="shell">
+            <span>
+              <Sparkles size={18} /> Design adaptat afacerii tale
+            </span>
+            <span>
+              <Globe2 size={18} /> Domeniu & găzduire
+            </span>
+            <span>
+              <ShieldCheck size={18} /> Securitate & mentenanță
+            </span>
+            <span>
+              <MessageCircle size={18} /> Suport în română
+            </span>
+          </div>
+        </div>
+        <DesignStudio />
+        <section className="shell home-section" id="why-webform">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">MAI MULT DECÂT UN SITE</p>
+              <h2>
+                Ai deja un job.
+                <br />
+                Site-ul nu trebuie să fie al doilea.
+              </h2>
+            </div>
+            <p>
+              De la prima schiță la următoarea actualizare, ai o echipă care se
+              ocupă de tot. Într-un singur abonament.
+            </p>
+          </div>
+          <div className="value-grid">
+            {[
+              [
+                "01",
+                "Frumos. Și folositor.",
+                "Un design care pune afacerea ta în valoare și îi ajută pe vizitatori să înțeleagă ce oferi și cum te pot contacta.",
+              ],
+              [
+                "02",
+                "Fără partea complicată.",
+                "Domeniu, găzduire, certificat SSL și optimizare pentru mobil. Le configurăm și le gestionăm pentru tine.",
+              ],
+              [
+                "03",
+                "Rămânem alături de tine.",
+                "Ai un serviciu nou sau alte fotografii? Ne scrii în chat. Noi facem modificările, tu îți vezi de afacere.",
+              ],
+            ].map(([n, title, text]) => (
+              <article key={n}>
+                <span className="number-label">{n} /</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="portfolio-section">
+          <div className="shell home-section">
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">UN PUNCT DE PLECARE BUN</p>
+                <h2>Stilul tău. Amprenta ta.</h2>
+              </div>
+              <Link className="text-link" href="/templates">
+                Explorează toate cele {templateOptions.length} modele{" "}
+                <ArrowUpRight size={18} />
+              </Link>
+            </div>
+            <div className="work-grid">
               {[
-                { title: "Bibliotecă de șabloane", desc: "20+ layout-uri premium. Schimbă oricând fără timp de nefuncționare." },
-                { title: "Verificări asincrone", desc: "Wireframe → design → previzualizare finală fără apeluri necesare." },
-                { title: "Găzduire & domeniu", desc: "SSL, domenii și analiză incluse. Gestionăm infrastructura pentru tine." },
-                { title: "Actualizări în 3 zile", desc: "Modificări bazate pe coadă cu previzualizări clare și aprobări." },
-                { title: "Integrări", desc: "Calendly, formulare, taguri CRM și scripturi personalizate făcute pentru tine." },
-                { title: "Export disponibil", desc: "Export complet disponibil ca serviciu plătit dacă ai nevoie să muți." },
-              ].map((item) => (
-                <div
-                  key={item.title}
-                  className="flex flex-col gap-1 border-b border-border last:border-b-0 bg-card px-6 py-5 sm:flex-row sm:items-baseline sm:gap-8"
+                {
+                  id: "archito",
+                  name: "Spațiu pentru idei mari.",
+                  category: "ARHITECTURĂ & DESIGN",
+                },
+                {
+                  id: "aether",
+                  name: "Un brand care se simte.",
+                  category: "BEAUTY & LIFESTYLE",
+                },
+                {
+                  id: "faster",
+                  name: "Energie, de la primul click.",
+                  category: "SERVICII & BUSINESS",
+                },
+              ].map((t) => (
+                <a
+                  className="work-card"
+                  key={t.id}
+                  href={`/templates/${t.id}.html`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <h3 className="text-heading-sm text-foreground sm:w-56 sm:shrink-0">{item.title}</h3>
-                  <p className="text-body-sm text-muted-foreground">{item.desc}</p>
-                </div>
+                  <div className="work-image">
+                    <Image
+                      src={`/templates/${t.id}.png`}
+                      width={640}
+                      height={480}
+                      alt={`Previzualizare model ${t.category.toLowerCase()}`}
+                    />
+                    <span className="work-arrow">
+                      <ArrowUpRight size={22} />
+                    </span>
+                  </div>
+                  <p className="eyebrow">{t.category}</p>
+                  <h3>{t.name}</h3>
+                </a>
               ))}
             </div>
+            <p className="portfolio-note">
+              Modele de design, personalizate cu textele, imaginile și
+              identitatea afacerii tale.
+            </p>
           </div>
         </section>
-
-        {/* How it works */}
-        <section id="how-it-works" className="section-blur section-fade py-20">
-          <div className="container max-w-5xl space-y-20">
-            <div className="mx-auto max-w-2xl text-center space-y-4">
-              <h2 className="text-display-md text-foreground" style={{ textWrap: "balance" }}>Cum Funcționează WebForm</h2>
-              <p className="text-body-lg text-muted-foreground">
-                Trimiți un Blueprint, alegi un aspect, livrăm în 7 zile — apoi gestionăm și actualizăm pentru totdeauna.
+        <section
+          className="shell home-section process-section"
+          id="how-it-works"
+        >
+          <div>
+            <p className="eyebrow">SIMPLU, DE LA ÎNCEPUT</p>
+            <h2>
+              De la „am nevoie de un site”
+              <br />
+              la „suntem online”.
+            </h2>
+            <p className="section-description">
+              Fără ședințe interminabile.
+              <br />
+              Fără termeni tehnici de descifrat.
+            </p>
+            <Link className="text-link" href="#plans">
+              Hai să începem <ArrowRight size={18} />
+            </Link>
+            <figure className="craft-scene">
+              <Image
+                src="/images/website-crafted.png"
+                alt="Textele și imaginile se reunesc într-un website complet, pregătit de lansare"
+                width={1536}
+                height={1024}
+                sizes="(max-width: 760px) 100vw, 40vw"
+              />
+              <figcaption>
+                De la materialele tale la un site gata de lansare.
+              </figcaption>
+            </figure>
+          </div>
+          <div className="process-steps">
+            {[
+              [
+                "01",
+                "Alegi planul și ne spui despre tine.",
+                "Îți creezi contul, activezi abonamentul și completezi formularul despre afacere. Alegi modelul care îți place.",
+              ],
+              [
+                "02",
+                "Noi construim. Tu aprobi.",
+                "Adaptăm designul și conținutul. Primești site-ul pentru verificare, înainte să îl publicăm.",
+              ],
+              [
+                "03",
+                "Ești online. Noi rămânem aproape.",
+                "Lansăm site-ul și ne ocupăm de găzduire și mentenanță. Ceri modificări direct din contul tău.",
+              ],
+            ].map(([n, title, desc]) => (
+              <article key={n}>
+                <span>{n}</span>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{desc}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="pricing-section" id="plans">
+          <div className="shell home-section">
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">UN ABONAMENT. TOTUL LA LOCUL LUI.</p>
+                <h2>
+                  Un site bun.
+                  <br />
+                  Un preț clar.
+                </h2>
+              </div>
+              <p>
+                Alege în funcție de ce are nevoie afacerea ta. Designul,
+                găzduirea și administrarea sunt incluse în ambele planuri.
               </p>
             </div>
-
-            {/* Step 1 */}
-            <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-              <div className="space-y-4">
-                <p className="text-body-sm font-medium text-primary">Pasul 1</p>
-                <h3 className="text-display-sm text-foreground">Trimite Formularul & alege un șablon</h3>
-                <p className="text-body-md text-muted-foreground">
-                  Completează Formularul Website-ului cu obiectivele, paginile și integrările tale. Alege din 100+ șabloane profesionale. Fără întâlniri — doar trimite și aprobă.
-                </p>
-              </div>
-              <div className="rounded-xl border border-border bg-card p-5">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted text-body-sm font-semibold text-foreground">WB</div>
-                    <div>
-                      <p className="text-body-sm font-semibold text-foreground">Blueprint Website</p>
-                      <p className="text-body-sm text-muted-foreground">Obiective · Pagini · Integrări</p>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2">
-                    {[
-                      { name: "Orbit", img: "/templates/orbit.png" },
-                      { name: "Aether", img: "/templates/aether.png" },
-                      { name: "Forward", img: "/templates/forward.png" },
-                      { name: "Cognitive", img: "/templates/cognitive.png" },
-                      { name: "Flux", img: "/templates/flux.png" },
-                      { name: "Lexora", img: "/templates/lexora.png" },
-                    ].map((template) => (
-                      <div
-                        key={template.name}
-                        className="aspect-video rounded-lg border border-border overflow-hidden"
-                      >
-                        <Image
-                          src={template.img}
-                          alt={template.name}
-                          width={200}
-                          height={113}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
-              <div className="rounded-xl border border-border bg-card p-5 order-2 lg:order-1">
-                <div className="flex items-center justify-between text-body-sm text-muted-foreground mb-4">
-                  <span>Status Construcție</span>
-                  <span className="rounded-lg bg-primary/10 px-2 py-0.5 text-body-sm text-primary">În Progres</span>
-                </div>
-                <div className="space-y-2">
-                  {[
-                    { label: "Wireframe aprobat", done: true },
-                    { label: "Design în lucru", done: false },
-                    { label: "Previzualizare live", done: false },
-                    { label: "Integrări configurate", done: false },
-                  ].map((step) => (
-                    <div key={step.label} className="flex items-center gap-3 rounded-lg border border-border px-3 py-2.5">
-                      <div className={`h-2 w-2 rounded-full ${step.done ? "bg-primary" : "bg-muted-foreground/30"}`} />
-                      <span className={`text-body-sm ${step.done ? "text-foreground" : "text-muted-foreground"}`}>{step.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="space-y-4 order-1 lg:order-2">
-                <p className="text-body-sm font-medium text-primary">Pasul 2</p>
-                <h3 className="text-display-sm text-foreground">Construim totul în 7 zile</h3>
-                <p className="text-body-md text-muted-foreground">
-                  Întregul site este construit pentru tine. Ne aliniem asincron cu previzualizări clare — poți trimite mesaje oricând în chat-ul integrat.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-              <div className="space-y-4">
-                <p className="text-body-sm font-medium text-primary">Pasul 3</p>
-                <h3 className="text-display-sm text-foreground">Gestionat pentru totdeauna</h3>
-                <p className="text-body-md text-muted-foreground">
-                  Trimite modificări oricând. Livrăm în 3 zile pe Business, 7 pe Start. Actualizări nelimitate, găzduire, SSL și monitorizare — totul inclus.
-                </p>
-              </div>
-              <div className="rounded-xl border border-border bg-card p-5">
-                <div className="space-y-2">
-                  {[
-                    "Conținut nou hero — livrat",
-                    "Schimbare șablon — previzualizare gata",
-                    "Integrare Calendly + Stripe — configurată",
-                    "SSL, analiză, uptime — monitorizat",
-                  ].map((item) => (
-                    <div key={item} className="flex items-center gap-3 rounded-lg border border-border px-3 py-2.5">
-                      <div className="h-2 w-2 rounded-full bg-primary" />
-                      <span className="text-body-sm text-foreground/80">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            <Plans />
+            <p className="pricing-footnote">
+              * Prima versiune în 7 zile de la primirea formularului complet și
+              a materialelor. Serviciile de găzduire și administrare sunt
+              disponibile pe durata abonamentului.
+            </p>
+            <div className="commerce-note">
+              <span>
+                <strong>Vrei un magazin online?</strong> Serviciul e-commerce
+                este în pregătire.
+              </span>
+              <a href="mailto:alexionescu870@gmail.com?subject=Interes%20e-commerce">
+                Hai să vorbim <ArrowUpRight size={16} />
+              </a>
             </div>
           </div>
         </section>
-
-        {/* Plans */}
-        <section id="plans" className="section-blur section-fade py-20">
-          <div className="container max-w-5xl space-y-12">
-            <div className="mx-auto max-w-2xl text-center space-y-4">
-              <h2 className="text-display-md text-foreground" style={{ textWrap: "balance" }}>Alege-ți planul</h2>
-              <p className="text-body-lg text-muted-foreground">
-                Începe gratuit cu un Blueprint. Upgrade când ești gata să lansezi.
-              </p>
-
-              {/* Billing toggle */}
-              <div className="mt-8 flex items-center justify-center gap-3">
-                <button
-                  onClick={() => setBillingInterval("month")}
-                  className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                    billingInterval === "month"
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  Lunar
-                </button>
-                <button
-                  onClick={() => setBillingInterval("year")}
-                  className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                    billingInterval === "year"
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  Anual
-                  <span className="ml-1.5 rounded-full bg-secondary/15 px-2 py-0.5 text-xs text-secondary">
-                    -25%
-                  </span>
-                </button>
-              </div>
-            </div>
-            <div className="grid gap-6 lg:grid-cols-3">
-              {[
-                {
-                  name: "WEBFORM START",
-                  monthlyPrice: 180,
-                  yearlyPrice: 1620, // 180 * 12 * 0.75
-                  desc: "Pentru proprietarii de afaceri mici care au nevoie de un website simplu și curat rapid.",
-                  items: [
-                    "Până la 3 pagini (Acasă, Despre, Contact sau Servicii)",
-                    "Alege din 100+ șabloane",
-                    "Construit în 7 zile",
-                    "Gestionat pentru totdeauna (găzduire + domeniu incluse)",
-                    "Actualizări în 7 zile",
-                    "1 cerere activă la un moment dat",
-                    "SEO de bază",
-                    "Optimizare mobilă",
-                    "Formular de contact / link de rezervare",
-                    "Securitate SSL",
-                  ],
-                  primary: false,
-                  cta: "Alege Start",
-                },
-                {
-                  name: "WEBFORM BUSINESS",
-                  monthlyPrice: 350,
-                  yearlyPrice: 3150, // 350 * 12 * 0.75
-                  desc: "Cel mai popular — acoperă 70%+ din clienți.",
-                  items: [
-                    "Până la 7 pagini",
-                    "100+ șabloane cu personalizare",
-                    "Construit în 7 zile",
-                    "Actualizări în 3 zile (prioritate)",
-                    "2 cereri active",
-                    "Configurare SEO avansată",
-                    "Sistem de blog opțional",
-                    "Dashboard de analiză",
-                    "Integrări (Calendly, Stripe, Mailchimp, CRM, etc.)",
-                    "Formulare personalizate",
-                    "Copywriting ușor (asistat AI 1-2 secțiuni)",
-                    "Găzduire + domeniu + gestionare completă",
-                  ],
-                  primary: true,
-                  cta: "Începe Business",
-                },
-                {
-                  name: "WEBFORM COMMERCE",
-                  monthlyPrice: null,
-                  yearlyPrice: null,
-                  desc: "Pentru afaceri care vând produse sau rezervări.",
-                  items: [
-                    "Tot ce e în Business",
-                    "Configurare e-commerce completă (Stripe, Sellfy, Snipcart, Shopify Lite, etc.)",
-                    "Produse nelimitate sau până la 50 — alegerea ta",
-                    "Timp de execuție actualizări 48h",
-                    "Coadă de cereri nelimitată",
-                    "Automatizări (coș abandonat, email-uri clienți, fluxuri CRM)",
-                    "Optimizare performanță",
-                    "SEO avansat",
-                    "Secțiuni personalizate / elemente UI",
-                    "Integrări API",
-                    "Suport prioritar (cele mai rapide răspunsuri)",
-                  ],
-                  primary: false,
-                  cta: "Contactează-ne",
-                },
-              ].map((plan) => {
-                const isCommerce = plan.name === "WEBFORM COMMERCE";
-                return (
-                  <div
-                    key={plan.name}
-                    className={`rounded-xl border p-6 relative ${
-                      plan.primary
-                        ? "border-primary/50 bg-card"
-                        : isCommerce
-                        ? "border-border bg-card opacity-60 pointer-events-none"
-                        : "border-border bg-card"
-                    }`}
-                  >
-                    {isCommerce && (
-                      <div className="absolute -top-3 -right-3 z-10 pointer-events-auto">
-                        <Badge className="bg-accent text-accent-foreground px-3 py-1 text-xs font-semibold rotate-12">
-                          E-commerce Vine Curând
-                        </Badge>
-                      </div>
-                    )}
-                    <div className="text-body-sm font-medium text-muted-foreground">{plan.name}</div>
-                    <div className="mt-2 text-display-sm text-foreground">
-                      {plan.monthlyPrice === null
-                        ? "Personalizat"
-                        : billingInterval === "year"
-                        ? `${Math.round(plan.yearlyPrice! / 12)} RON/lună`
-                        : `${plan.monthlyPrice} RON/lună`}
-                    </div>
-                    {plan.monthlyPrice !== null && billingInterval === "year" && (
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        Facturat anual ({plan.yearlyPrice} RON/an)
-                      </p>
-                    )}
-                    {plan.monthlyPrice !== null && billingInterval === "year" && (
-                      <p className="mt-1 text-sm text-secondary">
-                        Economisești 25%
-                      </p>
-                    )}
-                    <p className="mt-2 text-body-sm text-muted-foreground">{plan.desc}</p>
-                    <ul className="mt-4 space-y-2 text-body-sm text-muted-foreground">
-                      {plan.items.map((it) => (
-                        <li key={it} className="flex gap-2">
-                          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
-                          {it}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="mt-6">
-                      {isCommerce ? (
-                        <Button
-                          className="w-full pointer-events-auto"
-                          variant="outline"
-                          onClick={() => setNotifyDialogOpen(true)}
-                        >
-                          Anunță-mă
-                        </Button>
-                      ) : (
-                        <Button
-                          className="w-full"
-                          variant={plan.primary ? "default" : "outline"}
-                          asChild
-                        >
-                          <Link href="/subscribe">{plan.cta}</Link>
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+        <section className="shell home-section faq-section">
+          <div>
+            <p className="eyebrow">BINE DE ȘTIUT</p>
+            <h2>
+              Întrebări mici.
+              <br />
+              Răspunsuri clare.
+            </h2>
+            <p className="section-description">
+              Mai ai o întrebare?{" "}
+              <a href="mailto:alexionescu870@gmail.com" className="underline">
+                Scrie-ne.
+              </a>
+            </p>
           </div>
+          <FAQ />
         </section>
-
+        <section className="shell final-cta">
+          <div>
+            <p className="eyebrow">URMĂTORUL PAS PENTRU AFACEREA TA</p>
+            <h2>
+              Tu ai viziunea.
+              <br />
+              Noi facem site-ul.
+            </h2>
+          </div>
+          <Link href="#plans" className="action action-dark">
+            Găsește planul potrivit <ArrowUpRight size={20} />
+          </Link>
+          <MousePointer2
+            className="cta-pointer"
+            size={90}
+            strokeWidth={1}
+            aria-hidden="true"
+          />
+        </section>
       </main>
       <Footer />
-
-      <Dialog open={notifyDialogOpen} onOpenChange={setNotifyDialogOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-semibold">Primește Notificări</DialogTitle>
-            <DialogDescription>
-              Introdu email-ul tău și te vom notifica imediat ce<br />funcționalitatea e-commerce va fi disponibilă.
-            </DialogDescription>
-          </DialogHeader>
-          <form onSubmit={handleNotifySubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Adresă email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="tu@exemplu.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full"
-              />
-            </div>
-            <div className="flex gap-3 justify-end">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => setNotifyDialogOpen(false)}
-                disabled={isSubmitting}
-              >
-                Anulează
-              </Button>
-              <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Se trimite..." : "Notifică-mă"}
-              </Button>
-            </div>
-          </form>
-        </DialogContent>
-      </Dialog>
-
-      {homePageJsonLd.map((schema, index) => (
-        <Script
-          key={index}
-          type="application/ld+json"
-          id={`jsonld-${index}`}
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      ))}
     </>
   );
 }

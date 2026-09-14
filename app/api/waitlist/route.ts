@@ -1,31 +1,41 @@
+import {
+  apiError,
+  checkOrigin,
+  jsonBody,
+  rateLimit,
+  requestIP,
+} from "@/lib/api";
 import { NextResponse } from "next/server";
-
-type WaitlistEntry = {
-  name: string;
-  email: string;
-  businessType: string;
-  tier: string;
-};
-
-const waitlistStore: WaitlistEntry[] = [];
-
+import { z } from "zod";
+import { supabaseServerAdmin } from "@/lib/supabase/server";
+const schema = z.object({
+  name: z.string().trim().min(2).max(150),
+  email: z.string().trim().email().max(254),
+  businessType: z.string().max(200).default(""),
+  tier: z.string().max(40).default("Starter"),
+});
 export async function POST(request: Request) {
-  const body = (await request.json()) as Partial<WaitlistEntry>;
-
-  if (!body.email || !body.name) {
-    return NextResponse.json({ ok: false, message: "Missing fields" }, { status: 400 });
+  try {
+    checkOrigin(request);
+    const parsed = schema.safeParse(await jsonBody(request));
+    if (!parsed.success)
+      return NextResponse.json(
+        { ok: false, message: "Date invalide" },
+        { status: 400 },
+      );
+    await rateLimit("waitlist", requestIP(request), 5, 3600);
+    const { error } = await supabaseServerAdmin().from("waitlist").upsert(
+      {
+        name: parsed.data.name,
+        email: parsed.data.email.toLowerCase(),
+        business_type: parsed.data.businessType,
+        tier: parsed.data.tier,
+      },
+      { onConflict: "email", ignoreDuplicates: true },
+    );
+    if (error) throw error;
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    return apiError(error);
   }
-
-  waitlistStore.push({
-    name: body.name,
-    email: body.email,
-    businessType: body.businessType || "",
-    tier: body.tier || "Starter",
-  });
-
-  return NextResponse.json({ ok: true, received: waitlistStore.length });
-}
-
-export async function GET() {
-  return NextResponse.json({ ok: true, total: waitlistStore.length });
 }

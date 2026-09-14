@@ -1,178 +1,127 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { createServerClient } from "@supabase/ssr";
-
+import { z } from "zod";
 import { blueprintSchema } from "@/lib/zodSchemas";
 import { supabaseServerAdmin } from "@/lib/supabase/server";
-
+import {
+  ApiError,
+  apiError,
+  jsonBody,
+  requireSubscription,
+  requireUser,
+  rateLimit,
+} from "@/lib/api";
+import { assetIdFromUrl } from "@/lib/assets";
+import { notifyBlueprint } from "@/lib/blueprint-notification";
 export async function POST(request: Request) {
   try {
-    const payload = await request.json();
-    const { sessionId, ...formData } = payload;
-    const parse = blueprintSchema.safeParse(formData);
-
-    if (!parse.success) {
-      return NextResponse.json(
-        { ok: false, message: "Validation failed", issues: parse.error.flatten() },
-        { status: 400 },
-      );
+    const user = await requireSubscription(request);
+    await rateLimit("blueprint", user.id, 10, 300);
+    const payload = await jsonBody(request);
+    const envelope = z
+      .object({ submissionKey: z.string().uuid() })
+      .safeParse(payload);
+    const parse = blueprintSchema.safeParse(payload);
+    if (!envelope.success || !parse.success)
+      throw new ApiError(400, "Verifică informațiile din formular.");
+    const data = parse.data,
+      db = supabaseServerAdmin(),
+      submissionKey = envelope.data.submissionKey;
+    const uploads = data.look.assetUploads || [];
+    const assetIds = uploads.map(assetIdFromUrl);
+    if (
+      assetIds.some((id) => !id) ||
+      uploads.length > 20 ||
+      new Set(uploads).size !== uploads.length
+    )
+      throw new ApiError(400, "Lista de fișiere este invalidă.");
+    if (assetIds.length) {
+      const { data: owned, error } = await db
+        .from("blueprint_assets")
+        .select("id")
+        .eq("user_id", user.id)
+        .in("id", assetIds);
+      if (error) throw error;
+      if (owned?.length !== assetIds.length)
+        throw new ApiError(403, "Un fișier nu aparține acestui cont.");
     }
-
-    const data = parse.data;
-    const supabase = supabaseServerAdmin();
-
-    // Get user from session
-    const cookieStore = await cookies();
-    const supabaseAuth = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() {
-            return cookieStore.getAll();
-          },
-        },
-      }
-    );
-    const { data: { user } } = await supabaseAuth.auth.getUser();
-
-    // Save to Supabase
-    const { data: blueprint, error } = await supabase
+    const { data: blueprint, error } = await db
       .from("blueprints")
-      .insert({
-        user_id: user?.id || null,
-        business_name: data.identity.businessName,
-        one_liner: data.identity.oneLiner,
-        what_you_sell: data.identity.whatYouSell,
-        brand_personality: data.identity.brandPersonality,
-        main_goal: data.vision.mainGoal === "Other" && data.vision.customMainGoal
-          ? data.vision.customMainGoal
-          : data.vision.mainGoal,
-        "references": data.look.references,
-        color_preference: data.look.colorPreference,
-        imagery_vibe: data.look.imageryVibe,
-        assets_note: data.look.assetsNote,
-        asset_uploads: data.look.assetUploads,
-        pages: data.content.pages,
-        cta_destination: data.content.ctaDestination,
-        domain_status: data.technical.domainStatus,
-        integrations: data.technical.integrations,
-        current_site: data.technical.currentSite,
-        timeline_confirmed: data.confirmations.termsAccepted,
-        cancellation_confirmed: data.confirmations.termsAccepted,
-        sla_confirmed: data.confirmations.termsAccepted,
-        full_data: data,
-      })
-      .select()
-      .single();
-
-    if (error) {
-      console.error("Error saving blueprint:", error);
-      return NextResponse.json(
-        { ok: false, message: "Failed to save blueprint" },
-        { status: 500 },
-      );
+      .upsert(
+        {
+          user_id: user.id,
+          submission_key: submissionKey,
+          business_name: data.identity.businessName,
+          one_liner: data.identity.oneLiner,
+          what_you_sell: data.identity.whatYouSell,
+          brand_personality: data.identity.brandPersonality,
+          main_goal:
+            data.vision.mainGoal === "Other"
+              ? data.vision.customMainGoal
+              : data.vision.mainGoal,
+          references: data.look.references,
+          color_preference: data.look.colorPreference,
+          imagery_vibe: data.look.imageryVibe,
+          assets_note: data.look.assetsNote,
+          asset_uploads: uploads,
+          pages: data.content.pages,
+          cta_destination: data.content.ctaDestination,
+          domain_status: data.technical.domainStatus,
+          integrations: data.technical.integrations,
+          current_site: data.technical.currentSite,
+          timeline_confirmed: true,
+          cancellation_confirmed: true,
+          sla_confirmed: true,
+          full_data: data,
+        },
+        { onConflict: "user_id,submission_key", ignoreDuplicates: true },
+      )
+      .select("id")
+      .maybeSingle();
+    if (error) throw error;
+    let id = blueprint?.id;
+    if (!id) {
+      const { data: existing, error: readError } = await db
+        .from("blueprints")
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("submission_key", submissionKey)
+        .single();
+      if (readError) throw readError;
+      id = existing.id;
     }
-
-    // Organize assets into blueprint folder if there are uploads and sessionId
-    if (sessionId && data.look.assetUploads && data.look.assetUploads.length > 0) {
-      try {
-        const organizeUrl = request.url.replace('/api/blueprint', '/api/blueprint/organize-assets');
-        const organizeResponse = await fetch(organizeUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            sessionId,
-            blueprintId: blueprint.id,
-            assetUrls: data.look.assetUploads,
-          }),
-        });
-
-        if (organizeResponse.ok) {
-          const { updatedUrls } = await organizeResponse.json();
-
-          // Update blueprint with new URLs
-          if (updatedUrls && updatedUrls.length > 0) {
-            await supabase
-              .from("blueprints")
-              .update({ asset_uploads: updatedUrls })
-              .eq("id", blueprint.id);
-
-            console.log("Assets organized successfully for blueprint:", blueprint.id);
-          }
-        } else {
-          console.error("Failed to organize assets:", await organizeResponse.text());
-        }
-      } catch (organizeError) {
-        console.error("Asset organization error:", organizeError);
-        // Don't fail the request if asset organization fails
-      }
+    if (assetIds.length) {
+      const { error: assetError } = await db
+        .from("blueprint_assets")
+        .update({ blueprint_id: id })
+        .eq("user_id", user.id)
+        .in("id", assetIds);
+      if (assetError) throw assetError;
     }
-
-    // Send email notification
+    let notification = "pending";
     try {
-      const emailResponse = await fetch(`${request.url.replace('/api/blueprint', '/api/blueprint/notify')}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ blueprintId: blueprint.id, data }),
-      });
-
-      const emailResult = await emailResponse.json();
-
-      if (!emailResponse.ok) {
-        console.error("Email notification failed:", emailResult);
-      } else {
-        console.log("Email sent successfully:", emailResult);
-      }
-    } catch (emailError) {
-      console.error("Email notification error:", emailError);
-      // Don't fail the request if email fails
+      notification = await notifyBlueprint(id);
+    } catch {
+      console.error("Blueprint saved; notification requires retry", id);
     }
-
-    return NextResponse.json({ ok: true, id: blueprint.id });
+    return NextResponse.json({ ok: true, id, notification });
   } catch (error) {
-    console.error("Blueprint submission error:", error);
-    return NextResponse.json(
-      { ok: false, message: "Internal server error" },
-      { status: 500 },
-    );
+    return apiError(error);
   }
 }
-
-export async function GET() {
-  const supabase = supabaseServerAdmin();
-
-  // Get user from session
-  const cookieStore = await cookies();
-  const supabaseAuth = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-      },
-    }
-  );
-  const { data: { user } } = await supabaseAuth.auth.getUser();
-
-  // Check if user has submitted a blueprint
-  let hasBlueprint = false;
-  if (user) {
-    const { data: userBlueprint } = await supabase
+export async function GET(request: Request) {
+  try {
+    const user = await requireUser(request);
+    const { data, error } = await supabaseServerAdmin()
       .from("blueprints")
       .select("id")
       .eq("user_id", user.id)
-      .limit(1)
-      .single();
-
-    hasBlueprint = !!userBlueprint;
+      .limit(1);
+    if (error) throw error;
+    return NextResponse.json(
+      { ok: true, hasBlueprint: !!data?.length },
+      { headers: { "Cache-Control": "private, no-store" } },
+    );
+  } catch (error) {
+    return apiError(error);
   }
-
-  const { count } = await supabase
-    .from("blueprints")
-    .select("*", { count: "exact", head: true });
-
-  return NextResponse.json({ ok: true, total: count || 0, hasBlueprint });
 }

@@ -1,94 +1,54 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-
+import { hasSubscriptionAccess } from "@/lib/subscription";
 export async function middleware(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({
-    request,
-  });
-
+  let response = NextResponse.next({ request });
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    (process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)!,
     {
       cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) =>
-            request.cookies.set(name, value)
+        getAll: () => request.cookies.getAll(),
+        setAll(cookies) {
+          cookies.forEach(({ name, value }) =>
+            request.cookies.set(name, value),
           );
-          supabaseResponse = NextResponse.next({
-            request,
-          });
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
+          response = NextResponse.next({ request });
+          cookies.forEach(({ name, value, options }) =>
+            response.cookies.set(name, value, options),
           );
         },
       },
-    }
+    },
   );
-
-  // Get the current user session
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  const pathname = request.nextUrl.pathname;
-
-  // Protected routes that require auth
-  if (pathname === "/subscribe" || pathname === "/account" || pathname === "/chat") {
-    if (!user) {
-      const redirectUrl = new URL("/login", request.url);
-      redirectUrl.searchParams.set("redirect", pathname);
-      return NextResponse.redirect(redirectUrl);
-    }
-  }
-
-  // Protected route: /start (Blueprint form) requires auth + subscription
-  if (pathname === "/start") {
-    // Not logged in - redirect to login
-    if (!user) {
-      console.log("[Middleware] /start - No user session found, redirecting to login");
-      const redirectUrl = new URL("/login", request.url);
-      redirectUrl.searchParams.set("redirect", pathname);
-      return NextResponse.redirect(redirectUrl);
-    }
-
-    // Check subscription status
-    const { data: profile, error: profileError } = await supabase
+  const redirect = (path: string) => {
+    const result = NextResponse.redirect(new URL(path, request.url));
+    response.cookies.getAll().forEach((cookie) => result.cookies.set(cookie));
+    return result;
+  };
+  if (!user)
+    return redirect(
+      `/login?redirect=${encodeURIComponent(request.nextUrl.pathname + request.nextUrl.search)}`,
+    );
+  if (request.nextUrl.pathname === "/start") {
+    const { data: profile, error } = await supabase
       .from("profiles")
-      .select("subscription_status, subscription_expires_at")
+      .select("role,subscription_status,subscription_expires_at")
       .eq("id", user.id)
       .single();
-
-    console.log("[Middleware] /start - User:", user.id, "Status:", profile?.subscription_status, "Error:", profileError?.message);
-
-    // Allow access if subscription is active OR cancelled but not expired
-    const hasAccess =
-      profile?.subscription_status === "active" ||
-      (profile?.subscription_status === "cancelled" &&
-        profile?.subscription_expires_at &&
-        new Date(profile.subscription_expires_at) > new Date());
-
-    if (!hasAccess) {
-      console.log("[Middleware] /start - No access, redirecting to subscribe");
-      return NextResponse.redirect(new URL("/subscribe", request.url));
-    }
+    if (error)
+      return new NextResponse(
+        "Serviciul nu este disponibil momentan. Încearcă din nou.",
+        { status: 503 },
+      );
+    if (profile?.role !== "admin" && !hasSubscriptionAccess(profile))
+      return redirect("/subscribe");
   }
-
-  return supabaseResponse;
+  return response;
 }
-
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public files (images, html templates, etc.)
-     */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|html|css|js|json|xml|txt|woff|woff2|ttf|eot)$).*)",
-  ],
+  matcher: ["/admin/:path*", "/account/:path*", "/chat/:path*", "/subscribe/:path*", "/start"],
 };

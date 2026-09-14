@@ -3,10 +3,10 @@ import type { DefaultSeoProps } from "next-seo";
 
 export const siteConfig = {
   name: "WebForm",
-  title: "WebForm — Site-ul tău, construit pentru tine — gestionat pentru totdeauna",
+  title: "WebForm — Site-ul tău, fără bătăi de cap",
   titleTemplate: "%s | WebForm România",
   description:
-    "Lansare în 7 zile. Actualizări în 3 zile. WebForm construiește, găzduiește și gestionează site-ul tău sub un singur abonament. Fără constructori de site-uri, fără bătăi de cap tehnice.",
+    "Un site profesionist construit și administrat pentru tine, de la 180 lei/lună. Design, găzduire, domeniu și actualizări într-un singur abonament.",
   url: "https://ro.joinwebform.com",
   domain: "ro.joinwebform.com",
   creator: "WebForm România",
@@ -42,14 +42,14 @@ export const siteConfig = {
     "site web romania",
     "servicii web",
   ],
-  themeColor: "#0F0F11",
+  themeColor: "#f7f5ef",
   twitterHandle: "@webform_ro",
   linkedinUrl: "https://www.linkedin.com/company/webform-ro",
-  email: "contact@webform.site",
-  phone: "+40 722 000 000",
+  email: "alexionescu870@gmail.com",
+  phone: "+40 764 902 801",
   address: {
     street: "România",
-    city: "Brașov",
+    city: "București",
     country: "România",
     countryCode: "RO",
   },
@@ -147,7 +147,7 @@ export const defaultMetadata: Metadata = {
     // yahoo: "your-yahoo-verification-code",
   },
   other: {
-    "msapplication-TileColor": "#0F0F11",
+    "msapplication-TileColor": "#f7f5ef",
     "theme-color": siteConfig.themeColor,
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-translucent",

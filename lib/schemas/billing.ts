@@ -27,11 +27,11 @@ export const companyBillingSchema = z.object({
   iban: z.string().optional().default(""),
   // Headquarters (required county and address)
   hqCounty: z.string().min(1, "Judetul sediului social este obligatoriu"),
-  hqCity: z.string().optional().default(""),
+  hqCity: z.string().trim().min(1, "Localitatea sediului este obligatorie"),
   hqAddress: z.string().min(5, "Adresa sediului social este obligatorie"),
   // Contact (optional)
   contactName: z.string().optional().default(""),
-  contactPhone: z.string().optional().default(""),
+  contactPhone: z.string().trim().min(10, "Telefonul de contact este obligatoriu"),
   // Delivery (optional)
   deliveryCounty: z.string().optional().default(""),
   deliveryCity: z.string().optional().default(""),

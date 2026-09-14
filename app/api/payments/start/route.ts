@@ -1,148 +1,117 @@
+import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
-
-import { createPaymentRequest, isNetopiaConfigured } from "@/lib/netopia";
+import { z } from "zod";
+import {
+  createPaymentRequest,
+  generateOrderId,
+  isNetopiaConfigured,
+} from "@/lib/netopia";
 import { getPlan } from "@/lib/pricing";
-import { billingSchema, type BillingInfo } from "@/lib/schemas/billing";
-
+import { billingSchema } from "@/lib/schemas/billing";
+import {
+  ApiError,
+  apiError,
+  jsonBody,
+  rateLimit,
+  requireUser,
+  requestIP,
+} from "@/lib/api";
+import { supabaseServerAdmin } from "@/lib/supabase/server";
+const schema = z.object({
+  planId: z.string().max(50),
+  requestKey: z.string().uuid(),
+  billingInfo: billingSchema,
+  browserData: z.record(z.string().max(2000)).optional(),
+});
 export async function POST(request: Request) {
   try {
-    const { planId, browserData, billingInfo } = await request.json();
-
-    // Validate plan
+    const user = await requireUser(request);
+    const parsed = schema.safeParse(await jsonBody(request));
+    if (!parsed.success)
+      throw new ApiError(400, "Verifică datele de facturare.");
+    const { planId, requestKey, billingInfo, browserData } = parsed.data;
     const plan = getPlan(planId);
-    if (!plan) {
-      return NextResponse.json(
-        { error: "Plan invalid" },
-        { status: 400 }
+    if (!plan) throw new ApiError(400, "Plan invalid.");
+    if (!isNetopiaConfigured())
+      throw new ApiError(
+        503,
+        "Plata online este temporar indisponibilă. Te rugăm să ne contactezi.",
       );
-    }
-
-    // Validate billing info
-    if (!billingInfo) {
-      return NextResponse.json(
-        { error: "Informatiile de facturare sunt obligatorii" },
-        { status: 400 }
-      );
-    }
-
-    const billingResult = billingSchema.safeParse(billingInfo);
-    if (!billingResult.success) {
-      return NextResponse.json(
-        { error: "Informatii de facturare invalide" },
-        { status: 400 }
-      );
-    }
-
-    const validatedBilling: BillingInfo = billingResult.data;
-
-    // Check if Netopia is configured
-    if (!isNetopiaConfigured()) {
-      return NextResponse.json(
-        {
-          error: "Sistemul de plati nu este configurat inca. Te rugam sa ne contactezi pentru plata manuala.",
-          notConfigured: true,
-        },
-        { status: 503 }
-      );
-    }
-
-    // Get the access token from Authorization header
-    const authHeader = request.headers.get("Authorization");
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return NextResponse.json(
-        { error: "Trebuie sa fii autentificat" },
-        { status: 401 }
-      );
-    }
-
-    const accessToken = authHeader.replace("Bearer ", "");
-
-    // Create Supabase client with the access token
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        global: {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        },
-      }
-    );
-
-    // Get user from the token
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser(accessToken);
-
-    if (userError || !user) {
-      return NextResponse.json(
-        { error: "Trebuie sa fii autentificat" },
-        { status: 401 }
-      );
-    }
-
-    // Get user profile for name
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("name, business_name")
-      .eq("id", user.id)
-      .single();
-
-    const userName = profile?.name || profile?.business_name || "Client";
-
-    // Get client IP
-    const clientIp =
-      request.headers.get("x-forwarded-for")?.split(",")[0] ||
-      request.headers.get("x-real-ip") ||
-      "127.0.0.1";
-
-    // Create payment request
-    const paymentResult = await createPaymentRequest({
-      userId: user.id,
-      userEmail: user.email || "",
-      userName,
-      planId,
-      browserData,
-      clientIp,
-    });
-
-    // Store order in database for tracking (use service role for insert)
-    const supabaseAdmin = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
-    );
-
-    const { error: orderError } = await supabaseAdmin.from("orders").insert({
-      id: paymentResult.orderId,
+    await rateLimit("checkout", user.id, 10, 300);
+    const fingerprint = createHash("sha256")
+      .update(JSON.stringify({ planId, amount: plan.price, billingInfo }))
+      .digest("hex");
+    const db = supabaseServerAdmin();
+    const orderId = generateOrderId();
+    // Persist before contacting the processor. The unique key handles double-clicks,
+    // concurrent requests and retries after a lost HTTP response.
+    const { error } = await db.from("orders").insert({
+      id: orderId,
       user_id: user.id,
       plan_id: planId,
       amount: plan.price,
       currency: "RON",
       status: "pending",
-      ntp_id: paymentResult.ntpId,
-      billing_info: validatedBilling,
+      billing_info: billingInfo,
+      request_key: requestKey,
+      request_fingerprint: fingerprint,
     });
-
-    if (orderError) {
-      console.error("Error saving order:", orderError);
-      // Don't fail the payment, just log the error
+    if (error) {
+      if (error.code !== "23505") throw error;
+      const { data: existing, error: readError } = await db
+        .from("orders")
+        .select("id,plan_id,status,checkout_url,request_fingerprint")
+        .eq("user_id", user.id)
+        .eq("request_key", requestKey)
+        .single();
+      if (readError) throw readError;
+      if (
+        existing.plan_id !== planId ||
+        existing.request_fingerprint !== fingerprint
+      )
+        throw new ApiError(409, "Planul s-a schimbat. Reîncarcă pagina.");
+      if (existing.status === "completed")
+        return NextResponse.json({
+          success: true,
+          orderId: existing.id,
+          paymentUrl: `/subscribe/success?orderId=${encodeURIComponent(existing.id)}`,
+        });
+      if (existing.checkout_url && existing.status === "pending")
+        return NextResponse.json({
+          success: true,
+          orderId: existing.id,
+          paymentUrl: existing.checkout_url,
+        });
+      throw new ApiError(
+        409,
+        "Comanda este în curs de verificare. Nu iniția o plată nouă; verifică starea din cont.",
+      );
     }
-
+    const payment = await createPaymentRequest({
+      orderId,
+      userId: user.id,
+      userEmail: user.email || "",
+      planId,
+      billingInfo,
+      browserData,
+      clientIp: requestIP(request),
+    });
+    if (!payment.paymentUrl || !payment.ntpId)
+      throw new Error("Processor did not return checkout details");
+    const url = new URL(payment.paymentUrl);
+    if (url.protocol !== "https:")
+      throw new Error("Invalid processor checkout URL");
+    const { error: saveError } = await db
+      .from("orders")
+      .update({ ntp_id: payment.ntpId, checkout_url: payment.paymentUrl })
+      .eq("id", orderId);
+    if (saveError) throw saveError;
     return NextResponse.json({
       success: true,
-      orderId: paymentResult.orderId,
-      paymentUrl: paymentResult.paymentUrl,
+      orderId,
+      paymentUrl: payment.paymentUrl,
     });
   } catch (error) {
-    console.error("Payment start error:", error);
-    return NextResponse.json(
-      {
-        error: error instanceof Error ? error.message : "Eroare la initierea platii",
-      },
-      { status: 500 }
-    );
+    return apiError(error);
   }
 }

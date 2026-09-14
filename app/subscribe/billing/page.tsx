@@ -26,7 +26,7 @@ export default async function BillingPage({ searchParams }: BillingPageProps) {
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    (process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)!,
     {
       cookies: {
         getAll() {
@@ -40,13 +40,13 @@ export default async function BillingPage({ searchParams }: BillingPageProps) {
 
   // Redirect if not authenticated
   if (!user) {
-    redirect(`/login?redirect=/subscribe/billing?planId=${planId}`);
+    redirect(`/login?redirect=${encodeURIComponent(`/subscribe/billing?planId=${planId}`)}`);
   }
 
   // Fetch profile for pre-filling
   const { data: profile } = await supabase
     .from("profiles")
-    .select("name, phone")
+    .select("name, phone_number")
     .eq("id", user.id)
     .single();
 
@@ -54,7 +54,7 @@ export default async function BillingPage({ searchParams }: BillingPageProps) {
     <BillingClient
       plan={plan}
       initialName={profile?.name || ""}
-      initialPhone={profile?.phone || ""}
+      initialPhone={profile?.phone_number || ""}
     />
   );
 }

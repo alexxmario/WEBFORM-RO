@@ -1,4 +1,5 @@
 "use client";
+import { hasSubscriptionAccess } from "@/lib/subscription";
 
 import { useState, useMemo } from "react";
 import { Loader2, User, CreditCard, LogOut, AlertTriangle } from "lucide-react";
@@ -12,6 +13,7 @@ import { supabaseBrowser } from "@/lib/supabase/browser";
 import { getPlan } from "@/lib/pricing";
 
 interface UserProfile {
+  isAdmin?: boolean;
   id: string;
   email: string;
   name?: string;
@@ -31,7 +33,7 @@ export function AccountClient({ initialUser }: AccountClientProps) {
 
   // Get current plan details
   const currentPlan = initialUser.subscriptionPlan ? getPlan(initialUser.subscriptionPlan) : null;
-  const hasActiveSubscription = initialUser.subscriptionStatus === "active";
+  const hasActiveSubscription = hasSubscriptionAccess({subscription_status:initialUser.subscriptionStatus,subscription_expires_at:initialUser.subscriptionExpiresAt});
 
   // Format expiry date
   const formatDate = (dateString: string | null | undefined) => {
@@ -93,6 +95,8 @@ export function AccountClient({ initialUser }: AccountClientProps) {
             </p>
           </div>
 
+          {initialUser.isAdmin && <Link href="/admin" className="action action-dark">Deschide panoul de administrare ↗</Link>}
+
           {/* Profile Section */}
           <div className="rounded-2xl border border-border/60 bg-card/80 p-6">
             <div className="flex items-center gap-3 mb-4">
@@ -126,12 +130,14 @@ export function AccountClient({ initialUser }: AccountClientProps) {
 
             {hasActiveSubscription && currentPlan ? (
               <div className="space-y-4">
+                <Link href="/start" className="text-primary underline">Deschide proiectul</Link>
+                <Link href="/chat" className="ml-4 text-primary underline">Suport</Link>
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-muted-foreground">Plan curent</p>
                     <p className="text-foreground font-medium">{currentPlan.name}</p>
                   </div>
-                  <Badge className="bg-green-500/20 text-green-400">Activ</Badge>
+                  <Badge className="bg-green-500/20 text-green-400">{initialUser.subscriptionStatus === "cancelled" ? "Anulat · acces până la expirare" : "Activ"}</Badge>
                 </div>
 
                 <div>
@@ -165,7 +171,7 @@ export function AccountClient({ initialUser }: AccountClientProps) {
                           <p className="font-medium text-red-400">Esti sigur?</p>
                           <p className="text-sm text-muted-foreground">
                             Abonamentul va ramane activ pana la {formatDate(initialUser.subscriptionExpiresAt)},
-                            dar nu se va reinnoi automat.
+                            iar serviciul se încheie la expirarea perioadei plătite.
                           </p>
                         </div>
                       </div>
@@ -200,6 +206,8 @@ export function AccountClient({ initialUser }: AccountClientProps) {
               </div>
             ) : (
               <div className="space-y-4">
+                <Link href="/start" className="text-primary underline">Deschide proiectul</Link>
+                <Link href="/chat" className="ml-4 text-primary underline">Suport</Link>
                 <p className="text-muted-foreground">
                   Nu ai un abonament activ. Aboneaza-te pentru a accesa toate template-urile.
                 </p>

@@ -9,14 +9,14 @@ export default function TemplatesPage() {
   return (
     <>
       <Header />
-      <main className="container space-y-10 pb-16 pt-28">
+      <main id="main" className="container space-y-10 pb-16 pt-28">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <h1 className="font-display text-display-md">
-              Explorează librăria noastră de șabloane
+              Un punct de plecare pentru site-ul tău.
             </h1>
             <p className="max-w-2xl text-muted-foreground">
-              Alege din {templateOptions.length}+ șabloane proiectate profesional. Fiecare poate fi personalizat complet pentru a se potrivi brandului tău.
+              Alege din {templateOptions.length} șabloane proiectate profesional. Fiecare poate fi personalizat complet pentru a se potrivi brandului tău.
             </p>
           </div>
           <BlueprintButton size="lg">Completează Formularul</BlueprintButton>
@@ -32,12 +32,11 @@ export default function TemplatesPage() {
               className="group relative flex flex-col gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/30"
             >
               <div
-                className="relative aspect-square w-full overflow-hidden rounded-xl bg-cover bg-center shadow-inner"
+                className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-cover bg-center shadow-inner"
                 style={{
                   backgroundImage: template.thumbnail
                     ? `url(${template.thumbnail})`
                     : "radial-gradient(circle at 20% 30%,hsl(var(--accent) / 0.35),transparent 40%),radial-gradient(circle at 80% 30%,hsl(var(--primary) / 0.35),transparent 40%),linear-gradient(120deg,hsl(var(--muted) / 0.6),hsl(var(--background) / 0.7))",
-                  filter: "brightness(1.45) saturate(1.25)",
                 }}
               >
                 {template.thumbnail && (
@@ -45,7 +44,8 @@ export default function TemplatesPage() {
                     src={template.thumbnail}
                     alt={template.name}
                     fill
-                    className="object-cover brightness-125 saturate-125 transition group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover object-top transition group-hover:scale-105"
                   />
                 )}
               </div>

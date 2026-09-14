@@ -1,69 +1,56 @@
+import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
+import { ApiError, apiError, rateLimit, requireSubscription } from "@/lib/api";
+import { ASSET_BUCKET, detectAsset } from "@/lib/assets";
 import { supabaseServerAdmin } from "@/lib/supabase/server";
-
 export async function POST(request: Request) {
   try {
-    const formData = await request.formData();
-    const file = formData.get("file") as File;
-    const sessionId = formData.get("sessionId") as string;
-
-    if (!file) {
-      return NextResponse.json(
-        { ok: false, error: "No file provided" },
-        { status: 400 }
+    const user = await requireSubscription(request);
+    await rateLimit("upload", user.id, 30, 3600);
+    if (Number(request.headers.get("content-length") || 0) > 11 * 1024 * 1024)
+      throw new ApiError(413, "Limita este 10 MB per fișier.");
+    const body = await request.formData();
+    const file = body.get("file");
+    if (
+      !(file instanceof File) ||
+      file.size === 0 ||
+      file.size > 10 * 1024 * 1024
+    )
+      throw new ApiError(400, "Încarcă un fișier între 1 byte și 10 MB.");
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const type = detectAsset(buffer);
+    if (!type || (file.type && file.type !== type.mime))
+      throw new ApiError(
+        400,
+        "Fișier invalid. Folosește JPG, PNG, WebP, GIF sau PDF.",
       );
-    }
-
-    if (!sessionId) {
-      return NextResponse.json(
-        { ok: false, error: "No session ID provided" },
-        { status: 400 }
-      );
-    }
-
-    // Convert file to buffer
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    // Generate unique filename with session folder
-    const timestamp = Date.now();
-    const randomStr = Math.random().toString(36).substring(2, 15);
-    const extension = file.name.split(".").pop();
-    const filename = `${sessionId}/${timestamp}-${randomStr}.${extension}`;
-
-    const supabase = supabaseServerAdmin();
-
-    // Upload to Supabase Storage in session-specific folder
-    const { error } = await supabase.storage
-      .from("blueprint-assets")
-      .upload(filename, buffer, {
-        contentType: file.type,
-        cacheControl: "3600",
+    const id = randomUUID(),
+      path = `${user.id}/${id}.${type.extension}`;
+    const db = supabaseServerAdmin();
+    const { error } = await db.storage
+      .from(ASSET_BUCKET)
+      .upload(path, buffer, { contentType: type.mime });
+    if (error) throw error;
+    const { error: recordError } = await db
+      .from("blueprint_assets")
+      .insert({
+        id,
+        user_id: user.id,
+        storage_path: path,
+        original_name: file.name.slice(0, 255),
+        mime_type: type.mime,
+        size_bytes: file.size,
       });
-
-    if (error) {
-      console.error("Upload error:", error);
-      return NextResponse.json(
-        { ok: false, error: error.message },
-        { status: 500 }
-      );
+    if (recordError) {
+      await db.storage.from(ASSET_BUCKET).remove([path]);
+      throw recordError;
     }
-
-    // Get public URL
-    const { data: { publicUrl } } = supabase.storage
-      .from("blueprint-assets")
-      .getPublicUrl(filename);
-
     return NextResponse.json({
       ok: true,
-      url: publicUrl,
+      url: `/api/assets/${id}`,
       filename: file.name,
     });
   } catch (error) {
-    console.error("Upload error:", error);
-    return NextResponse.json(
-      { ok: false, error: error instanceof Error ? error.message : "Upload failed" },
-      { status: 500 }
-    );
+    return apiError(error);
   }
 }

@@ -417,7 +417,7 @@ export function FloatingLines({
 
     const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(setSize) : null;
 
-    if (ro && containerRef.current) {
+    if (ro) {
       ro.observe(containerRef.current);
     }
 
@@ -476,7 +476,7 @@ export function FloatingLines({
 
     return () => {
       cancelAnimationFrame(raf);
-      if (ro && containerRef.current) {
+      if (ro) {
         ro.disconnect();
       }
 

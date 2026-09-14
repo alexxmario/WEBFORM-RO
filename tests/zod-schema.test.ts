@@ -20,7 +20,7 @@ const validBlueprint = {
       { url: "https://linear.app", notes: "Clean layout" },
       { url: "https://stripe.com", notes: "Trustworthy design" },
     ],
-    colorPreference: "#0EA5E9",
+    colorPreference: ["#0EA5E9"],
     imageryVibe: ["Minimal"],
     assetsNote: "",
   },
@@ -40,9 +40,7 @@ const validBlueprint = {
     timezone: "EST",
   },
   confirmations: {
-    timeline: true,
-    cancellation: true,
-    sla: true,
+    termsAccepted: true,
   },
 };
 
@@ -55,16 +53,16 @@ describe("blueprintSchema", () => {
   it("rejects when confirmations are missing", () => {
     const parsed = blueprintSchema.safeParse({
       ...validBlueprint,
-      confirmations: { timeline: false, cancellation: false, sla: false },
+      confirmations: { termsAccepted: false },
     });
     expect(parsed.success).toBe(false);
   });
 
-  it("enforces at least one reference site", () => {
+  it("allows clients to proceed without reference sites", () => {
     const parsed = blueprintSchema.safeParse({
       ...validBlueprint,
       look: { ...validBlueprint.look, references: [] },
     });
-    expect(parsed.success).toBe(false);
+    expect(parsed.success).toBe(true);
   });
 });

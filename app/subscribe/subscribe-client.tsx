@@ -1,4 +1,5 @@
 "use client";
+import { hasSubscriptionAccess } from "@/lib/subscription";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -8,7 +9,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { getPlansByTier, getMonthlyEquivalent, getPlan, type Plan } from "@/lib/pricing";
+import { getPlansByTier, getMonthlyEquivalent, formatPrice, getPlan, type Plan } from "@/lib/pricing";
 
 type BillingInterval = "month" | "year";
 
@@ -33,7 +34,7 @@ export function SubscribeClient({ initialUser }: SubscribeClientProps) {
 
   // Get user's current plan tier (if any)
   const currentPlan = initialUser.subscriptionPlan ? getPlan(initialUser.subscriptionPlan) : null;
-  const currentTier = currentPlan?.tier || null;
+  const currentTier = hasSubscriptionAccess({subscription_status:initialUser.subscriptionStatus,subscription_expires_at:initialUser.subscriptionExpiresAt}) ? currentPlan?.tier || null : null;
 
   const handleSubscribe = async (plan: Plan) => {
     // Redirect to billing page with plan ID
@@ -50,7 +51,7 @@ export function SubscribeClient({ initialUser }: SubscribeClientProps) {
             Alege planul potrivit pentru tine
           </h1>
           <p className="mt-2 text-muted-foreground">
-            Acces complet la toate template-urile noastre profesionale. Anulezi oricand.
+            Construim și administrăm site-ul tău. Alege planul în funcție de nevoile afacerii.
           </p>
 
           {/* Billing toggle */}
@@ -150,7 +151,7 @@ function PricingCard({ plan, billingInterval, onSubscribe, popular, isCurrentPla
         <h3 className="text-xl font-semibold text-foreground">{plan.name.replace(" Anual", "")}</h3>
         <div className="mt-3 flex items-baseline gap-1">
           <span className="text-4xl font-bold text-foreground">
-            {monthlyEquivalent}
+            {formatPrice(monthlyEquivalent)}
           </span>
           <span className="text-muted-foreground">RON/luna</span>
         </div>
@@ -177,7 +178,6 @@ function PricingCard({ plan, billingInterval, onSubscribe, popular, isCurrentPla
 
       <Button
         onClick={() => onSubscribe(plan)}
-        disabled={isCurrentPlan}
         className={`w-full ${
           isCurrentPlan
             ? "bg-green-500/20 text-green-400 hover:bg-green-500/20 cursor-default"
@@ -190,7 +190,7 @@ function PricingCard({ plan, billingInterval, onSubscribe, popular, isCurrentPla
         {isCurrentPlan ? (
           <>
             <Check className="mr-2 h-4 w-4" />
-            Planul tău actual
+            Reînnoiește planul
           </>
         ) : (
           "Abonează-te acum"

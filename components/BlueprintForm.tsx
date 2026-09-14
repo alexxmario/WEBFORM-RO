@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import {
   Controller,
   FieldPath,
@@ -103,6 +103,7 @@ export function BlueprintForm() {
     references?.some((ref) => ref.url === template.url),
   );
 
+  const submissionKey = useRef<string | null>(null);
   const [step, setStep] = useState(0);
   const [templateDialogOpen, setTemplateDialogOpen] = useState(false);
   const [customPageInput, setCustomPageInput] = useState("");
@@ -153,7 +154,7 @@ export function BlueprintForm() {
     try {
       const response = await fetch("/api/blueprint", {
         method: "POST",
-        body: JSON.stringify({ ...values, sessionId }),
+        body: JSON.stringify({ ...values, submissionKey: submissionKey.current || (submissionKey.current = crypto.randomUUID()) }),
       });
       if (!response.ok) {
         console.error("❌ API error:", response.status, await response.text());
@@ -239,9 +240,11 @@ export function BlueprintForm() {
         return result.url;
       });
 
-      const uploadedUrls = await Promise.all(uploadPromises);
+      const results = await Promise.allSettled(uploadPromises);
+      const uploadedUrls = results.flatMap(result => result.status === "fulfilled" ? [result.value] : []);
+      if (results.some(result => result.status === "rejected")) toast.error("Unele fișiere nu au fost încărcate. Le poți reîncerca.");
       setValue("look.assetUploads", [...currentUploads, ...uploadedUrls]);
-      toast.success(`${files.length} fișier${files.length > 1 ? 'e' : ''} încărcat${files.length > 1 ? 'e' : ''}`);
+      toast.success(`${uploadedUrls.length} fișier${files.length > 1 ? 'e' : ''} încărcat${files.length > 1 ? 'e' : ''}`);
     } catch (error) {
       console.error("Upload error:", error);
       toast.error("Încărcarea unor fișiere a eșuat");
@@ -476,7 +479,7 @@ export function BlueprintForm() {
               <input
                 type="file"
                 multiple
-                accept="image/*"
+                accept="image/jpeg,image/png,image/webp,image/gif,application/pdf"
                 disabled={uploadingFiles}
                 className="text-sm text-muted-foreground file:mr-3 file:rounded-full file:border file:border-border/60 file:bg-muted file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-foreground file:transition hover:file:border-primary/60 disabled:opacity-50 disabled:cursor-not-allowed"
                 onChange={handleFileUpload}
@@ -490,7 +493,7 @@ export function BlueprintForm() {
                 ) : assetUploads?.length ? (
                   `${assetUploads.length} fișier${assetUploads.length > 1 ? 'e' : ''} încărcat${assetUploads.length > 1 ? 'e' : ''}`
                 ) : (
-                  "Fișiere JPG, PNG, SVG suportate"
+                  "JPG, PNG, WebP, GIF sau PDF · maximum 10 MB/fișier"
                 )}
               </p>
             </Field>

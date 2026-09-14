@@ -1,3 +1,6 @@
+import { randomUUID } from "node:crypto";
+import type { BillingInfo } from "./schemas/billing";
+import { processorBilling, configuredVat } from "./payment-request";
 import { Netopia } from "netopia-card";
 import { getPlan, type Plan } from "./pricing";
 
@@ -16,33 +19,38 @@ export function isNetopiaConfigured(): boolean {
     NETOPIA_CONFIG.apiKey &&
     NETOPIA_CONFIG.posSignature &&
     NETOPIA_CONFIG.notifyUrl &&
-    NETOPIA_CONFIG.redirectUrl
+    NETOPIA_CONFIG.redirectUrl &&
+    process.env.NETOPIA_IPN_PUBLIC_KEY &&
+    configuredVat() !== null
   );
 }
 
 // Payment status codes from Netopia
 export const PAYMENT_STATUS = {
-  PENDING: 0,
-  PENDING_AUTH: 1,
+  PENDING: 1,
+  PENDING_AUTH: 14,
   CONFIRMED: 3,
-  CONFIRMED_PENDING: 4,
-  SCHEDULED: 5,
-  CREDITED: 6,
-  CANCELED: 7,
-  CREDIT_PENDING: 8,
-  ERROR: 10,
+  CONFIRMED_PENDING: 5,
+  SCHEDULED: 7,
+  CREDITED: 8,
+  CANCELED: 4,
+  CREDIT_PENDING: 9,
+  ERROR: 11,
   DECLINED: 12,
-  FRAUD: 15,
+  FRAUD: 13,
 } as const;
 
 // Helper to check if payment is successful
 export function isPaymentSuccessful(status: number): boolean {
-  return status === PAYMENT_STATUS.CONFIRMED || status === PAYMENT_STATUS.CONFIRMED_PENDING;
+  return (
+    status === PAYMENT_STATUS.CONFIRMED ||
+    status === PAYMENT_STATUS.CONFIRMED_PENDING
+  );
 }
 
 // Helper to check if payment is pending
 export function isPaymentPending(status: number): boolean {
-  return status === PAYMENT_STATUS.PENDING || status === PAYMENT_STATUS.PENDING_AUTH;
+  return [1, 2, 6, 7, 14, 15, 18].includes(status);
 }
 
 // Helper to get human-readable status
@@ -69,23 +77,23 @@ export function getPaymentStatusText(status: number): string {
 
 // Generate unique order ID
 export function generateOrderId(): string {
-  const timestamp = Date.now();
-  const random = Math.random().toString(36).substring(2, 8);
-  return `WF-${timestamp}-${random}`;
+  return `WF-${randomUUID()}`;
 }
 
 // Create a Netopia payment request
 export interface CreatePaymentParams {
   userId: string;
   userEmail: string;
-  userName: string;
+  orderId: string;
+  billingInfo: BillingInfo;
   planId: string;
   browserData?: Record<string, string>;
   clientIp?: string;
 }
 
 export async function createPaymentRequest(params: CreatePaymentParams) {
-  const { userEmail, userName, planId, browserData, clientIp } = params;
+  const { userEmail, orderId, billingInfo, planId, browserData, clientIp } =
+    params;
 
   const plan = getPlan(planId);
   if (!plan) {
@@ -96,18 +104,16 @@ export async function createPaymentRequest(params: CreatePaymentParams) {
     throw new Error("Netopia is not configured. Please add your credentials.");
   }
 
+  const returnUrl = new URL(NETOPIA_CONFIG.redirectUrl);
+  returnUrl.searchParams.set("orderId", orderId);
   const netopia = new Netopia({
     apiKey: NETOPIA_CONFIG.apiKey,
     posSignature: NETOPIA_CONFIG.posSignature,
     notifyUrl: NETOPIA_CONFIG.notifyUrl,
-    redirectUrl: NETOPIA_CONFIG.redirectUrl,
+    redirectUrl: returnUrl.toString(),
     sandbox: NETOPIA_CONFIG.sandbox,
     language: "ro",
   });
-
-  const orderId = generateOrderId();
-  const [firstName, ...lastNameParts] = userName.split(" ");
-  const lastName = lastNameParts.join(" ") || firstName;
 
   // Set order data
   netopia.setOrderData({
@@ -116,18 +122,7 @@ export async function createPaymentRequest(params: CreatePaymentParams) {
     currency: "RON",
     description: `Abonament ${plan.name} - WebForm`,
     dateTime: new Date().toISOString(),
-    billing: {
-      email: userEmail,
-      firstName: firstName || "Client",
-      lastName: lastName || "WebForm",
-      phone: "0700000000",
-      city: "Bucuresti",
-      country: 642, // Romania ISO code
-      countryName: "Romania",
-      state: "Bucuresti",
-      postalCode: "000000",
-      details: "",
-    },
+    billing: processorBilling(billingInfo, userEmail),
   });
 
   // Set product data
@@ -137,7 +132,7 @@ export async function createPaymentRequest(params: CreatePaymentParams) {
       code: plan.id,
       category: "subscription",
       price: plan.price,
-      vat: 19, // 19% TVA in Romania
+      vat: configuredVat()!, // Explicit merchant configuration; never infer tax registration.
     },
   ]);
 
@@ -199,8 +194,13 @@ export function processNotification(notification: ProcessNotificationParams) {
 // Calculate subscription expiry date
 export function calculateExpiryDate(plan: Plan): Date {
   const now = new Date();
-  if (plan.interval === "year") {
-    return new Date(now.setFullYear(now.getFullYear() + 1));
-  }
-  return new Date(now.setMonth(now.getMonth() + 1));
+  const day = now.getUTCDate();
+  now.setUTCDate(1);
+  if (plan.interval === "year") now.setUTCFullYear(now.getUTCFullYear() + 1);
+  else now.setUTCMonth(now.getUTCMonth() + 1);
+  const lastDay = new Date(
+    Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 0),
+  ).getUTCDate();
+  now.setUTCDate(Math.min(day, lastDay));
+  return now;
 }

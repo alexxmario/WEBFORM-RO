@@ -28,7 +28,7 @@ export function ChatSidebar({ currentRoomId, onRoomSelect, accessToken }: ChatSi
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchRooms();
+    if(accessToken) fetchRooms();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accessToken]);
 
@@ -68,7 +68,7 @@ export function ChatSidebar({ currentRoomId, onRoomSelect, accessToken }: ChatSi
   };
 
   return (
-    <div className="flex h-full w-80 flex-col border-r border-border/60 bg-card/50">
+    <div className="flex h-full w-full md:w-80 flex-col border-r border-border/60 bg-card/50">
       <div className="border-b border-border/60 p-4">
         <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground">
           <MessageCircle className="h-5 w-5" />

@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { safeAuthRedirect } from "@/lib/auth-redirect";
 import { useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { Suspense, useMemo, useState } from "react";
@@ -12,7 +14,7 @@ import { toast } from "sonner";
 function LoginForm() {
   const supabase = useMemo(supabaseBrowser, []);
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get("redirect") || "/subscribe";
+  const redirectTo = safeAuthRedirect(searchParams.get("redirect"));
   const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
   const [name, setName] = useState("");
   const [business, setBusiness] = useState("");
@@ -33,7 +35,6 @@ function LoginForm() {
   };
 
   const handleAuth = async () => {
-    console.log("handleAuth called", { authMode, email, password: password ? "[hidden]" : "" });
     setError("");
 
     if (authMode === "signup") {
@@ -85,7 +86,7 @@ function LoginForm() {
         setLoading(false);
         setAuthMode("signin");
         setPassword("");
-        toast.success("Cont creat cu succes! Te rugăm să te autentifici.");
+        toast.success(signupResult.confirmationRequired ? "Verifică emailul pentru confirmarea contului, apoi autentifică-te." : "Cont creat! Te poți autentifica.");
         return;
       }
 
@@ -100,14 +101,14 @@ function LoginForm() {
         } else if (error.message.includes("Email not confirmed")) {
           setError("Te rugăm să îți confirmi adresa de email");
         } else {
-          setError(`Autentificare eșuată: ${error.message}`);
+          setError("Nu ne putem conecta momentan la serviciul de autentificare. Încearcă din nou în câteva minute.");
         }
         return;
       }
 
       if (signInData.session?.user) {
         const user = signInData.session.user;
-        await initRoom(user.id, user.email || "");
+        await initRoom(user.id, user.email || "").catch(() => { /* Chat can initialize when opened; login must still succeed. */ });
 
         // Check subscription status
         const { data: profile } = await supabase
@@ -125,7 +126,7 @@ function LoginForm() {
           window.location.href = redirectTo === "/subscribe" ? "/templates" : redirectTo;
         } else {
           // No active subscription - go to subscribe page
-          window.location.href = "/subscribe";
+          window.location.href = redirectTo;
         }
       } else {
         setLoading(false);
@@ -143,10 +144,11 @@ function LoginForm() {
   };
 
   return (
-    <main className="container flex min-h-screen flex-col items-center justify-center gap-6 px-4 py-12">
+    <main id="main" className="container flex min-h-screen flex-col items-center justify-center gap-6 px-4 py-12">
+      <Link href="/" className="wordmark"><span className="brand-symbol">w.</span>webform</Link>
       <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4 rounded-xl border border-border bg-card p-6">
         <h1 className="text-heading-lg text-foreground">
-          {authMode === "signup" ? "Creează un cont" : "Autentifică-te pentru chat"}
+          {authMode === "signup" ? "Creează un cont" : "Bine ai revenit"}
         </h1>
         {error && (
           <div className="rounded-lg border border-red-500/20 bg-red-500/10 p-3 text-body-sm text-red-400">
@@ -155,14 +157,18 @@ function LoginForm() {
         )}
         {authMode === "signup" && (
           <>
-            <Input placeholder="Nume complet" value={name} onChange={(e) => setName(e.target.value)} />
-            <Input placeholder="Numele afacerii" value={business} onChange={(e) => setBusiness(e.target.value)} />
-            <Input type="tel" placeholder="Număr de telefon" value={phone} onChange={(e) => setPhone(e.target.value)} />
+            <Input aria-label="Nume complet" autoComplete="name" required placeholder="Nume complet" value={name} onChange={(e) => setName(e.target.value)} />
+            <Input aria-label="Numele afacerii" autoComplete="organization" required placeholder="Numele afacerii" value={business} onChange={(e) => setBusiness(e.target.value)} />
+            <Input aria-label="Număr de telefon" autoComplete="tel" required type="tel" placeholder="Număr de telefon" value={phone} onChange={(e) => setPhone(e.target.value)} />
           </>
         )}
-        <Input type="email" placeholder="tu@exemplu.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Input aria-label="Email" autoComplete="email" required type="email" placeholder="tu@exemplu.com" value={email} onChange={(e) => setEmail(e.target.value)} />
         <Input
           type="password"
+          aria-label="Parolă"
+          autoComplete={authMode === "signup" ? "new-password" : "current-password"}
+          required
+          minLength={authMode === "signup" ? 8 : undefined}
           placeholder="Parolă"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -170,7 +176,7 @@ function LoginForm() {
         {authMode === "signup" && (
           <Input
             type="password"
-            placeholder="Confirmă parola"
+            aria-label="Confirmă parola" autoComplete="new-password" required placeholder="Confirmă parola"
             value={passwordConfirm}
             onChange={(e) => setPasswordConfirm(e.target.value)}
           />

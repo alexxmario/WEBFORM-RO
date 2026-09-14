@@ -5,21 +5,24 @@ import Link from "next/link";
 import { Loader2, MessageCircle } from "lucide-react";
 
 import { BlueprintForm } from "@/components/BlueprintForm";
-import { FloatingLinesBackground } from "@/components/FloatingLinesBackground";
+import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 
 export default function StartPage() {
   const [loading, setLoading] = useState(true);
+  const [loadError,setLoadError] = useState(false);
   const [hasBlueprint, setHasBlueprint] = useState(false);
 
   useEffect(() => {
     async function checkBlueprint() {
       try {
         const response = await fetch("/api/blueprint");
+        if (!response.ok) throw new Error("Blueprint unavailable");
         const data = await response.json();
         setHasBlueprint(data.hasBlueprint || false);
       } catch (error) {
         console.error("Error checking blueprint status:", error);
+        setLoadError(true);
       } finally {
         setLoading(false);
       }
@@ -27,10 +30,12 @@ export default function StartPage() {
     checkBlueprint();
   }, []);
 
+  if(loadError) return <><Header/><main id="main" className="container pt-40 text-center"><h1 className="text-2xl">Nu am putut verifica proiectul.</h1><p className="my-5 text-muted-foreground">Conexiunea cu serviciul este temporar indisponibilă.</p><button className="action action-dark" onClick={()=>window.location.reload()}>Încearcă din nou</button></main></>;
+
   if (loading) {
     return (
       <div className="relative isolate min-h-screen overflow-hidden">
-        <FloatingLinesBackground />
+        <Header />
         <main className="relative z-10 flex min-h-screen items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </main>
@@ -41,10 +46,10 @@ export default function StartPage() {
   if (hasBlueprint) {
     return (
       <div className="relative isolate min-h-screen overflow-hidden">
-        <FloatingLinesBackground />
+        <Header />
         <main
           id="main"
-          className="relative z-10 mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center gap-8 px-4 py-12 text-center"
+          className="relative z-10 mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center gap-8 px-4 pt-32 pb-12 text-center"
         >
           <div className="space-y-4">
             <h1 className="font-display text-display-sm sm:text-display-md">
@@ -68,10 +73,10 @@ export default function StartPage() {
 
   return (
     <div className="relative isolate min-h-screen overflow-hidden">
-      <FloatingLinesBackground />
+      <Header />
       <main
         id="main"
-        className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col gap-10 px-4 py-12 sm:px-8 lg:py-16"
+        className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col gap-10 px-4 pt-32 pb-12 sm:px-8 lg:pt-36 lg:pb-16"
       >
         <div className="mx-auto max-w-2xl space-y-4 text-center">
           <h1 className="font-display text-display-md sm:text-display-lg" style={{ textWrap: "balance" }}>

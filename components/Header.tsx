@@ -1,103 +1,77 @@
 "use client";
-
-import { User, LogOut } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
-import { memo, useCallback, useMemo } from "react";
-
-import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
-import { supabaseBrowser } from "@/lib/supabase/browser";
-import { BlueprintButton } from "./BlueprintButton";
+import { useState } from "react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useAuthContext } from "@/lib/context/AuthContext";
 
-const navLinks = [
-  { href: "/#how-it-works", label: "Cum funcționează" },
-  { href: "/templates", label: "Librărie" },
-  { href: "/#plans", label: "Planuri" },
-];
-
-export const Header = memo(function Header() {
-  const pathname = usePathname();
+export function Header() {
   const { user } = useAuthContext();
-  const supabase = useMemo(supabaseBrowser, []);
-
-  const handleSignOut = useCallback(async () => {
-    await supabase.auth.signOut();
-    window.location.href = "/";
-  }, [supabase]);
-
+  const [open, setOpen] = useState(false);
+  const links = [
+    { href: "/#how-it-works", label: "Cum funcționează" },
+    { href: "/templates", label: "Modele de site" },
+    { href: "/#plans", label: "Prețuri" },
+  ];
   return (
-    <motion.header
-      initial={{ opacity: 0, y: -8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="fixed inset-x-0 top-0 z-40 px-4 pt-2"
-    >
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 rounded-xl border border-border bg-background/95 px-4 py-3 backdrop-blur-sm">
-        <Link href="/" className="flex items-center px-2 py-1">
-          <Image
-            src="/logo.png"
-            alt="WebForm Logo"
-            width={100}
-            height={100}
-            className="max-h-14"
-          />
+    <header className="site-header">
+      <div className="shell header-inner">
+        <Link
+          href="/"
+          className="wordmark"
+          aria-label="WebForm, pagina principală"
+        >
+          <span className="brand-symbol">w.</span>webform
         </Link>
-        <nav className="hidden items-center gap-2 md:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "rounded-lg px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground",
-                pathname === link.href && "text-foreground",
-              )}
-            >
-              {link.label}
+        <nav className="desktop-nav" aria-label="Navigare principală">
+          {links.map((l) => (
+            <Link key={l.href} href={l.href}>
+              {l.label}
             </Link>
           ))}
-          {user && (
-            <Link
-              href="/chat"
-              className={cn(
-                "rounded-lg px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground",
-                pathname === "/chat" && "text-foreground",
-              )}
-            >
-              Suport
-            </Link>
-          )}
         </nav>
-        <div className="flex items-center gap-2">
-          {user ? (
-            <>
-              <Link
-                href="/account"
-                className="hidden items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground/80 transition-colors hover:text-foreground sm:flex"
-              >
-                <User className="h-4 w-4" />
-                <span className="max-w-[120px] truncate">Contul meu</span>
-              </Link>
-              <Button size="sm" variant="outline" onClick={handleSignOut}>
-                <LogOut className="h-4 w-4 sm:mr-2" />
-                <span className="hidden sm:inline">Deconectare</span>
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button asChild size="sm" variant="outline">
-                <Link href="/login">Autentificare</Link>
-              </Button>
-              <BlueprintButton size="sm" className="hidden sm:inline-flex">
-                Începe Formularul
-              </BlueprintButton>
-            </>
-          )}
+        <div className="header-actions">
+          <Link className="account-link" href={user ? "/account" : "/login"}>
+            {user ? "Contul meu" : "Intră în cont"}
+          </Link>
+          <Link
+            className="action action-small action-dark"
+            href={user ? "/start" : "/#plans"}
+          >
+            {user ? "Proiectul meu" : "Începem?"}
+            <ArrowUpRight size={16} />
+          </Link>
+          <button
+            className="menu-toggle"
+            aria-label={open ? "Închide meniul" : "Deschide meniul"}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <X /> : <Menu />}
+          </button>
         </div>
       </div>
-    </motion.header>
+      {open && (
+        <nav
+          id="mobile-nav"
+          className="mobile-nav"
+          aria-label="Navigare mobilă"
+        >
+          {[
+            ...links,
+            {
+              href: user ? "/account" : "/login",
+              label: user ? "Contul meu" : "Intră în cont",
+            },
+            ...(user ? [{ href: "/chat", label: "Suport" }] : []),
+          ].map((l) => (
+            <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>
+              {l.label}
+              <ArrowUpRight size={16} />
+            </Link>
+          ))}
+        </nav>
+      )}
+    </header>
   );
-});
+}

@@ -45,15 +45,18 @@ export function WaitlistForm() {
   } = form;
 
   const onSubmit = async (values: WaitlistValues) => {
-    const response = await fetch("/api/waitlist", {
-      method: "POST",
-      body: JSON.stringify(values),
-    });
-    if (!response.ok) {
-      toast.error("We couldn't save your spot. Please try again.");
-      return;
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (!response.ok) throw new Error("Save failed");
+      toast.success("Cererea ta a fost salvată. Îți vom scrie când serviciul este disponibil.");
+      form.reset();
+    } catch {
+      toast.error("Nu am putut salva cererea. Încearcă din nou sau contactează-ne.");
     }
-    toast.success("You're on the list. We'll invite you when a spot opens.");
   };
 
   return (

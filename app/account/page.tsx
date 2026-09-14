@@ -8,7 +8,7 @@ export default async function AccountPage() {
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    (process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)!,
     {
       cookies: {
         getAll() {
@@ -28,7 +28,7 @@ export default async function AccountPage() {
   // Fetch profile with subscription info
   const { data: profile } = await supabase
     .from("profiles")
-    .select("name, subscription_status, subscription_plan, subscription_expires_at")
+    .select("role, name, subscription_status, subscription_plan, subscription_expires_at")
     .eq("id", user.id)
     .single();
 
@@ -36,6 +36,7 @@ export default async function AccountPage() {
     id: user.id,
     email: user.email || "",
     name: profile?.name || undefined,
+    isAdmin: profile?.role === "admin",
     subscriptionStatus: profile?.subscription_status || null,
     subscriptionPlan: profile?.subscription_plan || null,
     subscriptionExpiresAt: profile?.subscription_expires_at || null,

@@ -1,7 +1,9 @@
 "use client";
 
+import { mergeMessages } from "@/lib/chat-messages";
+import { toast } from "sonner";
 import { Loader2, Send } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 
 import { supabaseBrowser } from "@/lib/supabase/browser";
 import { Button } from "@/components/ui/button";
@@ -34,6 +36,9 @@ export function ChatClient({ initialUser }: ChatClientProps) {
   const [loading, setLoading] = useState(true);
   const [accessToken, setAccessToken] = useState<string>("");
 
+  const activeRoom=useRef<string | null>(null);
+  const [sending,setSending]=useState(false);
+  const [initError,setInitError]=useState(false);
   const isAdmin = initialUser.role === "admin";
 
   useEffect(() => {
@@ -46,6 +51,7 @@ export function ChatClient({ initialUser }: ChatClientProps) {
         await initRoom(initialUser.id, initialUser.email);
       } catch (error) {
         console.error("Error during init:", error);
+        setInitError(true);
       } finally {
         setLoading(false);
       }
@@ -57,6 +63,7 @@ export function ChatClient({ initialUser }: ChatClientProps) {
   useEffect(() => {
     if (!roomId) return;
 
+    activeRoom.current=roomId;
     loadMessages(roomId);
 
     const channel = supabase
@@ -73,29 +80,15 @@ export function ChatClient({ initialUser }: ChatClientProps) {
             room_id: string;
           };
 
-          // Fetch sender email from profiles
-          const { data: senderProfile } = await supabase
-            .from("profiles")
-            .select("email")
-            .eq("id", record.sender_id)
-            .single();
-
-          setMessages((prev) => [
-            ...prev,
-            {
-              id: record.id,
-              content: record.content,
-              created_at: record.created_at,
-              sender_id: record.sender_id,
-              sender_email: senderProfile?.email,
-            },
-          ]);
+          if(activeRoom.current!==record.room_id) return;
+          setMessages(prev=>mergeMessages(prev,[record]));
         },
       )
       .subscribe();
 
     return () => {
-      channel.unsubscribe();
+      activeRoom.current=null;
+      void supabase.removeChannel(channel);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId, supabase]);
@@ -110,13 +103,14 @@ export function ChatClient({ initialUser }: ChatClientProps) {
 
       if (!res.ok) {
         console.error("Failed to init room:", res.status);
-        return;
+        throw new Error("Chat unavailable");
       }
 
       const data = await res.json();
       setRoomId(data.roomId);
     } catch (error) {
       console.error("Error initializing room:", error);
+      setInitError(true);
     }
   };
 
@@ -126,7 +120,7 @@ export function ChatClient({ initialUser }: ChatClientProps) {
         .from("messages")
         .select("id, content, created_at, sender_id, profiles:sender_id (email)")
         .eq("room_id", room)
-        .order("created_at", { ascending: true });
+        .order("created_at", { ascending: false }).limit(200);
 
       if (error) {
         console.error("Error loading messages:", error);
@@ -148,7 +142,7 @@ export function ChatClient({ initialUser }: ChatClientProps) {
             sender_email: email,
           };
         });
-        setMessages(mapped);
+        if(activeRoom.current===room) setMessages(prev=>mergeMessages(prev,mapped));
       }
     } catch (error) {
       console.error("Exception loading messages:", error);
@@ -156,27 +150,25 @@ export function ChatClient({ initialUser }: ChatClientProps) {
   };
 
   const handleSend = async () => {
-    if (!roomId || !messageText.trim()) return;
-    const content = messageText.trim();
-    setMessageText("");
-
-    const { error } = await supabase.from("messages").insert({
-      room_id: roomId,
-      sender_id: initialUser.id,
-      content,
-    });
-
-    if (error) {
-      console.error("Error sending message:", error);
-      alert(`Failed to send message: ${error.message}`);
-      setMessageText(content);
-    }
+    if (!roomId || !messageText.trim() || sending) return;
+    const content=messageText.trim(),targetRoom=roomId;
+    if(content.length>5000){toast.error("Mesajul poate avea maximum 5.000 de caractere.");return;}
+    setSending(true);
+    try {
+      const {data,error}=await supabase.from("messages").insert({room_id:targetRoom,sender_id:initialUser.id,content}).select("id,content,created_at,sender_id").single();
+      if(error) throw error;
+      if(activeRoom.current===targetRoom){setMessages(prev=>mergeMessages(prev,[data]));setMessageText("");}
+    } catch {toast.error("Mesajul nu a fost trimis. Textul a fost păstrat; încearcă din nou.");}
+    finally {setSending(false);}
   };
 
   const handleRoomSelect = async (selectedRoomId: string) => {
+    activeRoom.current=selectedRoomId;
     setRoomId(selectedRoomId);
     setMessages([]);
   };
+
+  if(initError) return <><Header/><main id="main" className="container pt-40 text-center"><h1 className="text-2xl">Nu am putut deschide conversația.</h1><button className="action action-dark mt-6" onClick={()=>window.location.reload()}>Încearcă din nou</button></main></>;
 
   if (loading) {
     return (
@@ -189,7 +181,7 @@ export function ChatClient({ initialUser }: ChatClientProps) {
   return (
     <>
       <Header />
-      <main className="flex min-h-screen pt-20">
+      <main id="main" className="flex flex-col md:flex-row min-h-screen pt-24">
         {isAdmin && (
           <ChatSidebar
             currentRoomId={roomId}
@@ -203,7 +195,7 @@ export function ChatClient({ initialUser }: ChatClientProps) {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-semibold text-foreground">
-                    {isAdmin ? "Admin Support Chat" : "Support chat"}
+                    {isAdmin ? "Admin Support Chat" : "Conversația ta cu WebForm"}
                   </p>
                   <p className="text-xs text-muted-foreground">
                     {isAdmin
@@ -222,7 +214,7 @@ export function ChatClient({ initialUser }: ChatClientProps) {
                       }`}
                     >
                       <div className="text-xs text-muted-foreground">
-                        {message.sender_id === initialUser.id ? "You" : message.sender_email || "Client"}
+                        {message.sender_id === initialUser.id ? "Tu" : message.sender_email || "Suport"}
                       </div>
                       <div className="mt-1 max-w-[80%] rounded-2xl border border-border/50 bg-card/80 px-3 py-2 text-sm text-foreground">
                         {message.content}
@@ -231,13 +223,16 @@ export function ChatClient({ initialUser }: ChatClientProps) {
                   ))}
                   {!messages.length && (
                     <div className="text-center text-sm text-muted-foreground">
-                      {isAdmin ? "No messages in this conversation yet." : "No messages yet. Say hello!"}
+                      {isAdmin ? "No messages in this conversation yet." : "Ai o întrebare sau o modificare pentru site? Scrie-ne aici."}
                     </div>
                   )}
                 </div>
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
                   <Textarea
-                    placeholder="Type a message..."
+                    aria-label="Mesaj"
+                    maxLength={5000}
+                    disabled={sending}
+                    placeholder="Scrie un mesaj..."
                     value={messageText}
                     onChange={(e) => setMessageText(e.target.value)}
                     onKeyDown={(e) => {
@@ -248,9 +243,9 @@ export function ChatClient({ initialUser }: ChatClientProps) {
                     }}
                     className="min-h-[60px] flex-1"
                   />
-                  <Button className="self-end sm:self-auto" onClick={handleSend}>
+                  <Button disabled={sending || !roomId || !messageText.trim()} className="self-end sm:self-auto" onClick={handleSend}>
                     <Send className="mr-2 h-4 w-4" />
-                    Send
+                    {sending ? "Se trimite..." : "Trimite"}
                   </Button>
                 </div>
               </div>

@@ -23,10 +23,6 @@ export default function RootLayout({
         <ThemeProvider>
           <AuthProvider>
             <div className="relative min-h-screen overflow-hidden">
-              <div
-                className="noise pointer-events-none fixed inset-0 opacity-40 mix-blend-soft-light"
-                aria-hidden
-              />
               {children}
             </div>
             <Toast />
