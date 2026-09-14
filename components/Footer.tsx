@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 export function Footer() {
   return (
     <footer className="site-footer">
@@ -6,7 +7,15 @@ export function Footer() {
         <div className="footer-top">
           <div>
             <Link className="wordmark" href="/">
-              <span className="brand-symbol">w.</span>webform
+              <span className="brand-logo-shell">
+                <Image
+                  className="brand-logo"
+                  src="/logo.png"
+                  alt="WebForm"
+                  width={1137}
+                  height={314}
+                />
+              </span>
             </Link>
             <p>
               Site-ul tău, fără bătăi de cap.

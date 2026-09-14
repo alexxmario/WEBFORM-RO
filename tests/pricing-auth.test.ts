@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getPlan, getMonthlyEquivalent, PLANS } from "@/lib/pricing";
 import { safeAuthRedirect } from "@/lib/auth-redirect";
+import { getPromotion, promotionPrice } from "@/lib/promotions";
 describe("checkout pricing", () => {
   it("keeps the annual monthly equivalent exact", () => {
     expect(getMonthlyEquivalent(PLANS.business_anual)).toBe(262.5);
@@ -16,6 +17,21 @@ describe("checkout pricing", () => {
   });
   it("does not resolve unknown plans", () =>
     expect(getPlan("invalid")).toBeUndefined());
+});
+describe("promoții", () => {
+  it("applies WEBFORM20 to the server-owned plan price", () => {
+    const promotion = getPromotion(" webform20 ");
+    expect(promotion).toBeDefined();
+    expect(promotionPrice(PLANS.standard_lunar, promotion!)).toEqual({
+      originalPrice: 180,
+      discount: 36,
+      finalPrice: 144,
+    });
+  });
+
+  it("rejects unknown codes", () => {
+    expect(getPromotion("NOT-A-CODE")).toBeUndefined();
+  });
 });
 describe("login return path", () => {
   it("preserves selected checkout plans", () =>

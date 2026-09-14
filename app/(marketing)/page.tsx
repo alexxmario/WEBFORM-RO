@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   MessageCircle,
   Sparkles,
+  BadgePercent,
 } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -57,6 +58,9 @@ export default function HomePage() {
               </span>
               <span>
                 <Check size={14} /> Găzduire inclusă
+              </span>
+              <span>
+                <BadgePercent size={14} /> Cod WEBFORM20 · −20% la prima plată
               </span>
             </div>
           </div>

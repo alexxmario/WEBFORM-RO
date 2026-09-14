@@ -7,6 +7,11 @@ import {
   isNetopiaConfigured,
 } from "@/lib/netopia";
 import { getPlan } from "@/lib/pricing";
+import {
+  getPromotion,
+  normalizePromotionCode,
+  promotionPrice,
+} from "@/lib/promotions";
 import { billingSchema } from "@/lib/schemas/billing";
 import {
   ApiError,
@@ -22,6 +27,7 @@ const schema = z.object({
   requestKey: z.string().uuid(),
   billingInfo: billingSchema,
   browserData: z.record(z.string().max(2000)).optional(),
+  promoCode: z.string().trim().max(40).optional(),
 });
 export async function POST(request: Request) {
   try {
@@ -29,19 +35,50 @@ export async function POST(request: Request) {
     const parsed = schema.safeParse(await jsonBody(request));
     if (!parsed.success)
       throw new ApiError(400, "Verifică datele de facturare.");
-    const { planId, requestKey, billingInfo, browserData } = parsed.data;
+    const { planId, requestKey, billingInfo, browserData, promoCode } =
+      parsed.data;
     const plan = getPlan(planId);
     if (!plan) throw new ApiError(400, "Plan invalid.");
+    const normalizedPromoCode = normalizePromotionCode(promoCode);
+    const promotion = getPromotion(normalizedPromoCode);
+    if (normalizedPromoCode && !promotion)
+      throw new ApiError(400, "Codul promoțional nu este valid.");
     if (!isNetopiaConfigured())
       throw new ApiError(
         503,
         "Plata online este temporar indisponibilă. Te rugăm să ne contactezi.",
       );
     await rateLimit("checkout", user.id, 10, 300);
-    const fingerprint = createHash("sha256")
-      .update(JSON.stringify({ planId, amount: plan.price, billingInfo }))
-      .digest("hex");
     const db = supabaseServerAdmin();
+    if (promotion?.firstPaymentOnly) {
+      const { data: previousOrder, error: eligibilityError } = await db
+        .from("orders")
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("status", "completed")
+        .limit(1)
+        .maybeSingle();
+      if (eligibilityError) throw eligibilityError;
+      if (previousOrder)
+        throw new ApiError(
+          400,
+          "Codul WEBFORM20 este disponibil doar la prima plată.",
+        );
+    }
+    const pricing = promotion
+      ? promotionPrice(plan, promotion)
+      : { originalPrice: plan.price, discount: 0, finalPrice: plan.price };
+    const fingerprintPayload = promotion
+      ? {
+          planId,
+          amount: pricing.finalPrice,
+          promoCode: promotion.code,
+          billingInfo,
+        }
+      : { planId, amount: plan.price, billingInfo };
+    const fingerprint = createHash("sha256")
+      .update(JSON.stringify(fingerprintPayload))
+      .digest("hex");
     const orderId = generateOrderId();
     // Persist before contacting the processor. The unique key handles double-clicks,
     // concurrent requests and retries after a lost HTTP response.
@@ -49,10 +86,17 @@ export async function POST(request: Request) {
       id: orderId,
       user_id: user.id,
       plan_id: planId,
-      amount: plan.price,
+      amount: pricing.finalPrice,
       currency: "RON",
       status: "pending",
-      billing_info: billingInfo,
+      billing_info: promotion
+        ? {
+            ...billingInfo,
+            promotion_code: promotion.code,
+            original_amount: pricing.originalPrice,
+            discount_amount: pricing.discount,
+          }
+        : billingInfo,
       request_key: requestKey,
       request_fingerprint: fingerprint,
     });
@@ -92,6 +136,8 @@ export async function POST(request: Request) {
       userId: user.id,
       userEmail: user.email || "",
       planId,
+      amount: pricing.finalPrice,
+      promotionCode: promotion?.code,
       billingInfo,
       browserData,
       clientIp: requestIP(request),

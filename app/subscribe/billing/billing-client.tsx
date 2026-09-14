@@ -2,7 +2,13 @@
 
 import { useState, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2, ArrowLeft, Building2, User } from "lucide-react";
+import {
+  Loader2,
+  ArrowLeft,
+  Building2,
+  User,
+  BadgePercent,
+} from "lucide-react";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -17,6 +23,11 @@ import {
 } from "@/components/ui/select";
 import { supabaseBrowser } from "@/lib/supabase/browser";
 import { type Plan, getMonthlyEquivalent } from "@/lib/pricing";
+import {
+  getPromotion,
+  normalizePromotionCode,
+  promotionPrice,
+} from "@/lib/promotions";
 import {
   JUDETE,
   getLocalitatiByJudet,
@@ -49,6 +60,10 @@ export function BillingClient({
   const [loading, setLoading] = useState(false);
   const [billingType, setBillingType] = useState<BillingType>("individual");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [promoCode, setPromoCode] = useState("");
+  const [appliedPromoCode, setAppliedPromoCode] = useState<string | null>(null);
+  const promotion = getPromotion(appliedPromoCode);
+  const discounted = promotion ? promotionPrice(plan, promotion) : null;
 
   // Individual form state
   const [individual, setIndividual] = useState<IndividualBilling>({
@@ -105,6 +120,7 @@ export function BillingClient({
             user: session.user.id,
             planId: plan.id,
             amount: plan.price,
+            promoCode: appliedPromoCode,
             billingInfo: result.data,
           }),
         ),
@@ -142,6 +158,7 @@ export function BillingClient({
           requestKey: checkoutKey,
           browserData: browserInfo,
           billingInfo: result.data,
+          promoCode: appliedPromoCode || undefined,
         }),
       });
 
@@ -176,6 +193,11 @@ export function BillingClient({
   };
 
   const monthlyEquivalent = getMonthlyEquivalent(plan);
+  const discountedMonthlyEquivalent = discounted
+    ? plan.interval === "year"
+      ? discounted.finalPrice / 12
+      : discounted.finalPrice
+    : null;
 
   return (
     <>
@@ -199,14 +221,76 @@ export function BillingClient({
                 <p className="text-lg font-semibold">{plan.name}</p>
               </div>
               <div className="text-right">
-                <p className="text-2xl font-bold">{monthlyEquivalent} RON</p>
+                {discounted ? (
+                  <>
+                    <p className="text-sm text-muted-foreground line-through">
+                      {monthlyEquivalent} RON
+                    </p>
+                    <p className="text-2xl font-bold text-primary">
+                      {discountedMonthlyEquivalent} RON
+                    </p>
+                  </>
+                ) : (
+                  <p className="text-2xl font-bold">{monthlyEquivalent} RON</p>
+                )}
                 <p className="text-sm text-muted-foreground">
                   {plan.interval === "year"
-                    ? `/luna (facturat anual ${plan.price} RON)`
+                    ? `/luna (facturat anual ${discounted?.finalPrice ?? plan.price} RON)`
                     : "/luna"}
                 </p>
               </div>
             </div>
+          </div>
+
+          <div className="mb-8 rounded-xl border border-border/60 bg-card/50 p-4">
+            <label
+              htmlFor="promo-code"
+              className="mb-2 flex items-center gap-2 text-sm font-medium"
+            >
+              <BadgePercent className="h-4 w-4 text-primary" />
+              Ai un cod promoțional?
+            </label>
+            <div className="flex gap-2">
+              <Input
+                id="promo-code"
+                value={promoCode}
+                onChange={(event) => {
+                  setPromoCode(event.target.value);
+                  setErrors((current) => ({ ...current, promoCode: "" }));
+                }}
+                placeholder="Introdu codul"
+                autoCapitalize="characters"
+              />
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => {
+                  const normalized = normalizePromotionCode(promoCode);
+                  if (!getPromotion(normalized)) {
+                    setAppliedPromoCode(null);
+                    setErrors((current) => ({
+                      ...current,
+                      promoCode: "Codul promoțional nu este valid.",
+                    }));
+                    return;
+                  }
+                  setPromoCode(normalized);
+                  setAppliedPromoCode(normalized);
+                  setErrors((current) => ({ ...current, promoCode: "" }));
+                }}
+              >
+                Aplică
+              </Button>
+            </div>
+            {errors.promoCode && (
+              <p className="mt-2 text-sm text-red-500">{errors.promoCode}</p>
+            )}
+            {promotion && discounted && (
+              <p className="mt-2 text-sm text-green-400">
+                Cod aplicat: {promotion.code}. Economisești {discounted.discount}{" "}
+                RON la această plată.
+              </p>
+            )}
           </div>
 
           <p className="mb-6 text-sm text-muted-foreground">

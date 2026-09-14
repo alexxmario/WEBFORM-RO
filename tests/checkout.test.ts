@@ -29,11 +29,11 @@ const body = {
   requestKey: "00000000-0000-4000-8000-000000000001",
   billingInfo,
 };
-const request = () =>
+const request = (overrides: Record<string, unknown> = {}) =>
   new Request("http://localhost:3000/api/payments/start", {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify(body),
+    body: JSON.stringify({ ...body, ...overrides }),
   });
 beforeEach(() => {
   vi.clearAllMocks();
@@ -74,6 +74,45 @@ it("never initiates a charge when the order cannot be saved", async () => {
   });
   expect((await POST(request())).status).toBe(503);
   expect(mocks.payment).not.toHaveBeenCalled();
+});
+it("applies WEBFORM20 on the server for a customer's first payment", async () => {
+  const eligibility = {
+    select: vi.fn(),
+    eq: vi.fn(),
+    limit: vi.fn(),
+    maybeSingle: vi.fn().mockResolvedValue({ data: null, error: null }),
+  };
+  eligibility.select.mockReturnValue(eligibility);
+  eligibility.eq.mockReturnValue(eligibility);
+  eligibility.limit.mockReturnValue(eligibility);
+  const insert = vi.fn().mockResolvedValue({ error: null });
+  const update = vi
+    .fn()
+    .mockReturnValue({ eq: vi.fn().mockResolvedValue({ error: null }) });
+  mocks.from
+    .mockReturnValueOnce(eligibility)
+    .mockReturnValueOnce({ insert })
+    .mockReturnValueOnce({ update });
+
+  const response = await POST(request({ promoCode: "webform20" }));
+
+  expect(response.status).toBe(200);
+  expect(insert).toHaveBeenCalledWith(
+    expect.objectContaining({
+      amount: 144,
+      billing_info: expect.objectContaining({
+        promotion_code: "WEBFORM20",
+        original_amount: 180,
+        discount_amount: 36,
+      }),
+    }),
+  );
+  expect(mocks.payment).toHaveBeenCalledWith(
+    expect.objectContaining({
+      amount: 144,
+      promotionCode: "WEBFORM20",
+    }),
+  );
 });
 it("reuses the original checkout on a duplicate request", async () => {
   const fingerprint = createHash("sha256")

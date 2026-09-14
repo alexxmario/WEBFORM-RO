@@ -87,13 +87,23 @@ export interface CreatePaymentParams {
   orderId: string;
   billingInfo: BillingInfo;
   planId: string;
+  amount: number;
+  promotionCode?: string;
   browserData?: Record<string, string>;
   clientIp?: string;
 }
 
 export async function createPaymentRequest(params: CreatePaymentParams) {
-  const { userEmail, orderId, billingInfo, planId, browserData, clientIp } =
-    params;
+  const {
+    userEmail,
+    orderId,
+    billingInfo,
+    planId,
+    amount,
+    promotionCode,
+    browserData,
+    clientIp,
+  } = params;
 
   const plan = getPlan(planId);
   if (!plan) {
@@ -118,9 +128,9 @@ export async function createPaymentRequest(params: CreatePaymentParams) {
   // Set order data
   netopia.setOrderData({
     orderID: orderId,
-    amount: plan.price,
+    amount,
     currency: "RON",
-    description: `Abonament ${plan.name} - WebForm`,
+    description: `Abonament ${plan.name} - WebForm${promotionCode ? ` - cod ${promotionCode}` : ""}`,
     dateTime: new Date().toISOString(),
     billing: processorBilling(billingInfo, userEmail),
   });
@@ -131,7 +141,7 @@ export async function createPaymentRequest(params: CreatePaymentParams) {
       name: `Abonament ${plan.name}`,
       code: plan.id,
       category: "subscription",
-      price: plan.price,
+      price: amount,
       vat: configuredVat()!, // Explicit merchant configuration; never infer tax registration.
     },
   ]);

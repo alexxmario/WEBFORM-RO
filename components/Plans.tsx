@@ -52,6 +52,9 @@ export function Plans({ compact = false }: { compact?: boolean }) {
                   ? `${formatPrice(plan.price)} lei facturați anual. Economisești 25%.`
                   : "Facturare lunară. Reînnoire din cont."}
               </p>
+              <p className="promo-code-note">
+                Cod <strong>WEBFORM20</strong> · −20% la prima plată
+              </p>
               <Link
                 className={`action ${i === 1 ? "action-orange" : "action-outline"}`}
                 href={`/subscribe/billing?planId=${plan.id}`}

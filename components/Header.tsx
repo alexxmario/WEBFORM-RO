@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useAuthContext } from "@/lib/context/AuthContext";
@@ -20,7 +21,16 @@ export function Header() {
           className="wordmark"
           aria-label="WebForm, pagina principală"
         >
-          <span className="brand-symbol">w.</span>webform
+          <span className="brand-logo-shell">
+            <Image
+              className="brand-logo"
+              src="/logo.png"
+              alt=""
+              width={1137}
+              height={314}
+              priority
+            />
+          </span>
         </Link>
         <nav className="desktop-nav" aria-label="Navigare principală">
           {links.map((l) => (

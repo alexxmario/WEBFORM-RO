@@ -113,6 +113,19 @@ a {
   letter-spacing: -1.2px;
   gap: 10px;
 }
+.brand-logo-shell {
+  display: flex;
+  align-items: center;
+  width: 154px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: #0d0f13;
+}
+.brand-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 .brand-symbol {
   display: grid;
   place-items: center;
@@ -654,6 +667,17 @@ h2 {
   line-height: 1.7;
   max-width: 800px;
   margin-top: 22px;
+}
+
+.promo-code-note {
+  margin-top: 0.75rem;
+  color: var(--muted-ink);
+  font-size: 0.875rem;
+}
+
+.promo-code-note strong {
+  color: var(--foreground);
+  letter-spacing: 0.04em;
 }
 .commerce-note {
   display: flex;
