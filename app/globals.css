@@ -930,6 +930,11 @@ section[id] {
     gap: 22px;
   }
 }
+@media (min-width: 1051px) {
+  .admin-app .admin-stats {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
 @media (max-width: 760px) {
   .shell {
     width: calc(100% - 40px);

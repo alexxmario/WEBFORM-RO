@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { blueprintSchema } from "@/lib/zodSchemas";
 import { commerceQuoteSchema } from "@/lib/commerce-quote";
+import { contactSchema } from "@/lib/contact";
 
 const validBlueprint = {
   identity: {
@@ -87,5 +88,25 @@ describe("commerceQuoteSchema", () => {
 
   it("requires explicit consent for the phone call", () => {
     expect(commerceQuoteSchema.safeParse({ ...quote, consent: false }).success).toBe(false);
+  });
+});
+
+describe("contactSchema", () => {
+  const message = {
+    name: "Ana Popescu",
+    email: "ana@example.com",
+    phone: "",
+    businessName: "Atelier Ana",
+    subject: "site",
+    message: "Aș dori un site de prezentare pentru atelierul meu.",
+    consent: true,
+  };
+
+  it("accepts a complete contact message", () => {
+    expect(contactSchema.safeParse(message).success).toBe(true);
+  });
+
+  it("rejects short messages and missing privacy consent", () => {
+    expect(contactSchema.safeParse({ ...message, message: "Salut", consent: false }).success).toBe(false);
   });
 });

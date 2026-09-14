@@ -13,6 +13,7 @@ export function Header() {
     { href: "/#chat-workflow", label: "Comunicare" },
     { href: "/templates", label: "Modele de site" },
     { href: "/#plans", label: "Prețuri" },
+    { href: "/contact", label: "Contact" },
   ];
   return (
     <header className="site-header">

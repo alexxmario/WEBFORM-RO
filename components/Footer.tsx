@@ -29,6 +29,7 @@ export function Footer() {
             <Link href="/templates">Modele de site</Link>
             <Link href="/#plans">Prețuri</Link>
             <Link href="/faq">Întrebări frecvente</Link>
+            <Link href="/contact">Contact</Link>
             <Link href="/account">Contul meu</Link>
           </div>
           <div>
