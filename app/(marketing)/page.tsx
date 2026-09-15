@@ -319,7 +319,7 @@ export default function HomePage() {
               [
                 "01",
                 "Alegi serviciul potrivit.",
-                "Activezi un abonament pentru site sau ceri o ofertă dacă ai nevoie de un magazin online.",
+                "Alegi planul pentru site sau ceri o ofertă dacă ai nevoie de un magazin online.",
               ],
               [
                 "02",
@@ -328,13 +328,13 @@ export default function HomePage() {
               ],
               [
                 "03",
-                "Continuăm împreună în chat.",
-                "Primești acolo întrebările, prima versiune a site-ului și trimiți toate modificările.",
+                "Salvăm proiectul și activezi planul.",
+                "Vezi confirmarea proiectului, apoi faci plata securizată pentru planul ales.",
               ],
               [
                 "04",
-                "Aprobi, publicăm și rămânem aproape.",
-                "După lansare, folosești același chat când ai nevoie de o actualizare.",
+                "Intrăm în chat, construim și publicăm.",
+                "Primești prima versiune în chat, trimiți modificările și rămânem acolo și după lansare.",
               ],
             ].map(([n, title, desc]) => (
               <article key={n}>
@@ -353,7 +353,7 @@ export default function HomePage() {
               <p className="eyebrow">UN SINGUR LOC PENTRU TOT PROIECTUL</p>
               <h2>Fără telefoane pierdute.<br />Fără conversații împrăștiate.</h2>
               <p className="section-description">
-                După formular, primești un mesaj în chat-ul proiectului. Acolo discutăm detaliile, îți trimitem site-ul și notăm fiecare modificare.
+                După ce formularul este salvat și plata este confirmată, intri direct în chat-ul proiectului. Acolo discutăm detaliile, îți trimitem site-ul și notăm fiecare modificare.
               </p>
               <Link className="action action-dark" href="#plans">Începe proiectul <ArrowUpRight size={18} /></Link>
             </div>

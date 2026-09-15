@@ -1,11 +1,11 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
-import { ApiError, apiError, rateLimit, requireSubscription } from "@/lib/api";
+import { ApiError, apiError, rateLimit, requireUser } from "@/lib/api";
 import { ASSET_BUCKET, detectAsset } from "@/lib/assets";
 import { supabaseServerAdmin } from "@/lib/supabase/server";
 export async function POST(request: Request) {
   try {
-    const user = await requireSubscription(request);
+    const user = await requireUser(request);
     await rateLimit("upload", user.id, 30, 3600);
     if (Number(request.headers.get("content-length") || 0) > 11 * 1024 * 1024)
       throw new ApiError(413, "Limita este 10 MB per fișier.");

@@ -7,19 +7,25 @@ import { Loader2, MessageCircle } from "lucide-react";
 import { ProjectBriefForm } from "@/components/ProjectBriefForm";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
+import { getPlan } from "@/lib/pricing";
 
 export default function StartPage() {
   const [loading, setLoading] = useState(true);
   const [loadError,setLoadError] = useState(false);
   const [hasBlueprint, setHasBlueprint] = useState(false);
+  const [hasSubscription, setHasSubscription] = useState(false);
+  const [planId, setPlanId] = useState("standard_lunar");
 
   useEffect(() => {
     async function checkBlueprint() {
       try {
+        const requestedPlan = new URLSearchParams(window.location.search).get("planId");
+        if (requestedPlan && getPlan(requestedPlan)) setPlanId(requestedPlan);
         const response = await fetch("/api/blueprint");
         if (!response.ok) throw new Error("Blueprint unavailable");
         const data = await response.json();
         setHasBlueprint(data.hasBlueprint || false);
+        setHasSubscription(data.hasSubscription || false);
       } catch (error) {
         console.error("Error checking blueprint status:", error);
         setLoadError(true);
@@ -56,14 +62,15 @@ export default function StartPage() {
               Formularul a fost deja completat
             </h1>
             <p className="text-body-lg text-muted-foreground">
-              Formularul tău este la echipa noastră și lucrăm la site-ul tău.
-              Pentru întrebări, materiale sau modificări, folosește chat-ul proiectului.
+              {hasSubscription
+                ? "Proiectul este activ. Pentru întrebări, materiale sau modificări, folosește chat-ul proiectului."
+                : "Proiectul tău este salvat. Mai rămâne să activezi planul ales, apoi intri direct în chat-ul proiectului."}
             </p>
           </div>
           <Button asChild size="lg" className="gap-2">
-            <Link href="/chat">
+            <Link href={hasSubscription ? "/chat" : `/project-ready?planId=${encodeURIComponent(planId)}`}>
               <MessageCircle className="h-5 w-5" />
-              Deschide chat-ul proiectului
+              {hasSubscription ? "Deschide chat-ul proiectului" : "Continuă către activarea planului"}
             </Link>
           </Button>
         </main>
@@ -83,13 +90,14 @@ export default function StartPage() {
             Spune-ne pe scurt de ce are nevoie afacerea ta.
           </h1>
           <p className="text-muted-foreground">
-            Durează aproximativ 4 minute. După trimitere, primești un mesaj în chat-ul proiectului și continuăm totul acolo.
+            Durează aproximativ 4 minute. Salvăm proiectul, activezi planul ales, apoi intri direct în chat-ul proiectului.
           </p>
+          <p className="text-sm font-medium">Plan ales: {getPlan(planId)?.name}</p>
         </div>
 
         <div className="mx-auto w-full max-w-5xl overflow-hidden rounded-2xl border border-border bg-card">
           <div className="px-5 py-6 sm:px-10 sm:py-10">
-            <ProjectBriefForm />
+            <ProjectBriefForm planId={planId} />
           </div>
         </div>
       </main>

@@ -28,7 +28,6 @@ const routes: SitemapEntry[] = [
   { route: "/support", priority: 0.6, changeFrequency: "monthly" },
 
   // Pagini utilitare
-  { route: "/thank-you", priority: 0.3, changeFrequency: "yearly" },
   { route: "/status", priority: 0.4, changeFrequency: "daily" },
 
   // Pagini legale

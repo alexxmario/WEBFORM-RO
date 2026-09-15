@@ -45,7 +45,7 @@ const pages = [
   { label: "Contact", value: "Contact" },
 ];
 
-export function ProjectBriefForm() {
+export function ProjectBriefForm({ planId }: { planId: string }) {
   const router = useRouter();
   const submissionKey = useRef<string | null>(null);
   const [step, setStep] = useState(0);
@@ -137,8 +137,8 @@ export function ProjectBriefForm() {
         }),
       });
       if (!response.ok) throw new Error("submit");
-      toast.success("Formular primit. Ai un mesaj nou în chat.");
-      router.push("/thank-you");
+      toast.success("Proiectul a fost salvat.");
+      router.push(`/project-ready?planId=${encodeURIComponent(planId)}`);
     } catch {
       toast.error("Formularul nu a putut fi trimis. Încearcă din nou.");
     }
@@ -252,8 +252,8 @@ export function ProjectBriefForm() {
         {step === 3 && <>
           <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
             <div className="flex gap-3"><MessageCircle className="mt-0.5 h-5 w-5 shrink-0 text-primary" /><div>
-              <h3 className="font-semibold">După trimitere, continuăm în chat</h3>
-              <p className="mt-1 text-sm text-muted-foreground">Acolo primești mesajul de bun venit, întrebările noastre și prima versiune a site-ului. Tot acolo trimiți modificările și aprobarea finală.</p>
+              <h3 className="font-semibold">După trimitere, proiectul este salvat</h3>
+              <p className="mt-1 text-sm text-muted-foreground">Vezi cum direcția site-ului începe să prindă contur, apoi activezi planul ales. Imediat după plată intri în chat-ul proiectului.</p>
             </div></div>
           </div>
           <div className="grid gap-3 rounded-2xl border border-border p-5 text-sm sm:grid-cols-2">
@@ -279,7 +279,7 @@ export function ProjectBriefForm() {
             <Button type="button" onClick={next}>Continuă</Button>
           ) : (
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Trimite și deschide chat-ul
+              {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Salvează proiectul
             </Button>
           )}
         </div>

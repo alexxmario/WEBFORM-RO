@@ -21,6 +21,18 @@ export function PaymentStatus({
     } catch {}
   }, [orderId, status]);
   useEffect(() => {
+    if (status !== "completed") return;
+    let redirectTimer: number | undefined;
+    void fetch("/api/chat/welcome", { method: "POST" }).finally(() => {
+      redirectTimer = window.setTimeout(() => {
+        window.location.href = "/chat";
+      }, 2500);
+    });
+    return () => {
+      if (redirectTimer) window.clearTimeout(redirectTimer);
+    };
+  }, [status]);
+  useEffect(() => {
     if (status !== "pending") return;
     const controller = new AbortController();
     let attempts = 0;
@@ -63,7 +75,7 @@ export function PaymentStatus({
       </h1>
       <p className="mt-4 text-muted-foreground">
         {paid
-          ? "Abonamentul este activ. Completează formularul scurt, apoi primești pașii proiectului în chat."
+          ? "Planul este activ. Pregătim chat-ul proiectului și te trimitem acolo automat."
           : pending
             ? delayed
               ? "Confirmarea durează mai mult. Nu plăti din nou; contactează-ne cu numărul comenzii."
@@ -75,12 +87,12 @@ export function PaymentStatus({
       </p>
       <Link
         className="action action-dark mt-8"
-        href={paid ? "/start" : pending ? "/chat" : "/subscribe"}
+        href={paid ? "/chat" : pending ? "/contact" : "/subscribe"}
       >
         {paid
-          ? "Completează formularul proiectului"
+          ? "Intră în chat-ul proiectului"
           : pending
-            ? "Deschide chat-ul"
+            ? "Contactează-ne"
             : "Înapoi la planuri"}
       </Link>
     </div>

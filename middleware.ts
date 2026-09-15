@@ -33,7 +33,7 @@ export async function middleware(request: NextRequest) {
     return redirect(
       `/login?redirect=${encodeURIComponent(request.nextUrl.pathname + request.nextUrl.search)}`,
     );
-  if (request.nextUrl.pathname === "/start") {
+  if (request.nextUrl.pathname.startsWith("/chat")) {
     const { data: profile, error } = await supabase
       .from("profiles")
       .select("role,subscription_status,subscription_expires_at")

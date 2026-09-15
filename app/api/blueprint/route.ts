@@ -6,16 +6,15 @@ import {
   ApiError,
   apiError,
   jsonBody,
-  requireSubscription,
   requireUser,
   rateLimit,
 } from "@/lib/api";
 import { assetIdFromUrl } from "@/lib/assets";
 import { notifyBlueprint } from "@/lib/blueprint-notification";
-import { ensureProjectChatWelcome } from "@/lib/chat-welcome";
+import { hasSubscriptionAccess } from "@/lib/subscription";
 export async function POST(request: Request) {
   try {
-    const user = await requireSubscription(request);
+    const user = await requireUser(request);
     await rateLimit("blueprint", user.id, 10, 300);
     const payload = await jsonBody(request);
     const envelope = z
@@ -104,14 +103,7 @@ export async function POST(request: Request) {
     } catch {
       console.error("Blueprint saved; notification requires retry", id);
     }
-    let chatReady = false;
-    try {
-      await ensureProjectChatWelcome(user.id, user.email || "");
-      chatReady = true;
-    } catch (error) {
-      console.error("Blueprint saved; welcome message requires retry", error);
-    }
-    return NextResponse.json({ ok: true, id, notification, chatReady });
+    return NextResponse.json({ ok: true, id, notification });
   } catch (error) {
     return apiError(error);
   }
@@ -119,14 +111,20 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   try {
     const user = await requireUser(request);
-    const { data, error } = await supabaseServerAdmin()
-      .from("blueprints")
-      .select("id")
-      .eq("user_id", user.id)
-      .limit(1);
-    if (error) throw error;
+    const db = supabaseServerAdmin();
+    const [blueprints, profile] = await Promise.all([
+      db.from("blueprints").select("id").eq("user_id", user.id).limit(1),
+      db.from("profiles").select("role,subscription_status,subscription_expires_at").eq("id", user.id).single(),
+    ]);
+    if (blueprints.error) throw blueprints.error;
+    if (profile.error) throw profile.error;
     return NextResponse.json(
-      { ok: true, hasBlueprint: !!data?.length },
+      {
+        ok: true,
+        hasBlueprint: !!blueprints.data?.length,
+        hasSubscription:
+          profile.data?.role === "admin" || hasSubscriptionAccess(profile.data),
+      },
       { headers: { "Cache-Control": "private, no-store" } },
     );
   } catch (error) {

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { verifyNetopiaNotification } from "@/lib/netopia-verification";
 import { supabaseServerAdmin } from "@/lib/supabase/server";
+import { ensureProjectChatWelcome } from "@/lib/chat-welcome";
 export const dynamic = "force-dynamic";
 const notificationSchema = z.object({
   order: z.object({ orderID: z.string().min(1).max(150) }),
@@ -43,7 +44,8 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     const { order, payment } = parsed.data;
-    const { error } = await supabaseServerAdmin().rpc("webform_apply_payment", {
+    const db = supabaseServerAdmin();
+    const { data: appliedStatus, error } = await db.rpc("webform_apply_payment", {
       p_order_id: order.orderID,
       p_ntp_id: payment.ntpID,
       p_amount: payment.amount,
@@ -52,6 +54,25 @@ export async function POST(request: Request) {
       p_token: payment.token || null,
     });
     if (error) throw error;
+    if (appliedStatus === "completed") {
+      try {
+        const { data: paidOrder, error: orderError } = await db
+          .from("orders")
+          .select("user_id")
+          .eq("id", order.orderID)
+          .single();
+        if (orderError || !paidOrder) throw orderError || new Error("Order unavailable");
+        const { data: profile, error: profileError } = await db
+          .from("profiles")
+          .select("email")
+          .eq("id", paidOrder.user_id)
+          .single();
+        if (profileError || !profile) throw profileError || new Error("Profile unavailable");
+        await ensureProjectChatWelcome(paidOrder.user_id, profile.email || "");
+      } catch (welcomeError) {
+        console.error("Payment completed; chat welcome requires retry", welcomeError);
+      }
+    }
     return NextResponse.json({ errorCode: 0 });
   } catch {
     return NextResponse.json(

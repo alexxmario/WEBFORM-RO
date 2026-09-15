@@ -3,6 +3,7 @@ import { createServerClient } from "@supabase/ssr";
 import { redirect } from "next/navigation";
 import { getPlan } from "@/lib/pricing";
 import { BillingClient } from "./billing-client";
+import { hasSubscriptionAccess } from "@/lib/subscription";
 
 interface BillingPageProps {
   searchParams: Promise<{ planId?: string }>;
@@ -44,11 +45,25 @@ export default async function BillingPage({ searchParams }: BillingPageProps) {
   }
 
   // Fetch profile for pre-filling
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("name, phone_number")
-    .eq("id", user.id)
-    .single();
+  const [{ data: profile }, { data: blueprint }] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select("name, phone_number, role, subscription_status, subscription_expires_at")
+      .eq("id", user.id)
+      .single(),
+    supabase
+      .from("blueprints")
+      .select("id")
+      .eq("user_id", user.id)
+      .limit(1)
+      .maybeSingle(),
+  ]);
+
+  const alreadySubscribed =
+    profile?.role === "admin" || hasSubscriptionAccess(profile || {});
+  if (!alreadySubscribed && !blueprint) {
+    redirect(`/start?planId=${encodeURIComponent(plan.id)}`);
+  }
 
   return (
     <BillingClient
