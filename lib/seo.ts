@@ -89,14 +89,14 @@ export const defaultMetadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: "/api/og",
+        url: "/og-image.png?v=webform-20260917",
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} - Creare site-uri web profesionale`,
         type: "image/png",
       },
       {
-        url: "/og-square.png",
+        url: "/og-square.png?v=webform-20260917",
         width: 600,
         height: 600,
         alt: `${siteConfig.name} Logo`,
@@ -112,7 +112,7 @@ export const defaultMetadata: Metadata = {
     creator: siteConfig.twitterHandle,
     site: siteConfig.twitterHandle,
     images: {
-      url: "/api/og",
+      url: "/og-image.png?v=webform-20260917",
       alt: `${siteConfig.name} - Site-uri web profesionale`,
     },
   },
@@ -131,11 +131,12 @@ export const defaultMetadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.ico?v=webform-20260917", sizes: "32x32", type: "image/x-icon" },
+      { url: "/favicon-16x16.png?v=webform-20260917", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png?v=webform-20260917", sizes: "32x32", type: "image/png" },
     ],
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png?v=webform-20260917", sizes: "180x180", type: "image/png" },
     ],
   },
   manifest: "/site.webmanifest",
@@ -174,7 +175,7 @@ export function generatePageMetadata({
   noIndex?: boolean;
 }): Metadata {
   const url = `${siteConfig.url}${path}`;
-  const ogImage = image || "/api/og";
+  const ogImage = image || "/og-image.png?v=webform-20260917";
 
   return {
     title,
@@ -212,7 +213,7 @@ export const defaultSeo: DefaultSeoProps = {
     locale: siteConfig.locale,
     images: [
       {
-        url: `${siteConfig.url}/api/og`,
+        url: `${siteConfig.url}/og-image.png?v=webform-20260917`,
         width: 1200,
         height: 630,
         alt: siteConfig.title,

@@ -16,8 +16,8 @@ export const organizationJsonLd = {
   logo: {
     "@type": "ImageObject",
     url: `${siteConfig.url}/logo.png`,
-    width: 512,
-    height: 512,
+    width: 1137,
+    height: 314,
   },
   image: `${siteConfig.url}/og-image.png`,
   description:

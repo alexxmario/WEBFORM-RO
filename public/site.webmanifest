@@ -1,14 +1,24 @@
 {
-  "name": "WebForm Romania",
+  "name": "WebForm România",
   "short_name": "WebForm",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "sizes": "48x48",
-      "type": "image/x-icon"
+      "src": "/webform-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/webform-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
-  "theme_color": "#000000",
-  "background_color": "#000000",
+  "theme_color": "#f7f5ef",
+  "background_color": "#222220",
   "display": "standalone"
 }
