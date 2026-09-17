@@ -1,5 +1,6 @@
 "use client";
 
+import { STRIPE_TERMS_VERSION, STRIPE_TERMS_TEXT } from "@/lib/stripe/terms";
 import { useState, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -57,6 +58,7 @@ export function BillingClient({
 }: BillingClientProps) {
   const router = useRouter();
   const supabase = useMemo(supabaseBrowser, []);
+  const [accepted, setAccepted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [billingType, setBillingType] = useState<BillingType>("individual");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -83,6 +85,7 @@ export function BillingClient({
   const requestKey = useRef<string | null>(null);
   const requestFingerprint = useRef<string | null>(null);
   const handleSubmit = async () => {
+    if (loading || !accepted) return;
     setLoading(true);
     setErrors({});
 
@@ -142,10 +145,6 @@ export function BillingClient({
       }
       requestKey.current = checkoutKey;
 
-      // Collect browser info for Netopia
-      const { collectBrowserInfo } = await import("netopia-card");
-      const browserInfo = collectBrowserInfo(navigator, window);
-
       // Call payment API with billing info
       const response = await fetch("/api/payments/start", {
         method: "POST",
@@ -156,7 +155,8 @@ export function BillingClient({
         body: JSON.stringify({
           planId: plan.id,
           requestKey: checkoutKey,
-          browserData: browserInfo,
+          accepted,
+          termsVersion: STRIPE_TERMS_VERSION,
           billingInfo: result.data,
           promoCode: appliedPromoCode || undefined,
         }),
@@ -165,10 +165,17 @@ export function BillingClient({
       const data = await response.json();
 
       if (!response.ok) {
+        if (data.resetCheckout) {
+          try {
+            sessionStorage.removeItem(storageKey);
+          } catch {}
+          requestKey.current = null;
+          requestFingerprint.current = null;
+        }
         throw new Error(data.error || "Eroare la initierea platii");
       }
 
-      // Redirect to Netopia payment page
+      // Redirect to Stripe Checkout
       if (data.paymentUrl) {
         try {
           sessionStorage.setItem(
@@ -287,17 +294,17 @@ export function BillingClient({
             )}
             {promotion && discounted && (
               <p className="mt-2 text-sm text-green-400">
-                Cod aplicat: {promotion.code}. Economisești {discounted.discount}{" "}
-                RON la această plată.
+                Cod aplicat: {promotion.code}. Economisești{" "}
+                {discounted.discount} RON la această plată.
               </p>
             )}
           </div>
 
           <p className="mb-6 text-sm text-muted-foreground">
-            Plătești perioada selectată. Reînnoirea se face din cont, printr-o
-            plată nouă; nu debităm automat cardul. Dacă treci la alt nivel
-            (Start/Business), noua perioadă începe imediat, fără calcul
-            proporțional pentru perioada anterioară.
+            Abonamentul se reînnoiește automat prin Stripe. Reducerea WEBFORM20
+            se aplică doar primei plăți; următoarele plăți sunt de {plan.price}{" "}
+            RON/{plan.interval === "year" ? "an" : "lună"}. Poți opri reînnoirea
+            din cont.
           </p>
           {/* Billing type selection */}
           <h2 className="mb-4 text-xl font-semibold">Vreau factura pe:</h2>
@@ -502,8 +509,7 @@ export function BillingClient({
                             setCompany({
                               ...company,
                               cuiPrefix: (value === "_none" ? "" : value) as
-                                | ""
-                                | "RO",
+                                "" | "RO",
                             })
                           }
                         >
@@ -833,11 +839,31 @@ export function BillingClient({
             </div>
           )}
 
+          <label className="mt-8 flex gap-3 text-sm leading-relaxed">
+            <input
+              type="checkbox"
+              checked={accepted}
+              onChange={(event) => setAccepted(event.target.checked)}
+              className="mt-1 h-5 w-5 shrink-0"
+            />
+            <span>
+              {STRIPE_TERMS_TEXT} Accept{" "}
+              <a
+                className="underline"
+                href="/legal/terms"
+                target="_blank"
+                rel="noreferrer"
+              >
+                termenii serviciului
+              </a>
+              .
+            </span>
+          </label>
           {/* Submit button */}
           <div className="mt-8">
             <Button
               onClick={handleSubmit}
-              disabled={loading}
+              disabled={loading || !accepted}
               className="w-full"
               size="lg"
             >
@@ -847,7 +873,7 @@ export function BillingClient({
                   Se proceseaza...
                 </>
               ) : (
-                "Salveaza"
+                "Continuă la plata securizată"
               )}
             </Button>
           </div>

@@ -11,7 +11,7 @@ import { getPlan } from "@/lib/pricing";
 
 export default function StartPage() {
   const [loading, setLoading] = useState(true);
-  const [loadError,setLoadError] = useState(false);
+  const [loadError, setLoadError] = useState(false);
   const [hasBlueprint, setHasBlueprint] = useState(false);
   const [hasSubscription, setHasSubscription] = useState(false);
   const [planId, setPlanId] = useState("standard_lunar");
@@ -19,7 +19,9 @@ export default function StartPage() {
   useEffect(() => {
     async function checkBlueprint() {
       try {
-        const requestedPlan = new URLSearchParams(window.location.search).get("planId");
+        const requestedPlan = new URLSearchParams(window.location.search).get(
+          "planId",
+        );
         if (requestedPlan && getPlan(requestedPlan)) setPlanId(requestedPlan);
         const response = await fetch("/api/blueprint");
         if (!response.ok) throw new Error("Blueprint unavailable");
@@ -36,7 +38,24 @@ export default function StartPage() {
     checkBlueprint();
   }, []);
 
-  if(loadError) return <><Header/><main id="main" className="container pt-40 text-center"><h1 className="text-2xl">Nu am putut verifica proiectul.</h1><p className="my-5 text-muted-foreground">Conexiunea cu serviciul este temporar indisponibilă.</p><button className="action action-dark" onClick={()=>window.location.reload()}>Încearcă din nou</button></main></>;
+  if (loadError)
+    return (
+      <>
+        <Header />
+        <main id="main" className="container pt-40 text-center">
+          <h1 className="text-2xl">Nu am putut verifica proiectul.</h1>
+          <p className="my-5 text-muted-foreground">
+            Conexiunea cu serviciul este temporar indisponibilă.
+          </p>
+          <button
+            className="action action-dark"
+            onClick={() => window.location.reload()}
+          >
+            Încearcă din nou
+          </button>
+        </main>
+      </>
+    );
 
   if (loading) {
     return (
@@ -68,9 +87,17 @@ export default function StartPage() {
             </p>
           </div>
           <Button asChild size="lg" className="gap-2">
-            <Link href={hasSubscription ? "/chat" : `/project-ready?planId=${encodeURIComponent(planId)}`}>
+            <Link
+              href={
+                hasSubscription
+                  ? "/chat"
+                  : `/project-ready?planId=${encodeURIComponent(planId)}`
+              }
+            >
               <MessageCircle className="h-5 w-5" />
-              {hasSubscription ? "Deschide chat-ul proiectului" : "Continuă către activarea planului"}
+              {hasSubscription
+                ? "Deschide chat-ul proiectului"
+                : "Continuă către activarea planului"}
             </Link>
           </Button>
         </main>
@@ -83,19 +110,25 @@ export default function StartPage() {
       <Header />
       <main
         id="main"
-        className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col gap-10 px-4 pt-32 pb-12 sm:px-8 lg:pt-36 lg:pb-16"
+        className="relative z-10 mx-auto flex min-h-screen max-w-3xl flex-col gap-10 px-4 pt-32 pb-12 sm:px-8 lg:pt-36 lg:pb-16"
       >
         <div className="mx-auto max-w-2xl space-y-4 text-center">
-          <h1 className="font-display text-display-md sm:text-display-lg" style={{ textWrap: "balance" }}>
+          <h1
+            className="font-display text-display-md sm:text-display-lg"
+            style={{ textWrap: "balance" }}
+          >
             Spune-ne pe scurt de ce are nevoie afacerea ta.
           </h1>
           <p className="text-muted-foreground">
-            Durează aproximativ 4 minute. Salvăm proiectul, activezi planul ales, apoi intri direct în chat-ul proiectului.
+            Cinci întrebări scurte despre afacerea ta. Salvăm proiectul,
+            activezi planul ales, apoi intri direct în chat-ul proiectului.
           </p>
-          <p className="text-sm font-medium">Plan ales: {getPlan(planId)?.name}</p>
+          <p className="text-sm font-medium">
+            Plan ales: {getPlan(planId)?.name}
+          </p>
         </div>
 
-        <div className="mx-auto w-full max-w-5xl overflow-hidden rounded-2xl border border-border bg-card">
+        <div className="mx-auto w-full max-w-3xl overflow-hidden rounded-2xl border border-border bg-card">
           <div className="px-5 py-6 sm:px-10 sm:py-10">
             <ProjectBriefForm planId={planId} />
           </div>

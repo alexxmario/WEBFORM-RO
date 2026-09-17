@@ -4,7 +4,7 @@ let ready=true;
 const publicKey=process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY||process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const secretKey=process.env.SUPABASE_SECRET_KEY||process.env.SUPABASE_SERVICE_ROLE_KEY;
 const entries={NEXT_PUBLIC_SUPABASE_URL:process.env.NEXT_PUBLIC_SUPABASE_URL,'Supabase publishable/anon key':publicKey,'Supabase secret/service-role key':secretKey};
-for(const name of ['NETOPIA_API_KEY','NETOPIA_SIGNATURE','NETOPIA_IPN_PUBLIC_KEY','NETOPIA_VAT_RATE','NETOPIA_SANDBOX','NEXT_PUBLIC_NETOPIA_CONFIRM_URL','NEXT_PUBLIC_NETOPIA_RETURN_URL'])entries[name]=process.env[name];
+for(const name of ['CAMPAIGN_STRIPE_SECRET_KEY','STRIPE_WEBHOOK_SECRET'])entries[name]=process.env[name];
 for(const [name,value] of Object.entries(entries)){console.log(`${value?'OK':'MISSING'} ${name}`);if(!value)ready=false;}
 for(const name of ['RESEND_API_KEY','NOTIFICATION_EMAIL','NOTIFICATION_FROM_EMAIL'])console.log(`${process.env[name]?'OK':'OPTIONAL MISSING'} ${name}`);
 const url=process.env.NEXT_PUBLIC_SUPABASE_URL;

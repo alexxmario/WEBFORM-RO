@@ -1,7 +1,8 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: "https://webform.site",
-  generateRobotsTxt: true,
+  generateRobotsTxt: false,
+  exclude: ["/instalatii", "/instalatii/*", "/admin", "/admin/*"],
   changefreq: "weekly",
   priority: 0.7,
   transform: async (config, path) => {

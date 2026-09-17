@@ -1,3 +1,5 @@
+import { LeadForm } from "@/components/campaign/LeadForm";
+import "@/app/instalatii/campaign.css";
 import { DesignStudio } from "@/components/DesignStudio";
 import { HomeMotion } from "@/components/HomeMotion";
 import Link from "next/link";
@@ -118,6 +120,7 @@ export default function HomePage() {
           </div>
         </div>
         <DesignStudio />
+        <section className="campaign"><div className="shell campaign-section campaign-two"><div><p className="eyebrow">VEZI ÎNAINTE SĂ DECIZI</p><h2>Vrei să vezi site-ul înainte să plătești?</h2><p>Lasă-ne numărul și te sunăm.</p></div><LeadForm source="homepage" /></div></section>
         <section className="shell home-section" id="why-webform">
           <div className="section-heading">
             <div>
@@ -324,7 +327,7 @@ export default function HomePage() {
               [
                 "02",
                 "Completezi formularul scurt.",
-                "În aproximativ 4 minute aflăm ce vinzi, ce obiectiv ai și ce stil îți place.",
+                "Cinci răspunsuri scurte despre afacere, clienți și rezultatul pe care îl vrei.",
               ],
               [
                 "03",

@@ -105,7 +105,7 @@ export function SubscribeClient({ initialUser }: SubscribeClientProps) {
         {/* Trust badges */}
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm text-muted-foreground">
-            Platile sunt procesate securizat prin Netopia mobilPay. <br />
+            Plățile și reînnoirile automate sunt procesate securizat prin Stripe. <br />
             Poti anula abonamentul oricand din contul tau.
           </p>
         </div>

@@ -54,7 +54,7 @@ export default function TermsPage() {
               Plățile se efectuează online prin card bancar sau transfer bancar.
             </p>
             <p>
-              Abonamentul se facturează lunar. Taxele de setup sunt plătite o singură dată la începutul serviciului.
+              Abonamentul se facturează lunar sau anual, conform opțiunii alese, și se reînnoiește automat prin Stripe. Poți opri reînnoirea din cont; accesul continuă până la sfârșitul perioadei plătite. Reducerile pentru prima plată nu se aplică reînnoirilor.
             </p>
           </section>
 

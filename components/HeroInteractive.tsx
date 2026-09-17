@@ -43,7 +43,7 @@ export const HeroInteractive = memo(function HeroInteractive() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="max-w-xl text-body-lg text-muted-foreground"
         >
-          Completezi Formularul, alegi un șablon, și primești site-ul tău în 7
+          Ne spui despre afacerea ta și primești site-ul tău în 7
           zile. Fără întâlniri, fără complicații.
         </motion.p>
 

@@ -8,6 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: "/",
         disallow: [
+          "/instalatii",
           "/api/",
           "/admin/",
           "/_next/",
@@ -19,16 +20,17 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "Googlebot",
         allow: "/",
-        disallow: ["/api/", "/admin/", "/dashboard/"],
+        disallow: ["/instalatii", "/api/", "/admin/", "/dashboard/"],
       },
       {
         userAgent: "Googlebot-Image",
+        disallow: ["/instalatii"],
         allow: ["/images/", "/og-image.png", "/logo.png"],
       },
       {
         userAgent: "Bingbot",
         allow: "/",
-        disallow: ["/api/", "/admin/", "/dashboard/"],
+        disallow: ["/instalatii", "/api/", "/admin/", "/dashboard/"],
       },
     ],
     sitemap: `${siteConfig.url}/sitemap.xml`,

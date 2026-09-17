@@ -13,13 +13,15 @@ export default function TemplatesPage() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <h1 className="font-display text-display-md">
-              Un punct de plecare pentru site-ul tău.
+              Bibliotecă de inspirație.
             </h1>
             <p className="max-w-2xl text-muted-foreground">
-              Alege din {templateOptions.length} șabloane proiectate profesional. Fiecare poate fi personalizat complet pentru a se potrivi brandului tău.
+              Explorează {templateOptions.length} exemple de design. Sunt aici
+              pentru inspirație; echipa WebForm propune direcția potrivită
+              pentru afacerea ta.
             </p>
           </div>
-          <BlueprintButton size="lg">Completează Formularul</BlueprintButton>
+          <BlueprintButton size="lg">Începe proiectul</BlueprintButton>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -64,9 +66,10 @@ export default function TemplatesPage() {
         <div className="sticky bottom-4 z-20">
           <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-card px-4 py-3">
             <p className="text-body-sm text-muted-foreground">
-              Gata să începi? Completează Formularul Website-ului și vom personaliza orice șablon pentru tine.
+              Gata să începi? Începe proiectul Website-ului și vom personaliza
+              orice șablon pentru tine.
             </p>
-            <BlueprintButton>Completează Formularul</BlueprintButton>
+            <BlueprintButton>Începe proiectul</BlueprintButton>
           </div>
         </div>
       </main>

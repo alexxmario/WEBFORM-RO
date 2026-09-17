@@ -2,7 +2,14 @@
 import { hasSubscriptionAccess } from "@/lib/subscription";
 
 import { useState, useMemo } from "react";
-import { Loader2, User, CreditCard, LogOut, AlertTriangle, MessageCircle } from "lucide-react";
+import {
+  Loader2,
+  User,
+  CreditCard,
+  LogOut,
+  AlertTriangle,
+  MessageCircle,
+} from "lucide-react";
 import Link from "next/link";
 
 import { Header } from "@/components/Header";
@@ -14,6 +21,7 @@ import { getPlan } from "@/lib/pricing";
 
 interface UserProfile {
   isAdmin?: boolean;
+  hasStripeBilling?: boolean;
   id: string;
   email: string;
   name?: string;
@@ -29,11 +37,37 @@ interface AccountClientProps {
 export function AccountClient({ initialUser }: AccountClientProps) {
   const supabase = useMemo(supabaseBrowser, []);
   const [cancellingSubscription, setCancellingSubscription] = useState(false);
+  const [portalBusy, setPortalBusy] = useState(false);
+  const [portalError, setPortalError] = useState("");
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
 
+  async function openPortal() {
+    setPortalBusy(true);
+    setPortalError("");
+    try {
+      const response = await fetch("/api/subscription/portal", {
+        method: "POST",
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      window.location.assign(data.url);
+    } catch (error) {
+      setPortalError(
+        error instanceof Error
+          ? error.message
+          : "Nu putem deschide administrarea plăților.",
+      );
+      setPortalBusy(false);
+    }
+  }
   // Get current plan details
-  const currentPlan = initialUser.subscriptionPlan ? getPlan(initialUser.subscriptionPlan) : null;
-  const hasActiveSubscription = hasSubscriptionAccess({subscription_status:initialUser.subscriptionStatus,subscription_expires_at:initialUser.subscriptionExpiresAt});
+  const currentPlan = initialUser.subscriptionPlan
+    ? getPlan(initialUser.subscriptionPlan)
+    : null;
+  const hasActiveSubscription = hasSubscriptionAccess({
+    subscription_status: initialUser.subscriptionStatus,
+    subscription_expires_at: initialUser.subscriptionExpiresAt,
+  });
 
   // Format expiry date
   const formatDate = (dateString: string | null | undefined) => {
@@ -53,7 +87,9 @@ export function AccountClient({ initialUser }: AccountClientProps) {
   const handleCancelSubscription = async () => {
     setCancellingSubscription(true);
     try {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       if (!session?.access_token) {
         window.location.href = "/login";
         return;
@@ -62,7 +98,7 @@ export function AccountClient({ initialUser }: AccountClientProps) {
       const response = await fetch("/api/subscription/cancel", {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${session.access_token}`,
+          Authorization: `Bearer ${session.access_token}`,
         },
       });
 
@@ -76,7 +112,11 @@ export function AccountClient({ initialUser }: AccountClientProps) {
       window.location.reload();
     } catch (error) {
       console.error("Cancel error:", error);
-      alert(error instanceof Error ? error.message : "Eroare la anularea abonamentului");
+      alert(
+        error instanceof Error
+          ? error.message
+          : "Eroare la anularea abonamentului",
+      );
     } finally {
       setCancellingSubscription(false);
       setShowCancelConfirm(false);
@@ -95,11 +135,26 @@ export function AccountClient({ initialUser }: AccountClientProps) {
             </p>
           </div>
 
-          {initialUser.isAdmin && <Link href="/admin" className="action action-dark">Deschide panoul de administrare ↗</Link>}
+          {initialUser.isAdmin && (
+            <Link href="/admin" className="action action-dark">
+              Deschide panoul de administrare ↗
+            </Link>
+          )}
 
-          <Link href="/chat" className="flex items-center gap-4 rounded-2xl border border-primary/20 bg-primary/5 p-6 transition hover:border-primary/50">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10"><MessageCircle className="h-5 w-5 text-primary" /></div>
-            <div><h2 className="font-semibold">Chat-ul proiectului</h2><p className="mt-1 text-sm text-muted-foreground">Întrebări, versiuni ale site-ului, modificări și aprobarea finală.</p></div>
+          <Link
+            href="/chat"
+            className="flex items-center gap-4 rounded-2xl border border-primary/20 bg-primary/5 p-6 transition hover:border-primary/50"
+          >
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10">
+              <MessageCircle className="h-5 w-5 text-primary" />
+            </div>
+            <div>
+              <h2 className="font-semibold">Chat-ul proiectului</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Întrebări, versiuni ale site-ului, modificări și aprobarea
+                finală.
+              </p>
+            </div>
           </Link>
 
           {/* Profile Section */}
@@ -124,6 +179,35 @@ export function AccountClient({ initialUser }: AccountClientProps) {
             </div>
           </div>
 
+          {initialUser.hasStripeBilling && (
+            <section className="rounded-2xl border border-border/60 bg-card/80 p-6 space-y-4">
+              <h2 className="text-lg font-semibold">Plăți și facturi Stripe</h2>
+              <p className="text-sm text-muted-foreground">
+                Poți actualiza cardul și descărca facturile. Dacă o reînnoire a
+                eșuat, actualizează metoda de plată; accesul se reactivează după
+                confirmarea plății.
+              </p>
+              <Button
+                variant="outline"
+                onClick={openPortal}
+                disabled={portalBusy}
+              >
+                {portalBusy
+                  ? "Se deschide…"
+                  : "Gestionează cardul și facturile"}
+              </Button>
+              {portalError && <p role="alert">{portalError}</p>}
+              {!hasActiveSubscription && (
+                <Button
+                  variant="outline"
+                  onClick={handleCancelSubscription}
+                  disabled={cancellingSubscription}
+                >
+                  Oprește reînnoirea abonamentului
+                </Button>
+              )}
+            </section>
+          )}
           {/* Subscription Section */}
           <div className="rounded-2xl border border-border/60 bg-card/80 p-6">
             <div className="flex items-center gap-3 mb-4">
@@ -135,27 +219,45 @@ export function AccountClient({ initialUser }: AccountClientProps) {
 
             {hasActiveSubscription && currentPlan ? (
               <div className="space-y-4">
-                <Link href="/start" className="text-primary underline">Deschide proiectul</Link>
-                <Link href="/chat" className="ml-4 text-primary underline">Chat proiect</Link>
+                <Link href="/start" className="text-primary underline">
+                  Deschide proiectul
+                </Link>
+                <Link href="/chat" className="ml-4 text-primary underline">
+                  Chat proiect
+                </Link>
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-muted-foreground">Plan curent</p>
-                    <p className="text-foreground font-medium">{currentPlan.name}</p>
+                    <p className="text-foreground font-medium">
+                      {currentPlan.name}
+                    </p>
                   </div>
-                  <Badge className="bg-green-500/20 text-green-400">{initialUser.subscriptionStatus === "cancelled" ? "Anulat · acces până la expirare" : "Activ"}</Badge>
+                  <Badge className="bg-green-500/20 text-green-400">
+                    {initialUser.subscriptionStatus === "cancelled"
+                      ? "Anulat · acces până la expirare"
+                      : "Activ"}
+                  </Badge>
                 </div>
 
                 <div>
                   <p className="text-sm text-muted-foreground">Pret</p>
                   <p className="text-foreground">
-                    {currentPlan.price} RON / {currentPlan.interval === "year" ? "an" : "luna"}
+                    {currentPlan.price} RON /{" "}
+                    {currentPlan.interval === "year" ? "an" : "luna"}
                   </p>
                 </div>
 
                 {initialUser.subscriptionExpiresAt && (
                   <div>
-                    <p className="text-sm text-muted-foreground">Expira la</p>
-                    <p className="text-foreground">{formatDate(initialUser.subscriptionExpiresAt)}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {initialUser.hasStripeBilling &&
+                      initialUser.subscriptionStatus !== "cancelled"
+                        ? "Perioadă plătită până la"
+                        : "Expiră la"}
+                    </p>
+                    <p className="text-foreground">
+                      {formatDate(initialUser.subscriptionExpiresAt)}
+                    </p>
                   </div>
                 )}
 
@@ -164,6 +266,7 @@ export function AccountClient({ initialUser }: AccountClientProps) {
                     <Button
                       variant="outline"
                       className="text-red-400 border-red-400/30 hover:bg-red-400/10 hover:text-red-400"
+                      disabled={initialUser.subscriptionStatus === "cancelled"}
                       onClick={() => setShowCancelConfirm(true)}
                     >
                       Anuleaza abonamentul
@@ -173,10 +276,13 @@ export function AccountClient({ initialUser }: AccountClientProps) {
                       <div className="flex items-start gap-2">
                         <AlertTriangle className="h-5 w-5 text-red-400 shrink-0 mt-0.5" />
                         <div>
-                          <p className="font-medium text-red-400">Esti sigur?</p>
+                          <p className="font-medium text-red-400">
+                            Esti sigur?
+                          </p>
                           <p className="text-sm text-muted-foreground">
-                            Abonamentul va ramane activ pana la {formatDate(initialUser.subscriptionExpiresAt)},
-                            iar serviciul se încheie la expirarea perioadei plătite.
+                            Abonamentul va ramane activ pana la{" "}
+                            {formatDate(initialUser.subscriptionExpiresAt)}, iar
+                            serviciul se încheie la expirarea perioadei plătite.
                           </p>
                         </div>
                       </div>
@@ -211,10 +317,15 @@ export function AccountClient({ initialUser }: AccountClientProps) {
               </div>
             ) : (
               <div className="space-y-4">
-                <Link href="/start" className="text-primary underline">Deschide proiectul</Link>
-                <Link href="/chat" className="ml-4 text-primary underline">Chat proiect</Link>
+                <Link href="/start" className="text-primary underline">
+                  Deschide proiectul
+                </Link>
+                <Link href="/chat" className="ml-4 text-primary underline">
+                  Chat proiect
+                </Link>
                 <p className="text-muted-foreground">
-                  Nu ai un abonament activ. Aboneaza-te pentru a accesa toate template-urile.
+                  Nu ai un abonament activ. Aboneaza-te pentru a accesa toate
+                  template-urile.
                 </p>
                 <Button asChild>
                   <Link href="/subscribe">Vezi planurile</Link>

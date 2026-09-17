@@ -66,7 +66,7 @@ export function Footer() {
           <span>
             © {new Date().getFullYear()} WebForm. Toate drepturile rezervate.
           </span>
-          <span>Plăți securizate prin NETOPIA Payments</span>
+          <span>Plăți securizate prin Stripe</span>
         </div>
       </div>
     </footer>

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { projectBriefPayloadSchema } from "@/lib/project-brief";
 import { blueprintSchema } from "@/lib/zodSchemas";
 import { supabaseServerAdmin } from "@/lib/supabase/server";
 import {
@@ -20,7 +21,14 @@ export async function POST(request: Request) {
     const envelope = z
       .object({ submissionKey: z.string().uuid() })
       .safeParse(payload);
-    const parse = blueprintSchema.safeParse(payload);
+    const isShortBrief =
+      typeof payload === "object" &&
+      payload !== null &&
+      "briefVersion" in payload &&
+      payload.briefVersion === 2;
+    const parse = (
+      isShortBrief ? projectBriefPayloadSchema : blueprintSchema
+    ).safeParse(payload);
     if (!envelope.success || !parse.success)
       throw new ApiError(400, "Verifică informațiile din formular.");
     const data = parse.data,
@@ -114,7 +122,11 @@ export async function GET(request: Request) {
     const db = supabaseServerAdmin();
     const [blueprints, profile] = await Promise.all([
       db.from("blueprints").select("id").eq("user_id", user.id).limit(1),
-      db.from("profiles").select("role,subscription_status,subscription_expires_at").eq("id", user.id).single(),
+      db
+        .from("profiles")
+        .select("role,subscription_status,subscription_expires_at")
+        .eq("id", user.id)
+        .single(),
     ]);
     if (blueprints.error) throw blueprints.error;
     if (profile.error) throw profile.error;

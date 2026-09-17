@@ -15,7 +15,7 @@ vi.mock("@/lib/netopia", () => ({
   generateOrderId: () => "WF-test",
   createPaymentRequest: mocks.payment,
 }));
-import { POST } from "@/app/api/payments/start/route";
+import { POST } from "@/lib/payments/netopia-start";
 const billingInfo = {
   billingType: "individual",
   name: "Ana Popescu",

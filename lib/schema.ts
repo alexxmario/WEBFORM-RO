@@ -290,9 +290,9 @@ export const howToJsonLd = {
     },
     {
       "@type": "HowToStep",
-      name: "Alege un sablon",
-      text: "Selecteaza din peste 100 de sabloane premium cel care se potriveste brandului tau.",
-      url: `${siteConfig.url}/templates`,
+      name: "Activeaza planul",
+      text: "Activeaza planul ales si discuta detaliile cu echipa in chat-ul proiectului.",
+      url: `${siteConfig.url}/subscribe`,
     },
     {
       "@type": "HowToStep",

@@ -42,7 +42,7 @@ export default function ContactPage() {
                   <a href="https://anpc.ro/ce-spune-legea/sal/" target="_blank" rel="noopener noreferrer">ANPC · Soluționarea alternativă a litigiilor</a>
                 </div>
               </div>
-              <p className="border-t border-border pt-6 text-xs text-muted-foreground">Plățile online sunt procesate securizat prin NETOPIA Payments.</p>
+              <p className="border-t border-border pt-6 text-xs text-muted-foreground">Plățile online sunt procesate securizat prin Stripe.</p>
             </aside>
           </div>
         </div>

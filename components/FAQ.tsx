@@ -1,7 +1,8 @@
 const faqs = [
+  ["Al cui e domeniul dacă anulez?", "Domeniul rămâne al tău."],
   [
     "Ce este inclus în abonament?",
-    "Construirea site-ului pe baza unui model ales de tine, adaptarea la afacerea ta, găzduire, domeniu, SSL și administrare. Numărul de pagini și ritmul actualizărilor depind de planul ales.",
+    "Construirea unui site cu structură și design propuse de echipa noastră pentru afacerea ta, găzduire, domeniu, SSL și administrare. Numărul de pagini și ritmul actualizărilor depind de planul ales.",
   ],
   [
     "Trebuie să știu ceva despre site-uri?",
