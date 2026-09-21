@@ -52,6 +52,57 @@ a {
   @apply absolute left-4 top-4 -translate-y-20 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
 }
 
+.whatsapp-button {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 50px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(20, 105, 52, 0.28);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.whatsapp-button:hover {
+  background: #1ebe5d;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.whatsapp-button:focus-visible {
+  outline: 3px solid hsl(var(--background));
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .whatsapp-button {
+    right: 16px;
+    bottom: 16px;
+    width: 52px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .whatsapp-button span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
 .mission-section {
   will-change: opacity, transform;
 }

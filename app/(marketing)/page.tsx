@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Plans } from "@/components/Plans";
 import { FAQ } from "@/components/FAQ";
 import { templateOptions } from "@/lib/templates";
@@ -431,6 +432,7 @@ export default function HomePage() {
         </section>
       </main>
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }
