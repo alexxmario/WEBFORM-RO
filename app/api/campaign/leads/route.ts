@@ -1,4 +1,3 @@
-import { createHash } from "node:crypto";
 import { NextResponse, after } from "next/server";
 import {
   apiError,
@@ -9,7 +8,6 @@ import {
   requestIP,
 } from "@/lib/api";
 import { leadSchema } from "@/lib/campaign/schema";
-import { campaignConfig } from "@/lib/campaign/config";
 import { notifyLead } from "@/lib/campaign/server";
 import { supabaseServerAdmin } from "@/lib/supabase/server";
 export async function POST(request: Request) {
@@ -48,51 +46,7 @@ export async function POST(request: Request) {
         await notifyLead(id).catch(() =>
           console.error("Campaign lead notification pending", id),
         );
-        const c = campaignConfig();
-        if (
-          p.source !== "instalatii" ||
-          !p.marketingConsent ||
-          !c.pixel ||
-          !process.env.CAMPAIGN_META_ACCESS_TOKEN
-        )
-          return;
-        try {
-          const response = await fetch(
-            `https://graph.facebook.com/${process.env.CAMPAIGN_META_API_VERSION || "v23.0"}/${c.pixel}/events`,
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              signal: AbortSignal.timeout(8000),
-              body: JSON.stringify({
-                access_token: process.env.CAMPAIGN_META_ACCESS_TOKEN,
-                data: [
-                  {
-                    event_name: "Lead",
-                    event_id: p.eventId,
-                    event_time: Math.floor(Date.now() / 1000),
-                    action_source: "website",
-                    event_source_url: `${c.origin}/instalatii`,
-                    user_data: {
-                      ph: [
-                        createHash("sha256")
-                          .update(p.phone.replace("+", ""))
-                          .digest("hex"),
-                      ],
-                      client_ip_address: requestIP(request),
-                      client_user_agent: request.headers.get("user-agent"),
-                      ...(p.attribution.fbclid
-                        ? { fbc: `fb.1.${Date.now()}.${p.attribution.fbclid}` }
-                        : {}),
-                    },
-                  },
-                ],
-              }),
-            },
-          );
-          if (!response.ok) console.error("Campaign CAPI delivery failed", id);
-        } catch {
-          console.error("Campaign CAPI delivery failed", id);
-        }
+
       });
     }
     return NextResponse.json({ ok: true, eventId: p.eventId });

@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "file": "01-numarul-din-poza.png",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c81e-6118-7d90-bd3a-8acc7baf4ceb/exec-5d787cf2-221b-49e6-b803-1a2f9ed3c689.png",
+    "editPrompt": null
+  },
+  {
+    "id": 2,
+    "file": "02-testul-inainte-de-click.png",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c81e-6118-7d90-bd3a-8acc7baf4ceb/exec-a422aa3d-f761-49fa-8b20-8e42d1bb7204.png",
+    "editPrompt": "Edit this existing campaign image only to fix its transparent background. REQUIRED: an OPAQUE fully filled full-bleed rectangular background, every pixel opaque, NO transparency or alpha cutout. Flatten the ENTIRE supplied image over solid warm cream #f7f5ef, including all corners and all areas behind headline and objects. Preserve the exact composition, objects, Romanian headline and all secondary text, accent colors, aspect ratio and typography. This is a finished ready-to-use rectangular advertisement image, not an isolated asset. Do not remove the background, do not erase light/white areas, do not create transparency. Background must visibly be cream across all empty space. Correct only legibility if necessary: charcoal headline with existing orange emphasis. No new text, no logo. Keep headline exact: 'Înainte să plătești încă un click, fă testul ăsta.'."
+  },
+  {
+    "id": 3,
+    "file": "03-acopera-numele.png",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c81e-6118-7d90-bd3a-8acc7baf4ceb/exec-926719a4-c070-4448-9627-b59ff3feef0f.png",
+    "editPrompt": "Edit this existing campaign image only to fix its transparent background. REQUIRED: an OPAQUE fully filled full-bleed rectangular background, every pixel opaque, NO transparency or alpha cutout. Flatten the ENTIRE supplied image over solid charcoal #242320, including all corners and all areas behind headline and objects. Preserve the exact composition, objects, Romanian headline and all secondary text, accent colors, aspect ratio and typography. This is a finished ready-to-use rectangular advertisement image, not an isolated asset. Do not remove the background, do not erase light/white areas, do not create transparency. Background must visibly be dark charcoal across all empty space. Correct only legibility if necessary: cream headline with existing orange emphasis. No new text, no logo. Keep headline exact: 'Acoperă numele firmei. Mai rămâne ceva al tău?'."
+  },
+  {
+    "id": 4,
+    "file": "04-ce-ai-facut-aici.png",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c81e-6118-7d90-bd3a-8acc7baf4ceb/exec-1800fb9d-76d7-4826-810f-ad21de2bc896.png",
+    "editPrompt": "Edit this existing campaign image only to fix its transparent background. REQUIRED: an OPAQUE fully filled full-bleed rectangular background, every pixel opaque, NO transparency or alpha cutout. Flatten the ENTIRE supplied image over solid charcoal #242320, including all corners and all areas behind headline and objects. Preserve the exact composition, objects, Romanian headline and all secondary text, accent colors, aspect ratio and typography. This is a finished ready-to-use rectangular advertisement image, not an isolated asset. Do not remove the background, do not erase light/white areas, do not create transparency. Background must visibly be dark charcoal across all empty space. Correct only legibility if necessary: cream headline with existing orange emphasis. No new text, no logo. Keep headline exact: 'Baia arată impecabil. Dar ce ai făcut tu aici?'."
+  },
+  {
+    "id": 5,
+    "file": "05-cat-costa.png",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c81e-6118-7d90-bd3a-8acc7baf4ceb/exec-b7051b5d-1042-4ae1-bb86-157dae8c2177.png",
+    "editPrompt": "Edit this existing campaign image only to fix its transparent background. REQUIRED: an OPAQUE fully filled full-bleed rectangular background, every pixel opaque, NO transparency or alpha cutout. Flatten the ENTIRE supplied image over solid warm cream #f7f5ef, including all corners and all areas behind headline and objects. Preserve the exact composition, objects, Romanian headline and all secondary text, accent colors, aspect ratio and typography. This is a finished ready-to-use rectangular advertisement image, not an isolated asset. Do not remove the background, do not erase light/white areas, do not create transparency. Background must visibly be cream across all empty space. Correct only legibility if necessary: charcoal headline with existing orange emphasis. No new text, no logo. Keep headline exact: '„Cât costă?” Încearcă să nu începi cu prețul.'."
+  },
+  {
+    "id": 6,
+    "file": "06-cuvantul-urgente.png",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c81e-6118-7d90-bd3a-8acc7baf4ceb/exec-f4af1418-7aad-4158-b337-f3786c3a5ffd.png",
+    "editPrompt": "Edit this existing campaign image only to fix its transparent background. REQUIRED: an OPAQUE fully filled full-bleed rectangular background, every pixel opaque, NO transparency or alpha cutout. Flatten the ENTIRE supplied image over solid charcoal #242320, including all corners and all areas behind headline and objects. Preserve the exact composition, objects, Romanian headline and all secondary text, accent colors, aspect ratio and typography. This is a finished ready-to-use rectangular advertisement image, not an isolated asset. Do not remove the background, do not erase light/white areas, do not create transparency. Background must visibly be dark charcoal across all empty space. Correct only legibility if necessary: cream headline with existing orange emphasis. No new text, no logo. Keep headline exact: 'Cuvântul care poate aduce apeluri când nu lucrezi.'."
+  },
+  {
+    "id": 7,
+    "file": "07-dupa-recomandare.png",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c81e-6118-7d90-bd3a-8acc7baf4ceb/exec-bb9a741b-4a09-4009-9c99-fdfa2897c440.png",
+    "editPrompt": "Edit this existing campaign image only to fix its transparent background. REQUIRED: an OPAQUE fully filled full-bleed rectangular background, every pixel opaque, NO transparency or alpha cutout. Flatten the ENTIRE supplied image over solid warm cream #f7f5ef, including all corners and all areas behind headline and objects. Preserve the exact composition, objects, Romanian headline and all secondary text, accent colors, aspect ratio and typography. This is a finished ready-to-use rectangular advertisement image, not an isolated asset. Do not remove the background, do not erase light/white areas, do not create transparency. Background must visibly be cream across all empty space. Correct only legibility if necessary: charcoal headline with existing orange emphasis. No new text, no logo. Keep headline exact: 'Te-a recomandat un client. Acum începe partea neclară.'."
+  },
+  {
+    "id": 8,
+    "file": "08-lista-care-spune-nu.png",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c81e-6118-7d90-bd3a-8acc7baf4ceb/exec-daa7a112-0a56-4fe4-9f8e-624ac29b4001.png",
+    "editPrompt": "Edit this existing campaign image only to fix its transparent background. REQUIRED: an OPAQUE fully filled full-bleed rectangular background, every pixel opaque, NO transparency or alpha cutout. Flatten the ENTIRE supplied image over solid warm cream #f7f5ef, including all corners and all areas behind headline and objects. Preserve the exact composition, objects, Romanian headline and all secondary text, accent colors, aspect ratio and typography. This is a finished ready-to-use rectangular advertisement image, not an isolated asset. Do not remove the background, do not erase light/white areas, do not create transparency. Background must visibly be cream across all empty space. Correct only legibility if necessary: charcoal headline with existing orange emphasis. No new text, no logo. Keep headline exact: 'Lista de servicii are nevoie și de un „nu”.'."
+  },
+  {
+    "id": 9,
+    "file": "09-costul-pe-un-an.png",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c81e-6118-7d90-bd3a-8acc7baf4ceb/exec-77d5f357-e861-42d4-8870-aacf1a8b30d7.png",
+    "editPrompt": "Edit this existing campaign image only to fix its transparent background. REQUIRED: an OPAQUE fully filled full-bleed rectangular background, every pixel opaque, NO transparency or alpha cutout. Flatten the ENTIRE supplied image over solid charcoal #242320, including all corners and all areas behind headline and objects. Preserve the exact composition, objects, Romanian headline and all secondary text, accent colors, aspect ratio and typography. This is a finished ready-to-use rectangular advertisement image, not an isolated asset. Do not remove the background, do not erase light/white areas, do not create transparency. Background must visibly be dark charcoal across all empty space. Correct only legibility if necessary: cream headline with existing orange emphasis. No new text, no logo. Keep headline exact: 'Site ieftin? Întâi schimbă unitatea de măsură.'."
+  },
+  {
+    "id": 10,
+    "file": "10-incepe-cu-mesajele.png",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c81e-6118-7d90-bd3a-8acc7baf4ceb/exec-7d5fb8ad-8c06-4e3e-848c-3264250d739d.png",
+    "editPrompt": "Edit this existing campaign image only to fix its transparent background. REQUIRED: an OPAQUE fully filled full-bleed rectangular background, every pixel opaque, NO transparency or alpha cutout. Flatten the ENTIRE supplied image over solid warm cream #f7f5ef, including all corners and all areas behind headline and objects. Preserve the exact composition, objects, Romanian headline and all secondary text, accent colors, aspect ratio and typography. This is a finished ready-to-use rectangular advertisement image, not an isolated asset. Do not remove the background, do not erase light/white areas, do not create transparency. Background must visibly be cream across all empty space. Correct only legibility if necessary: charcoal headline with existing orange emphasis. No new text, no logo. Keep headline exact: 'Nu începe site-ul cu „Despre noi”. Începe cu mesajele.'."
+  }
+]

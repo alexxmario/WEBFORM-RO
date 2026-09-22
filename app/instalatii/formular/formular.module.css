@@ -1,0 +1,43 @@
+.page {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+  background: #090f14;
+  color: #f8f7f3;
+  color-scheme: dark;
+}
+.form { width: 100%; max-width: 620px; }
+.form :global(.campaign-form) {
+  background: #101b23;
+  border-color: #30404b;
+  padding: 32px;
+}
+.form :global(.campaign-fields input),
+.form :global(.campaign-fields select) {
+  background: #090f14;
+  color: #f8f7f3;
+  border-color: #52616d;
+}
+.form input:focus-visible,
+.form select:focus-visible,
+.form button:focus-visible,
+.form a:focus-visible { outline: 2px solid #51d2e9; outline-offset: 3px; }
+.form :global(.campaign-form input[type="checkbox"]) { accent-color: #ffce2e; }
+.form :global(.action) {
+  display: inline-flex;
+  justify-content: center;
+  padding: 16px 20px;
+  border-radius: 6px;
+  background: #ffce2e;
+  color: #10151a;
+  font-weight: 700;
+}
+.form :global(.campaign-small) { color: #b9c6ce; text-align: center; font-size: 12px; margin-top: 16px; }
+.form :global(.campaign-success) { padding: 32px; border: 1px solid #30404b; border-radius: 16px; background: #101b23; }
+.form :global(.campaign-success h3) { font-size: 26px; margin-bottom: 12px; }
+.form :global(.campaign-success p) { margin-bottom: 24px; }
+@media (max-width: 600px) {
+  .page { padding: 24px 14px; }
+  .form :global(.campaign-form) { padding: 24px 20px; }
+}

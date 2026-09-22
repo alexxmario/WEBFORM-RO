@@ -247,61 +247,49 @@
   margin: auto;
 }
 .installer-demo {
-  background: #203b39;
-  color: #eff1de;
+  background: #fbfaf7;
+  color: #172d35;
   border-radius: 15px;
   overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
 }
+.campaign-phone .installer-demo { border-radius: 0; }
 .demo-brand {
-  padding: 22px 20px;
-  border-bottom: 1px solid #45605b;
-  font-size: 12px;
-  letter-spacing: 0.06em;
-}
-.demo-brand span {
-  display: block;
-  font-size: 8px;
-  margin-top: 6px;
-  color: #b3c9b5;
-}
-.demo-content {
-  padding: 28px 24px;
-}
-.demo-content small {
-  font-size: 8px;
-  letter-spacing: 0.12em;
-}
-.campaign .demo-content h2 {
-  font-size: 34px;
-  letter-spacing: -0.04em;
-  margin: 18px 0;
-  font-weight: 550;
-}
-.demo-content p {
-  font-size: 12px;
-  line-height: 1.7;
-}
-.demo-pipe {
-  font-size: 110px;
-  line-height: 1;
-  color: #cde489;
-  margin: 10px 0;
-}
-.demo-call {
-  display: block;
-  padding: 12px;
-  background: #d2e59d;
-  color: #203b39;
-  font-size: 12px;
-  font-weight: 700;
-  text-align: center;
-  border-radius: 4px;
-}
-.demo-services {
-  margin: 20px 0;
-  display: grid;
+  padding: 20px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  font-size: 10px;
+}
+.demo-logo { display: flex; align-items: center; font-size: 20px; letter-spacing: -1px; }
+.demo-logo svg { margin-right: 6px; }
+.demo-logo strong { font-weight: 750; }
+.demo-nav { font-size: 8px; color: #667277; }
+.campaign-phone .demo-nav { display: none; }
+.demo-content { position: relative; isolation: isolate; padding: 38px 24px 24px; color: white; }
+.demo-content > img { object-fit: cover; object-position: 65% center; z-index: -2; }
+.demo-content::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, #10282de8, #10282d66); }
+.demo-content small { font-size: 7px; letter-spacing: 1.3px; }
+.campaign .demo-content h2 { font-family: Arial, Helvetica, sans-serif; font-size: 34px; line-height: 1.07; letter-spacing: -1.4px; margin: 22px 0 18px; font-weight: 500; color: white; }
+.campaign .demo-content h2 em { font-family: Georgia, serif; font-weight: 400; color: #f4bd97; }
+.campaign .demo-content p { font-size: 10px; line-height: 1.8; color: #e3e5e3; margin: 0 0 22px; }
+.demo-call { display: inline-flex; align-items: center; gap: 15px; padding: 12px 14px; background: #ed824d; color: #172d35; font-size: 9px; font-weight: 700; border-radius: 2px; }
+.campaign .demo-content .demo-location { margin: 24px 0 0; font-size: 8px; }
+.demo-assurance { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 10px; background: #efeee8; font-size: 8px; }
+.demo-assurance svg { color: #a35d38; }
+.demo-services { padding: 25px 20px 28px; }
+.demo-services > small { font-size: 7px; letter-spacing: 1.3px; color: #9d5c3b; }
+.campaign .demo-services h3 { font-size: 18px; line-height: 1.2; letter-spacing: -.5px; font-weight: 500; margin: 10px 0 20px; }
+.demo-service-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.demo-service-list span { display: flex; flex-direction: column; gap: 9px; padding-top: 13px; border-top: 1px solid #deded6; font-size: 8px; }
+.demo-service-list svg { color: #bd683f; }
+.campaign-phone .demo-content { padding: 28px 17px 23px; }
+.campaign .campaign-phone .demo-content h2 { font-size: 29px; }
+.campaign .campaign-phone .demo-content p { font-size: 9px; }
+.campaign .campaign-phone .demo-content .demo-location { font-size: 7px; }
+@media (max-width: 760px) {
+  .campaign .campaign-phone .demo-content h2 { font-size: 25px; }
+  .campaign .campaign-phone .demo-services h3 { font-size: 16px; }
 }
 .campaign-phone-note {
   display: block;

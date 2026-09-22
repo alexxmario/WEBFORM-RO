@@ -1,0 +1,1 @@
+Editare cu ImageGen integrat: elimină exclusiv textul Scenariu ilustrativ din colțul inferior dreapta, reconstruind fundalul; păstrează restul textelor, semnătura webform, obiectele, paleta și compoziția.

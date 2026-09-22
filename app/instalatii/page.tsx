@@ -194,7 +194,7 @@ export default function Page() {
                 <strong>0 lei avans. Vezi întâi, decizi apoi.</strong>
               </p>
             </div>
-            <CampaignLead pixel={c.pixel} whatsapp={c.whatsapp} />
+            <CampaignLead whatsapp={c.whatsapp} />
           </div>
         </section>
       </main>

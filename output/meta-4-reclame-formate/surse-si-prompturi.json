@@ -1,0 +1,146 @@
+[
+  {
+    "id": 4,
+    "file": "04-lucrari-la-prezentare.png",
+    "format": "square",
+    "prompt": "Edit and ADAPT this approved existing Romanian creative to a 1:1 aspect ratio, 1080 x 1080 output. Aspect ratio is essential. Square canvas. Reflow headline in upper quarter, scene below. Generous 6% safe margins. Preserve original idea, recognizable objects, photographic style, palette, all exact headline wording and diacritics, and tiny 'webform' signature. Headline exactly: Un instalator își poate trimite lucrările la PREZENTARE. Fără să meargă cu ele. Recompose/outpaint background and reposition existing elements as needed for native layout in this target ratio, rather than simply cropping original. Maintain visual relationship and story. DO NOT add 'Scenariu ilustrativ', any other caption, price, CTA, logo changes, or additional words. Entire canvas fully opaque, full bleed, no letterbox, no surrounding mockup. ONE finished image only.",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c937-170b-7bc1-a389-ae4576f090ce/exec-97a6da29-82f6-4b2b-adac-61048549af8d.png",
+    "native_size": [
+      1254,
+      1254
+    ],
+    "output": "04-lucrari-la-prezentare/square-1080x1080.png"
+  },
+  {
+    "id": 4,
+    "file": "04-lucrari-la-prezentare.png",
+    "format": "vertical",
+    "prompt": "Edit and ADAPT this approved existing Romanian creative to a 9:16 aspect ratio, 1080 x 1920 output. Aspect ratio is essential. Tall vertical Stories canvas. Extend original background vertically. Keep ALL headline, webform signature and essential subject within central safe region: x=7% to 85%, y=15% to 75%. Top 15% and bottom 25% background only for interface overlays. Reflow text; don't shrink into unreadable type. Preserve original idea, recognizable objects, photographic style, palette, all exact headline wording and diacritics, and tiny 'webform' signature. Headline exactly: Un instalator își poate trimite lucrările la PREZENTARE. Fără să meargă cu ele. Recompose/outpaint background and reposition existing elements as needed for native layout in this target ratio, rather than simply cropping original. Maintain visual relationship and story. DO NOT add 'Scenariu ilustrativ', any other caption, price, CTA, logo changes, or additional words. Entire canvas fully opaque, full bleed, no letterbox, no surrounding mockup. ONE finished image only.",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c937-170b-7bc1-a389-ae4576f090ce/exec-669b8349-e5aa-4f6f-9418-fe51b600d981.png",
+    "native_size": [
+      941,
+      1672
+    ],
+    "output": "04-lucrari-la-prezentare/vertical-1080x1920.png"
+  },
+  {
+    "id": 4,
+    "file": "04-lucrari-la-prezentare.png",
+    "format": "horizontal",
+    "prompt": "Edit and ADAPT this approved existing Romanian creative to a 1.91:1 aspect ratio, 1910 x 1000 output. Aspect ratio is essential. WIDE landscape canvas. Recompose with headline mainly left 45%, key visual mainly right 55%, or integrate headline in negative space where appropriate. No cropped headlines. 6% safe margins. Preserve original idea, recognizable objects, photographic style, palette, all exact headline wording and diacritics, and tiny 'webform' signature. Headline exactly: Un instalator își poate trimite lucrările la PREZENTARE. Fără să meargă cu ele. Recompose/outpaint background and reposition existing elements as needed for native layout in this target ratio, rather than simply cropping original. Maintain visual relationship and story. DO NOT add 'Scenariu ilustrativ', any other caption, price, CTA, logo changes, or additional words. Entire canvas fully opaque, full bleed, no letterbox, no surrounding mockup. ONE finished image only.",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c937-170b-7bc1-a389-ae4576f090ce/exec-399ee85e-ea37-4dbd-afae-12390f629d52.png",
+    "native_size": [
+      1734,
+      907
+    ],
+    "output": "04-lucrari-la-prezentare/horizontal-1200x628.png"
+  },
+  {
+    "id": 2,
+    "file": "02-sub-gresie.png",
+    "format": "square",
+    "prompt": "Edit and ADAPT this approved existing Romanian creative to a 1:1 aspect ratio, 1080 x 1080 output. Aspect ratio is essential. Square canvas. Reflow headline in upper quarter, scene below. Generous 6% safe margins. Preserve original idea, recognizable objects, photographic style, palette, all exact headline wording and diacritics, and tiny 'webform' signature. Headline exactly: Lucrarea e sub gresie. Cum mai arăți ce ai făcut BINE? Recompose/outpaint background and reposition existing elements as needed for native layout in this target ratio, rather than simply cropping original. Maintain visual relationship and story. DO NOT add 'Scenariu ilustrativ', any other caption, price, CTA, logo changes, or additional words. Entire canvas fully opaque, full bleed, no letterbox, no surrounding mockup. ONE finished image only.",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c937-170b-7bc1-a389-ae4576f090ce/exec-cdfb3b22-a88a-4596-8a75-92008a19b867.png",
+    "native_size": [
+      1254,
+      1254
+    ],
+    "output": "02-sub-gresie/square-1080x1080.png"
+  },
+  {
+    "id": 2,
+    "file": "02-sub-gresie.png",
+    "format": "vertical",
+    "prompt": "Edit and ADAPT this approved existing Romanian creative to a 9:16 aspect ratio, 1080 x 1920 output. Aspect ratio is essential. Tall vertical Stories canvas. Extend original background vertically. Keep ALL headline, webform signature and essential subject within central safe region: x=7% to 85%, y=15% to 75%. Top 15% and bottom 25% background only for interface overlays. Reflow text; don't shrink into unreadable type. Preserve original idea, recognizable objects, photographic style, palette, all exact headline wording and diacritics, and tiny 'webform' signature. Headline exactly: Lucrarea e sub gresie. Cum mai arăți ce ai făcut BINE? Recompose/outpaint background and reposition existing elements as needed for native layout in this target ratio, rather than simply cropping original. Maintain visual relationship and story. DO NOT add 'Scenariu ilustrativ', any other caption, price, CTA, logo changes, or additional words. Entire canvas fully opaque, full bleed, no letterbox, no surrounding mockup. ONE finished image only.",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c937-170b-7bc1-a389-ae4576f090ce/exec-85b5b63f-f76c-4a54-9ea9-d219636a8af9.png",
+    "native_size": [
+      940,
+      1672
+    ],
+    "output": "02-sub-gresie/vertical-1080x1920.png"
+  },
+  {
+    "id": 2,
+    "file": "02-sub-gresie.png",
+    "format": "horizontal",
+    "prompt": "Edit and ADAPT this approved existing Romanian creative to a 1.91:1 aspect ratio, 1910 x 1000 output. Aspect ratio is essential. WIDE landscape canvas. Recompose with headline mainly left 45%, key visual mainly right 55%, or integrate headline in negative space where appropriate. No cropped headlines. 6% safe margins. Preserve original idea, recognizable objects, photographic style, palette, all exact headline wording and diacritics, and tiny 'webform' signature. Headline exactly: Lucrarea e sub gresie. Cum mai arăți ce ai făcut BINE? Recompose/outpaint background and reposition existing elements as needed for native layout in this target ratio, rather than simply cropping original. Maintain visual relationship and story. DO NOT add 'Scenariu ilustrativ', any other caption, price, CTA, logo changes, or additional words. Entire canvas fully opaque, full bleed, no letterbox, no surrounding mockup. ONE finished image only.",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c937-170b-7bc1-a389-ae4576f090ce/exec-427591c6-20fc-4c01-a936-622f4872cbbc.png",
+    "native_size": [
+      1733,
+      907
+    ],
+    "output": "02-sub-gresie/horizontal-1200x628.png"
+  },
+  {
+    "id": 6,
+    "file": "06-poza-cu-poveste.png",
+    "format": "square",
+    "prompt": "Edit and ADAPT this approved existing Romanian creative to a 1:1 aspect ratio, 1080 x 1080 output. Aspect ratio is essential. Square canvas. Reflow headline in upper quarter, scene below. Generous 6% safe margins. Preserve original idea, recognizable objects, photographic style, palette, all exact headline wording and diacritics, and tiny 'webform' signature. Headline exactly: Două poze cu același calorifer. De ce una spune MAI mult? Recompose/outpaint background and reposition existing elements as needed for native layout in this target ratio, rather than simply cropping original. Maintain visual relationship and story. DO NOT add 'Scenariu ilustrativ', any other caption, price, CTA, logo changes, or additional words. Entire canvas fully opaque, full bleed, no letterbox, no surrounding mockup. ONE finished image only.",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c937-170b-7bc1-a389-ae4576f090ce/exec-240d554c-84e9-4932-b739-9e1a4aa0e1e2.png",
+    "native_size": [
+      1254,
+      1254
+    ],
+    "output": "06-poza-cu-poveste/square-1080x1080.png"
+  },
+  {
+    "id": 6,
+    "file": "06-poza-cu-poveste.png",
+    "format": "vertical",
+    "prompt": "Edit and ADAPT this approved existing Romanian creative to a 9:16 aspect ratio, 1080 x 1920 output. Aspect ratio is essential. Tall vertical Stories canvas. Extend original background vertically. Keep ALL headline, webform signature and essential subject within central safe region: x=7% to 85%, y=15% to 75%. Top 15% and bottom 25% background only for interface overlays. Reflow text; don't shrink into unreadable type. Preserve original idea, recognizable objects, photographic style, palette, all exact headline wording and diacritics, and tiny 'webform' signature. Headline exactly: Două poze cu același calorifer. De ce una spune MAI mult? Recompose/outpaint background and reposition existing elements as needed for native layout in this target ratio, rather than simply cropping original. Maintain visual relationship and story. DO NOT add 'Scenariu ilustrativ', any other caption, price, CTA, logo changes, or additional words. Entire canvas fully opaque, full bleed, no letterbox, no surrounding mockup. ONE finished image only.",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c937-170b-7bc1-a389-ae4576f090ce/exec-cde36a54-09ca-4d1f-b395-6d9f61b0f3c3.png",
+    "native_size": [
+      941,
+      1672
+    ],
+    "output": "06-poza-cu-poveste/vertical-1080x1920.png"
+  },
+  {
+    "id": 6,
+    "file": "06-poza-cu-poveste.png",
+    "format": "horizontal",
+    "prompt": "Edit and ADAPT this approved existing Romanian creative to a 1.91:1 aspect ratio, 1910 x 1000 output. Aspect ratio is essential. WIDE landscape canvas. Recompose with headline mainly left 45%, key visual mainly right 55%, or integrate headline in negative space where appropriate. No cropped headlines. 6% safe margins. Preserve original idea, recognizable objects, photographic style, palette, all exact headline wording and diacritics, and tiny 'webform' signature. Headline exactly: Două poze cu același calorifer. De ce una spune MAI mult? Recompose/outpaint background and reposition existing elements as needed for native layout in this target ratio, rather than simply cropping original. Maintain visual relationship and story. DO NOT add 'Scenariu ilustrativ', any other caption, price, CTA, logo changes, or additional words. Entire canvas fully opaque, full bleed, no letterbox, no surrounding mockup. ONE finished image only.",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c937-170b-7bc1-a389-ae4576f090ce/exec-36f40757-78fa-4238-bfa5-2b5da2124e0b.png",
+    "native_size": [
+      1734,
+      907
+    ],
+    "output": "06-poza-cu-poveste/horizontal-1200x628.png"
+  },
+  {
+    "id": 8,
+    "file": "08-prima-intrebare.png",
+    "format": "square",
+    "prompt": "Edit and ADAPT this approved existing Romanian creative to a 1:1 aspect ratio, 1080 x 1080 output. Aspect ratio is essential. Square canvas. Reflow headline in upper quarter, scene below. Generous 6% safe margins. Preserve original idea, recognizable objects, photographic style, palette, all exact headline wording and diacritics, and tiny 'webform' signature. Headline exactly: „Cât costă?” poate avea un început mai INTERESANT. Recompose/outpaint background and reposition existing elements as needed for native layout in this target ratio, rather than simply cropping original. Maintain visual relationship and story. DO NOT add 'Scenariu ilustrativ', any other caption, price, CTA, logo changes, or additional words. Entire canvas fully opaque, full bleed, no letterbox, no surrounding mockup. ONE finished image only.",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c937-170b-7bc1-a389-ae4576f090ce/exec-9bdcf0d1-e32f-4008-b6d8-ee24212a2aba.png",
+    "native_size": [
+      1254,
+      1254
+    ],
+    "output": "08-prima-intrebare/square-1080x1080.png"
+  },
+  {
+    "id": 8,
+    "file": "08-prima-intrebare.png",
+    "format": "vertical",
+    "prompt": "Edit and ADAPT this approved existing Romanian creative to a 9:16 aspect ratio, 1080 x 1920 output. Aspect ratio is essential. Tall vertical Stories canvas. Extend original background vertically. Keep ALL headline, webform signature and essential subject within central safe region: x=7% to 85%, y=15% to 75%. Top 15% and bottom 25% background only for interface overlays. Reflow text; don't shrink into unreadable type. Preserve original idea, recognizable objects, photographic style, palette, all exact headline wording and diacritics, and tiny 'webform' signature. Headline exactly: „Cât costă?” poate avea un început mai INTERESANT. Recompose/outpaint background and reposition existing elements as needed for native layout in this target ratio, rather than simply cropping original. Maintain visual relationship and story. DO NOT add 'Scenariu ilustrativ', any other caption, price, CTA, logo changes, or additional words. Entire canvas fully opaque, full bleed, no letterbox, no surrounding mockup. ONE finished image only.",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c937-170b-7bc1-a389-ae4576f090ce/exec-49f4c7f2-5fce-4bfc-a908-9c39fe417aed.png",
+    "native_size": [
+      941,
+      1672
+    ],
+    "output": "08-prima-intrebare/vertical-1080x1920.png"
+  },
+  {
+    "id": 8,
+    "file": "08-prima-intrebare.png",
+    "format": "horizontal",
+    "prompt": "Edit and ADAPT this approved existing Romanian creative to a 1.91:1 aspect ratio, 1910 x 1000 output. Aspect ratio is essential. WIDE landscape canvas. Recompose with headline mainly left 45%, key visual mainly right 55%, or integrate headline in negative space where appropriate. No cropped headlines. 6% safe margins. Preserve original idea, recognizable objects, photographic style, palette, all exact headline wording and diacritics, and tiny 'webform' signature. Headline exactly: „Cât costă?” poate avea un început mai INTERESANT. Recompose/outpaint background and reposition existing elements as needed for native layout in this target ratio, rather than simply cropping original. Maintain visual relationship and story. DO NOT add 'Scenariu ilustrativ', any other caption, price, CTA, logo changes, or additional words. Entire canvas fully opaque, full bleed, no letterbox, no surrounding mockup. ONE finished image only.",
+    "source": "/Users/alexmario/.codex/generated_images/01a0c937-170b-7bc1-a389-ae4576f090ce/exec-e92e04ce-f1a1-4076-a3c8-b6c46959aa45.png",
+    "native_size": [
+      1733,
+      907
+    ],
+    "output": "08-prima-intrebare/horizontal-1200x628.png"
+  }
+]

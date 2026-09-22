@@ -13,7 +13,7 @@ export default function PrivacyPage() {
           <Badge variant="ghost">Legal</Badge>
           <h1 className="font-display text-4xl font-semibold">Politica de Confidențialitate</h1>
           <p className="text-muted-foreground">
-            Ultima actualizare: {new Date().toLocaleDateString("ro-RO")}
+            Ultima actualizare: 17.09.2026
           </p>
         </div>
 
@@ -68,7 +68,7 @@ export default function PrivacyPage() {
           <section className="space-y-2">
             <h2 className="text-lg font-semibold text-foreground">5. Transferul Datelor</h2>
             <p>
-              Nu vindem și nu partajăm datele dvs. cu terți în scopuri publicitare.
+              Nu vindem datele dvs. Cu acordul dvs., transmitem date către Meta Platforms Ireland Limited în scop de publicitate, măsurarea conversiilor și personalizarea reclamelor.
               Putem partaja date cu:
             </p>
             <ul className="list-disc pl-6 space-y-1">
@@ -80,9 +80,31 @@ export default function PrivacyPage() {
           <section className="space-y-2">
             <h2 className="text-lg font-semibold text-foreground">6. Cookie-uri</h2>
             <p>
-              Operăm fără cookie-uri de tracking în mod implicit. Folosim doar cookie-uri esențiale
-              pentru funcționarea site-ului (autentificare, sesiune). Dacă activăm analytics,
-              aceste servicii pot seta propriile cookie-uri conform politicilor lor.
+              Meta Pixel (ID 1562676298357841) este dezactivat implicit. Scriptul se
+              încarcă și evenimentele PageView și Lead se transmit numai după acceptarea
+              cookie-urilor de publicitate. Refuzul nu împiedică trimiterea formularului.
+            </p>
+            <p>
+              La trimiterea cu succes a formularului de pe /instalatii, transmitem
+              pentru advanced matching numai numele, telefonul și orașul introduse
+              în formular. Formularul actual nu solicită email, deci nu transmitem email.
+              Aceste date sunt normalizate și transformate de Pixel prin hashing pentru
+              potrivirea cu utilizatorii Meta. Nu includem firma sau serviciile solicitate.
+              Pixel-ul transmite și informații tehnice despre vizită, precum pagina,
+              adresa IP și browserul, și poate seta cookie-uri precum _fbp și _fbc.
+            </p>
+            <p>
+              Puteți refuza sau retrage acordul oricând din „Setări cookie-uri”,
+              buton disponibil pe toate paginile. Retragerea oprește trimiterile viitoare
+              și reîncarcă pagina fără Pixel; nu șterge datele deja transmise către Meta.
+              Puteți șterge cookie-urile existente din setările browserului și puteți
+              solicita exercitarea drepturilor folosind datele de contact de mai jos.
+            </p>
+            <p>
+              Meta poate prelucra datele și în afara Spațiului Economic European,
+              conform propriei <a href="https://www.facebook.com/privacy/policy/" className="underline" target="_blank" rel="noreferrer">politici de confidențialitate</a>.
+              Preferința de consimțământ este păstrată local în browser până când
+              o modificați sau ștergeți datele site-ului.
             </p>
           </section>
 

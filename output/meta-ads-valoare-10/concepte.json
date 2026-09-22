@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "slug": "numarul-care-se-poate-apasa",
+    "title": "Numărul care se poate apăsa",
+    "audience": "Instalatori cu un site sau o pagină de prezentare; verificarea contactului de pe mobil.",
+    "benefit": "Cititorul poate verifica dacă numărul afișat pornește efectiv un apel. Bază: test manual reproductibil; nu pretinde o creștere măsurată a apelurilor.",
+    "nvf": "News: un număr vizibil și un număr utilizabil sunt lucruri diferite. Value: testarea butonului pe telefon. Findings: rezultatul propriului test, încă necunoscut.",
+    "copy": "Deschide site-ul tău pe telefon și apasă pe număr. Ce se întâmplă?\n\nPentru un instalator, acesta e un test simplu al paginii de contact. Dacă numărul e doar într-o poză, omul trebuie să-l țină minte sau să-l copieze înainte să sune.\n\nVerifică dacă atingerea lui deschide apelul către numărul corect. Apoi încearcă și butonul WhatsApp: ajunge la conversația potrivită?\n\nPoți face verificarea acum, fără să schimbi tot site-ul.\n\nPe site-urile pentru instalatori, noi includem butoane de apel și WhatsApp. Ideea e simplă: din pagina în care omul vede serviciul să poată începe și conversația.\n\nÎn ghid găsești pașii de verificare și ce să ceri persoanei care îți administrează site-ul.",
+    "hooks": [
+      "Pe site apare numărul tău. Poate clientul să îl și apese direct?",
+      "Un test pentru site-ul de instalator: apasă numărul de pe propriul telefon."
+    ],
+    "headline": "Poți suna direct din site?",
+    "description": "Verifică apelul și WhatsApp de pe mobil.",
+    "article": "Cum verifici butoanele de apel și WhatsApp de pe site",
+    "outline": "Test pe mobil → număr ca text, imagine sau link → verificarea destinației apelului și conversației → cerere concretă de corectare → exemplu de butoane incluse de noi → solicitarea unui site.",
+    "bridge": "Butoanele de apel și WhatsApp sunt menționate explicit în oferta noastră locală.",
+    "check": "Testează funcționarea butoanelor pe site-ul demonstrativ înainte de folosirea lui ca dovadă. Articolul este propus, nepublicat.",
+    "visual": "Fotografie editorială apropiată: telefon pe o masă de lucru lângă un creion și o cheie reglabilă folosită. Pe ecran, o pagină demonstrativă foarte simplă, un singur buton «Sună». Mână firească pregătită să atingă butonul, fără număr de telefon inventat.",
+    "exact": "Pe ecran: «Instalații sanitare», «Sună», «Exemplu ilustrativ». Fără text suprapus.",
+    "prompt": "Use case: ads-marketing. Create ONE standalone 4:5 portrait image for a Romanian educational feed post addressed to plumbing business owners. Candid smartphone photo, a real-looking scratched workbench, used adjustable wrench and pencil, smartphone in close-up with a simplified illustrative website. One anatomically natural hand about to tap a large plain website button. Exact visible phone screen text only: 'Instalații sanitare', 'Sună', 'Exemplu ilustrativ'. No fabricated phone number. Soft daylight, imperfect spontaneous framing, tactile believable objects. No headline overlay, no logo, no price, no sales graphics, no arrows, no fake social-media chrome. This is an illustrative concept, not photographic evidence of a customer. Screen text legible and correctly accented."
+  },
+  {
+    "id": 2,
+    "slug": "zona-in-care-lucrezi",
+    "title": "Zona în care lucrezi",
+    "audience": "Instalatori care primesc întrebări despre deplasări în afara ariei lor.",
+    "benefit": "Cititorul poate formula clar localitățile deservite și condițiile de deplasare. Bază: exercițiu de clarificare, fără promisiunea eliminării apelurilor nepotrivite.",
+    "nvf": "News: «și împrejurimi» lasă neclar unde ajungi. Value: un model de structurare a zonei. Findings: nu sunt disponibile date măsurate.",
+    "copy": "„Ajungeți și la noi?” Răspunsul poate fi deja pe pagina serviciului tău.\n\nDacă lucrezi ca instalator într-o zonă limitată, verifică ce scrie lângă serviciile tale. „Oraș și împrejurimi” lasă loc de interpretări.\n\nScrie localitățile în care te deplasezi în mod obișnuit. Separat, explică dacă accepți lucrări mai departe și cum se stabilește deplasarea.\n\nPune informația lângă butonul de contact, unde omul decide dacă îți scrie. Completează doar ce poți acoperi în realitate.\n\nNoi construim pagina în jurul serviciilor și informațiilor afacerii tale. Zona deservită este unul dintre lucrurile care merită lămurite înainte de design.\n\nÎn articol găsești un model de text pe care îl poți adapta zonei în care lucrezi.",
+    "hooks": [
+      "Scrie unde te deplasezi înainte ca omul să te sune pentru lucrare.",
+      "Pentru un instalator, «și împrejurimi» poate însemna altceva decât înțelege viitorul client."
+    ],
+    "headline": "Cum scrii clar zona deservită",
+    "description": "Un model simplu pentru pagina serviciilor.",
+    "article": "Ce scrii pe site ca oamenii să înțeleagă unde te deplasezi",
+    "outline": "Ambiguitatea expresiei «împrejurimi» → listă de localități și excepții → model completabil → plasarea lângă contact → integrarea în pagina creată de noi.",
+    "bridge": "Paginile și textele sunt adaptate afacerii; lista concretă de localități trebuie furnizată de instalator.",
+    "check": "Confirmă aria fiecărei afaceri; nu folosi o hartă generată ca reprezentare geografică reală. Articol propus, nepublicat.",
+    "visual": "O pagină de carnet fotografiată pe scaunul unei dube parcate, cu rubrici pentru organizarea zonei. Nicio hartă și nicio localitate inventată.",
+    "exact": "«Unde mă deplasez», «Localități», «Deplasări la cerere».",
+    "prompt": "Use case: ads-marketing. ONE 4:5 portrait candid editorial photo for Romanian plumbing business owners. A modest paper notebook on passenger seat of a parked work van, pencil alongside, quiet natural morning light, tightly framed. The notebook has three large clearly readable handwritten Romanian labels exactly: 'Unde mă deplasez', 'Localități', 'Deplasări la cerere'. Empty writing lines below each label. Real paper, slightly worn seat, natural non-studio composition. No maps, no location claims, no person, no company logo, no prices, no promotional headline or button. A useful everyday planning note, not an advertising poster. Correct diacritics."
+  },
+  {
+    "id": 3,
+    "slug": "poza-care-explica-lucrarea",
+    "title": "Poza care explică lucrarea",
+    "audience": "Instalatori care au fotografii cu lucrări, dar nu le explică în portofoliu.",
+    "benefit": "Cititorul poate adăuga context unei fotografii de lucrare. Bază: metodă editorială demonstrabilă, nu dovadă de performanță comercială.",
+    "nvf": "News: fotografia rezultatului nu explică singură intervenția. Value: problema, intervenția și rezultatul vizibil. Findings: nu există comparație măsurată.",
+    "copy": "O poză cu lucrarea terminată nu spune singură ce ai rezolvat acolo.\n\nPentru portofoliul unui instalator, încearcă să adaugi sub fotografie o explicație scurtă: ce problemă exista, ce ai făcut și ce se vede în imagine.\n\nDe exemplu, dacă fotografia arată o baterie înlocuită, spune asta. Nu transforma o piesă nouă într-o promisiune despre întreaga instalație.\n\nAlege lucrări reale și imagini pe care le poți publica. Lasă în afara cadrului numele, adresele și lucrurile personale ale clientului.\n\nNoi putem folosi fotografiile și informațiile trimise de tine pentru prezentarea serviciilor. Explicațiile vin din lucrarea reală; pagina le pune într-o formă ușor de urmărit.\n\nÎn articol găsești un model de descriere pentru următoarea fotografie din portofoliu.",
+    "hooks": [
+      "Ai poza lucrării terminate. Adaugă și explicația pe care clientul n-o poate ghici.",
+      "În portofoliul unui instalator, explicația de sub fotografie face parte din lucrare."
+    ],
+    "headline": "Ce scrii sub o poză de lucrare",
+    "description": "Un model de descriere fără laude goale.",
+    "article": "Cum descrii o lucrare de instalații folosind o fotografie reală",
+    "outline": "Ce arată și ce nu arată o fotografie → problema/intervenția/rezultatul vizibil → exemplu explicit ilustrativ → selecția imaginilor publicabile → portofoliul pe site.",
+    "bridge": "Oferta locală precizează că instalatorul trimite poze, iar echipa scrie textele.",
+    "check": "Pentru publicare ca portofoliu sunt necesare fotografii reale și explicații confirmate. Imaginea creată pentru concept este ilustrativă. Articol propus, nepublicat.",
+    "visual": "Thumbnail editorial cu o fotografie ilustrativă a unei baterii simple lângă o fișă de descriere. Nu comparație înainte/după și nu lucrare pretinsă a unui client.",
+    "exact": "«Ce ai rezolvat aici?» și, discret, «Exemplu ilustrativ».",
+    "prompt": "Use case: ads-marketing. ONE standalone 4:5 portrait educational editorial image for Romanian plumbers. Close detail of a plain chrome bathroom faucet on a neutral ceramic sink, realistic daylight and ordinary bathroom, no luxury staging. A small paper caption card occupies lower quarter with exact large readable Romanian text 'Ce ai rezolvat aici?' and smaller 'Exemplu ilustrativ'. Quiet understated editorial composition, natural imperfections, no before-and-after, no invented workmanship claims or testimonial, no brand logo, no price, no CTA badge, no decorative arrows. Clearly illustrative, not an actual client portfolio photograph."
+  },
+  {
+    "id": 4,
+    "slug": "mesajul-pentru-estimare",
+    "title": "Mesajul pentru estimare",
+    "audience": "Instalatori care primesc cereri de preț fără context suficient.",
+    "benefit": "Cititorul primește un răspuns reutilizabil pentru a cere localitatea, problema și o fotografie. Bază: model de mesaj, fără timp economisit pretins.",
+    "nvf": "News: întrebarea de preț poate primi întâi un pas clar. Value: text de copiat. Findings: efectul în conversații trebuie observat, nu este măsurat.",
+    "copy": "Când primești „cât costă?”, cere întâi informațiile care îți lipsesc pentru estimare.\n\nPentru un instalator, un mesaj fără localitate și fără descrierea problemei poate fi greu de evaluat.\n\nPoți folosi acest răspuns:\n\n„Spune-mi, te rog, localitatea și ce problemă ai observat. Dacă se vede, trimite și o fotografie, fără să demontezi nimic. Îți spun apoi ce pot estima din aceste informații și dacă este nevoie de o verificare la fața locului.”\n\nAcelași îndemn poate sta pe pagina serviciului, lângă contactul WhatsApp. Clientul vede ce să pregătească înainte să scrie.\n\nNoi includem contact direct pe WhatsApp în site-urile pentru instalatori. Textul din jurul butonului poate explica următorul pas.\n\nÎn ghid găsești modelul complet și cum îl adaptezi fără să promiți un preț înainte de evaluare.",
+    "hooks": [
+      "O cerere de preț devine mai clară când clientul știe ce să trimită.",
+      "Pune lângă WhatsApp informațiile de care ai nevoie pentru a discuta lucrarea."
+    ],
+    "headline": "Un răspuns util la „cât costă?”",
+    "description": "Model de mesaj pentru cereri de estimare.",
+    "article": "Ce informații ceri înainte să estimezi o lucrare de instalații",
+    "outline": "Cererea incompletă → mesajul reutilizabil → limita fotografiei și a estimării la distanță → plasarea pe pagina serviciului → legătura WhatsApp.",
+    "bridge": "Butonul WhatsApp este un fapt din oferta locală; nu se afirmă că site-ul diagnostichează sau calculează automat prețuri.",
+    "check": "Validează formularea cu persoana care răspunde solicitărilor. Articol propus, nepublicat.",
+    "visual": "Notiță digitală simplă, cu text util, aspect de listă de lucru. Fără simularea unei conversații reale sau a interfeței WhatsApp.",
+    "exact": "«Pentru o estimare», «Localitatea», «Problema observată», «O fotografie, dacă se vede», «Fără să demontezi nimic».",
+    "prompt": "Use case: ads-marketing. ONE 4:5 portrait native-feeling Romanian educational note image for plumbing business owners. Looks like a simple personal digital note with warm off-white background, generous spacing, dark charcoal highly readable type, small unobtrusive bullet marks. Exact text only: title 'Pentru o estimare'; separate lines 'Localitatea', 'Problema observată', 'O fotografie, dacă se vede'; final smaller but readable line 'Fără să demontezi nimic'. No app branding or fake conversation, no names, no social account, no timestamps, no logo, no price, no CTA. Understated useful saved-note aesthetic, not a glossy poster. Correct Romanian diacritics."
+  },
+  {
+    "id": 5,
+    "slug": "dupa-recomandare",
+    "title": "După recomandare",
+    "audience": "Instalatori care lucrează prin recomandări și vor o prezentare ușor de transmis.",
+    "benefit": "Cititorul poate pregăti o pagină care răspunde întrebărilor celui care primește recomandarea. Bază: scenariu explicit, nu comportament statistic atribuit clienților.",
+    "nvf": "News: recomandarea poate fi însoțită de informațiile necesare contactului. Value: verificare după servicii, zonă și contact. Findings: nu sunt disponibile.",
+    "copy": "Imaginează-ți că un fost client trimite mai departe numele tău unui vecin.\n\nVecinul știe că ești instalator. Poate nu știe ce lucrări accepți, în ce zonă ajungi sau cum preferi să fii contactat.\n\nPregătește un link pe care îl poți trimite odată cu numărul. Pe pagina respectivă, verifică dacă serviciile, zona și contactul sunt ușor de găsit de pe telefon.\n\nDă linkul cuiva care nu-ți cunoaște afacerea și roagă-l să-ți spună ce a înțeles că faci. Răspunsul îți arată unde mai ai de explicat.\n\nNoi putem aduna această prezentare pe un site într-un singur loc, cu textele afacerii și contact direct.\n\nÎn articol găsești întrebările cu care poți verifica pagina înainte să o trimiți mai departe.",
+    "hooks": [
+      "Ce află despre tine omul care tocmai a primit numărul tău de telefon?",
+      "O recomandare poate avea și un link cu serviciile, zona și contactul tău."
+    ],
+    "headline": "Ce trimiți odată cu numărul tău",
+    "description": "O verificare pentru pagina recomandată clienților.",
+    "article": "Cum pregătești pagina pe care o trimiți când cineva te recomandă",
+    "outline": "Scenariu de recomandare → informațiile care lipsesc → exercițiu cu un cititor nou → listă de verificare → pagină creată de noi.",
+    "bridge": "Site-ul reunește serviciile, textele și contactul; nu se promite că produce recomandări.",
+    "check": "Nu prezenta scenariul ca întâmplare reală. Articol propus, nepublicat.",
+    "visual": "Fotografie raw cu o mână care oferă un cartonaș simplu celeilalte; trei rubrici lizibile în loc de date fictive ale unei afaceri.",
+    "exact": "Pe cartonaș: «Servicii», «Zonă», «Contact».",
+    "prompt": "Use case: ads-marketing. ONE standalone 4:5 portrait candid editorial smartphone-style photograph. Two anatomically natural adult hands pass a small plain cream paper card across a kitchen table in daylight. Card is close to camera and displays only three simple large Romanian words on separate lines: 'Servicii', 'Zonă', 'Contact'. No identity, invented business or actual contact details. Cropped hands only, no faces, no testimonial. Slight spontaneous framing, ordinary setting. No advertising headline, logo, prices, glossy effects or sales buttons. A conceptual illustration of passing useful business information along, not evidence of a customer story."
+  },
+  {
+    "id": 6,
+    "slug": "servicii-pe-intelesul-clientului",
+    "title": "Servicii pe înțelesul clientului",
+    "audience": "Instalatori cu descrieri foarte generale ale serviciilor.",
+    "benefit": "Cititorul poate înlocui o etichetă generală cu exemple concrete de lucrări acceptate. Bază: diferență textuală vizibilă, nu rezultat de conversie.",
+    "nvf": "News: o categorie profesională nu precizează toate lucrările. Value: rescriere prin exemple reale. Findings: comparație ilustrativă între o etichetă și o listă concretă.",
+    "copy": "„Instalații sanitare” spune domeniul. Nu spune exact ce lucrări accepți de la clienți.\n\nPe pagina unui instalator, adaugă sub categoria generală exemple din munca ta reală: montaj de baterii, înlocuire de obiecte sanitare sau reparații pe care le faci efectiv.\n\nSepară serviciile pe care le oferi de cele pentru care nu preiei solicitări. Nu completa lista cu lucrări doar pentru că sună bine.\n\nTestul e simplu: poate cineva să citească lista și să recunoască problema pentru care vrea să te contacteze?\n\nNoi scriem textele pornind de la informațiile pe care le dai despre afacere. O listă precisă de servicii oferă material mai bun decât „facem de toate”.\n\nÎn articol găsești un exercițiu de rescriere și un model pentru organizarea serviciilor.",
+    "hooks": [
+      "Scrie lucrările pe care le accepți, în cuvintele folosite de viitorii tăi clienți.",
+      "Pe pagina ta scrie «instalații sanitare». Se înțelege și ce lucrări preiei?"
+    ],
+    "headline": "Din „instalații” în servicii clare",
+    "description": "Un exercițiu pentru textul paginii tale.",
+    "article": "Cum transformi o categorie generală într-o listă clară de servicii",
+    "outline": "Categorie versus lucrare → comparație ilustrativă → inventarul lucrărilor reale → delimitarea serviciilor → scrierea textelor cu noi.",
+    "bridge": "Scrierea textelor pe baza discuției cu instalatorul este descrisă în oferta locală.",
+    "check": "Confirmă toate serviciile cu afacerea; exemplele nu implică autorizări sau competențe inexistente. Articol propus, nepublicat.",
+    "visual": "Foaie de lucru pe birou, cu o etichetă generală și dedesubt exemple concrete. Comparația ține de formulare, nu de rezultate.",
+    "exact": "«Instalații sanitare», «Ce lucrări?», «Montaj baterii», «Înlocuire obiecte sanitare», «Exemple de formulare».",
+    "prompt": "Use case: ads-marketing. ONE 4:5 portrait editorial worksheet photograph for Romanian plumbing businesses. Top-down ordinary desk, one cream sheet, dark blue pen alongside. On the paper exact large highly readable text: 'Instalații sanitare', then 'Ce lucrări?', then two separate examples 'Montaj baterii', 'Înlocuire obiecte sanitare'. Small clear bottom label 'Exemple de formulare'. Authentic ink and paper feel, restrained casual annotated-note style, no decorative arrows, no complicated diagrams. No price, logo, claim of sales growth, CTA or brand palette. Correct diacritics. Each phrase appears once."
+  },
+  {
+    "id": 7,
+    "slug": "cererea-de-modificare",
+    "title": "Cererea de modificare",
+    "audience": "Instalatori care au un site și trimit actualizări persoanei care îl administrează.",
+    "benefit": "Cititorul poate scrie o cerere de actualizare completă: locul, textul nou și data aplicării. Bază: model de lucru, fără economie de timp cuantificată.",
+    "nvf": "News: «schimbă programul» lasă detalii nespuse. Value: model pentru o cerere clară. Findings: nu există date despre reducerea schimburilor de mesaje.",
+    "copy": "„Schimbă programul pe site” lasă loc de întrebări. Trimite și varianta finală.\n\nCând actualizezi informațiile unei firme de instalații, spune unde apare modificarea, ce text trebuie pus și de când este valabil.\n\nUn model simplu:\n\n„În secțiunea Contact, înlocuiește programul actual cu programul de mai jos. Modificarea se aplică de la data menționată.”\n\nAdaugă programul complet și data exactă. Dacă informația apare și în alte locuri pe site, enumeră-le. După actualizare, verifică pagina pe telefon.\n\nNoi includem actualizări în abonament, în limitele planului ales. O cerere clară ne ajută să înțelegem ce vrei schimbat.\n\nÎn articol găsești un model de cerere și lista lucrurilor de verificat după modificare.",
+    "hooks": [
+      "Când schimbi programul firmei, trimite și locul, textul nou și data aplicării.",
+      "O modificare pe site începe cu textul exact pe care vrei să-l publici."
+    ],
+    "headline": "Cum ceri o modificare pe site",
+    "description": "Un model pe care îl poți reutiliza.",
+    "article": "Cum trimiți o cerere clară de actualizare a site-ului",
+    "outline": "Cerere ambiguă → model cu secțiune/text/datǎ → informații repetate → verificarea după publicare → limitele actualizărilor incluse de noi.",
+    "bridge": "Actualizări incluse: Start în 7 zile, o cerere activă; Business în 3 zile, două cereri active, conform fișierelor locale. Lucrările ample se discută separat.",
+    "check": "Confirmă termenii valabili ai planului la lansare. Nu sugera modificări nelimitate sau imediate. Articol propus, nepublicat.",
+    "visual": "Checklist simplu pe hârtie prinsă cu o agrafă, fotografie de birou, compoziție imperfectă dar lizibilă.",
+    "exact": "«Modificare pe site», «Unde apare?», «Textul nou», «De când?», «Verificare după publicare».",
+    "prompt": "Use case: ads-marketing. ONE 4:5 portrait natural overhead photo of a plain paper checklist held with a small binder clip on a modest desk. For Romanian tradespeople managing business website updates. Exact text in clean large dark lettering: 'Modificare pe site', 'Unde apare?', 'Textul nou', 'De când?', 'Verificare după publicare'. Empty checkboxes and ample blank space. Soft window light, paper grain, a pen partly cropped, authentic useful office note. No digital UI, no logo, price, offer, sales graphics or fabricated metrics. Mobile-readable Romanian diacritics."
+  },
+  {
+    "id": 8,
+    "slug": "ce-trimiti-pentru-site",
+    "title": "Ce trimiți pentru site",
+    "audience": "Instalatori care amână un site fiindcă nu au textele sau materialele pregătite.",
+    "benefit": "Cititorul poate strânge într-un folder materialele de bază pentru prezentare. Bază: listă de pregătire, fără promisiune privind durata economisită.",
+    "nvf": "News: pregătirea poate începe cu faptele afacerii, fără un text de prezentare finisat. Value: inventarul de materiale. Findings: nu sunt disponibile.",
+    "copy": "Pentru site-ul de instalator, începe cu ce faci concret și cu fotografiile lucrărilor.\n\nDeschide un folder și adună acolo numele afacerii, serviciile, localitățile în care lucrezi, programul și datele de contact.\n\nAdaugă fotografii reale pe care le poți publica. Pentru fiecare, notează ce lucrare arată. Nu trebuie să începi cu un paragraf despre „profesionalism și calitate”.\n\nCu aceste informații, ai o bază pe care o poate folosi oricine îți pregătește prezentarea.\n\nNoi scriem textele site-ului tău de instalator după discuția cu tine, iar tu trimiți fotografiile lucrărilor. Explici ce faci; de aici se construiește pagina.\n\nÎn ghid găsești lista de pregătire, ca să poți vedea dintr-o privire ce ai și ce mai lipsește.",
+    "hooks": [
+      "Nu ai textele pentru site? Începe cu serviciile, zona și fotografiile lucrărilor tale.",
+      "Înainte de design, strânge într-un singur loc informațiile reale despre firma ta."
+    ],
+    "headline": "Ce pregătești pentru site-ul tău",
+    "description": "O listă simplă de informații și fotografii.",
+    "article": "Lista de materiale pentru un site de instalator",
+    "outline": "Datele afacerii → servicii și localități → poze publicabile și explicații → program/contact → ce scriem noi pe această bază.",
+    "bridge": "Oferta precizează discuția telefonică, redactarea textelor de către echipă și trimiterea fotografiilor de către instalator.",
+    "check": "Nu atribui fotografiilor generate o lucrare reală. Articol propus, nepublicat.",
+    "visual": "Fotografie raw a unui dosar de hârtie deschis pe masa de bucătărie, cu foi simple pentru informații, fără portofoliu inventat.",
+    "exact": "Pe trei file: «Servicii», «Zonă», «Fotografii».",
+    "prompt": "Use case: ads-marketing. ONE 4:5 portrait candid editorial photograph. A simple opened kraft paper folder on an ordinary kitchen table, three slightly overlapping paper divider sheets with exact large handwritten Romanian labels 'Servicii', 'Zonă', 'Fotografii'. No other text. A used pencil, softly blurred work jacket at edge, natural midday light, believable modest setting, no people. The folder illustrates preparing materials for a plumbing business website, not a client case. No stock portfolio photos, fake credentials, company logos, price labels, promotional typography or CTA. Quiet native feed aesthetic."
+  },
+  {
+    "id": 9,
+    "slug": "testul-inainte-de-plata",
+    "title": "Testul înainte de plată",
+    "audience": "Instalatori care analizează un site demonstrativ sau o propunere înainte să decidă.",
+    "benefit": "Cititorul poate evalua concret prezentarea, corectitudinea informațiilor și contactul. Bază: listă de verificare și previzualizare menționată în oferta locală.",
+    "nvf": "News: previzualizarea este utilă pentru verificarea utilizării, nu numai a aspectului. Value: pași de test pe mobil. Findings: rezultatele testului rămân de observat.",
+    "copy": "Înainte să aprobi site-ul, încearcă să faci de pe telefon ce face clientul.\n\nCaută o lucrare pe care o preiei. Verifică zona în care te deplasezi. Apasă contactul și vezi dacă duce unde trebuie.\n\nApoi citește textele: descriu serviciile tale sau promit lucruri pe care nu le oferi? Fotografiile reprezintă afacerea corect?\n\nNotează ce lipsește și trimite observațiile înainte să aprobi varianta finală. E o verificare pe care o poți face indiferent cine construiește site-ul.\n\nNoi îți arătăm site-ul înainte de plată. Folosește momentul pentru aceste teste, ca să decizi pe ceva concret.\n\nÎn articol găsești lista completă de verificare pentru previzualizarea de pe mobil.",
+    "hooks": [
+      "Când primești propunerea de site, testează și contactul, nu doar prima imagine.",
+      "Deschide previzualizarea pe telefon și caută serviciul pentru care ar suna un client."
+    ],
+    "headline": "Ce verifici înainte să aprobi site-ul",
+    "description": "O listă pentru previzualizarea de pe telefon.",
+    "article": "Cum verifici un site de instalator înainte să-l aprobi",
+    "outline": "Servicii/zonă/contact → corectitudinea textelor și imaginilor → observații concrete → limitele unui demo → previzualizarea oferită de noi și pasul comercial.",
+    "bridge": "Vezi site-ul înainte de plată este o condiție afișată în oferta locală; nu echivalează cu testarea unor rezultate comerciale.",
+    "check": "Confirmă condițiile previzualizării. Un demo nu demonstrează trafic sau clienți obținuți. Articol propus, nepublicat.",
+    "visual": "Telefon pe birou lângă o foaie de verificare. Ecran generic necomercial cu mențiunea Demo; accent pe lista utilizabilă.",
+    "exact": "Pe foaie: «Servicii», «Zonă», «Contact», «Texte corecte». Pe ecran: «Demo».",
+    "prompt": "Use case: ads-marketing. ONE 4:5 portrait informal editorial photograph for plumbing business owners evaluating a website. Smartphone on a plain tabletop beside a paper test checklist. Phone screen has a very simple abstract website layout with only exact readable word 'Demo', no fake company or fabricated reviews. Paper in focus has four exact large readable labels with empty checkboxes: 'Servicii', 'Zonă', 'Contact', 'Texte corecte'. Natural side light, slight everyday clutter limited to pencil, realistic phone and paper. No giant headline, logo, sales badge, prices, claims, arrows or testimonial. Correct Romanian text."
+  },
+  {
+    "id": 10,
+    "slug": "intrebari-repetate",
+    "title": "Întrebări repetate",
+    "audience": "Instalatori care răspund frecvent la aceleași întrebări înainte de stabilirea lucrării.",
+    "benefit": "Cititorul poate construi o secțiune de întrebări utile din conversațiile proprii. Bază: procedură de selecție, fără promisiunea reducerii măsurate a mesajelor.",
+    "nvf": "News: conversațiile proprii pot deveni material pentru pagină. Value: extragerea întrebărilor și răspunsurilor reale. Findings: temele trebuie identificate din mesajele afacerii; nu sunt inventate ca cercetare.",
+    "copy": "Întrebările care revin în mesajele clienților pot deveni o secțiune utilă pe site.\n\nPentru firma ta de instalații, uită-te la conversațiile recente și notează întrebările care se repetă. Păstrează formulările, fără datele personale ale oamenilor.\n\nPoate e vorba despre deplasare, program sau felul în care se stabilește prețul. Alege doar ce apare cu adevărat în discuțiile tale.\n\nScrie răspunsuri scurte și concrete. Dacă răspunsul depinde de lucrare, explică de ce și ce informații sunt necesare.\n\nNoi putem integra aceste răspunsuri în textele site-ului tău, alături de servicii și contact. Pagina devine astfel un loc în care omul se poate pregăti pentru conversație.\n\nÎn articol găsești metoda de selecție și un model pentru scrierea răspunsurilor.",
+    "hooks": [
+      "Uită-te la ultimele conversații cu clienții: ce întrebări ar merita explicate pe site?",
+      "O pagină utilă poate începe cu întrebările pe care clienții ți le pun deja."
+    ],
+    "headline": "Ce întrebări merită puse pe site",
+    "description": "Folosește conversațiile reale ale afacerii tale.",
+    "article": "Cum construiești întrebările frecvente din conversațiile cu clienții",
+    "outline": "Citirea conversațiilor proprii → eliminarea datelor personale → gruparea temelor recurente → răspunsuri cu limite clare → integrarea în prezentarea creată de noi.",
+    "bridge": "Răspunsurile pot face parte din textele paginilor personalizate; nu se promite un modul automat de analiză a mesajelor.",
+    "check": "Validează frecvența temelor în conversațiile reale. Nu publica mesaje private. Articol propus, nepublicat.",
+    "visual": "Trei cartonașe pe un birou, cu întrebări exemplificative, etichetate ca exemple. Fără screenshot de conversație inventată.",
+    "exact": "«Unde vă deplasați?», «Care este programul?», «Cum se stabilește prețul?», «Exemple de întrebări».",
+    "prompt": "Use case: ads-marketing. ONE 4:5 portrait natural editorial flat-lay photo. Three modest off-white paper cards arranged casually on a real desk. Large clearly readable Romanian questions, one per card, exactly: 'Unde vă deplasați?', 'Care este programul?', 'Cum se stabilește prețul?'. Small separate handwritten note clearly reads 'Exemple de întrebări'. Useful planning exercise for a plumbing business website. Natural soft daylight, simple restrained framing, no fabricated chat screenshot or identity, no customers, no logo, price, offer badge or CTA, no ornate branding. Text accurate with Romanian diacritics and ample margins."
+  }
+]

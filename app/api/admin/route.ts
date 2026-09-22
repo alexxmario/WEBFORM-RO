@@ -1,3 +1,4 @@
+import { normalizeSubmission, paginateSubmissions } from "@/lib/admin-submissions";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { apiError, ApiError, jsonBody } from "@/lib/api";
@@ -11,7 +12,7 @@ const sources = {
   leads: { table: "waitlist", columns: "id,email,name,business_type,tier,created_at" },
   contacts: { table: "waitlist", columns: "id,email,name,business_type,tier,created_at" },
 } as const;
-const querySchema = z.object({ view: z.enum(["clients", "projects", "orders", "leads", "contacts"]).default("projects"), page: z.coerce.number().int().min(1).max(100000).default(1) });
+const querySchema = z.object({ view: z.enum(["submissions", "clients", "projects", "orders", "leads", "contacts"]).default("submissions"), page: z.coerce.number().int().min(1).max(100000).default(1) });
 const updateSchema = z.object({ id: z.string().uuid(), status: z.enum(projectStatuses), notes: z.string().max(10000), revision: z.string().uuid() }).strict();
 export async function GET(request: Request) {
   try {
@@ -20,6 +21,35 @@ export async function GET(request: Request) {
     if (!input.success) throw new ApiError(400, "Filtre invalide.");
     const { view, page } = input.data;
     const db = supabaseServerAdmin();
+    if (view === "submissions") {
+      // Each source contributes at most the first page * 25 records to the
+      // global chronological page. Counts remain exact across all sources.
+      const configs = [
+        { kind: "campaign" as const, table: "campaign_leads", columns: "id,source,name,phone,company,city,services,business_type,status,notes,created_at" },
+        { kind: "waitlist" as const, ...sources.leads },
+        { kind: "project" as const, ...sources.projects },
+      ];
+      const results = await Promise.all(configs.map(async source => {
+        const data: Record<string, unknown>[] = [];
+        let count = 0;
+        // Stay below the database's response row limit on later pages.
+        for (let offset = 0; offset < page * 25; offset += 500) {
+          const result = await db.from(source.table).select(source.columns, { count: "exact" })
+            .order("created_at", { ascending: false }).order("id")
+            .range(offset, Math.min(offset + 499, page * 25 - 1));
+          if (result.error) throw result.error;
+          count = result.count || 0;
+          data.push(...(result.data || []) as unknown as Record<string, unknown>[]);
+          if (data.length >= count || !result.data?.length) break;
+        }
+        return { data, count, error: null };
+      }));
+      for (const result of results) if (result.error) throw result.error;
+      const records = results.flatMap((result, index) => (result.data || []).map(row =>
+        normalizeSubmission(configs[index].kind, row as unknown as Record<string, unknown> & { id: string })));
+      return NextResponse.json({ rows: paginateSubmissions(records, page), total: results.reduce((sum, result) => sum + (result.count || 0), 0),
+        submissionCounts: results.map(result => result.count || 0), counts: [] }, { headers: { "Cache-Control": "private, no-store" } });
+    }
     const source = sources[view];
     let rowsQuery = db.from(source.table).select(source.columns, { count: "exact" }).order("created_at", { ascending: false }).order("id");
     if (view === "contacts") rowsQuery = rowsQuery.eq("tier", "Contact");

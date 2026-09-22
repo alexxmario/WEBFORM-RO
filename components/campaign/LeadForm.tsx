@@ -1,22 +1,23 @@
 "use client";
 import { useRef, useState } from "react";
+import { hasMetaConsent, trackMetaLead } from "@/lib/meta-pixel";
 import { leadSchema } from "@/lib/campaign/schema";
 export function LeadForm({
   source = "instalatii",
   whatsapp = "",
-  marketingConsent = false,
 }: {
   source?: "instalatii" | "homepage";
   whatsapp?: string;
-  marketingConsent?: boolean;
 }) {
   const [busy, setBusy] = useState(false),
     [done, setDone] = useState(false),
     [error, setError] = useState("");
   const eventId = useRef("");
+  const submitting = useRef(false);
+  const completed = useRef(false);
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (busy) return;
+    if (submitting.current || completed.current) return;
     setError("");
     const f = new FormData(event.currentTarget);
     if (!eventId.current) eventId.current = crypto.randomUUID();
@@ -39,7 +40,7 @@ export function LeadForm({
       website: f.get("website") || "",
       eventId: eventId.current,
       attribution,
-      marketingConsent,
+      marketingConsent: hasMetaConsent(),
       ...(source === "instalatii"
         ? {
             company: f.get("company"),
@@ -55,6 +56,7 @@ export function LeadForm({
       );
       return;
     }
+    submitting.current = true;
     setBusy(true);
     try {
       const response = await fetch("/api/campaign/leads", {
@@ -64,9 +66,11 @@ export function LeadForm({
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.message);
+      completed.current = true;
       setDone(true);
-      if (source === "instalatii" && marketingConsent)
-        window.fbq?.("track", "Lead", {}, { eventID: data.eventId });
+      if (parsed.data.source === "instalatii" && parsed.data.marketingConsent) {
+        trackMetaLead(eventId.current, parsed.data);
+      }
     } catch (e) {
       setError(
         e instanceof Error
@@ -74,6 +78,7 @@ export function LeadForm({
           : "Trimiterea a eșuat. Încearcă din nou.",
       );
     } finally {
+      submitting.current = false;
       setBusy(false);
     }
   }
