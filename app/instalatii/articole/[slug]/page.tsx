@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { articles } from "../articles";
 import { campaignConfig } from "@/lib/campaign/config";
@@ -56,7 +57,6 @@ export default async function ArticlePage({ params, searchParams }: Props) {
   }
   if (!attribution.has("utm_content"))
     attribution.set("utm_content", `instalatori-ad-${article.ad}`);
-  const campaignUrl = `/instalatii?${attribution.toString()}`;
   const config = campaignConfig();
   const words = [
     article.intro,
@@ -73,13 +73,13 @@ export default async function ArticlePage({ params, searchParams }: Props) {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <a
-          href={campaignUrl}
-          aria-label="WebForm — site-uri pentru instalatori"
+        <Link
+          href="/"
+          aria-label="WebForm — pagina principală"
           className={styles.brand}
         >
           <em>web</em>form.
-        </a>
+        </Link>
         <span>IDEI PENTRU INSTALATORI</span>
       </header>
       <main id="main">
@@ -216,9 +216,9 @@ export default async function ArticlePage({ params, searchParams }: Props) {
         </section>
       </main>
       <footer className={styles.footer}>
-        <a className={styles.brand} href={campaignUrl}>
+        <Link className={styles.brand} href="/">
           <em>web</em>form.
-        </a>
+        </Link>
         <p>Lucrări reale. Explicații clare. Un loc al lor online.</p>
         <a href="/legal/privacy">Confidențialitate</a>
       </footer>
