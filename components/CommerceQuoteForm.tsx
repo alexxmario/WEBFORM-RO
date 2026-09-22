@@ -85,8 +85,7 @@ export function CommerceQuoteForm() {
         <CheckCircle2 className="mx-auto h-12 w-12 text-green-600" />
         <h2 className="mt-4 text-2xl font-semibold">Cererea a fost trimisă.</h2>
         <p className="mt-2 text-muted-foreground">
-          Te sunăm în cel mult o zi lucrătoare pentru a înțelege magazinul și
-          pentru a pregăti oferta potrivită.
+          Vă vom contacta curând.
         </p>
       </div>
     );

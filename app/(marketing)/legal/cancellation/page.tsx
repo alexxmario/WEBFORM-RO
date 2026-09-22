@@ -117,7 +117,7 @@ export default function CancellationPage() {
               <li>Sau prin panoul de suport din contul dvs.</li>
             </ul>
             <p className="mt-2">
-              Vă vom confirma anularea prin email în termen de 24 de ore.
+              Vă vom confirma anularea prin email în curând.
             </p>
           </section>
 
@@ -125,7 +125,7 @@ export default function CancellationPage() {
             <h2 className="text-lg font-semibold text-foreground">8. Contact pentru Reclamații</h2>
             <p>
               Pentru orice nemulțumiri sau reclamații privind serviciile noastre, vă rugăm
-              să ne contactați. Ne angajăm să răspundem în termen de 48 de ore și să găsim
+              să ne contactați. Vom reveni cu un răspuns în curând pentru a găsi
               o soluție echitabilă.
             </p>
             <p className="mt-2">

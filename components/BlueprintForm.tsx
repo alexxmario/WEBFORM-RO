@@ -161,7 +161,7 @@ export function BlueprintForm() {
         toast.error("Ceva nu a mers bine. Te rugăm să verifici formularul.");
         return;
       }
-      toast.success("Blueprint primit. Te vom contacta în 24 de ore.");
+      toast.success("Blueprint primit. Vă vom contacta curând.");
       router.push("/thank-you");
     } catch (error) {
       console.error("❌ Submit error:", error);

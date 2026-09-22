@@ -363,7 +363,7 @@ export default function HomePage() {
             </div>
             <div className="chat-workflow-card" aria-label="Exemplu de conversație în chat-ul proiectului">
               <div className="chat-workflow-head"><span className="status-dot" /> Chat proiect · Echipa WebForm</div>
-              <div className="chat-bubble chat-bubble-team">Bine ai venit! Am primit formularul. Îl analizăm și revenim aici în cel mult o zi lucrătoare.</div>
+              <div className="chat-bubble chat-bubble-team">Bine ai venit! Am primit formularul. Îl analizăm. Vă vom contacta curând.</div>
               <div className="chat-bubble chat-bubble-client">Perfect. Pot să vă trimit aici și logo-ul nou?</div>
               <div className="chat-bubble chat-bubble-team">Da. Tot aici primești și prima versiune a site-ului pentru verificare.</div>
               <div className="chat-workflow-input">Scrie un mesaj… <MessageCircle size={17} /></div>

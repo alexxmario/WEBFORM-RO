@@ -3,7 +3,7 @@ import { supabaseServerAdmin } from "./supabase/server";
 export const PROJECT_WELCOME_MESSAGE = `Bine ai venit în chat-ul proiectului WebForm! Am primit formularul tău.
 
 Ce urmează:
-1. Analizăm informațiile și revenim aici în cel mult o zi lucrătoare.
+1. Analizăm informațiile. Vă vom contacta curând.
 2. Clarificăm în acest chat textele, imaginile și orice detaliu lipsă.
 3. Îți trimitem aici prima versiune a site-ului pentru verificare.
 4. După aprobarea ta, publicăm site-ul și rămânem aici pentru actualizări.

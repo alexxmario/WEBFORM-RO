@@ -85,7 +85,7 @@ export function LeadForm({
   if (done)
     return (
       <div className="campaign-success" role="status">
-        <h3>Gata! Te sunăm în câteva minute.</h3>
+        <h3>Vă vom contacta curând.</h3>
         <p>Am primit cererea ta.</p>
         {whatsapp && (
           <a className="action action-dark" href={`https://wa.me/${whatsapp}`}>
@@ -184,7 +184,7 @@ export function LeadForm({
       </label>
       {error && <p role="alert">{error}</p>}
       <button className="action action-dark" disabled={busy}>
-        {busy ? "Se trimite…" : "Vreau site-ul meu – te sunăm azi"} ↗
+        {busy ? "Se trimite…" : "Vreau site-ul meu"} ↗
       </button>
       <p className="campaign-small">
         30 de secunde. Fără plată și fără obligații acum.

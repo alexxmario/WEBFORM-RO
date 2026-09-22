@@ -57,7 +57,7 @@ export function ContactForm() {
       <div className="rounded-2xl border border-green-600/20 bg-green-500/5 p-8 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-green-600" />
         <h2 className="mt-4 text-2xl font-semibold">Mesajul a ajuns la noi.</h2>
-        <p className="mt-2 text-muted-foreground">Îți răspundem în cel mult o zi lucrătoare.</p>
+        <p className="mt-2 text-muted-foreground">Vă vom contacta curând.</p>
       </div>
     );
   }
@@ -100,7 +100,7 @@ export function ContactForm() {
         {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
         Trimite mesajul
       </Button>
-      <p className="text-center text-xs text-muted-foreground">Răspundem, de regulă, în aceeași zi lucrătoare.</p>
+      <p className="text-center text-xs text-muted-foreground">Vă vom contacta curând.</p>
     </form>
   );
 }
