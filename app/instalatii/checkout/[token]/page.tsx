@@ -48,7 +48,7 @@ export default async function Page({
               terms={campaignTerms()}
               bonus={c.bonus}
               ready={Boolean(
-                c.fee && c.bonus && process.env.CAMPAIGN_STRIPE_SECRET_KEY,
+                c.bonus && process.env.CAMPAIGN_STRIPE_SECRET_KEY,
               )}
               pending={query.success === "1"}
             />

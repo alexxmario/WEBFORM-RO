@@ -34,7 +34,7 @@ export default function Page() {
               Vreau site-ul meu ↗
             </a>
             <p className="campaign-small">
-              Vezi site-ul înainte de plată. Abonament minimum 12 luni.
+              Vezi site-ul înainte de plată.
             </p>
           </div>
           <div className="campaign-phone-wrap">
@@ -150,7 +150,7 @@ export default function Page() {
             {[
               [
                 "Care e condiția?",
-                `Abonament de 180 lei/lună, perioadă minimă de 12 luni. Dacă anulezi mai devreme, plătești construcția${c.fee ? ` (${c.fee} lei)` : ", la taxa comunicată în ofertă înainte de acceptare"}.`,
+                "Abonament de 180 lei/lună, fără perioadă minimă contractuală și fără taxă de anulare anticipată.",
               ],
               ["Al cui e domeniul?", "Al tău. Rămâne al tău și dacă pleci."],
               [

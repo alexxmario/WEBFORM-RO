@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { articles } from "../articles";
-import { campaignConfig } from "@/lib/campaign/config";
 import styles from "../article.module.css";
 
 type Props = {
@@ -57,7 +56,6 @@ export default async function ArticlePage({ params, searchParams }: Props) {
   }
   if (!attribution.has("utm_content"))
     attribution.set("utm_content", `instalatori-ad-${article.ad}`);
-  const config = campaignConfig();
   const words = [
     article.intro,
     ...article.sections.flatMap((s) => [
@@ -192,13 +190,7 @@ export default async function ArticlePage({ params, searchParams }: Props) {
                 0 lei avans <span>·</span> 180 lei/lună
               </p>
               <p className={styles.terms}>
-                Abonamentul Start: până la 3 pagini, minimum 12 luni. Modificări
-                în 7 zile, o cerere activă. La anularea înainte de termen se
-                aplică taxa de construcție
-                {config.fee
-                  ? ` de ${config.fee} lei`
-                  : ", comunicată înainte de acceptare"}
-                . Domeniul rămâne al tău.
+                Abonamentul Start: până la 3 pagini. Modificări în 7 zile, o cerere activă. Domeniul rămâne al tău.
               </p>
             </div>
             <div className={styles.actions}>

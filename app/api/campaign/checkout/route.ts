@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     if (!p.success)
       throw new ApiError(400, "Acceptă termenii pentru a continua.");
     const c = campaignConfig();
-    if (!c.fee || !c.bonus)
+    if (!c.bonus)
       throw new ApiError(503, "Oferta este în curs de configurare.");
     if (p.data.version !== c.termsVersion)
       throw new ApiError(409, "Termenii s-au actualizat. Reîncarcă pagina.");
