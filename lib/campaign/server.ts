@@ -1,3 +1,4 @@
+import { leadSourceLabel } from "./lead-source";
 import { Resend } from "resend";
 import { ApiError } from "@/lib/api";
 import { supabaseServerAdmin } from "@/lib/supabase/server";
@@ -47,7 +48,7 @@ export async function notifyLead(id: string, paid = false) {
       subject: paid
         ? "Conectează domeniul — client plătit"
         : `Lead nou — sună în 5 minute: ${data.name}`,
-      text: `${data.name}\nTelefon: ${data.phone}\nOraș: ${data.city || "—"}\nSursa: ${data.source}\n${campaignConfig().origin}/admin/leads`,
+      text: `${data.name}\nTelefon: ${data.phone}\nOraș: ${data.city || "—"}\nSursa: ${leadSourceLabel(data.source, data.attribution)}\nAfacere: ${data.business_type || "—"}\n${campaignConfig().origin}/admin/leads`,
     },
     { idempotencyKey: `campaign-${paid ? "paid" : "lead"}-${id}` },
   );

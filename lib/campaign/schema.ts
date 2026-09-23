@@ -36,6 +36,7 @@ const common = {
   marketingConsent: z.boolean().default(false),
   attribution: z
     .object({
+      article_slug: z.string().max(150).regex(/^[a-z0-9-]+$/).optional(),
       utm_source: z.string().max(300).optional(),
       utm_medium: z.string().max(300).optional(),
       utm_campaign: z.string().max(300).optional(),

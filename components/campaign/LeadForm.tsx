@@ -5,9 +5,11 @@ import { leadSchema } from "@/lib/campaign/schema";
 export function LeadForm({
   source = "instalatii",
   whatsapp = "",
+  articleSlug,
 }: {
   source?: "instalatii" | "homepage";
   whatsapp?: string;
+  articleSlug?: string;
 }) {
   const [busy, setBusy] = useState(false),
     [done, setDone] = useState(false),
@@ -32,6 +34,7 @@ export function LeadForm({
         "fbclid",
       ].flatMap((k) => (params.get(k) ? [[k, params.get(k)!]] : [])),
     );
+    if (articleSlug) attribution.article_slug = articleSlug;
     const payload = {
       source,
       name: f.get("name"),

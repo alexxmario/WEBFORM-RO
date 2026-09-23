@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { leadSourceLabel } from "@/lib/campaign/lead-source";
 import { statuses, statusLabels } from "@/lib/campaign/schema";
 import "../workspace.css";
 type Lead = {
@@ -97,7 +98,7 @@ export function CampaignAdmin() {
       <main id="main" className="admin-main">
         <div className="admin-title">
           <div>
-            <p className="admin-overline">CAMPANIE + HOMEPAGE</p>
+            <p className="admin-overline">CAMPANII · ARTICOLE · HOMEPAGE</p>
             <h1>Lead-uri de sunat</h1>
             <p>Primul apel în 5 minute.</p>
           </div>
@@ -146,7 +147,7 @@ export function CampaignAdmin() {
                       <a href={`tel:${row.phone}`}>{row.phone}</a>
                     </td>
                     <td>
-                      {row.source}
+                      {leadSourceLabel(row.source, row.attribution)}
                       <small>{statusLabels[row.status]}</small>
                     </td>
                     <td>

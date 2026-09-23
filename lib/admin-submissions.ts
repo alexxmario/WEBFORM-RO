@@ -1,3 +1,4 @@
+import { leadSourceLabel } from "@/lib/campaign/lead-source";
 type RecordRow = Record<string, unknown> & { id: string };
 export type Submission = RecordRow & { submission_source: string; submission_kind: string };
 
@@ -5,7 +6,7 @@ export function normalizeSubmission(kind: "campaign" | "waitlist" | "project", r
   if (kind === "campaign") return {
     ...row,
     submission_kind: kind,
-    submission_source: row.source === "instalatii" ? "Instalatori" : "Pagina principală",
+    submission_source: leadSourceLabel(row.source, row.attribution),
     submission_details: [row.phone, row.city, row.business_type, Array.isArray(row.services) ? row.services.join(", ") : ""].filter(Boolean).join(" · "),
   };
   if (kind === "project") return {

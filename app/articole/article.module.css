@@ -1,0 +1,26 @@
+.page{background:#faf8f2;color:#26362d;min-height:100vh;font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+.header{max-width:1100px;margin:auto;padding:27px 32px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #dedfd5;gap:20px}
+.brand{font-size:27px;font-weight:800;letter-spacing:-1.6px;text-decoration:none;color:#243e30}.brand em{font-style:normal;color:#668653}
+.header>span,.eyebrow{font-size:10px;letter-spacing:1.7px;font-weight:700;color:#586f50}
+.main{max-width:730px;margin:auto;padding:65px 28px 76px}
+.main h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(36px,5.5vw,55px);line-height:1.1;letter-spacing:-1.7px;font-weight:400;margin:19px 0 24px;text-wrap:balance}
+.meta{font-size:13px;color:#6b7168;padding-bottom:29px;border-bottom:1px solid #dedfd5;margin-bottom:35px}
+.body p,.offer p{font-size:19px;line-height:1.8;margin:0 0 23px;overflow-wrap:break-word}
+.body>p:first-child{font-size:22px;line-height:1.65;color:#344c3a}
+.main h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:29px;line-height:1.25;letter-spacing:-.5px;margin:44px 0 23px;text-wrap:balance}
+.offer{margin-top:51px;padding-top:36px;border-top:2px solid #a9b99d}.offer>section:first-of-type h2{margin-top:17px;font-size:36px}
+.actions{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin:31px 0 25px}
+.button{display:inline-flex;justify-content:space-between;gap:25px;background:#294732;color:#fff;padding:16px 22px;border-radius:6px;text-decoration:none;font-size:16px;font-weight:700}
+.button:hover{background:#1e3625}.secondary{font-size:15px;color:#294732;text-underline-offset:4px}
+.offer .start{font-size:15px;color:#586151}.start a{color:#294732;text-underline-offset:4px}
+.footer{max-width:1100px;margin:auto;border-top:1px solid #dedfd5;padding:28px 32px;display:flex;flex-wrap:wrap;align-items:center;gap:18px;font-size:12px;color:#586151}.footer>span{margin-right:auto}.footer a{text-underline-offset:4px}
+.page a:focus-visible{outline:3px solid #668653;outline-offset:5px}
+@media(max-width:540px){.header{padding:20px}.header>span{font-size:8px;letter-spacing:1px}.main{padding:39px 22px 48px}.main h1{letter-spacing:-1px}.body p,.offer p{font-size:18px;line-height:1.8;margin-bottom:23px}.body>p:first-child{font-size:20px}.main h2{font-size:27px}.offer>section:first-of-type h2{font-size:31px}.actions{align-items:stretch;flex-direction:column}.secondary{text-align:center;padding:10px}.footer{padding:25px 22px}.footer>span{flex-basis:65%}}
+.form{background:#f0f2e8;border:1px solid #d6ddcd;border-radius:10px;padding:28px;margin:30px 0;color-scheme:light;scroll-margin-top:24px}
+.form :global(.campaign-fields){display:grid;gap:20px}.form :global(.campaign-fields label){display:grid;gap:8px;font-size:15px;font-weight:700}
+.form :global(.campaign-fields input){width:100%;min-width:0;background:#fff;color:#26362d;border:1px solid #a8b59f;border-radius:5px;padding:13px;font:inherit;font-weight:400}
+.form :global(.campaign-honey){display:none}.form :global(.campaign-consent){display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.6;margin:22px 0}.form :global(.campaign-consent input){margin-top:4px;width:18px;height:18px;flex-shrink:0;accent-color:#294732}
+.form a{text-decoration:underline;text-underline-offset:3px}.form button{background:#294732;color:white;border:0;border-radius:5px;width:100%;padding:17px;font-size:17px;font-weight:700;cursor:pointer}.form button:disabled{opacity:.65;cursor:wait}
+.form :global(.campaign-small){font-size:12px;text-align:center;margin:14px 0 0}.form :global(.campaign-success h3){font-size:26px;margin-bottom:15px}.form :global([role="alert"]){font-size:15px;color:#9a2525}
+.form input:focus-visible,.form button:focus-visible{outline:3px solid #668653;outline-offset:3px}
+@media(max-width:540px){.form{padding:22px 18px}}

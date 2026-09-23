@@ -1,3 +1,5 @@
+import { leadSourceLabel } from "@/lib/campaign/lead-source";
+import { notifyTelegram } from "@/lib/telegram-notification";
 import { NextResponse, after } from "next/server";
 import {
   apiError,
@@ -43,6 +45,7 @@ export async function POST(request: Request) {
     if (result.data) {
       const id = result.data.id;
       after(async () => {
+        await notifyTelegram(`Cerere nouă — ${leadSourceLabel(p.source, p.attribution)}\nNume: ${p.name}\nTelefon: ${p.phone}\nOraș: ${p.source === "instalatii" ? p.city : "—"}\nAfacere: ${p.source === "homepage" ? p.businessType : "—"}`);
         await notifyLead(id).catch(() =>
           console.error("Campaign lead notification pending", id),
         );

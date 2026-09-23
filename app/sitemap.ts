@@ -1,3 +1,4 @@
+import marketingArticles from "@/lib/marketing-articles.json";
 import { siteConfig } from "@/lib/seo";
 import type { MetadataRoute } from "next";
 
@@ -38,7 +39,7 @@ const routes: SitemapEntry[] = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  return routes.map(({ route, priority, changeFrequency }) => ({
+  return [...routes, ...marketingArticles.articles.map(({ slug }) => ({ route: `/articole/${slug}`, priority: 0.7, changeFrequency: "monthly" as const }))].map(({ route, priority, changeFrequency }) => ({
     url: `${siteConfig.url}${route}`,
     lastModified: now,
     changeFrequency,
