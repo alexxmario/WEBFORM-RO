@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import styles from "./meta-consent.module.css";
 import { usePathname } from "next/navigation";
 import { hasMetaConsent, META_CONSENT_KEY, saveMetaConsent, trackMetaPageView } from "@/lib/meta-pixel";
 
@@ -33,16 +34,20 @@ export function MetaConsent() {
   }
 
   return open ? (
-    <section aria-label="Preferințe cookie-uri" className="fixed bottom-4 left-4 right-4 z-[100] mx-auto max-w-xl rounded-2xl border border-border bg-background p-5 text-foreground shadow-xl">
-      <h2 className="text-lg font-semibold">Cookie-uri pentru publicitate</h2>
-      <p className="mt-2 text-sm">Cu acordul tău, folosim Meta Pixel pentru măsurarea și personalizarea reclamelor. La trimiterea cererii, folosim numele, telefonul și orașul pentru potrivirea cu un cont Meta. Refuzul nu afectează formularul.</p>
-      <a className="mt-2 inline-block text-sm underline" href="/legal/privacy">Politica de confidențialitate</a>
-      <div className="mt-4 flex flex-wrap gap-3">
-        <button className="rounded-lg border border-border px-4 py-2" onClick={() => choose(false)}>{accepted ? "Retrag acordul" : "Refuz"}</button>
-        <button className="rounded-lg border border-border px-4 py-2" onClick={() => choose(true)}>Accept</button>
-        {accepted && <button className="px-4 py-2 underline" onClick={() => setOpen(false)}>Închide</button>}
+    <section aria-label="Preferințe cookie-uri" className={styles.banner}>
+      <h2>Preferințe cookie-uri</h2>
+      <p>Cu acordul tău, folosim Meta Pixel pentru măsurarea și personalizarea reclamelor. Poți refuza și folosi formularul.</p>
+      <details className={styles.details}>
+        <summary>Detalii și confidențialitate</summary>
+        <p>La trimiterea cererii, folosim numele, telefonul și orașul pentru potrivirea cu un cont Meta, numai cu acordul tău.</p>
+        <a href="/legal/privacy">Politica de confidențialitate</a>
+      </details>
+      <div className={styles.actions}>
+        <button onClick={() => choose(false)}>{accepted ? "Retrag acordul" : "Refuz"}</button>
+        <button onClick={() => choose(true)}>Accept</button>
+        {accepted && <button onClick={() => setOpen(false)}>Închide</button>}
       </div>
-      {storageError && <p role="alert" className="mt-2 text-sm">Preferința nu poate fi salvată în acest browser. Pixel-ul rămâne dezactivat.</p>}
+      {storageError && <p role="alert">Preferința nu poate fi salvată în acest browser. Pixel-ul rămâne dezactivat.</p>}
     </section>
   ) : (
     <button className="fixed bottom-3 left-3 z-[100] rounded-lg border border-border bg-background px-3 py-2 text-xs text-foreground shadow" onClick={() => setOpen(true)}>Setări cookie-uri</button>
