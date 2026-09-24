@@ -2,7 +2,7 @@ import { AdArticle } from "@/components/campaign/AdArticle";
 export default function Page() {
   return <AdArticle
     title="Clientul cu țeava spartă te caută pe Google. Te găsește?"
-    intro={["Omul vrea să afle repede ce lucrări faci și unde te deplasezi.", "Un site îi arată cum te poate contacta."]}
+    intro={["Omul vrea să afle repede ce lucrări faci și unde te deplasezi.", "Dacă nu te găsește pe tine, îl sună pe următorul."]}
     slug="instalatii"
     installerDemo
     sections={[

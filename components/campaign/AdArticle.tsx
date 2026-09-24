@@ -30,7 +30,7 @@ export function AdArticle({ title, intro, sections, slug, image, installerDemo =
           <h2>Explici. Aprobi. Te relaxezi.</h2>
           <p><b>1. Explici.</b> Vorbim despre serviciile și zona ta. Ne trimiți fotografiile, noi pregătim textele și site-ul.</p>
           <p><b>2. Aprobi.</b> Vezi propunerea înainte de plată. Dacă îți place, o aprobăm împreună și o publicăm după plată.</p>
-          <p><b>3. Te relaxezi.</b> Noi asigurăm găzduirea, domeniul, SSL și modificările incluse. În Start: actualizări în 7 zile, o cerere activă.</p>
+          <p><b>3. Te relaxezi.</b> Noi asigurăm găzduirea, domeniul, SSL și modificările incluse. Vrei să schimbi ceva? Ne scrii și rezolvăm în câteva zile.</p>
         </section>
         <aside className={styles.offer} aria-label="Oferta înainte de formular">{offer}</aside>
         <section id="formular" className={styles.form}>
