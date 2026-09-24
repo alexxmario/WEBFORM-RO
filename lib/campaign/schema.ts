@@ -50,7 +50,7 @@ export const leadSchema = z.discriminatedUnion("source", [
   z.object({
     ...common,
     source: z.literal("instalatii"),
-    company: z.enum(["yes", "no"]),
+    company: z.enum(["yes", "no"]).optional(),
     city: z.string().trim().min(2).max(150),
     services: z
       .array(z.enum(["Sanitare", "Termice", "Centrale", "Altele"]))

@@ -40,3 +40,10 @@ it("keeps each selected ad independently identifiable in admin", () => {
   expect(new Set(data.articles.map(a => a.slug)).size).toBe(11);
   for (const a of data.articles) expect(normalizeSubmission("campaign", { id: "test", source: "homepage", attribution: { article_slug: a.slug } }).submission_source).toContain(`reclama ${a.ad} ·`);
 });
+it("saves the short installer article form without inventing company status", async () => {
+  const short = { ...payload, source: "instalatii", city: "Brașov", services: ["Sanitare"], company: undefined };
+  expect((await POST(request(short))).status).toBe(200);
+  expect(mocks.insert).toHaveBeenCalledWith(expect.objectContaining({ company: null, city: "Brașov", services: ["Sanitare"], attribution: payload.attribution }));
+  await mocks.after.mock.calls[0][0]();
+  expect(mocks.telegram).toHaveBeenCalledWith(expect.stringContaining("Articol · reclama 1"));
+});

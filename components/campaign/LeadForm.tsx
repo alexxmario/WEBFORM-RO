@@ -6,10 +6,12 @@ export function LeadForm({
   source = "instalatii",
   whatsapp = "",
   articleSlug,
+  landing = false,
 }: {
   source?: "instalatii" | "homepage";
   whatsapp?: string;
   articleSlug?: string;
+  landing?: boolean;
 }) {
   const [busy, setBusy] = useState(false),
     [done, setDone] = useState(false),
@@ -46,7 +48,7 @@ export function LeadForm({
       marketingConsent: hasMetaConsent(),
       ...(source === "instalatii"
         ? {
-            company: f.get("company"),
+            company: landing ? undefined : f.get("company"),
             city: f.get("city"),
             services: f.getAll("services"),
           }
@@ -122,9 +124,22 @@ export function LeadForm({
             placeholder="07xx xxx xxx"
           />
         </label>
+      {source === "instalatii" && (
+        <fieldset>
+          <legend>Ce servicii faci?</legend>
+          <div className="campaign-services">
+            {["Sanitare", "Termice", "Centrale", "Altele"].map((s) => (
+              <label key={s}>
+                <input type="checkbox" name="services" value={s} />
+                {s}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )}
         {source === "instalatii" ? (
           <>
-            <label>
+            {!landing && <label>
               Ai firmă sau PFA?
               <select name="company" required defaultValue="">
                 <option value="" disabled>
@@ -133,7 +148,7 @@ export function LeadForm({
                 <option value="yes">Da</option>
                 <option value="no">Nu</option>
               </select>
-            </label>
+            </label>}
             <label>
               Orașul în care lucrezi
               <input
@@ -158,31 +173,15 @@ export function LeadForm({
           </label>
         )}
       </div>
-      {source === "instalatii" && (
-        <fieldset>
-          <legend>Ce servicii faci?</legend>
-          <div className="campaign-services">
-            {["Sanitare", "Termice", "Centrale", "Altele"].map((s) => (
-              <label key={s}>
-                <input type="checkbox" name="services" value={s} />
-                {s}
-              </label>
-            ))}
-          </div>
-        </fieldset>
-      )}
-      <label className="campaign-honey" aria-hidden="true">
+
+      {!landing && <label className="campaign-honey" aria-hidden="true">
         Website
         <input name="website" tabIndex={-1} autoComplete="off" />
-      </label>
+      </label>}
       <label className="campaign-consent">
         <input name="consent" type="checkbox" required />
         <span>
-          Sunt de acord să fiu contactat pentru această cerere și am citit{" "}
-          <a href="/legal/privacy" target="_blank" rel="noreferrer">
-            politica de confidențialitate
-          </a>
-          .
+          {landing ? "Sunt de acord ca WebForm să folosească datele din formular pentru a mă contacta despre această cerere. Pot solicita ștergerea lor sau retragerea acordului." : <>Sunt de acord să fiu contactat pentru această cerere și am citit <a href="/legal/privacy" target="_blank" rel="noreferrer">politica de confidențialitate</a>.</>}
         </span>
       </label>
       {error && <p role="alert">{error}</p>}

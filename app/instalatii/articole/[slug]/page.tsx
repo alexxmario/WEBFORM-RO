@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import { AdArticle } from "@/components/campaign/AdArticle";
 import { notFound } from "next/navigation";
 import { articles } from "../articles";
-import styles from "../article.module.css";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -37,183 +35,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ArticlePage({ params, searchParams }: Props) {
+export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
-  const article = articles.find((item) => item.slug === slug);
+  const article = articles.find((entry) => entry.slug === slug);
   if (!article) notFound();
-  const incoming = await searchParams;
-  const attribution = new URLSearchParams();
-  for (const key of [
-    "utm_source",
-    "utm_medium",
-    "utm_campaign",
-    "utm_term",
-    "utm_content",
-    "fbclid",
-  ]) {
-    const value = incoming[key];
-    if (typeof value === "string" && value) attribution.set(key, value);
-  }
-  if (!attribution.has("utm_content"))
-    attribution.set("utm_content", `instalatori-ad-${article.ad}`);
-  const words = [
-    article.intro,
-    ...article.sections.flatMap((s) => [
-      s.title,
-      ...s.paragraphs,
-      ...(s.items || []),
-      s.example?.text || "",
-    ]),
-  ]
-    .join(" ")
-    .split(/\s+/).length;
-
-  return (
-    <div className={styles.page}>
-      <header className={styles.header}>
-        <Link
-          href="/"
-          aria-label="WebForm — pagina principală"
-          className={styles.brand}
-        >
-          <em>web</em>form.
-        </Link>
-        <span>IDEI PENTRU INSTALATORI</span>
-      </header>
-      <main id="main">
-        <article>
-          <div className={styles.hero}>
-            <p className={styles.eyebrow}>{article.category}</p>
-            <h1>{article.title}</h1>
-            <p className={styles.intro}>{article.intro}</p>
-            <div className={styles.meta}>
-              <span>De echipa WebForm</span>
-              <span>{Math.max(3, Math.ceil(words / 180))} minute de citit</span>
-            </div>
-          </div>
-          <figure className={styles.figure}>
-            <Image
-              src={`/images/articole-instalatori/${article.image}.png`}
-              alt={article.alt}
-              width={1200}
-              height={628}
-              sizes="(max-width: 1000px) 100vw, 1000px"
-              priority
-            />
-          </figure>
-          <div className={styles.reading}>
-            <aside className={styles.contents} aria-label="În acest articol">
-              <span>ÎN ACEST ARTICOL</span>
-              {article.sections.map((section, i) => (
-                <a key={section.title} href={`#ideea-${i + 1}`}>
-                  <b>{String(i + 1).padStart(2, "0")}</b>
-                  {section.title}
-                </a>
-              ))}
-            </aside>
-            <div className={styles.body}>
-              {article.sections.map((section, i) => (
-                <section
-                  id={`ideea-${i + 1}`}
-                  key={section.title}
-                  className={styles.section}
-                >
-                  <span className={styles.number}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h2>{section.title}</h2>
-                  {section.paragraphs.map((p) => (
-                    <p key={p}>{p}</p>
-                  ))}
-                  {section.items && (
-                    <ul>
-                      {section.items.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  )}
-                  {section.example && (
-                    <div className={styles.example}>
-                      <span>{section.example.label}</span>
-                      <blockquote>{section.example.text}</blockquote>
-                    </div>
-                  )}
-                </section>
-              ))}
-              <aside className={styles.takeaway}>
-                <span>DE ÎNCERCAT LA URMĂTOAREA LUCRARE</span>
-                <p>{article.takeaway}</p>
-              </aside>
-            </div>
-          </div>
-        </article>
-        <section className={styles.offer} aria-labelledby="offer-title">
-          <div className={styles.offerIntro}>
-            <p className={styles.eyebrow}>MAI DEPARTE, CU WEBFORM</p>
-            <h2 id="offer-title">
-              Tu ai meseria.
-              <br />
-              Noi o punem <em>în pagină.</em>
-            </h2>
-            <p>{article.bridge}</p>
-          </div>
-          <div className={styles.steps}>
-            <div>
-              <span>01</span>
-              <h3>Ne povestești.</h3>
-              <p>
-                O discuție de aproximativ 15 minute și fotografiile tale trimise
-                pe WhatsApp ne dau punctul de pornire.
-              </p>
-            </div>
-            <div>
-              <span>02</span>
-              <h3>Vezi propunerea.</h3>
-              <p>
-                Pregătim textele și site-ul. Primești previzualizarea în maximum
-                7 zile de la discuție și primirea fotografiilor. O vezi înainte
-                să decizi și să plătești.
-              </p>
-            </div>
-            <div>
-              <span>03</span>
-              <h3>Noi îl administrăm.</h3>
-              <p>
-                După acceptare și plată, publicăm site-ul. Ne ocupăm de
-                găzduire, domeniu, SSL și modificările incluse în abonament.
-              </p>
-            </div>
-          </div>
-          <div className={styles.offerBottom}>
-            <div>
-              <p className={styles.price}>
-                0 lei avans <span>·</span> 180 lei/lună
-              </p>
-              <p className={styles.terms}>
-                Abonamentul Start: până la 3 pagini. Modificări în 7 zile, o cerere activă. Domeniul rămâne al tău.
-              </p>
-            </div>
-            <div className={styles.actions}>
-              <a className={styles.button} href={`/instalatii/formular?${attribution.toString()}`}>
-                Vreau să vă povestesc ↗
-              </a>
-              <a
-                className={styles.secondary}
-                href={`/instalatii/exemplu?${attribution.toString()}`}
-              >
-                Vezi un site demonstrativ →
-              </a>
-            </div>
-          </div>
-        </section>
-      </main>
-      <footer className={styles.footer}>
-        <Link className={styles.brand} href="/">
-          <em>web</em>form.
-        </Link>
-        <p>Lucrări reale. Explicații clare. Un loc al lor online.</p>
-        <a href="/legal/privacy">Confidențialitate</a>
-      </footer>
-    </div>
-  );
+  const intros: Record<string, string[]> = {
+    "lucrarile-tale-ajung-inaintea-ta": ["Tu ești la o lucrare. Noul client vrea să vadă ce ai mai făcut.", "Site-ul îi poate arăta munca ta înainte de primul apel."],
+    "ce-merita-fotografiat-inainte-de-gresie": ["O parte din munca ta dispare sub gresie.", "Fotografiile făcute la timp pot arăta ce ai realizat."],
+    "o-propozitie-schimba-o-fotografie": ["Clientul vede fotografia, dar nu știe ce ai făcut acolo.", "O explicație scurtă îl ajută să înțeleagă lucrarea."],
+    "ce-sa-contina-prima-cerere-de-montaj": ["Primești «cât costă?», fără detalii despre montaj.", "Site-ul poate explica ce informații ai nevoie să primești."],
+  };
+  const sections = article.sections.slice(0, 3).map(section => ({ title: section.title, paragraphs: [...section.paragraphs.slice(0, 1), ...(section.example ? [section.example.text] : section.items ? [section.items.slice(0, 2).join(" ")] : section.paragraphs.slice(1, 2))].flatMap(p => p.split(/(?<=[.!?])\s+(?=[A-ZĂÂÎȘȚ„])/).map(s=>s.trim()).filter(Boolean)).slice(0, 4) }));
+  return <AdArticle title={article.title} intro={intros[slug] ?? [article.intro]} sections={sections} slug={`instalatii-${article.slug}`} image={{src:`/images/articole-instalatori/${article.image}.png`, width:1200,height:628,alt:article.alt}} />;
 }

@@ -31,7 +31,29 @@
         "width": 1000,
         "height": 1250,
         "alt": "Micul „extra” care poate face o simplă recomandare mult mai convingătoare."
-      }
+      },
+      "landingIntro": [
+        "Un client îți recomandă numărul.",
+        "Dar noul client nu ți-a văzut lucrările."
+      ],
+      "landingSections": [
+        {
+          "title": "Ce merită să știe clientul",
+          "paragraphs": [
+            "Cineva îți recomandă afacerea. Trimite numărul tău și spune: „Vorbește cu ei.”",
+            "Este un început bun.",
+            "Dar omul care primește mesajul poate să nu știe încă nimic despre tine."
+          ]
+        },
+        {
+          "title": "Ce merită să conțină acel link?",
+          "paragraphs": [
+            "Începe cu o propoziție simplă despre serviciul tău și zona în care lucrezi, dacă aceasta contează.",
+            "Alege câteva imagini care arată munca pe care vrei să o faci mai des.",
+            "Lângă fiecare, explică pe scurt ce ai făcut. Folosește fotografii proprii, pe care ai dreptul să le publici."
+          ]
+        }
+      ]
     },
     {
       "ad": 2,
@@ -65,7 +87,37 @@
         "width": 1000,
         "height": 1250,
         "alt": "Arată profesionist. Dar trece „testul fără logo” care scoate la iveală ce înțelege un client?"
-      }
+      },
+      "landingIntro": [
+        "Clientul deschide site-ul de pe telefon.",
+        "Înțelege imediat ce instalații faci și unde lucrezi?"
+      ],
+      "landingSections": [
+        {
+          "title": "Ce merită să știe clientul",
+          "paragraphs": [
+            "Deschide site-ul de pe telefon și acoperă logo-ul cu degetul.",
+            "Privește ce rămâne pe primul ecran.",
+            "Ar putea fi pagina afacerii tale? Sau s-ar potrivi la fel de bine altor zece firme?"
+          ]
+        },
+        {
+          "title": "Cele trei răspunsuri de care are nevoie",
+          "paragraphs": [
+            "Primul: ce oferi, concret?",
+            "„Mobilier la comandă pentru bucătării și dressinguri” spune mai mult decât „Transformăm visuri în realitate”.",
+            "Al doilea: cui i se potrivește oferta?"
+          ]
+        },
+        {
+          "title": "Încearcă o rescriere simplă",
+          "paragraphs": [
+            "Completează propoziția: „Ajutăm [tipul de client] cu [serviciul concret], în [zona deservită].”",
+            "Nu trebuie să păstrezi exact această formulă. Folosește-o ca să vezi ce informații lipsesc.",
+            "Apoi citește titlul cu voce tare. Ai spune același lucru unui om care te întreabă cu ce te ocupi?"
+          ]
+        }
+      ]
     },
     {
       "ad": 3,
@@ -100,7 +152,37 @@
         "width": 1000,
         "height": 1250,
         "alt": "De la „n-am timp de site” la prima versiune în 7 zile. Secretul e în ce NU faci tu."
-      }
+      },
+      "landingIntro": [
+        "Ai lucrări, deplasări și telefoane.",
+        "Site-ul rămâne mereu pentru mai târziu."
+      ],
+      "landingSections": [
+        {
+          "title": "Ce merită să știe clientul",
+          "paragraphs": [
+            "Când spui „n-am timp de site”, probabil nu te gândești doar la o pagină.",
+            "Te gândești la toate lucrurile care vin odată cu ea.",
+            "Să alegi o platformă. Să înveți unde se schimbă un text."
+          ]
+        },
+        {
+          "title": "Ce ai nevoie să pregătești tu",
+          "paragraphs": [
+            "Începe cu serviciile pe care vrei să le prezinți și cu oamenii cărora li se adresează.",
+            "Adună textele, datele de contact și imaginile pe care le poți folosi.",
+            "Dacă ai deja materiale trimise clienților, pornește de acolo."
+          ]
+        },
+        {
+          "title": "Ce preia echipa",
+          "paragraphs": [
+            "Proiectul începe după completarea formularului și confirmarea plății.",
+            "Este versiunea pe care o verifici, nu o promisiune că orice proiect va fi publicat automat în ziua a șaptea.",
+            "O primești în chat și ne spui ce trebuie ajustat înainte de publicare."
+          ]
+        }
+      ]
     },
     {
       "ad": 5,
@@ -135,7 +217,37 @@
         "width": 1000,
         "height": 1250,
         "alt": "Un singur deget poate da de gol problema dintre site-ul tău și următoarea cerere de contact."
-      }
+      },
+      "landingIntro": [
+        "Omul caută un instalator de pe telefon.",
+        "Dacă nu găsește cum să te sune, conversația poate să nu înceapă."
+      ],
+      "landingSections": [
+        {
+          "title": "Ce merită să știe clientul",
+          "paragraphs": [
+            "Deschide site-ul de pe telefon, așa cum ar face cineva care tocmai a primit linkul.",
+            "Ține telefonul într-o mână și încearcă să ajungi la contact.",
+            "Poți citi textul fără să-l mărești?"
+          ]
+        },
+        {
+          "title": "Urmărește drumul până la cerere",
+          "paragraphs": [
+            "Începe de la prima propoziție: spune clar ce oferă afacerea?",
+            "Continuă spre informația de care ar avea nevoie un client înainte să te contacteze.",
+            "Pentru un serviciu local, poate fi zona în care lucrezi. Pentru un produs la comandă, poate fi felul în care se cere o ofertă."
+          ]
+        },
+        {
+          "title": "Un site pentru telefon se verifică pe telefon",
+          "paragraphs": [
+            "Aspectul este doar o parte din experiență.",
+            "Contează și dacă omul poate citi, înțelege și face pasul următor fără să ghicească.",
+            "Repetă testul după ce schimbi fotografii, texte sau butoane importante."
+          ]
+        }
+      ]
     },
     {
       "ad": 6,
@@ -171,7 +283,37 @@
         "width": 1000,
         "height": 1250,
         "alt": "Soluția pentru întrebările repetitive poate fi ascunsă chiar în mesaje. Iată cum o muți pe site."
-      }
+      },
+      "landingIntro": [
+        "Explici mereu ce lucrări faci și unde te deplasezi.",
+        "Răspunsurile pot sta împreună pe site."
+      ],
+      "landingSections": [
+        {
+          "title": "Ce merită să știe clientul",
+          "paragraphs": [
+            "Ai răspuns ieri la o întrebare despre servicii.",
+            "Astăzi explici din nou cum începe colaborarea.",
+            "Mâine, altcineva îți va cere câteva exemple și datele de contact."
+          ]
+        },
+        {
+          "title": "Cinci răspunsuri care pot deveni o prezentare",
+          "paragraphs": [
+            "Ce oferi exact?",
+            "Scrie serviciile în cuvintele pe care le folosesc clienții și explică pe scurt ce include fiecare.",
+            "Cum se lucrează cu tine?"
+          ]
+        },
+        {
+          "title": "Răspunsuri scurte, puse unde trebuie",
+          "paragraphs": [
+            "Nu este nevoie să transformi fiecare întrebare într-un text lung.",
+            "Unele răspunsuri își au locul lângă servicii. Altele pot sta într-o secțiune de întrebări frecvente.",
+            "Scopul este ca omul să găsească explicația atunci când are nevoie de ea."
+          ]
+        }
+      ]
     },
     {
       "ad": 7,
@@ -206,7 +348,37 @@
         "width": 1000,
         "height": 1250,
         "alt": "Site de la 180 lei/lună. Partea surprinzătoare nu e prețul, ci ce nu mai trebuie să faci tu."
-      }
+      },
+      "landingIntro": [
+        "Ai nevoie de un site și de cineva care să-l întrețină.",
+        "Merită să știi ce include abonamentul."
+      ],
+      "landingSections": [
+        {
+          "title": "Ce merită să știe clientul",
+          "paragraphs": [
+            "Când compari două oferte de site, prețul este cel mai ușor de observat.",
+            "Ce se întâmplă după lansare poate fi mai greu de văzut.",
+            "Cine ține site-ul online?"
+          ]
+        },
+        {
+          "title": "Compară și responsabilitățile",
+          "paragraphs": [
+            "Separă construcția site-ului de găzduire și de actualizările ulterioare.",
+            "Verifică ce include oferta și ce presupune o plată sau o discuție separată.",
+            "Include domeniu, găzduire, SSL, design optimizat pentru mobil, SEO de bază și formular de contact."
+          ]
+        },
+        {
+          "title": "Ce înseamnă actualizări în planul Start?",
+          "paragraphs": [
+            "De exemplu, poți cere schimbarea unui text sau a unei imagini, în limitele planului.",
+            "Tu rămâi persoana care furnizează informațiile corecte despre afacere și verifică prezentarea.",
+            "Dacă ai nevoie de mai multe pagini sau funcții, compară planurile pornind de la ce trebuie să facă site-ul pentru afacerea ta."
+          ]
+        }
+      ]
     },
     {
       "ad": 10,
@@ -242,7 +414,37 @@
         "width": 1000,
         "height": 1250,
         "alt": "Sistemul „Explici. Aprobi. Te relaxezi.” Cum ai un site profesionist fără să înveți să-l construiești."
-      }
+      },
+      "landingIntro": [
+        "Tu cunoști meseria și clienții.",
+        "Construcția site-ului poate fi preluată de echipă."
+      ],
+      "landingSections": [
+        {
+          "title": "Ce merită să știe clientul",
+          "paragraphs": [
+            "Un site are nevoie de structură, texte, imagini și o versiune care funcționează pe telefon.",
+            "Apoi trebuie publicat, găzduit și actualizat.",
+            "Când vezi doar trei pași, întrebarea este firească: unde au dispărut toate aceste lucruri?"
+          ]
+        },
+        {
+          "title": "Explici ce face afacerea ta",
+          "paragraphs": [
+            "Tu cunoști serviciile, clienții și felul în care lucrezi.",
+            "Prin formular, ne trimiți informațiile și materialele necesare pentru site.",
+            "Poți indica ce vrei să prezinți, ce exemple ai și cum vrei să fii contactat."
+          ]
+        },
+        {
+          "title": "Aprobi prezentarea înainte de publicare",
+          "paragraphs": [
+            "O primești în chat și o poți parcurge din perspectiva unui client.",
+            "Sunt corecte serviciile? Se înțelege oferta?",
+            "Sunt potrivite imaginile și datele de contact?"
+          ]
+        }
+      ]
     },
     {
       "ad": 11,
@@ -276,7 +478,37 @@
         "width": 1000,
         "height": 1250,
         "alt": "Recomandarea ajunge la client. Dar cine îi arată de ce meriți ales?"
-      }
+      },
+      "landingIntro": [
+        "Recomandarea a ajuns la client.",
+        "Acum vrea să vadă lucrările și zona în care te deplasezi."
+      ],
+      "landingSections": [
+        {
+          "title": "Ce merită să știe clientul",
+          "paragraphs": [
+            "„Știu eu pe cineva” poate deschide o ușă pentru afacerea ta.",
+            "Dar încrederea celui care te recomandă nu spune automat toate lucrurile pe care noul client vrea să le știe.",
+            "El poate avea alt tip de proiect. Alte întrebări."
+          ]
+        },
+        {
+          "title": "Arată-i ce are nevoie să verifice",
+          "paragraphs": [
+            "Imaginează-ți că cineva primește recomandarea pentru o firmă de amenajări.",
+            "Vrea să afle dacă firma face tipul de lucrare de care are nevoie și dacă lucrează în localitatea lui.",
+            "Apoi caută imagini din proiecte și o explicație despre cum începe colaborarea."
+          ]
+        },
+        {
+          "title": "Ajută și persoana care te recomandă",
+          "paragraphs": [
+            "Un client mulțumit poate trimite linkul tău fără să reconstruiască toată povestea afacerii.",
+            "Iar persoana care îl primește îl poate deschide când are timp.",
+            "Poate reveni la o lucrare sau poate trimite prezentarea mai departe unui coleg ori unui membru al familiei."
+          ]
+        }
+      ]
     },
     {
       "ad": 17,
@@ -312,7 +544,37 @@
         "width": 1000,
         "height": 1250,
         "alt": "„Nu mă pricep la site-uri.” Atunci de ce ar trebui să-l construiești tu? Webform arată partea pe care o poți delega."
-      }
+      },
+      "landingIntro": [
+        "Te pricepi la instalații, nu la construit site-uri.",
+        "Pentru prezentarea ta online poți avea o echipă."
+      ],
+      "landingSections": [
+        {
+          "title": "Ce merită să știe clientul",
+          "paragraphs": [
+            "Știi ce faci pentru clienți. Știi ce întrebări îți pun și ce trebuie să afli înainte să începi.",
+            "Dar dacă discuția ajunge la platforme, găzduire sau publicare, lucrurile devin mai puțin familiare.",
+            "Asta poate face proiectul unui site să pară mai complicat decât este partea care îți revine."
+          ]
+        },
+        {
+          "title": "Ce trebuie să poți spune",
+          "paragraphs": [
+            "Ce servicii sau produse vrei să prezinți?",
+            "Cui i se adresează și unde lucrezi, dacă zona contează?",
+            "Ce fotografii, texte sau exemple ai la dispoziție?"
+          ]
+        },
+        {
+          "title": "Cum verifici un site fără să fii specialist",
+          "paragraphs": [
+            "Citește-l ca pe o prezentare a afacerii tale.",
+            "Dacă un serviciu este descris greșit, spune ce ar trebui să înțeleagă clientul.",
+            "Dacă o fotografie nu este potrivită, trimite imaginea pe care vrei să o folosim."
+          ]
+        }
+      ]
     },
     {
       "ad": 18,
@@ -348,7 +610,37 @@
         "width": 1000,
         "height": 1250,
         "alt": "Scoate „calitate” și „profesionalism” de pe site. Ce rămâne îi arată clientului de ce să te aleagă?"
-      }
+      },
+      "landingIntro": [
+        "„Calitate” nu arată cum lucrezi.",
+        "O lucrare explicată clar îi spune clientului mai mult."
+      ],
+      "landingSections": [
+        {
+          "title": "Ce merită să știe clientul",
+          "paragraphs": [
+            "Cele două cuvinte apar ușor într-o prezentare de afacere.",
+            "Dar încearcă să le acoperi și citește ce rămâne.",
+            "Mai afli ceva concret despre serviciu?"
+          ]
+        },
+        {
+          "title": "Înlocuiește afirmația cu un detaliu",
+          "paragraphs": [
+            "În loc să scrii doar „lucrări de calitate”, arată o lucrare și explică ce ai realizat.",
+            "Dacă faci mobilier, poți prezenta materialele folosite și un detaliu de execuție, dacă sunt relevante pentru proiect.",
+            "Dacă oferi servicii, poți descrie ce include livrarea și ce verifici înainte de finalizare."
+          ]
+        },
+        {
+          "title": "Explică ce se întâmplă în colaborare",
+          "paragraphs": [
+            "„Suntem profesioniști” nu îi spune omului ce urmează după ce îți trimite un mesaj.",
+            "O explicație a procesului îi poate răspunde direct.",
+            "De exemplu: „Ne trimiți dimensiunile și câteva fotografii, apoi discutăm ce soluție se potrivește.”"
+          ]
+        }
+      ]
     },
     {
       "ad": 19,
@@ -384,7 +676,37 @@
         "width": 1000,
         "height": 1250,
         "alt": "Prezentarea afacerii poate încăpea într-un singur link. Secretul e în ce nu-l mai pui pe client să caute."
-      }
+      },
+      "landingIntro": [
+        "Trimiți poze, apoi servicii și date de contact.",
+        "Un singur link le poate ține împreună."
+      ],
+      "landingSections": [
+        {
+          "title": "Ce merită să știe clientul",
+          "paragraphs": [
+            "Trimiți câteva fotografii unui om interesat de afacerea ta.",
+            "Apoi adaugi un mesaj despre servicii și încă unul despre cum lucrați.",
+            "Mai târziu, conversația continuă. Informațiile importante rămân undeva mai sus."
+          ]
+        },
+        {
+          "title": "Ce pui în acel link?",
+          "paragraphs": [
+            "Începe cu o explicație scurtă despre ce oferi și cui i se potrivește.",
+            "Continuă cu serviciile sau produsele importante, descrise pe înțelesul unui client nou.",
+            "Adaugă câteva exemple relevante. Lângă fotografii, pune contextul care altfel ar fi rămas într-un mesaj separat."
+          ]
+        },
+        {
+          "title": "Pregătește materialele pe care le ai deja",
+          "paragraphs": [
+            "Adună fotografiile pe care le trimiți cel mai des și verifică dacă ai dreptul să le publici.",
+            "Notează explicațiile pe care le repeți când vorbești despre afacere.",
+            "Verifică datele de contact și elimină informațiile care nu mai sunt actuale."
+          ]
+        }
+      ]
     }
   ],
   "offer": [

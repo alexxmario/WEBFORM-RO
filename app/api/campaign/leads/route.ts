@@ -31,7 +31,7 @@ export async function POST(request: Request) {
         source: p.source,
         name: p.name,
         phone: p.phone,
-        company: p.source === "instalatii" ? p.company === "yes" : null,
+        company: p.source === "instalatii" && p.company ? p.company === "yes" : null,
         city: p.source === "instalatii" ? p.city : null,
         services: p.source === "instalatii" ? p.services : [],
         business_type: p.source === "homepage" ? p.businessType : null,
