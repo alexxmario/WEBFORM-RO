@@ -35,10 +35,10 @@ export function MetaConsent() {
 
   return open ? (
     <section aria-label="Preferințe cookie-uri" className={styles.banner}>
-      <h2>Preferințe cookie-uri</h2>
-      <p>Cu acordul tău, folosim Meta Pixel pentru măsurarea și personalizarea reclamelor. Poți refuza și folosi formularul.</p>
+      <p>Accepți Meta Pixel pentru măsurarea și personalizarea reclamelor?</p>
       <details className={styles.details}>
-        <summary>Detalii și confidențialitate</summary>
+        <summary>Detalii</summary>
+        <p>Poți refuza și folosi în continuare formularul.</p>
         <p>La trimiterea cererii, folosim numele, telefonul și orașul pentru potrivirea cu un cont Meta, numai cu acordul tău.</p>
         <a href="/legal/privacy">Politica de confidențialitate</a>
       </details>
@@ -50,6 +50,8 @@ export function MetaConsent() {
       {storageError && <p role="alert">Preferința nu poate fi salvată în acest browser. Pixel-ul rămâne dezactivat.</p>}
     </section>
   ) : (
-    <button className="fixed bottom-3 left-3 z-[100] rounded-lg border border-border bg-background px-3 py-2 text-xs text-foreground shadow" onClick={() => setOpen(true)}>Setări cookie-uri</button>
+    <div className={styles.settings}>
+      <button onClick={() => setOpen(true)}>Setări cookie-uri</button>
+    </div>
   );
 }
