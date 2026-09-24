@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { StickyLeadButton } from "./StickyLeadButton";
 import { Demo } from "./Demo";
 import { LeadForm } from "./LeadForm";
 import styles from "./ad-article.module.css";
@@ -21,7 +22,7 @@ export function AdArticle({ title, intro, sections, slug, image, installerDemo =
       <article>
         <h1>{title}</h1>
         <div className={styles.intro}>{intro.map(p=><p key={p}>{p}</p>)}</div>
-        <aside className={styles.offer} aria-label="Oferta WebForm">{offer}</aside>
+        <aside id="oferta-initiala" className={styles.offer} aria-label="Oferta WebForm">{offer}</aside>
         <div className={styles.reading}>{sections.slice(0,4).map(s=><section key={s.title}><h2>{s.title}</h2>{s.paragraphs.map(p=><p key={p}>{p}</p>)}</section>)}</div>
         {installerDemo && <section className={styles.demo}><h2>Așa poate arăta site-ul tău</h2><Demo /><p>Model demonstrativ. Site-ul tău va avea numele, serviciile și fotografiile tale.</p></section>}
         {image && <figure className={styles.figure}><Image {...image} alt={image.alt} sizes="(max-width: 640px) calc(100vw - 32px), 560px" /><figcaption>Exemplu vizual pentru prezentarea serviciilor tale.</figcaption></figure>}
@@ -46,6 +47,6 @@ export function AdArticle({ title, intro, sections, slug, image, installerDemo =
       </article>
       <footer>WebForm · Site-uri pentru afacerea ta</footer>
     </main>
-    <nav className={styles.sticky} aria-label="Cerere site"><a href="#formular">Vreau site-ul meu</a></nav>
+    <StickyLeadButton key={slug} />
   </div>;
 }
