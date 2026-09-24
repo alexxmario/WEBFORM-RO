@@ -1,0 +1,10 @@
+.form :global(.campaign-form) { background: transparent; border: 0; border-radius: 0; padding: 0; box-shadow: none; }
+.form :global(.campaign-fields) { grid-template-columns: 1fr; }
+.form :global(.campaign-fields select) { width: 100%; min-width: 0; padding: 13px; background: white; color: #26362d; border: 1px solid #a8b59f; border-radius: 5px; font: inherit; font-weight: 400; }
+.form :global(fieldset) { margin: 22px 0; min-width: 0; }
+.form :global(legend) { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+.form :global(.campaign-services) { display: flex; flex-wrap: wrap; gap: 12px 18px; }
+.form :global(.campaign-services label) { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.form :global(.campaign-services input) { width: 18px; height: 18px; accent-color: #294732; }
+.form :global(.campaign-success) { background: transparent; color: inherit; border: 0; padding: 0; }
+.form :global(.campaign-success a) { display: inline-flex; padding: 14px 18px; background: #294732; color: white; border-radius: 5px; }
