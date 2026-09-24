@@ -14,7 +14,7 @@ export function AdArticle({ title, intro, sections, slug, image, installerDemo =
     <p><b>Live în 7 zile</b></p>
     <p>180 lei/lună – hosting, domeniu, SSL și modificări incluse</p>
     <a className={styles.button} href="#formular">Vreau site-ul meu</a>
-    <small>Minimum 12 luni. Termenul începe după discuție și primirea materialelor; publicarea necesită aprobarea și plata ta.</small>
+    <small>Termenul începe după discuție și primirea materialelor; publicarea necesită aprobarea și plata ta.</small>
   </>;
   return <div className={styles.page}>
     <main id="main" className={styles.main}>
@@ -39,7 +39,7 @@ export function AdArticle({ title, intro, sections, slug, image, installerDemo =
         </section>
         <section className={styles.faq}>
           <h2>Întrebări frecvente</h2>
-          <details><summary>Care e condiția?</summary><p>180 lei/lună, minimum 12 luni. Abonamentul începe după ce accepți site-ul și plătești.</p></details>
+          <details><summary>Care e condiția?</summary><p>180 lei/lună, fără perioadă minimă contractuală. Abonamentul începe după ce accepți site-ul și plătești.</p></details>
           <details><summary>Al cui e domeniul?</summary><p>Al tău. Rămâne al tău și după încheierea colaborării.</p></details>
           <details><summary>Ce se întâmplă dacă nu-mi place site-ul?</summary><p>Nu plătești nimic.</p></details>
         </section>
