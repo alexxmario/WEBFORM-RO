@@ -25,7 +25,13 @@
         "Poți trimite aceeași prezentare pe WhatsApp, prin e-mail sau într-un mesaj pe Facebook.",
         "Iar persoana care te recomandă nu mai trebuie să țină minte toate detaliile.",
         "Tu ai deja experiența și exemplele. WebForm te ajută să le pui într-un site pe care să-l trimiți cu încredere."
-      ]
+      ],
+      "image": {
+        "src": "/images/articole/recomandarea-care-convinge.webp",
+        "width": 1000,
+        "height": 1250,
+        "alt": "Micul „extra” care poate face o simplă recomandare mult mai convingătoare."
+      }
     },
     {
       "ad": 2,
@@ -53,7 +59,13 @@
         "Arată primul ecran unei persoane care nu îți cunoaște afacerea și întreab-o ce a înțeles.",
         "Dacă răspunsul este neclar, ai un indiciu bun despre ce trebuie explicat mai bine.",
         "La WebForm, pornim de la informațiile despre afacerea ta pentru a organiza prezentarea, inclusiv primul ecran."
-      ]
+      ],
+      "image": {
+        "src": "/images/articole/testul-fara-logo.webp",
+        "width": 1000,
+        "height": 1250,
+        "alt": "Arată profesionist. Dar trece „testul fără logo” care scoate la iveală ce înțelege un client?"
+      }
     },
     {
       "ad": 3,
@@ -82,7 +94,13 @@
         "Poți verifica dacă serviciile sunt explicate corect, dacă imaginile sunt potrivite și dacă datele de contact sunt bune.",
         "Timpul tău se duce spre informațiile și deciziile care îți aparțin.",
         "Iar construcția și administrarea pot rămâne în grija aceleiași echipe."
-      ]
+      ],
+      "image": {
+        "src": "/images/articole/site-fara-sa-ti-ocupe-timpul.webp",
+        "width": 1000,
+        "height": 1250,
+        "alt": "De la „n-am timp de site” la prima versiune în 7 zile. Secretul e în ce NU faci tu."
+      }
     },
     {
       "ad": 5,
@@ -111,7 +129,13 @@
         "Repetă testul după ce schimbi fotografii, texte sau butoane importante.",
         "La WebForm, designul optimizat pentru mobil și formularul de contact sunt incluse și în planul Start.",
         "Poți începe prin a deschide modelele noastre de pe telefon și a urmări chiar acest traseu."
-      ]
+      ],
+      "image": {
+        "src": "/images/articole/testul-unui-singur-deget.webp",
+        "width": 1000,
+        "height": 1250,
+        "alt": "Un singur deget poate da de gol problema dintre site-ul tău și următoarea cerere de contact."
+      }
     },
     {
       "ad": 6,
@@ -141,7 +165,13 @@
         "Scopul este ca omul să găsească explicația atunci când are nevoie de ea.",
         "Vei avea în continuare conversații cu clienții. Doar că le poți trimite de la început un loc în care informațiile de bază sunt împreună.",
         "WebForm te ajută să organizezi aceste materiale într-un site construit și administrat de echipă."
-      ]
+      ],
+      "image": {
+        "src": "/images/articole/intrebarile-din-mesaje.webp",
+        "width": 1000,
+        "height": 1250,
+        "alt": "Soluția pentru întrebările repetitive poate fi ascunsă chiar în mesaje. Iată cum o muți pe site."
+      }
     },
     {
       "ad": 7,
@@ -170,7 +200,13 @@
         "Tu rămâi persoana care furnizează informațiile corecte despre afacere și verifică prezentarea.",
         "Echipa preia construcția și partea de administrare inclusă.",
         "Dacă ai nevoie de mai multe pagini sau funcții, compară planurile pornind de la ce trebuie să facă site-ul pentru afacerea ta."
-      ]
+      ],
+      "image": {
+        "src": "/images/articole/ce-include-un-site-la-180-lei.webp",
+        "width": 1000,
+        "height": 1250,
+        "alt": "Site de la 180 lei/lună. Partea surprinzătoare nu e prețul, ci ce nu mai trebuie să faci tu."
+      }
     },
     {
       "ad": 10,
@@ -200,7 +236,13 @@
         "Când se schimbă ceva în afacere, ne spui ce trebuie actualizat.",
         "Nu trebuie să cauți singur prin meniurile unei platforme pentru fiecare modificare de conținut.",
         "Tu păstrezi controlul asupra informațiilor. Echipa se ocupă de punerea lor în pagină și de partea tehnică inclusă."
-      ]
+      ],
+      "image": {
+        "src": "/images/articole/explici-aprobi-te-relaxezi.webp",
+        "width": 1000,
+        "height": 1250,
+        "alt": "Sistemul „Explici. Aprobi. Te relaxezi.” Cum ai un site profesionist fără să înveți să-l construiești."
+      }
     },
     {
       "ad": 11,
@@ -228,7 +270,13 @@
         "Poate reveni la o lucrare sau poate trimite prezentarea mai departe unui coleg ori unui membru al familiei.",
         "Recomandarea rămâne începutul conversației. Site-ul oferă contextul pentru pasul următor.",
         "La WebForm, construim acea prezentare pornind de la serviciile, materialele și exemplele afacerii tale."
-      ]
+      ],
+      "image": {
+        "src": "/images/articole/dupa-recomandare.webp",
+        "width": 1000,
+        "height": 1250,
+        "alt": "Recomandarea ajunge la client. Dar cine îi arată de ce meriți ales?"
+      }
     },
     {
       "ad": 17,
@@ -258,7 +306,13 @@
         "Ai un loc în care să spui ce s-a schimbat în afacere și ce trebuie actualizat.",
         "Tu furnizezi informațiile și verifici rezultatul. Noi preluăm construcția și administrarea incluse în abonament.",
         "Poți avea un rol clar în proiect fără să înveți să construiești site-uri."
-      ]
+      ],
+      "image": {
+        "src": "/images/articole/nu-ma-pricep-la-site-uri.webp",
+        "width": 1000,
+        "height": 1250,
+        "alt": "„Nu mă pricep la site-uri.” Atunci de ce ar trebui să-l construiești tu? Webform arată partea pe care o poți delega."
+      }
     },
     {
       "ad": 18,
@@ -288,7 +342,13 @@
         "Începe cu serviciul și continuă cu exemplele care îl ajută pe vizitator să înțeleagă ce primește.",
         "Când verifici pagina, întreabă-te: „Pe ce informație concretă se poate baza omul?”",
         "La WebForm, informațiile și materialele tale devin punctul de pornire pentru structura și designul site-ului."
-      ]
+      ],
+      "image": {
+        "src": "/images/articole/dincolo-de-calitate-si-profesionalism.webp",
+        "width": 1000,
+        "height": 1250,
+        "alt": "Scoate „calitate” și „profesionalism” de pe site. Ce rămâne îi arată clientului de ce să te aleagă?"
+      }
     },
     {
       "ad": 19,
@@ -318,7 +378,13 @@
         "Persoana îl poate redeschide și îl poate da mai departe fără să copieze fiecare imagine și explicație.",
         "Iar când se schimbă un serviciu, poți cere actualizarea prezentării de pe site.",
         "WebForm construiește și administrează acel loc pornind de la informațiile și materialele pe care le trimiți."
-      ]
+      ],
+      "image": {
+        "src": "/images/articole/afacerea-intr-un-singur-link.webp",
+        "width": 1000,
+        "height": 1250,
+        "alt": "Prezentarea afacerii poate încăpea într-un singur link. Secretul e în ce nu-l mai pui pe client să caute."
+      }
     }
   ],
   "offer": [

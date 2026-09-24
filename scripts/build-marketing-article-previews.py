@@ -2,6 +2,7 @@
 import html
 import json
 import re
+import shutil
 import zipfile
 from pathlib import Path
 
@@ -18,7 +19,12 @@ e = html.escape
 links = []
 for article in articles:
     url = f"{base}/articole/{article['slug']}"
-    body = ''.join(f'<h2>{e(p[4:])}</h2>' if p.startswith('### ') else f'<p>{e(p)}</p>' for p in article['paragraphs'])
+    image = article['image']
+    image_name = Path(image['src']).name
+    (out / 'images').mkdir(exist_ok=True)
+    shutil.copyfile(root / 'public' / image['src'].lstrip('/'), out / 'images' / image_name)
+    picture = f'<figure class="figure"><img src="images/{e(image_name)}" width="{image["width"]}" height="{image["height"]}" alt="{e(image["alt"])}"></figure>'
+    body = f'<p>{e(article["paragraphs"][0])}</p>' + picture + ''.join(f'<h2>{e(p[4:])}</h2>' if p.startswith('### ') else f'<p>{e(p)}</p>' for p in article['paragraphs'][1:])
     offer = ''.join(f"<section><h2>{e(s['title'])}</h2>" + ''.join(f'<p>{e(p)}</p>' for p in s['paragraphs']) + '</section>' for s in data['offer'])
     page = f'''<!doctype html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(article['title'])}</title><style>*{{box-sizing:border-box}}body{{margin:0}}{css}</style></head><body class="page"><header class="header"><a class="brand" href="../galerie.html"><em>web</em>form.</a><span>PREVIZUALIZARE · RECLAMA {article['ad']}</span></header><main class="main" id="main"><article><div class="eyebrow">GHID WEBFORM</div><h1>{e(article['title'])}</h1><p class="meta">De echipa WebForm</p><div class="body">{body}</div><section class="offer"><div class="eyebrow">CUM TE AJUTĂ WEBFORM</div>{offer}<div class="form"><p>Formularul funcțional este integrat în pagina site-ului.</p><p>Nume · Telefon · Tipul afacerii · Acord de contact</p><a class="button" href="http://localhost:3000/articole/{article['slug']}#formular">Testează formularul local →</a><p class="campaign-small">Aceasta este o previzualizare locală. Linkul public devine disponibil după publicarea site-ului.</p></div></section></article></main><footer class="footer"><a href="../galerie.html">← Înapoi la reclame</a></footer></body></html>'''
     (out / f"{article['slug']}.html").write_text(page)

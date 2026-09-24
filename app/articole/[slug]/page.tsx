@@ -1,5 +1,6 @@
 import { LeadForm } from "@/components/campaign/LeadForm";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import data from "@/lib/marketing-articles.json";
@@ -23,8 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: article.title,
     description,
     alternates: { canonical: url, languages: { "ro-RO": url } },
-    openGraph: { title: article.title, description, url, type: "article", siteName: "WebForm" },
-    twitter: { title: article.title, description, card: "summary_large_image" },
+    openGraph: { title: article.title, description, url, type: "article", siteName: "WebForm", images: [{ url: article.image.src, width: article.image.width, height: article.image.height, alt: article.image.alt }] },
+    twitter: { title: article.title, description, card: "summary_large_image", images: [article.image.src] },
   };
 }
 export default async function ArticlePage({ params, searchParams }: Props) {
@@ -47,7 +48,12 @@ export default async function ArticlePage({ params, searchParams }: Props) {
         <div className={styles.eyebrow}>GHID WEBFORM</div>
         <h1>{article.title}</h1>
         <p className={styles.meta}>De echipa WebForm · {Math.ceil(words / 180)} minute de citit</p>
-        <div className={styles.body}>{article.paragraphs.map((paragraph, index) => paragraph.startsWith("### ") ? <h2 key={index}>{paragraph.slice(4)}</h2> : <p key={index}>{paragraph}</p>)}</div>
+        <div className={styles.body}>
+          <p>{article.paragraphs[0]}</p>
+          <figure className={styles.figure}>
+            <Image src={article.image.src} width={article.image.width} height={article.image.height} alt={article.image.alt} sizes="(max-width: 540px) calc(100vw - 44px), 480px" priority />
+          </figure>
+          {article.paragraphs.slice(1).map((paragraph, index) => paragraph.startsWith("### ") ? <h2 key={index}>{paragraph.slice(4)}</h2> : <p key={index}>{paragraph}</p>)}</div>
         <section className={styles.offer} aria-label="Oferta WebForm">
           <div className={styles.eyebrow}>CUM TE AJUTĂ WEBFORM</div>
           {data.offer.map((section) => <section key={section.title}><h2>{section.title}</h2>{section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</section>)}
