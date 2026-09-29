@@ -25,3 +25,9 @@ Changing project workflow does not deploy a website or send a customer notificat
 ## Validation
 
 Automated authorization tests cover anonymous and non-admin access, cross-origin writes, invalid queries, forbidden extra fields, stale revisions and successful workflow updates. Local PostgreSQL tests apply the new migration twice and check customer access restrictions. Live testing requires the replacement Supabase project's keys, migrated database and an administrator account.
+
+## Lead management
+
+`/admin/leads` includes name/phone search, status filters, local page assignment (for example `/ionel-tomas`), internal notes and the next follow-up date/time. Pending-call filters exclude paid/lost leads and order scheduled calls chronologically. Dates are entered/displayed in the administrator device's local timezone and stored as timezone-aware timestamps. Assignment links an existing page; it does not publish a site, send a message or mark a preview as sent. Follow-ups are visible in the panel; no background reminders are sent.
+
+Before deploying this version, apply `supabase/migrations/20260929_lead_management.sql` after the campaign migrations. It is rerunnable, adds nullable fields to existing leads, and retains server-only permissions and the revision trigger. Existing lead data is preserved.

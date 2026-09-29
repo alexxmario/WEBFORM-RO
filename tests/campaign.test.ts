@@ -60,11 +60,26 @@ beforeAll(async () => {
   await db.exec(
     readFileSync("supabase/migrations/20260917_campaign_plans.sql", "utf8"),
   );
+  const management = readFileSync("supabase/migrations/20260929_lead_management.sql", "utf8");
+  await db.exec(management);
+  await db.exec(management);
 }, 60000);
 afterAll(async () => {
   await db?.close();
 });
 describe("campaign database integrity", () => {
+  it("persists CRM fields with revision protection and allows clearing them", async () => {
+    const lead = await db.query<{ id: string; revision: string }>("insert into campaign_leads(event_id,source,name,phone,consent_version) values(gen_random_uuid(),'homepage','CRM Test','+40722123456','v1') returning id,revision");
+    const { id, revision } = lead.rows[0];
+    const saved = await db.query<{ assigned_page: string; next_follow_up_at: Date; revision: string }>("update campaign_leads set assigned_page='/crm-test',next_follow_up_at='2026-10-02T07:30:00Z' where id=$1 and revision=$2 returning assigned_page,next_follow_up_at,revision", [id, revision]);
+    expect(saved.rows[0].assigned_page).toBe('/crm-test');
+    expect(saved.rows[0].next_follow_up_at.toISOString()).toBe('2026-10-02T07:30:00.000Z');
+    expect(saved.rows[0].revision).not.toBe(revision);
+    const stale = await db.query("update campaign_leads set notes='stale' where id=$1 and revision=$2 returning id", [id, revision]);
+    expect(stale.rows).toHaveLength(0);
+    const cleared = await db.query("update campaign_leads set assigned_page=null,next_follow_up_at=null where id=$1 returning assigned_page,next_follow_up_at", [id]);
+    expect(cleared.rows[0]).toEqual({ assigned_page: null, next_follow_up_at: null });
+  });
   it("hides leads and payment consent from public roles", async () => {
     await db.exec("set role anon");
     try {

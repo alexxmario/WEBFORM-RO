@@ -5,12 +5,15 @@ import { requireAdmin } from "@/lib/admin";
 import { apiError, ApiError, jsonBody } from "@/lib/api";
 import { supabaseServerAdmin } from "@/lib/supabase/server";
 import { statuses } from "@/lib/campaign/schema";
+import { assignedPageSchema, followUpSchema } from "@/lib/campaign/admin-schema";
 import { notifyLead } from "@/lib/campaign/server";
 const update = z.object({
   id: z.string().uuid(),
   revision: z.string().uuid(),
   status: z.enum(statuses).optional(),
   notes: z.string().max(10000).optional(),
+  assignedPage: assignedPageSchema.optional(),
+  nextFollowUpAt: followUpSchema.optional(),
   previewUrl: z.string().url().max(2000).optional(),
   extend: z.boolean().optional(),
   retryNotification: z.boolean().optional(),
@@ -20,20 +23,31 @@ export async function GET(request: Request) {
     await requireAdmin(request);
     const url = new URL(request.url);
     const status = url.searchParams.get("status");
-    const page = Math.max(
-      1,
-      Math.min(100000, Number(url.searchParams.get("page")) || 1),
-    );
+    const page = Number(url.searchParams.get("page") || 1);
+    const search = (url.searchParams.get("q") || "").trim();
+    const followUp = url.searchParams.get("followUp") || "";
+    if (!Number.isInteger(page) || page < 1 || page > 100000 || search.length > 150 || !["", "due", "scheduled", "unscheduled"].includes(followUp))
+      throw new ApiError(400, "Filtre invalide.");
     let query = supabaseServerAdmin()
       .from("campaign_leads")
       .select("*", { count: "exact" })
-      .order("created_at", { ascending: false })
+      .order(followUp === "due" || followUp === "scheduled" ? "next_follow_up_at" : "created_at", { ascending: followUp === "due" || followUp === "scheduled" })
       .order("id");
     if (status) {
       if (!statuses.includes(status as (typeof statuses)[number]))
         throw new ApiError(400, "Status invalid.");
       query = query.eq("status", status);
     }
+    if (search) {
+      const term = search.replace(/[^\p{L}\p{N} +@.-]/gu, "").trim();
+      if (!term) throw new ApiError(400, "Introdu un nume sau un telefon valid.");
+      const phone = term.replace(/[ ().-]/g, "").replace(/^0040/, "+40").replace(/^0/, "+40");
+      query = query.or(/^\+?\d+$/.test(phone) ? `name.ilike.%${term}%,phone.ilike.%${phone}%` : `name.ilike.%${term}%`);
+    }
+    if (followUp) query = query.not("status", "in", "(paid,lost)");
+    if (followUp === "due") query = query.lte("next_follow_up_at", new Date().toISOString());
+    if (followUp === "scheduled") query = query.not("next_follow_up_at", "is", null);
+    if (followUp === "unscheduled") query = query.is("next_follow_up_at", null);
     const { data, error, count } = await query.range(
       (page - 1) * 25,
       page * 25 - 1,
@@ -72,6 +86,8 @@ export async function PATCH(request: Request) {
       patch.status = p.status;
     }
     if (p.notes !== undefined) patch.notes = p.notes;
+    if (p.assignedPage !== undefined) patch.assigned_page = p.assignedPage;
+    if (p.nextFollowUpAt !== undefined) patch.next_follow_up_at = p.nextFollowUpAt;
     if (p.previewUrl) {
       const u = new URL(p.previewUrl);
       const allowed = (process.env.CAMPAIGN_PREVIEW_HOSTS || "")

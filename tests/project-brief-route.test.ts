@@ -1,4 +1,5 @@
 import { beforeEach, expect, it, vi } from "vitest";
+vi.mock("next/server", async (importOriginal) => ({ ...await importOriginal<typeof import("next/server")>(), after: vi.fn() }));
 const mocks = vi.hoisted(() => ({ user: vi.fn(), from: vi.fn(), rpc: vi.fn(), upsert: vi.fn(), notify: vi.fn() }));
 vi.mock("@/lib/server-user", () => ({ getServerUser: mocks.user }));
 vi.mock("@/lib/supabase/server", () => ({ supabaseServerAdmin: () => ({ from: mocks.from, rpc: mocks.rpc }) }));

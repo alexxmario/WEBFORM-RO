@@ -1,0 +1,200 @@
+[
+  {
+    "id": "01-recomandarea",
+    "format": "square",
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "id": "01-recomandarea",
+    "format": "vertical",
+    "width": 941,
+    "height": 1672
+  },
+  {
+    "id": "01-recomandarea",
+    "format": "horizontal",
+    "width": 1733,
+    "height": 907
+  },
+  {
+    "id": "02-primul-ecran",
+    "format": "square",
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "id": "02-primul-ecran",
+    "format": "vertical",
+    "width": 941,
+    "height": 1672
+  },
+  {
+    "id": "02-primul-ecran",
+    "format": "horizontal",
+    "width": 1734,
+    "height": 907
+  },
+  {
+    "id": "03-sapte-zile",
+    "format": "square",
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "id": "03-sapte-zile",
+    "format": "vertical",
+    "width": 941,
+    "height": 1672
+  },
+  {
+    "id": "03-sapte-zile",
+    "format": "horizontal",
+    "width": 1734,
+    "height": 907
+  },
+  {
+    "id": "05-un-deget",
+    "format": "square",
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "id": "05-un-deget",
+    "format": "vertical",
+    "width": 941,
+    "height": 1672
+  },
+  {
+    "id": "05-un-deget",
+    "format": "horizontal",
+    "width": 1734,
+    "height": 907
+  },
+  {
+    "id": "06-cinci-raspunsuri",
+    "format": "square",
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "id": "06-cinci-raspunsuri",
+    "format": "vertical",
+    "width": 941,
+    "height": 1672
+  },
+  {
+    "id": "06-cinci-raspunsuri",
+    "format": "horizontal",
+    "width": 1734,
+    "height": 907
+  },
+  {
+    "id": "07-pretul",
+    "format": "square",
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "id": "07-pretul",
+    "format": "vertical",
+    "width": 941,
+    "height": 1672
+  },
+  {
+    "id": "07-pretul",
+    "format": "horizontal",
+    "width": 1734,
+    "height": 907
+  },
+  {
+    "id": "10-trei-pasi",
+    "format": "square",
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "id": "10-trei-pasi",
+    "format": "vertical",
+    "width": 941,
+    "height": 1672
+  },
+  {
+    "id": "10-trei-pasi",
+    "format": "horizontal",
+    "width": 1734,
+    "height": 907
+  },
+  {
+    "id": "11-recomandarea-merge-mai-departe",
+    "format": "square",
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "id": "11-recomandarea-merge-mai-departe",
+    "format": "vertical",
+    "width": 941,
+    "height": 1672
+  },
+  {
+    "id": "11-recomandarea-merge-mai-departe",
+    "format": "horizontal",
+    "width": 1732,
+    "height": 908
+  },
+  {
+    "id": "17-nu-ma-pricep",
+    "format": "square",
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "id": "17-nu-ma-pricep",
+    "format": "vertical",
+    "width": 941,
+    "height": 1672
+  },
+  {
+    "id": "17-nu-ma-pricep",
+    "format": "horizontal",
+    "width": 1733,
+    "height": 907
+  },
+  {
+    "id": "18-testul-cuvintelor",
+    "format": "square",
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "id": "18-testul-cuvintelor",
+    "format": "vertical",
+    "width": 941,
+    "height": 1672
+  },
+  {
+    "id": "18-testul-cuvintelor",
+    "format": "horizontal",
+    "width": 1733,
+    "height": 907
+  },
+  {
+    "id": "19-un-singur-link",
+    "format": "square",
+    "width": 1254,
+    "height": 1254
+  },
+  {
+    "id": "19-un-singur-link",
+    "format": "vertical",
+    "width": 941,
+    "height": 1672
+  },
+  {
+    "id": "19-un-singur-link",
+    "format": "horizontal",
+    "width": 1734,
+    "height": 907
+  }
+]

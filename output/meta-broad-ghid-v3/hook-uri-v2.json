@@ -1,0 +1,82 @@
+[
+  {
+    "id": "01-recomandarea",
+    "hook": "Micul „extra” care poate face o simplă recomandare mult mai convingătoare.",
+    "image": "Un număr de telefon\nnu spune asta\ndespre afacerea ta.",
+    "sub": "Micul „extra” care poate schimba prima impresie.",
+    "lead": "Îți trimit numărul. Dar mai e ceva ce merită să vezi înainte să suni.",
+    "desc": "Ce merită trimis odată cu numărul."
+  },
+  {
+    "id": "02-primul-ecran",
+    "hook": "Arată profesionist. Dar trece „testul fără logo” care scoate la iveală ce înțelege un client?",
+    "image": "Arată profesionist.\nDar trece\n„testul fără logo”?",
+    "sub": "3 răspunsuri care fac afacerea mai ușor de ales.",
+    "lead": "Un simplu bilețel peste logo poate scoate la iveală ce nu spune site-ul.",
+    "desc": "Acoperă logo-ul. Apoi uită-te din nou."
+  },
+  {
+    "id": "03-sapte-zile",
+    "hook": "De la „n-am timp de site” la prima versiune în 7 zile. Secretul e în ce NU faci tu.",
+    "image": "„N-am timp de site.”\nAtunci cum poți avea\nprima versiune în 7 zile?",
+    "sub": "Secretul e în ce NU trebuie să faci tu.",
+    "lead": "Partea care pare să ceară cel mai mult timp nici măcar nu trebuie făcută de tine.",
+    "desc": "Descoperă ce poți scoate de pe lista ta."
+  },
+  {
+    "id": "04-dupa-lansare",
+    "hook": "Webform dezvăluie cum poți ține site-ul la zi fără să intri vreodată în panoul lui de administrare.",
+    "image": "Cum ții site-ul la zi\nfără să intri în el?",
+    "sub": "Webform dezvăluie ce se întâmplă după un simplu mesaj.",
+    "lead": "Schimbi programul pe site. Dar nu deschizi site-ul. Nici măcar nu cauți parola.",
+    "desc": "Totul începe cu un mesaj. Vezi ce urmează."
+  },
+  {
+    "id": "05-un-deget",
+    "hook": "Un singur deget poate da de gol problema dintre site-ul tău și următoarea cerere de contact.",
+    "image": "Un singur deget\npoate da de gol\nproblema site-ului.",
+    "sub": "Cât de greu îi este unui client să te contacteze?",
+    "lead": "Site-ul poate arăta impecabil și totuși să se împiedice exact aici. Încearcă asta.",
+    "desc": "Verifică locul în care se poate bloca un client."
+  },
+  {
+    "id": "06-cinci-raspunsuri",
+    "hook": "Soluția pentru întrebările repetitive poate fi ascunsă chiar în mesaje. Iată cum o muți pe site.",
+    "image": "Răspunzi iar\nla aceleași întrebări?\nSoluția e în mesaje.",
+    "sub": "5 răspunsuri pe care site-ul le poate da în locul tău.",
+    "lead": "Ai scris deja o parte din viitorul site. Doar că ai trimis-o pe bucăți, în mesaje.",
+    "desc": "Deschide ultimele conversații. Caută asta."
+  },
+  {
+    "id": "07-pretul",
+    "hook": "Site de la 180 lei/lună. Partea surprinzătoare nu e prețul, ci ce nu mai trebuie să faci tu.",
+    "image": "Site de la 180 lei/lună.\nPartea surprinzătoare?\nCine face munca.",
+    "sub": "Construcție. Găzduire. Actualizări. Vezi cum funcționează.",
+    "lead": "Vezi suma și te întrebi ce primești. Întrebarea interesantă este ce mai rămâne în grija ta.",
+    "desc": "Uită-te la ce se întâmplă după ce îl construim."
+  },
+  {
+    "id": "08-fotografii",
+    "hook": "Telefonul tău poate ascunde cea mai convingătoare parte a viitorului site. Știi unde să te uiți?",
+    "image": "Cea mai convingătoare\nparte a site-ului?\nPoate e deja în telefon.",
+    "sub": "Cele 3 tipuri de fotografii care merită scoase la lumină.",
+    "lead": "Înainte să inventezi încă un slogan, deschide galeria telefonului. S-ar putea să găsești ceva mai bun.",
+    "desc": "Privește fotografiile pe care le-ai tot păstrat."
+  },
+  {
+    "id": "09-dupa-program",
+    "hook": "Închizi laptopul, dar afacerea poate continua să se prezinte. Ce trebuie să lași pe site înainte să pleci?",
+    "image": "Tu închizi laptopul.\nCine prezintă afacerea\nurmătorului client?",
+    "sub": "3 lucruri pe care site-ul le poate explica în lipsa ta.",
+    "lead": "Cineva îți descoperă afacerea tocmai când tu ai terminat programul. Ce poate afla fără tine?",
+    "desc": "Ce rămâne disponibil după ce închizi laptopul?"
+  },
+  {
+    "id": "10-trei-pasi",
+    "hook": "Sistemul „Explici. Aprobi. Te relaxezi.” Cum ai un site profesionist fără să înveți să-l construiești.",
+    "image": "„Explici. Aprobi.\nTe relaxezi.”",
+    "sub": "Cum ai un site profesionist fără să înveți să-l construiești.",
+    "lead": "Pare că lipsește un pas: cine construiește, publică și întreține site-ul? Exact aici e diferența.",
+    "desc": "Descoperă partea care nu mai cade în grija ta."
+  }
+]

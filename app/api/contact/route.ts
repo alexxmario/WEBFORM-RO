@@ -1,5 +1,6 @@
+import { notifyTelegram } from "@/lib/telegram-notification";
 import { randomUUID } from "node:crypto";
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 
 import { apiError, checkOrigin, jsonBody, rateLimit, requestIP } from "@/lib/api";
 import { contactSchema, contactSubjects } from "@/lib/contact";
@@ -34,6 +35,8 @@ export async function POST(request: Request) {
       tier: "Contact",
     });
     if (error) throw error;
+
+    after(async () => { await notifyTelegram(`Cerere nouă — Contact\nNume: ${data.name}\nTelefon: ${data.phone || "—"}\nEmail: ${data.email}\nAfacere: ${data.businessName || "—"}\nSubiect: ${contactSubjects[data.subject]}\n${data.message}`); });
 
     return NextResponse.json({ ok: true });
   } catch (error) {

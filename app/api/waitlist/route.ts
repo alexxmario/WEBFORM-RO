@@ -1,3 +1,4 @@
+import { notifyTelegram } from "@/lib/telegram-notification";
 import {
   apiError,
   checkOrigin,
@@ -5,7 +6,7 @@ import {
   rateLimit,
   requestIP,
 } from "@/lib/api";
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { z } from "zod";
 import { supabaseServerAdmin } from "@/lib/supabase/server";
 const schema = z.object({
@@ -34,6 +35,8 @@ export async function POST(request: Request) {
       { onConflict: "email", ignoreDuplicates: true },
     );
     if (error) throw error;
+    after(async () => { await notifyTelegram(`Cerere nouă — ${parsed.data.tier}\nNume: ${parsed.data.name}\nEmail: ${parsed.data.email}\nAfacere: ${parsed.data.businessType || "—"}`); });
+
     return NextResponse.json({ ok: true });
   } catch (error) {
     return apiError(error);

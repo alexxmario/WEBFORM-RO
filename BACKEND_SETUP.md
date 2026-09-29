@@ -64,3 +64,9 @@ There is **no scheduled automatic card debit**. Renewals are customer-initiated 
 - Confirm production callback URLs and live/sandbox mode before accepting money.
 
 Protocol references: [NETOPIA's official IPN implementation](https://github.com/netopiapayments/go-sdk/blob/main/ipn.go), [Next.js security updates](https://nextjs.org/blog/security-update-2025-12-11).
+
+## Telegram notifications
+
+Set server-only `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` in the deployment environment, then redeploy. Keep the token out of Git and browser-exposed variables. The recipient must start the bot first; verify the private chat using a unique connection message before saving its ID.
+
+Contact, waitlist, commerce quote, campaign leads and new project briefs send a plain-text notification after saving. Delivery runs after the response with an 8-second timeout; failures are logged without credentials and do not undo the saved request. Telegram delivery currently has no persistent retry queue. Existing email notifications remain independent.

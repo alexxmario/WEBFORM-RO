@@ -1,5 +1,6 @@
+import { notifyTelegram } from "@/lib/telegram-notification";
 import { createHash } from "node:crypto";
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { Resend } from "resend";
 
 import {
@@ -45,6 +46,8 @@ export async function POST(request: Request) {
       { onConflict: "email" },
     );
     if (error) throw error;
+
+    after(async () => { await notifyTelegram(`Cerere nouă — Magazin online\nNume: ${data.name}\nEmail: ${data.email}\n${details}`); });
 
     if (
       process.env.RESEND_API_KEY &&

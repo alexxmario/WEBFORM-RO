@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { leadSourceLabel } from "@/lib/campaign/lead-source";
 import { statuses, statusLabels } from "@/lib/campaign/schema";
+import { localDateTime } from "@/lib/campaign/admin-schema";
 import "../workspace.css";
 type Lead = {
   id: string;
@@ -16,6 +17,8 @@ type Lead = {
   business_type: string;
   status: string;
   notes: string;
+  assigned_page: string | null;
+  next_follow_up_at: string | null;
   created_at: string;
   first_called_at: string | null;
   preview_url: string | null;
@@ -28,19 +31,27 @@ type Lead = {
 };
 export function CampaignAdmin() {
   const [rows, setRows] = useState<Lead[]>([]),
+    [search, setSearch] = useState(""),
+    [query, setQuery] = useState(""),
+    [followUp, setFollowUp] = useState(""),
     [status, setStatus] = useState(""),
     [page, setPage] = useState(1),
     [total, setTotal] = useState(0),
     [selected, setSelected] = useState<Lead | null>(null),
     [error, setError] = useState(""),
+    [dirty, setDirty] = useState(false),
     [busy, setBusy] = useState(false),
     [loading, setLoading] = useState(true),
     [refresh, setRefresh] = useState(0),
     [message, setMessage] = useState("");
   useEffect(() => {
+    const timer = setTimeout(() => { setQuery(search); setPage(1); }, 300);
+    return () => clearTimeout(timer);
+  }, [search]);
+  useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
-    fetch(`/api/admin/campaign?status=${status}&page=${page}`, {
+    fetch(`/api/admin/campaign?status=${status}&page=${page}&q=${encodeURIComponent(query)}&followUp=${followUp}`, {
       signal: controller.signal,
       cache: "no-store",
     })
@@ -58,7 +69,7 @@ export function CampaignAdmin() {
         if (!controller.signal.aborted) setLoading(false);
       });
     return () => controller.abort();
-  }, [status, page, refresh]);
+  }, [status, page, refresh, query, followUp]);
   async function update(patch: Record<string, unknown>) {
     if (!selected || busy) return;
     setBusy(true);
@@ -76,7 +87,7 @@ export function CampaignAdmin() {
       });
       const d = await r.json();
       if (!r.ok) throw new Error(d.message);
-      if (d.row) setSelected(d.row);
+      if (d.row) { setSelected(d.row); setDirty(false); }
       setRefresh((n) => n + 1);
       setMessage("Salvat.");
     } catch (e) {
@@ -86,7 +97,7 @@ export function CampaignAdmin() {
     }
   }
   return (
-    <div className="admin-app">
+    <div className="admin-app lead-workspace">
       <aside className="admin-sidebar">
         <Link href="/admin" className="admin-brand">
           webform
@@ -99,8 +110,8 @@ export function CampaignAdmin() {
         <div className="admin-title">
           <div>
             <p className="admin-overline">CAMPANII · ARTICOLE · HOMEPAGE</p>
-            <h1>Lead-uri de sunat</h1>
-            <p>Primul apel în 5 minute.</p>
+            <h1>Gestionare lead-uri</h1>
+            <p>De la primul apel la site-ul clientului. Toate detaliile, într-un singur loc.</p>
           </div>
           <button
             className="admin-button"
@@ -109,6 +120,18 @@ export function CampaignAdmin() {
             Actualizează
           </button>
         </div>
+        <div className="lead-filters">
+        <label>Caută un lead
+          <input type="search" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Nume sau telefon" maxLength={150} />
+        </label>
+        <label>Apeluri de revenire
+          <select value={followUp} onChange={(e) => { setFollowUp(e.target.value); setPage(1); }}>
+            <option value="">Toate lead-urile</option>
+            <option value="due">De sunat acum / restante</option>
+            <option value="scheduled">Cu revenire programată</option>
+            <option value="unscheduled">Fără revenire programată</option>
+          </select>
+        </label>
         <label>
           Filtrează după status{" "}
           <select
@@ -126,9 +149,11 @@ export function CampaignAdmin() {
             ))}
           </select>
         </label>
+        </div>
         {error && <p role="alert">{error}</p>}
         {message && <p role="status">{message}</p>}
         <section className="admin-list">
+          <div className="admin-list-title"><h2>{total} lead-uri</h2><span>Apelurile sunt afișate în ora locală</span></div>
           <div className="admin-table-wrap">
             <table>
               <thead>
@@ -136,6 +161,7 @@ export function CampaignAdmin() {
                   <th>Nume / telefon</th>
                   <th>Sursă / status</th>
                   <th>Creat / primul apel</th>
+                  <th>Următorul apel / pagină</th>
                   <th>Detalii</th>
                 </tr>
               </thead>
@@ -159,10 +185,19 @@ export function CampaignAdmin() {
                       </small>
                     </td>
                     <td>
+                      {row.next_follow_up_at ? <span className={Date.parse(row.next_follow_up_at) <= Date.now() && !["paid", "lost"].includes(row.status) ? "lead-due" : ""}>{new Date(row.next_follow_up_at).toLocaleString("ro-RO", { dateStyle: "medium", timeStyle: "short" })}</span> : <span>Fără apel programat</span>}
+                      {row.assigned_page && <a className="lead-page" href={row.assigned_page} target="_blank" rel="noreferrer">{row.assigned_page} ↗</a>}
+                      {row.notes && <small className="lead-note" title={row.notes}>{row.notes}</small>}
+                    </td>
+                    <td>
                       <button
                         className="admin-open"
+                        disabled={busy}
                         onClick={() => {
+                          if (dirty && !window.confirm("Ai modificări nesalvate. Vrei să le abandonezi?")) return;
+                          setDirty(false);
                           setSelected(row);
+                          setTimeout(() => document.getElementById("lead-detail")?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
                           setMessage("");
                         }}
                       >
@@ -199,7 +234,8 @@ export function CampaignAdmin() {
           </div>
         </section>
         {selected && (
-          <section className="admin-detail">
+          <section className="admin-detail" id="lead-detail">
+            <div className="admin-record">
             <h2>{selected.name}</h2>
             <p>
               <a href={`tel:${selected.phone}`}>{selected.phone}</a> ·{" "}
@@ -212,14 +248,18 @@ export function CampaignAdmin() {
                 .map(([k, v]) => `${k}: ${v}`)
                 .join(" · ")}
             </p>
+            </div>
             <form
               className="admin-edit"
+              onChange={() => setDirty(true)}
               onSubmit={(e) => {
                 e.preventDefault();
                 const f = new FormData(e.currentTarget);
                 void update({
                   ...(selected.paid_at ? {} : { status: f.get("status") }),
                   notes: f.get("notes"),
+                  assignedPage: String(f.get("assignedPage") || "").trim() || null,
+                  nextFollowUpAt: f.get("nextFollowUpAt") ? new Date(String(f.get("nextFollowUpAt"))).toISOString() : null,
                 });
               }}
               key={selected.id + selected.revision}
@@ -238,6 +278,16 @@ export function CampaignAdmin() {
                   ))}
                 </select>
               </label>
+              <div className="lead-edit-grid">
+                <label>Pagina făcută pentru client
+                  <input name="assignedPage" defaultValue={selected.assigned_page || ""} placeholder="/numele-clientului" maxLength={300} pattern="/[a-zA-Z0-9_\-]+(/[a-zA-Z0-9_\-]+)*/?" />
+                  <small>Atribuie o pagină existentă pe acest domeniu. Lasă gol pentru a elimina atribuirea.</small>
+                </label>
+                <label>Când revii cu un apel
+                  <input name="nextFollowUpAt" type="datetime-local" defaultValue={localDateTime(selected.next_follow_up_at)} />
+                  <small>Ora locală a dispozitivului. Șterge data după apel sau stabilește următoarea revenire.</small>
+                </label>
+              </div>
               <label>
                 Notițe
                 <textarea
@@ -245,16 +295,26 @@ export function CampaignAdmin() {
                   maxLength={10000}
                   rows={5}
                   defaultValue={selected.notes}
+                  placeholder="Ce ați discutat, ce își dorește clientul, ce ai de făcut înainte de următorul apel…"
                 />
               </label>
               <button className="admin-button primary" disabled={busy}>
                 Salvează
               </button>
             </form>
+            {selected.assigned_page && <div className="lead-actions">
+              <a className="admin-button" href={selected.assigned_page} target="_blank" rel="noreferrer">Deschide pagina ↗</a>
+              <button className="admin-button" onClick={async () => {
+                try { await navigator.clipboard.writeText(`${location.origin}${selected.assigned_page}`); setMessage("Linkul paginii a fost copiat."); }
+                catch { setError("Nu am putut copia linkul. Deschide pagina și copiază adresa."); }
+              }}>Copiază linkul paginii</button>
+            </div>}
+            {dirty && <p className="admin-record">Ai modificări nesalvate. Apasă Salvează înainte de alte acțiuni.</p>}
+            <div className="lead-actions">
             <button
               className="admin-button"
               disabled={
-                busy || !!selected.first_called_at || !!selected.paid_at
+                busy || dirty || !!selected.first_called_at || !!selected.paid_at
               }
               onClick={() => update({ status: "called" })}
             >
@@ -262,11 +322,13 @@ export function CampaignAdmin() {
             </button>
             <button
               className="admin-button"
-              disabled={busy}
+              disabled={busy || dirty}
               onClick={() => update({ retryNotification: true })}
             >
               Retrimite notificările restante
             </button>
+            </div>
+            <details className="lead-preview"><summary>Preview cu expirare și notificări</summary>
             <form
               className="admin-edit"
               onSubmit={(e) => {
@@ -287,7 +349,7 @@ export function CampaignAdmin() {
                   placeholder="https://preview.exemplu.ro"
                 />
               </label>
-              <button className="admin-button" disabled={busy}>
+              <button className="admin-button" disabled={busy || dirty}>
                 Publică preview pentru 14 zile
               </button>
             </form>
@@ -309,7 +371,7 @@ export function CampaignAdmin() {
                 <div>
                   <button
                     className="admin-button"
-                    disabled={busy}
+                    disabled={busy || dirty}
                     onClick={() => update({ extend: true })}
                   >
                     Prelungește cu 14 zile
@@ -334,6 +396,9 @@ export function CampaignAdmin() {
                 </div>
               </>
             )}
+            </details>
+            {error && <p role="alert">{error}</p>}
+            {message && <p role="status">{message}</p>}
           </section>
         )}
       </main>

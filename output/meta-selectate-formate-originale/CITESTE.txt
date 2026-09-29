@@ -1,0 +1,6 @@
+11 reclame, fiecare în propriul folder.
+Square: 1080 × 1080
+Vertical: 1080 × 1920
+Horizontal: 1200 × 628
+
+Imaginile aprobate sunt păstrate integral, redimensionate proporțional și centrate pe fundal neutru. Nu sunt regenerate sau decupate. Fiecare folder include textele reclamei.

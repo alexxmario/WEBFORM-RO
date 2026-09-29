@@ -1,0 +1,167 @@
+[
+  {
+    "id": "11-recomandarea-merge-mai-departe",
+    "name": "Ce lipsește din recomandare",
+    "from": [
+      1
+    ],
+    "hook": "Recomandarea ajunge la client. Dar cine îi arată de ce meriți ales?",
+    "image": "Te-a recomandat.\nDar i-a arătat și asta?",
+    "sub": "Detaliul care poate face afacerea mai ușor de ales.",
+    "alt": "Ce merită să însoțească numărul de telefon când cineva îți recomandă afacerea.",
+    "lead": "Numele a ajuns la cine trebuie. Explicația pentru care merită să te aleagă, poate nu.",
+    "body": "Numele a ajuns la cine trebuie. Explicația pentru care merită să te aleagă, poate nu.\n\nO recomandare poate începe cu „știu eu pe cineva”. Apoi apar întrebările.\n\nCu ce se ocupă exact?\nPot vedea ce a mai făcut?\nCum îl contactez?\n\nPersoana care te recomandă poate să nu aibă toate răspunsurile la îndemână.\n\nAici intră acel mic extra: un link în care munca ta se vede și oferta se înțelege.\n\nPoți pune împreună o explicație clară, exemple reale și o cale simplă de contact. Omul care primește recomandarea poate verifica singur dacă afacerea i se potrivește.\n\nIar cel care te recomandă are ceva concret de trimis mai departe.\n\nWebform construiește și administrează site-ul pornind de la informațiile și materialele afacerii tale.\n\nVezi cum poate arăta prezentarea care însoțește următoarea recomandare.",
+    "desc": "Ce lipsește dintre recomandare și primul apel?",
+    "destination": "Exemple de site-uri și prezentarea procesului Webform; arată explicit ofertă, exemple și contact.",
+    "scene": "Candid close photograph of two adult hands passing a plain business card across a cafe table; the card shows only 'Îți trimit și linkul.' A smartphone next to the receiving hand shows a restrained fictional demonstration website labelled 'Exemplu', with three short sections 'Ce facem', 'Exemple', 'Contact'. Main card is partly lifted, unusual caught-in-the-moment interaction. No coffees with writing, no testimonials, no fake messaging interface. Airy upper negative space."
+  },
+  {
+    "id": "12-testul-strainului",
+    "name": "Testul persoanei care nu te cunoaște",
+    "from": [
+      2
+    ],
+    "hook": "Un om care nu te cunoaște poate vedea ce ai ratat pe propriul site. Pune-i această întrebare.",
+    "image": "Tu știi ce vinzi.\nDar omul care deschide\nsite-ul pentru prima dată?",
+    "sub": "O singură întrebare poate arăta ce lipsește din primul ecran.",
+    "alt": "Testul „Ce ai înțeles că facem?” poate schimba felul în care îți prezinți afacerea.",
+    "lead": "Dă telefonul cu site-ul deschis cuiva care nu știe cu ce te ocupi.",
+    "body": "Dă telefonul cu site-ul deschis cuiva care nu știe cu ce te ocupi.\n\nApoi întreabă: „Ce ai înțeles că oferim?”\n\nFără explicații suplimentare. Lasă pagina să vorbească.\n\nDacă răspunsul e departe de ce vinzi, ai găsit un lucru important de schimbat înainte să alegi alte culori sau alte imagini.\n\nPentru tine, totul are context. Tu știi ce înseamnă fiecare serviciu și ce rezolvi pentru clienți.\n\nPersoana care intră prima dată pe site nu pornește cu aceleași informații.\n\nÎncearcă să pui în primul ecran trei lucruri: ce oferi concret, cui îi este util și cum poate cere detalii.\n\nPoți spune multe cu o propoziție clară și un exemplu potrivit.\n\nLa Webform, echipa propune structura și designul pornind de la informațiile despre afacere.\n\nExplorează exemplele cu întrebarea de mai sus în minte. Vezi cât de repede înțelegi ce are fiecare de oferit.",
+    "desc": "Oprește explicația. Lasă pagina să răspundă.",
+    "destination": "Exemple inspectabile și o explicație a testului din reclamă înainte de ofertă; testul nu este prezentat ca studiu.",
+    "scene": "An ordinary neutral studio desk with a laptop facing an adult visitor visible only by shoulder and hands, another person's hand gestures toward screen. The screen shows a deliberately simple generic demonstration site with label 'Exemplu', no industry images. A physical index card in foreground reads 'Ce ai înțeles că oferim?' Card and puzzled hovering hand are focal points, daylight. Preserve lots of clean top space. No fake client identities."
+  },
+  {
+    "id": "13-lista-care-se-scurteaza",
+    "name": "Lista pe care nu o faci tu",
+    "from": [
+      3,
+      10
+    ],
+    "hook": "Prima versiune a site-ului în 7 zile. Partea surprinzătoare e cât din proces nu trebuie să înveți.",
+    "image": "Prima versiune în 7 zile.\nFără să înveți\nsă construiești site-uri.",
+    "sub": "Webform arată ce rămâne, de fapt, pe lista ta.",
+    "qualifier": "De la formularul complet și materialele necesare.",
+    "alt": "Cum ajungi la prima versiune a site-ului fără cursuri, platforme de învățat și seri de construit pagini.",
+    "lead": "Poți sări peste tutoriale. Nu și peste informațiile despre afacerea pe care o cunoști.",
+    "body": "Poți sări peste tutoriale. Nu și peste informațiile despre afacerea pe care o cunoști.\n\nAsta schimbă lista de lucruri pe care o ai de făcut pentru site.\n\nTu explici ce oferi, cui te adresezi și ce vrei să poată găsi omul pe pagină. Trimiți textele și imaginile necesare.\n\nStructura, designul și construcția intră în grija echipei Webform.\n\nPrima versiune este gata în 7 zile de la primirea formularului complet și a materialelor necesare. O primești pentru verificare și trimiți observațiile în chat, înainte de publicare.\n\nTimpul tău merge către informații și feedback. Nu trebuie să înveți cum se așază fiecare element într-o platformă.\n\nPoate că proiectul pe care îl amâni pare mai mare fiindcă ai pus și munca tehnică pe lista ta.\n\nVezi pașii Webform și ce ai de pregătit. S-ar putea ca partea care te bloca să fie exact cea pe care o preia echipa.",
+    "desc": "Verifică ce poți scoate de pe lista ta.",
+    "destination": "Procesul Webform, formularul/materialele, condiția termenului și verificarea înainte de publicare.",
+    "scene": "Raw natural overhead photograph of two adjacent paper lists on a simple pale desk. Left sheet heading 'De învățat?' with words 'Platformă', 'Design', 'Publicare' each crossed out once in pencil. Right sheet heading 'De pregătit' with words 'Informații', 'Texte', 'Imagini'. A hand is sliding the left sheet away. No calendar implying unconditional delivery. Simple pencil, no coffee. Adequate top caption space."
+  },
+  {
+    "id": "14-contactul-din-mers",
+    "name": "Butonul pe care trebuie să-l găsești",
+    "from": [
+      5
+    ],
+    "hook": "Butonul de contact există. Dar îl găsești cu o singură mână? Testul care poate da de gol un site frumos.",
+    "image": "Butonul există.\nDar îl găsești\ncu o singură mână?",
+    "sub": "Vezi ce poate sta între interesul unui client și contact.",
+    "alt": "Site-ul trece testul laptopului. Ce se întâmplă când îl deschizi de pe telefon?",
+    "lead": "Încearcă să ajungi la contact fără să schimbi mâna și fără să mărești ecranul.",
+    "body": "Încearcă să ajungi la contact fără să schimbi mâna și fără să mărești ecranul.\n\nAi găsit drumul imediat sau ai început să cauți?\n\nE un test pe care îl poți face chiar acum, pe site-ul afacerii.\n\nVerifică dacă textul se citește, dacă meniul poate fi folosit ușor și dacă pasul următor este vizibil.\n\nUn vizitator poate fi interesat de ce oferi și totuși să aibă nevoie de un drum mai clar până la tine.\n\nPe laptop, toate par la îndemână. Pe telefon, spațiul și felul în care ții ecranul schimbă experiența.\n\nDe aceea merită să verifici traseul exact cum l-ar folosi cineva care te descoperă din mers.\n\nWebform include design optimizat pentru mobil și formular de contact, inclusiv în planul Start.\n\nDeschide exemplele de pe telefon și încearcă testul. Vezi cum se leagă prezentarea de pasul prin care cineva poate cere detalii.",
+    "desc": "Încearcă înainte să mai trimiți linkul.",
+    "destination": "Galeria cu exemple funcționale pe mobil și traseu vizibil către contact.",
+    "scene": "Natural daylight candid close-up outdoors on a park bench, one anatomically correct hand holding a smartphone. A clean fictional generic website labelled 'Exemplu' shows a prominent button 'Contact' in the lower reachable area. Hand's thumb hovers above that button, one subtle red drawn circle around it. Neutral urban background softly blurred, no industries. Top half bokeh gives clear caption space. No fake UI stats or notification badges."
+  },
+  {
+    "id": "15-site-ul-din-raspunsuri",
+    "name": "Site-ul scris pe bucăți",
+    "from": [
+      6
+    ],
+    "hook": "Ai scris deja o parte din site-ul tău. Doar că o trimiți iar și iar, în mesaje.",
+    "image": "O parte din site-ul tău\ne deja scrisă.\nȘtii unde s-o cauți?",
+    "sub": "Răspunsurile repetitive pot deveni prezentarea afacerii.",
+    "alt": "Ce legătură au mesajele trimise clienților cu site-ul pe care încă nu l-ai făcut?",
+    "lead": "Răspunsul lung pe care tocmai l-ai trimis poate merita un loc permanent pe site.",
+    "body": "Răspunsul lung pe care tocmai l-ai trimis poate merita un loc permanent pe site.\n\nCel despre cum lucrezi. Despre ce include serviciul. Despre ce trebuie să pregătească un client.\n\nUită-te la întrebările care revin.\n\nDin ele poți construi o prezentare mult mai utilă decât o pagină plină de expresii generale.\n\nÎncepe cu trei lucruri: întrebarea, răspunsul pe înțelesul clientului și un exemplu care îl face clar.\n\nApoi pune informațiile într-o ordine în care cineva să le poată parcurge singur.\n\nAstfel, data viitoare poți trimite un link către explicație. Persoana citește când are timp și poate reveni cu întrebări despre situația ei.\n\nWebform folosește informațiile și materialele afacerii pentru a construi site-ul. Echipa propune structura și designul, iar tu verifici prezentarea.\n\nVezi cum funcționează. S-ar putea să fii mai aproape de materialele pentru site decât credeai.",
+    "desc": "Caută răspunsul pe care l-ai mai trimis ieri.",
+    "destination": "Pașii de pregătire a conținutului și procesul Webform. Nu promite import automat de conversații.",
+    "scene": "Overhead raw native photograph of several printed plain text notes being gathered into a single folder labelled 'Pentru site'. Three short notes read 'Cum lucrăm', 'Ce include', 'Ce pregătești'. A smartphone lies face-down; no fake chats or personal details. A hand folds a paper corner to reveal folder title. Natural paper texture and asymmetric framing, empty upper section for main caption. No coffee."
+  },
+  {
+    "id": "16-dupa-prima-plata",
+    "name": "Ce urmează după preț",
+    "from": [
+      7
+    ],
+    "hook": "Site de la 180 lei/lună. Ce se întâmplă după prima plată e partea pe care merită s-o vezi.",
+    "image": "180 lei/lună pentru site.\nBine. Dar ce se întâmplă\ndupă prima plată?",
+    "sub": "Webform arată cine îl construiește și cine rămâne să-l administreze.",
+    "alt": "Un site în abonament ascunde o întrebare bună: primești o platformă sau o echipă care face munca?",
+    "lead": "Plătești abonamentul. Apoi cine se apucă de site? Aici merită să privești mai atent.",
+    "body": "Plătești abonamentul. Apoi cine se apucă de site? Aici merită să privești mai atent.\n\nCând compari oferte, verifică dacă primești acces la un instrument sau un site construit pentru tine.\n\nLa Webform, echipa preia construcția pornind de la formularul și materialele afacerii. Detaliile și verificarea proiectului se desfășoară în chat.\n\nPlanul Start, de 180 lei/lună, include un site de până la 3 pagini, domeniu, găzduire, SSL și administrare.\n\nDupă lansare, ai tot acolo o cale de a cere actualizări. În Start, modificările de conținut incluse se livrează în 7 zile, cu o cerere activă. Lucrările mai ample se discută separat.\n\nGăzduirea și administrarea sunt disponibile pe durata abonamentului.\n\nAșadar, uită-te și la ce se întâmplă după momentul plății.\n\nVezi pașii colaborării și ce include planul. Acolo se vede câtă muncă preia echipa.",
+    "desc": "Uită-te la ce primești după acces.",
+    "destination": "Planuri și proces; plata și formularul, condițiile actualizărilor și durata abonamentului.",
+    "scene": "Candid desk photo of a cream index card held upright reading 'De la 180 lei/lună'. Behind it a laptop and a paper timeline with only 'Formular → Construcție → Administrare'. Focus on a hand turning over a second card reading 'Și apoi?'. No fabricated receipt, invoice, bank logos or payment notification. Warm daylight, minimal neutral desk props, high readability."
+  },
+  {
+    "id": "17-nu-ma-pricep",
+    "name": "Obiecția care nu te oprește",
+    "from": [
+      10,
+      3
+    ],
+    "hook": "„Nu mă pricep la site-uri.” Atunci de ce ar trebui să-l construiești tu? Webform arată partea pe care o poți delega.",
+    "image": "„Nu mă pricep la site-uri.”\nAtunci de ce ar trebui\nsă-l construiești tu?",
+    "sub": "Cum ajungi la un site profesionist fără să înveți o platformă.",
+    "alt": "Ce ai de făcut pentru un site profesionist când partea tehnică nu mai cade în grija ta.",
+    "lead": "Poți explica ce face afacerea ta fără să știi ce buton publică o pagină.",
+    "body": "Poți explica ce face afacerea ta fără să știi ce buton publică o pagină.\n\nȘi tocmai aici merită să înceapă proiectul.\n\nCe oferi? Cine are nevoie? Ce exemple poți arăta? Cum vrei să te contacteze oamenii?\n\nRăspunsurile îți aparțin. Construcția site-ului poate fi preluată de o echipă.\n\nLa Webform, trimiți informațiile și materialele prin formular. Echipa propune structura și designul și pregătește prima versiune.\n\nTu o verifici și trimiți observațiile în chat înainte de publicare.\n\nNu trebuie să înveți o platformă ca să spui „aici vreau altă fotografie” sau „serviciul acesta trebuie explicat mai clar”.\n\nDupă lansare, cererile de actualizare continuă în chat, în condițiile planului ales.\n\nVezi cum funcționează procesul. Cunoștințele despre afacerea ta pot fi punctul de pornire; partea tehnică are cine s-o preia.",
+    "desc": "Descoperă ce revine ție și ce face echipa.",
+    "destination": "Proces, formular și chat; fără a sugera că nu trebuie pregătite materiale.",
+    "scene": "Natural overhead photograph on a light table: an open thick blank technical notebook with a small paper label 'Cum construiesc?' is being closed by a hand, beside a simple handwritten card 'Ce face afacerea mea'. A laptop in background displays a generic site mockup labelled 'Exemplu'. Idea is leaving technical learning and explaining business. No code gibberish. Plenty of quiet top area for exact headline, no coffee."
+  },
+  {
+    "id": "18-testul-cuvintelor",
+    "name": "Testul cuvintelor care dispar",
+    "from": [
+      2
+    ],
+    "hook": "Scoate „calitate” și „profesionalism” de pe site. Ce rămâne îi arată clientului de ce să te aleagă?",
+    "image": "Șterge „calitate”.\nȘterge „profesionalism”.\nDe ce te-ar alege acum?",
+    "sub": "Testul care scoate la iveală ce merită arătat pe site.",
+    "alt": "Două cuvinte pot face site-ul să sune bine. Ce îi dă, de fapt, unui client motive să te aleagă?",
+    "lead": "Acoperă cele două cuvinte. Dacă explicația dispare odată cu ele, încearcă acest exercițiu.",
+    "body": "Acoperă cele două cuvinte. Dacă explicația dispare odată cu ele, încearcă acest exercițiu.\n\nÎn loc de „calitate”, arată un detaliu din munca ta.\n\nÎn loc de „profesionalism”, explică ce se întâmplă după ce cineva îți trimite o cerere.\n\nÎn loc de încă o afirmație generală, pune un exemplu real care ajută omul să înțeleagă ce primește.\n\nNu ai nevoie să spui totul în primul ecran. Dar merită să-i dai vizitatorului ceva concret pe care să-și bazeze interesul.\n\nPoate fi o fotografie bine aleasă, un proces explicat simplu sau un răspuns la o întrebare importantă.\n\nLa Webform, informațiile și materialele afacerii sunt punctul de pornire pentru structură și design.\n\nEchipa construiește site-ul, iar tu verifici dacă prezentarea spune clar ce oferi.\n\nExplorează exemplele cu acest test în minte: ce pot vedea și înțelege, dincolo de adjective?",
+    "desc": "Vezi ce rămâne după ce dispar adjectivele.",
+    "destination": "Exemple și un scurt material care demonstrează înlocuirea afirmațiilor cu informații concrete. Nu se inventează rezultate sau testimoniale.",
+    "scene": "Close raw editorial photo of a printed fictional website draft pinned to a simple cork board, title words 'Calitate' and 'Profesionalism' visibly crossed out in red marker. Underneath three handwritten sticky labels 'Exemplu real', 'Cum lucrăm', 'Ce primești'. A hand with marker is in shot. The unfinished draft is clearly marked 'Schiță'. Natural window light, top area for caption. Avoid extra invented text."
+  },
+  {
+    "id": "19-un-singur-link",
+    "name": "Prezentarea care nu se pierde în mesaje",
+    "from": [
+      1,
+      6
+    ],
+    "hook": "Prezentarea afacerii poate încăpea într-un singur link. Secretul e în ce nu-l mai pui pe client să caute.",
+    "image": "„Mai sus sunt pozele.\nMai jos sunt detaliile.”\nSe poate și altfel.",
+    "sub": "Cum pui prezentarea afacerii într-un singur link ușor de trimis.",
+    "alt": "Fotografii aici, explicații dincolo. Ce se schimbă când clientul le găsește în același loc?",
+    "lead": "Îi trimiți pozele. Apoi explicația. Apoi încă un mesaj cu felul în care lucrați.",
+    "body": "Îi trimiți pozele. Apoi explicația. Apoi încă un mesaj cu felul în care lucrați.\n\nTot ce trebuie există. Doar că este împărțit.\n\nOmul revine mai târziu și încearcă să găsească fotografia, detaliul sau răspunsul de care avea nevoie.\n\nUn site îți permite să pui prezentarea într-o ordine pe care o poate urmări singur.\n\nCe oferi.\nExemple relevante.\nCum se desfășoară colaborarea.\nCum poate cere detalii.\n\nApoi trimiți un singur link, pe care persoana îl poate redeschide sau da mai departe.\n\nMerită să începi prin a aduna materialele pe care deja le folosești când explici afacerea.\n\nWebform le poate integra într-un site construit și administrat de echipă. Tu trimiți informațiile și verifici prezentarea înainte de publicare.\n\nVezi cum funcționează și cum pot sta împreună lucrurile pe care acum le trimiți separat.",
+    "desc": "Ce găsește omul când redeschide conversația?",
+    "destination": "Exemple de structură care grupează ofertă, materiale și contact; proces de pregătire și construcție.",
+    "scene": "Overhead candid photograph of four separated paper cards on a neutral fabric-covered desk reading 'Poze', 'Detalii', 'Cum lucrăm', 'Contact', with a hand gathering them under a single slim folder marked 'Un singur link'. A smartphone is off to one side with no visible app interface. Warm tactile paper, subtle imperfect alignment, no fake chat messages. Leave upper negative space for longer quoted headline."
+  },
+  {
+    "id": "20-formularul-care-inlocuieste",
+    "name": "Ce preia formularul",
+    "from": [
+      10,
+      3
+    ],
+    "hook": "Un site făcut pentru tine poate începe fără să alegi o platformă. Cele 3 răspunsuri care pun echipa la treabă.",
+    "image": "Site-ul începe\ncu 3 răspunsuri.\nNiciunul nu e despre cod.",
+    "sub": "Webform arată ce trebuie să explici ca echipa să poată construi.",
+    "alt": "Înainte de culori și butoane, un site are nevoie de aceste 3 lucruri despre afacerea ta.",
+    "lead": "Nu începe cu platforma. Începe cu lucrurile pe care un client trebuie să le înțeleagă.",
+    "body": "Nu începe cu platforma. Începe cu lucrurile pe care un client trebuie să le înțeleagă.\n\nCe oferi concret?\nCui îi este util?\nCe vrei să facă după ce citește?\n\nTrei răspunsuri care ajută echipa să înțeleagă direcția site-ului.\n\nApoi vin materialele, detaliile serviciilor și exemplele pe care le poți arăta. Nu trebuie să ai deja desenată fiecare pagină ca să începi conversația despre proiect.\n\nWebform folosește formularul și materialele afacerii pentru a propune structura și designul.\n\nDupă confirmarea plății și pregătirea informațiilor necesare, proiectul continuă în chat. Primești prima versiune în 7 zile de la formularul complet și materialele necesare și o verifici înainte de publicare.\n\nCele trei răspunsuri dau direcția; formularul complet adună detaliile necesare construcției.\n\nVezi pașii și ce ai de pregătit. Poate că începutul e mai aproape de ce știi deja decât de ce credeai că trebuie să înveți.",
+    "desc": "Primul pas are legătură cu afacerea, nu cu o platformă.",
+    "destination": "Formularul real și procesul, explicând că cele trei întrebări sunt orientative și nu întregul necesar.",
+    "scene": "Candid photo of an open notebook on a small desk near a window, three large handwritten questions numbered '1. Ce oferi?', '2. Pentru cine?', '3. Ce urmează?'. A pen points at first question; closed laptop occupies the far edge, implying business explanation first. Small paper corner 'Pentru site'. Clear top negative space, no industry props, no coffee, modest and natural rather than polished stock."
+  }
+]

@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { notifyTelegram } from "@/lib/telegram-notification";
+import { NextResponse, after } from "next/server";
 import { z } from "zod";
 import { projectBriefPayloadSchema } from "@/lib/project-brief";
 import { blueprintSchema } from "@/lib/zodSchemas";
@@ -104,6 +105,9 @@ export async function POST(request: Request) {
         .eq("user_id", user.id)
         .in("id", assetIds);
       if (assetError) throw assetError;
+    }
+    if (blueprint?.id) {
+      after(async () => { await notifyTelegram(`Proiect nou — WebForm\nAfacere: ${data.identity.businessName}\n${data.identity.oneLiner}\nID: ${id}`); });
     }
     let notification = "pending";
     try {

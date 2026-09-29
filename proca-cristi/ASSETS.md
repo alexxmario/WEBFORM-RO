@@ -1,0 +1,1 @@
+Hero photograph: Magda Ehlers / Pexels. https://www.pexels.com/photo/copper-pipes-on-black-background-3721272/ . Pexels license https://www.pexels.com/license/ . Illustrative stock image, not a completed client project.
