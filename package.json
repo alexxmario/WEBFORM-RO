@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/stripe-preflight.mjs && next build",
+    "build": "node scripts/stripe-preflight.mjs && next build && node scripts/check-built-css.mjs",
     "start": "next start",
     "lint": "eslint app components lib middleware.ts --ext .ts,.tsx",
     "test": "vitest run",
